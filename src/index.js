@@ -1,80 +1,149 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ms from 'pretty-ms';
+import Timer from './Timer.js';
+import Select from 'react-select';
 
 
-class Timer extends React.Component { 
+class Form extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { value: 'Please Fill in the description here.' };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit(this);
+    }
+
+    handleChange(event) {
+        this.setState({ value: event.target.value });
+    }
+
+    handleSubmit(event) {
+        // alert('A name was submitted: ' + this.state.value);
+        // event.preventDefault();
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label for="description">
+                    Description:
+                    {/* <input type="text" value={this.state.value} onChange={this.handleChange} /> */}
+                </label>
+                <br/>
+                <textarea name="description" value={this.state.value} onChange={this.handleSubmit}/>
+                <label>
+                    <DropDown title="Contract Drop Down" />
+                </label>
+                <label>
+                    <Timer />
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+        );
+    }
+
+}
+
+
+
+
+
+
+class DropDown extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            time: 0,
-            isOn: false,
-            start: 0
-        };
+            selectedOption: 1,
 
-        this.startTimer = this.startTimer.bind(this);
-        this.stopTimer = this.stopTimer.bind(this);
-        this.resetTimer = this.resetTimer.bind(this);
+            listOpen: true,
+            headerTitle: this.props.title,
+            items: [
+                {
+                    value: 0,
+                    label: "New York",
+                    selected: false,
+                    key: 'location'
+                },
+                {
+                    value: 1,
+                    label: 'Dublin',
+                    selected: false,
+                    key: 'location'
+                },
+                {
+                    value: 2,
+                    label: 'California',
+                    selected: false,
+                    key: 'location'
+                },
+                {
+                    value: 3,
+                    label: 'Istanbul',
+                    selected: false,
+                    key: 'location'
+                },
+                {
+                    value: 4,
+                    label: 'Izmir',
+                    selected: false,
+                    key: 'location'
+                },
+                {
+                    value: 5,
+                    label: 'Oslo',
+                    selected: false,
+                    key: 'location'
+                }
+            ]
+        }
+
+        this.handleClickOutside.bind(this);
+        this.toggleList.bind(this);
+        this.handleChange.bind(this);
     }
 
-    startTimer() {
+    handleClickOutside() {
         this.setState({
-            isOn: true,
-            time: this.state.time,
-            start: Date.now() - this.state.time
+            listOpen: true
         });
-
-        this.timer = setInterval(() => this.setState({
-            time: Date.now() - this.state.start
-        }), 1);
     }
 
-    stopTimer() {
-        this.setState({isOn: false});
-        clearInterval(this.timer);
+    toggleList() {
+        this.setState(prevState => ({
+            listOpen: !prevState.listOpen
+        }))
     }
 
-    resetTimer() {
-        this.setState({time:0, isOn: false});
+    handleChange(selectedOption) {
+        console.log(selectedOption);
+        this.setState({selectedOption: selectedOption.value});
+        // console.log(`Option selected: `, selectedOption);
     }
-
 
     render() {
-
-        let start = (this.state.time === 0 && !this.state.isOn) 
-        ? <button onClick={this.startTimer}>start</button> 
-        : null
-
-        let stop = (this.state.isOn)
-        ? <button onClick={this.stopTimer}>stop</button>
-        : null
-
-        let resume = (this.state.time !== 0 && !this.state.isOn)
-        ? <button onClick={this.startTimer}>resume</button>
-        : null
-
-        let reset = (this.state.time > 0)
-        ? <button onClick={this.resetTimer}>reset</button>
-        : null
-
-
+        // const { list } = this.props;
+        // const { listOpen, headerTitle } = this.state;
+        const { selectedOption } = this.state;
+        console.log(selectedOption);
         return (
-            <div>
-                <h3>timer: {ms(this.state.time)} - hours: {((((this.state.time / 1000) / 60) / 60)).toFixed(2)} </h3>
-                {start}
-                {resume}
-                {stop}
-                {reset} 
-            </div>
-        )
+            <select value={selectedOption} onChange={this.handleChange}>
+                this.state.items.forEach( (item) => {
+                    <option value></option>
+                });
+            </select>
+        );
     }
+
 }
+
+
 
 
 // ========================================
 
 ReactDOM.render(
-    <Timer />,
+    <Form />,
+    // <DropDown title="Contract Drop Down"/>,
     document.getElementById('root')
 );
