@@ -1,4 +1,5 @@
 import React from 'react';
+import './DropDown.css';
 
 
 export default class DropDown extends React.Component {
@@ -70,38 +71,38 @@ export default class DropDown extends React.Component {
     }
 
     handleChange(args) {
-        console.log(args);
-        // this.setState({ selectedOption: selectedOption.value });
-        // console.log(`Option selected: `, selectedOption);
         const newValue = args.currentTarget.selectedIndex;
-        // const label = selectedOption.label;
-        // const preexistingOption = this.state.selectedOption;
-        // preexistingOption.value = value;
-        // preexistingOption.label = label;
-        // preexistingOption.key = selectedOption.key;
-        this.setState({selectedOption: { 
-            value: newValue
-        }});
+        this.setState({
+            selectedOption: {
+                value: newValue
+            }
+        });
     }
 
     render() {
-        
+
         const { selectedOption } = this.state;
+        const { headerTitle } = this.state;
         // console.log(selectedOption);
         return (
-            <select value={selectedOption.value} onChange={this.handleChange}>
-                {this.state.items.map(item => {
-                    console.log(item);
-                    return (
-                        <option 
-                            key={item.key}
-                            label={item.label}
-                            value={item.value}>
-                            {item.label}
-                        </option>
-                    );
-                })}
-            </select>
+            <div class="drop-down">
+                <label class="drop-down__title">{headerTitle}: </label>
+                <select class="drop-down__select" value={selectedOption.value} onChange={this.handleChange}>
+                    {this.state.items.map(item => {
+                        console.log(item);
+                        return (
+                            <option
+                                class="drop-down__option"
+                                key={item.key}
+                                label={item.label}
+                                value={item.value}>
+                                {item.label}
+                            </option>
+                        );
+                    })}
+                </select>
+
+            </div>
         );
     }
 
