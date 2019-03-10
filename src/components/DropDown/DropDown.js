@@ -10,8 +10,6 @@ export default class DropDown extends React.Component {
             selectedOption: {
                 value: 0
             },
-
-            listOpen: true,
             headerTitle: this.props.title,
             items: [
                 {
@@ -53,30 +51,19 @@ export default class DropDown extends React.Component {
             ]
         }
 
-        this.handleClickOutside = this.handleClickOutside.bind(this);
-        this.toggleList = this.toggleList.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleClickOutside() {
-        this.setState({
-            listOpen: true
-        });
-    }
 
-    toggleList() {
-        this.setState(prevState => ({
-            listOpen: !prevState.listOpen
-        }))
-    }
-
-    handleChange(args) {
-        const newValue = args.currentTarget.selectedIndex;
+    handleChange(event) {
+        const newValue = event.currentTarget.selectedIndex;
         this.setState({
             selectedOption: {
                 value: newValue
             }
         });
+
+        // this.props.handle(event);
     }
 
     render() {
@@ -85,14 +72,14 @@ export default class DropDown extends React.Component {
         const { headerTitle } = this.state;
         // console.log(selectedOption);
         return (
-            <div class="drop-down">
-                <label class="drop-down__title">{headerTitle}: </label>
-                <select class="drop-down__select" value={selectedOption.value} onChange={this.handleChange}>
+            <div className="drop-down">
+                <label className="drop-down__title">{headerTitle}: </label>
+                <select className="drop-down__select" value={selectedOption.value} onChange={this.handleChange}>
                     {this.state.items.map(item => {
                         console.log(item);
                         return (
                             <option
-                                class="drop-down__option"
+                                className="drop-down__option"
                                 key={item.key}
                                 label={item.label}
                                 value={item.value}>

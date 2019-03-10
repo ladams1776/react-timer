@@ -1,0 +1,66 @@
+.mt-1em {
+    margin-top: 1em;
+}
+
+.m-a {
+    margin: auto;
+}
+
+.w-140 {
+    width: 140px;
+}
+
+.w-50 {
+    width: 50px;
+}
+
+.timer {
+    background-color: #d8d8d8b3;
+}
+
+.timer__label {
+    display: block;
+    width: 175px;
+    margin: auto;
+}
+
+.timer__start {
+    float: right;
+    background-color: #00e81f;
+    color: black;
+    border-radius: 4px;
+    width: 4em;
+    height: 3em;
+    border: none;
+}
+
+.timer__reset {
+    float: right;
+    background-color: #d30000;
+    color: white;
+    border-radius: 4px;
+    width: 4em;
+    height: 3em;
+    border: none;
+}
+
+.timer__resume {
+    float: left;
+    float: left;
+    background-color: #00e8bb;
+    color: black;
+    border-radius: 4px;
+    width: 5em;
+    height: 40px;
+    border: none;
+}
+
+.timer__stop {
+    float: left;
+    background-color: #d6e800;
+    color: black;
+    border-radius: 4px;
+    width: 4em;
+    height: 3em;
+    border: none;
+}

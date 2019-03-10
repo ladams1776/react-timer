@@ -1,21 +1,18 @@
-// import 'file-saver';
+var FileSaver = require('file-saver');
 
-// export default class ReservationEventJSONWriter {
+export default class JsonWriter {
 
-//     constructor() {}
-
-//     writeReservation(eventName, dates, url, partySize, time) {
-//         console.log('Write the details to a json file.');
-//         let data = {
-//             eventName: eventName,
-//             dates: dates,
-//             url: url,
-//             partySize: partySize,
-//             time: time
-//         };
-//         let json = JSON.stringify(data);
-//         let blob = new Blob([json], {type: "application/json"});
-//         let fileName = eventName+".json";
-//         saveAs(blob, fileName);
-//     }
-// }
+    write(project, task, time, description) {
+        console.log('Write the details to a json file.');
+        let data = {
+            project: project,
+            task: task,
+            time: time,
+            description: description
+        };
+        let json = JSON.stringify(data);
+        let blob = new Blob([json], {type: "application/json"});
+        let fileName = project + task + time +".json";
+        FileSaver.saveAs(blob, fileName);
+    }
+}

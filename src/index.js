@@ -1,11 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from './Form/Form';
-// import Select from 'react-select';
-
-
-
-
 
 
 
@@ -15,6 +10,5 @@ import Form from './Form/Form';
 
 ReactDOM.render(
     <Form />,
-    // <DropDown title="Contract Drop Down"/>,
     document.getElementById('root')
 );

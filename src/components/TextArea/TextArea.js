@@ -1,4 +1,6 @@
 import React from 'react';
+import './TextArea.css';
+
 
 export default class TextArea extends React.Component {
 
@@ -12,13 +14,18 @@ export default class TextArea extends React.Component {
 
     render() {
         return (
-            <div class="text-area">
+            <div className="text-area">
                 <label
-                    class="text-area__label"
-                    htmlFor="description">
+                    className="text-area__label"
+                    htmlFor="description"
+                >
                     {this.state.labelTitle}
                 </label>
-                <textarea class="text-area__description" name="description" description="Project Description" onChange={this.handleDescriptionChange} />
+                <textarea className="text-area__description" 
+                        name="description" 
+                        description="Project Description" 
+                        // onChange={this.props.handler} 
+                    />
             </div>
         )
     }
