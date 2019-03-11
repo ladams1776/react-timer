@@ -20,7 +20,7 @@ export default class Form extends React.Component {
         // this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleSubmit = this.handleSubmit(this);
         // this.dropDownChange = this.dropDownChange(this);
-        this.timerChangeHandler = this.timerChangeHandler(this);
+        // this.timerChangeHandler = this.timerChangeHandler(this);
     }
 
     // handleDescriptionChange() {
@@ -36,7 +36,8 @@ export default class Form extends React.Component {
         // event.preventDefault();
         // event.preventDefault();
         console.log('yup');
-        
+        // let time = this.timerChangeHandler();
+        // console.log(time);
     }
 
 
@@ -45,11 +46,11 @@ export default class Form extends React.Component {
     // }
 
 
-    timerChangeHandler(timePassed) {
+    timeChange = (dataFromChild) => {
        // this.setState({ time: event.target.value });
-       console.log(this.props.time)
+       console.log(dataFromChild)
        console.log('timer was changed');
-        console.log("Time passed is: " + timePassed);
+        console.log("Time passed is: " + dataFromChild);
         //@todo: we want to set the state of the time in the form, but we want this to come from the Timer
     //    this.setState({ time: 1 });
     //    this.state.time = time;
@@ -62,7 +63,7 @@ export default class Form extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <TextArea title="Description:" />
                     <DropDown title="Contract Drop Down"  />
-                    <Timer handler={this.timerChangeHandler}/>
+                    <Timer handler={this.timeChange}/>
                     <input className="form-submit f-r mt-4em" type="submit" value="Submit" />
                 </form>
             </div>

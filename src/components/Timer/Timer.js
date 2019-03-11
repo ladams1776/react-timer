@@ -10,14 +10,31 @@ export default class Timer extends React.Component {
             time: 0,
             isOn: false,
             start: 0,
-            stoppedTimeAt: 0
+            stoppedTimeAt: 0,
         };
 
         this.startTimer = this.startTimer.bind(this);
-        this.stopTimer = this.stopTimer.bind(this);
-        // this.stopTimer = this.props.handler.bind(this);
+        // this.stopTimer = this.stopTimer.bind(this);
+
         this.resetTimer = this.resetTimer.bind(this);
     }
+
+
+
+
+    timerChangeHandler() {
+       // this.setState({ time: event.target.value });
+    //    console.log(this.props.time)
+    //    console.log('timer was changed');
+    //     console.log("Time passed is: " + timePassed);
+        //@todo: we want to set the state of the time in the form, but we want this to come from the Timer
+    //    this.setState({ time: 1 });
+    //    this.state.time = time;
+       return this.state.stoppedTimeAt;
+    }
+
+
+
 
     startTimer() {
         this.setState({
@@ -31,14 +48,14 @@ export default class Timer extends React.Component {
         }), 1);
     }
 
-    stopTimer() {
+    stopTimer = (e) => {
         this.setState({ isOn: false });        
         clearInterval(this.timer);
         let timePassed = ((((this.state.time / 1000) / 60) / 60)).toFixed(2);
         this.setState({stoppedTimeAt: timePassed});
-        
+        this.props.handler(timePassed)
         //@todo: issue passing up the time through the handler.
-        // this.props.handler(timePassed);
+        // this.state.handler(timePassed);
     }
 
     resetTimer() {
