@@ -3,13 +3,18 @@ import './TextArea.css';
 
 
 export default class TextArea extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
             labelTitle: props.title,
             description: props.description
         }
+    }
+
+    handleChange = (e) => {
+        const newDescription = e.target.value;
+        this.setState({description: newDescription});
+        this.props.handler(newDescription);
     }
 
     render() {
@@ -23,8 +28,8 @@ export default class TextArea extends React.Component {
                 </label>
                 <textarea className="text-area__description" 
                         name="description" 
-                        description="Project Description" 
-                        // onChange={this.props.handler} 
+                        value={this.state.description} 
+                        onChange={this.handleChange} 
                     />
             </div>
         )

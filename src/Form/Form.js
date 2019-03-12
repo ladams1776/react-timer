@@ -11,63 +11,53 @@ export default class Form extends React.Component {
         super(props);
 
         this.state = {
-            description: 'Please Fill in the description here.', // text area
+            description: 'Project Description', // text area
             time: 0,     // from timer
-            project: null,  // from drop down
-            task: null,     // from drop down
+            selectedProject: 0,
+            dropDownList:  this.props.list,
             writer: new JsonWriter()
         };
-        // this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+
         this.handleSubmit = this.handleSubmit(this);
         // this.dropDownChange = this.dropDownChange(this);
-        // this.timerChangeHandler = this.timerChangeHandler(this);
+        // this.timeChangeHandler = this.timeChangeHandler(this);
     }
 
-    // handleDescriptionChange() {
-    //     console.log('description changed');
-    //     this.setState({
-    //         description: 'yup'
-    //     });
-    // }
+    textChangeHandler = (dataFromChild) => {
+        this.setState({
+            description: dataFromChild
+        });
+    }
 
     handleSubmit(event) {
+        let d = this.state.dropDownList[this.state.selectedProject]
         // this.state.writer.write(this.state.project, this.state.task, this.state.time, this.state.description);
         // alert('A name was submitted: ' + this.state.value);
         // event.preventDefault();
-        // event.preventDefault();
-        console.log('yup');
         // let time = this.timerChangeHandler();
         // console.log(time);
     }
 
 
-    // dropDownChange(event) {
-    //     this.setState({ project: event.target.value });
-    // }
+    dropDownChange = (dataFromChild) => {
+        // this.setState({ selectedProject: dataFromChild });
+    }
 
 
-    timeChange = (dataFromChild) => {
-       // this.setState({ time: event.target.value });
-       console.log(dataFromChild)
-       console.log('timer was changed');
-        console.log("Time passed is: " + dataFromChild);
-        //@todo: we want to set the state of the time in the form, but we want this to come from the Timer
-    //    this.setState({ time: 1 });
-    //    this.state.time = time;
-       
+    timeChangeHandler = (dataFromChild) => {
+       this.setState({ time: dataFromChild });       
     }
 
     render() {
         return (
             <div className="m-a w-400px">
                 <form onSubmit={this.handleSubmit}>
-                    <TextArea title="Description:" />
-                    <DropDown title="Contract Drop Down"  />
-                    <Timer handler={this.timeChange}/>
+                    <TextArea title="Description:" description={this.state.description} handler={this.textChangeHandler} />
+                    <DropDown title="Contract Drop Down" list={this.state.dropDownList} handler={this.dropDownChange} />
+                    <Timer handler={this.timeChangeHandler}/>
                     <input className="form-submit f-r mt-4em" type="submit" value="Submit" />
                 </form>
             </div>
         );
     }
-
 }

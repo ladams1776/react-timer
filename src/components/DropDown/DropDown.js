@@ -11,44 +11,7 @@ export default class DropDown extends React.Component {
                 value: 0
             },
             headerTitle: this.props.title,
-            items: [
-                {
-                    value: 0,
-                    label: "New York",
-                    selected: false,
-                    key: 0
-                },
-                {
-                    value: 1,
-                    label: 'Dublin',
-                    selected: false,
-                    key: 1
-                },
-                {
-                    value: 2,
-                    label: 'California',
-                    selected: false,
-                    key: 2
-                },
-                {
-                    value: 3,
-                    label: 'Istanbul',
-                    selected: false,
-                    key: 3
-                },
-                {
-                    value: 4,
-                    label: 'Izmir',
-                    selected: false,
-                    key: 4
-                },
-                {
-                    value: 5,
-                    label: 'Oslo',
-                    selected: false,
-                    key: 5
-                }
-            ]
+            items: this.props.list
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -63,20 +26,17 @@ export default class DropDown extends React.Component {
             }
         });
 
-        // this.props.handle(event);
+        // this.props.handler(newValue);
     }
 
     render() {
 
-        const { selectedOption } = this.state;
         const { headerTitle } = this.state;
-        // console.log(selectedOption);
         return (
             <div className="drop-down">
                 <label className="drop-down__title">{headerTitle}: </label>
-                <select className="drop-down__select" value={selectedOption.value} onChange={this.handleChange}>
+                <select className="drop-down__select" value={this.state.selectedOption.value} onChange={this.handleChange}>
                     {this.state.items.map(item => {
-                        console.log(item);
                         return (
                             <option
                                 className="drop-down__option"
@@ -88,9 +48,7 @@ export default class DropDown extends React.Component {
                         );
                     })}
                 </select>
-
             </div>
         );
     }
-
 }

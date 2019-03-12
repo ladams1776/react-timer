@@ -1,0 +1,51 @@
+[
+    {
+        "customer": "Acme Corp",
+        "key": 0,
+        "value": 0, 
+        "selected": true,
+        "label": "Search Engine Optimization"
+    },
+    {
+        "customer": "Wonka Industries",
+        "key": 1,
+        "value": 1,
+        "selected": false,
+        "label": "Usability"
+    },
+    {
+        "customer": "Stark Industries",
+        "key": 2,
+        "value": 2,
+        "selected": false,
+        "label": "Speed and Performance"
+    },
+    {
+        "customer": "Ollivanders Wand Shop",
+        "key": 3,
+        "value": 3,
+        "selected": false,
+        "label": "Analytics"
+    },
+    {
+        "customer": "Gekko and Co",
+        "key": 4,
+        "value": 4,
+        "selected": false,
+        "label": "Page content"
+    },
+    {
+        "customer": "Wayne Enterprise",
+        "key": 5,
+        "value": 5,
+        "selected": false,
+        "label": "Code Quality"
+    },
+    {
+        "customer": "Cyberdyne Systems",
+        "key": 6,
+        "value": 6,
+        "selected": false,
+        "label": "Set up Hosting Account"
+    }
+]
