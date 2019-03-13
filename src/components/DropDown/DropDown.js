@@ -26,7 +26,7 @@ export default class DropDown extends React.Component {
             }
         });
 
-        // this.props.handler(newValue);
+        this.props.handler(newValue);
     }
 
     render() {

@@ -12,7 +12,7 @@ export default class JsonWriter {
         };
         let json = JSON.stringify(data);
         let blob = new Blob([json], {type: "application/json"});
-        let fileName = project + task + time +".json";
+        let fileName = (new Date().toString()) + "_" + description + "_" + time +".json";
         FileSaver.saveAs(blob, fileName);
     }
 }

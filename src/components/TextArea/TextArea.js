@@ -18,6 +18,8 @@ export default class TextArea extends React.Component {
     }
 
     render() {
+
+
         return (
             <div className="text-area">
                 <label
@@ -29,8 +31,12 @@ export default class TextArea extends React.Component {
                 <textarea className="text-area__description" 
                         name="description" 
                         value={this.state.description} 
-                        onChange={this.handleChange} 
+                        onChange={this.handleChange}
+                        maxlength="255"
+                        rows="5"
+                        cols="52"
                     />
+                <span className="text-area__character-length">{this.state.description.length} character(s)</span>
             </div>
         )
     }

@@ -18,7 +18,7 @@ export default class Form extends React.Component {
             writer: new JsonWriter()
         };
 
-        this.handleSubmit = this.handleSubmit(this);
+        // this.handleSubmit = this.handleSubmit(this);
         // this.dropDownChange = this.dropDownChange(this);
         // this.timeChangeHandler = this.timeChangeHandler(this);
     }
@@ -29,18 +29,29 @@ export default class Form extends React.Component {
         });
     }
 
-    handleSubmit(event) {
-        let d = this.state.dropDownList[this.state.selectedProject]
-        // this.state.writer.write(this.state.project, this.state.task, this.state.time, this.state.description);
-        // alert('A name was submitted: ' + this.state.value);
-        // event.preventDefault();
-        // let time = this.timerChangeHandler();
-        // console.log(time);
+    handleSubmit = (event) => {
+        const dropDownSelection = this.state.dropDownList[this.state.selectedProject];
+        const time = this.state.time;
+        const description = this.state.description;
+
+        const timeTask = {
+            project: {
+                customer: dropDownSelection.customer,
+                contract: dropDownSelection.label, 
+            },
+            description: description,
+            time: time
+        };
+
+        this.state.writer.write(timeTask);
     }
 
+    descriptionChange = (dataFromChild) => {
+        this.setState({description: dataFromChild})
+    }
 
     dropDownChange = (dataFromChild) => {
-        // this.setState({ selectedProject: dataFromChild });
+        this.setState({ selectedProject: dataFromChild });
     }
 
 
@@ -52,7 +63,7 @@ export default class Form extends React.Component {
         return (
             <div className="m-a w-400px">
                 <form onSubmit={this.handleSubmit}>
-                    <TextArea title="Description:" description={this.state.description} handler={this.textChangeHandler} />
+                    <TextArea title="Description:" description={this.state.description} handler={this.descriptionChange} />
                     <DropDown title="Contract Drop Down" list={this.state.dropDownList} handler={this.dropDownChange} />
                     <Timer handler={this.timeChangeHandler}/>
                     <input className="form-submit f-r mt-4em" type="submit" value="Submit" />
