@@ -14,7 +14,7 @@ export default class Form extends React.Component {
             description: 'Project Description', // text area
             time: 0,     // from timer
             selectedProject: 0,
-            dropDownList:  this.props.list,
+            dropDownList: this.props.list,
             writer: new JsonWriter()
         };
 
@@ -33,21 +33,25 @@ export default class Form extends React.Component {
         const dropDownSelection = this.state.dropDownList[this.state.selectedProject];
         const time = this.state.time;
         const description = this.state.description;
-
+        const date = new Date();
+        const dateFormatted = date.getMonth().toString() + "/" + date.getDate().toString() + "/" + date.getFullYear().toString()
         const timeTask = {
-            project: {
-                customer: dropDownSelection.customer,
-                contract: dropDownSelection.label, 
-            },
-            description: description,
-            time: time
+            date: dateFormatted,
+            WorkUnit: [
+                {
+                    customer: dropDownSelection.customer,
+                    contract: dropDownSelection.contract,
+                    description: description,
+                    time: time,
+                }
+            ]
         };
 
         this.state.writer.write(timeTask);
     }
 
     descriptionChange = (dataFromChild) => {
-        this.setState({description: dataFromChild})
+        this.setState({ description: dataFromChild })
     }
 
     dropDownChange = (dataFromChild) => {
@@ -56,7 +60,7 @@ export default class Form extends React.Component {
 
 
     timeChangeHandler = (dataFromChild) => {
-       this.setState({ time: dataFromChild });       
+        this.setState({ time: dataFromChild });
     }
 
     render() {
@@ -65,7 +69,7 @@ export default class Form extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <TextArea title="Description:" description={this.state.description} handler={this.descriptionChange} />
                     <DropDown title="Contract Drop Down" list={this.state.dropDownList} handler={this.dropDownChange} />
-                    <Timer handler={this.timeChangeHandler}/>
+                    <Timer handler={this.timeChangeHandler} />
                     <input className="form-submit f-r mt-4em" type="submit" value="Submit" />
                 </form>
             </div>

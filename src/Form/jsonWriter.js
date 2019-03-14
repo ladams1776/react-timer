@@ -2,17 +2,10 @@ var FileSaver = require('file-saver');
 
 export default class JsonWriter {
 
-    write(project, task, time, description) {
-        console.log('Write the details to a json file.');
-        let data = {
-            project: project,
-            task: task,
-            time: time,
-            description: description
-        };
-        let json = JSON.stringify(data);
+    write(taskBundle) {
+        let json = JSON.stringify(taskBundle);
         let blob = new Blob([json], {type: "application/json"});
-        let fileName = (new Date().toString()) + "_" + description + "_" + time +".json";
+        let fileName = (new Date().toString()) + "_" + taskBundle.description + "_" + taskBundle.time +".json";
         FileSaver.saveAs(blob, fileName);
     }
 }
