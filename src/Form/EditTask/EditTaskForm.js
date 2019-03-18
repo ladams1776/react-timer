@@ -1,11 +1,11 @@
 import React from 'react';
-import DropDown from '../components/DropDown/DropDown';
-import Timer from '../components/Timer/Timer';
-import TextArea from '../components/TextArea/TextArea';
-import './Form.css';
+import DropDown from '../../components/DropDown/DropDown';
+import Timer from '../../components/Timer/Timer';
+import TextArea from '../../components/TextArea/TextArea';
+import './EditTaskForm.css';
 import JsonWriter from './JsonWriter';
 
-export default class Form extends React.Component {
+export default class EditTaskForm extends React.Component {
 
     constructor(props) {
         super(props);
