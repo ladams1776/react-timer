@@ -5,9 +5,15 @@ app.listen(3001, function () {
     console.log();
 });
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 app.get("/task", function (req, res) {
     //@todo: simulate db
-    res.json([
+    res.jsonp([
         {
             description: "Optimizing and setting up SEO",
             customer: "Acme Corp",

@@ -1,0 +1,49 @@
+a.task-list {
+    display: block;
+    width: 600px;
+    line-height: 2em;
+    text-decoration: none;
+    margin: 2em auto;
+    background-color: #f6f6f6;
+    color: #3b3b3b;
+    padding: 2em;
+}
+
+a.task-list:hover {
+    display: block;
+    width: 600px;
+    line-height: 2em;
+    text-decoration: none;
+    margin: 2em auto;
+    background-color: #5c5858;
+    padding: 2em;
+    color: #cec3c3;
+}
+
+.task-list__description {
+    display: block;
+    line-height: 1em;
+}
+
+.task-list__customer {
+    display: inline-block;
+    line-height: 1em;
+}
+
+.task-list__contract {
+    display: inline-block;
+    line-height: 1em;
+}
+
+.task-list__time {
+    display: block;
+    line-height: 1em;
+}
+
+.task-list__time-label {
+    display: inline-block;
+}
+
+.task-list__time-value {
+    display: inline-block;
+}
