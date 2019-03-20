@@ -11,6 +11,8 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-onclickoutside": "^6.8.0",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.5",
     "react-select": "^2.4.2",
     "typescript": "^3.3.3333"
@@ -29,5 +31,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }

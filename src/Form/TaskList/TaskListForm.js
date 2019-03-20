@@ -1,5 +1,11 @@
 import React from 'react';
+import {
+    Route,
+    NavLink,
+    HashRouter
+} from "react-router-dom";
 import './TaskListForn.css';
+
 
 export default class TaskListForm extends React.Component {
     constructor(props) {
@@ -8,7 +14,6 @@ export default class TaskListForm extends React.Component {
             tasks: []
         };
     }
-
 
     componentDidMount() {
         this.setState({ tasks: null });
@@ -19,12 +24,15 @@ export default class TaskListForm extends React.Component {
         })
         .then(data => {
             let tasks = data.map((task) => {
+                
                 return(
-                    <a href="#" id={task.key} class="task-list">
-                        <span class="task-list__description">{task.description}</span>
-                        <span class="task-list__customer">{task.customer}</span> - <span class="task-list__contract">{task.contract}</span>                        
-                        <span class="task-list__time"><span class="task-list__time-label">Time:</span><span class="task-list__time-value">{task.time}</span></span>
-                    </a>                                        
+                    <li key={task.id}>
+                        <NavLink to={"/task/"+task.id} id={task.id} className="task-list" >
+                            <span className="task-list__description">{task.description}</span>
+                            <span className="task-list__customer">{task.customer}</span> - <span className="task-list__contract">{task.contract}</span>                        
+                            <span className="task-list__time"><span className="task-list__time-label">Time:</span><span className="task-list__time-value">{task.time}</span></span>
+                        </NavLink>
+                    </li>                                        
                 )
             })
             this.setState({ tasks: tasks });

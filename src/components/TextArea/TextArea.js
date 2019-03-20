@@ -32,7 +32,7 @@ export default class TextArea extends React.Component {
                         name="description" 
                         value={this.state.description} 
                         onChange={this.handleChange}
-                        maxlength="255"
+                        maxLength="255"
                         rows="5"
                         cols="52"
                     />

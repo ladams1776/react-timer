@@ -8,6 +8,7 @@ import JsonWriter from './JsonWriter';
 export default class EditTaskForm extends React.Component {
 
     constructor(props) {
+        console.log('EditTaskForm is called');
         super(props);
 
         this.state = {

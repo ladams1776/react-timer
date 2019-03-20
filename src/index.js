@@ -1,18 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EditTaskForm from './Form/EditTask/EditTaskForm';
-import TaskListForm from './Form/TaskList/TaskListForm';
+import Main from './Main';
 
 
-
-
-const list = require('./resources/dropdownDefinition.json');
+const dropDownListContracts = require('./resources/dropdownDefinition.json');
 
 // ========================================
 
 ReactDOM.render(
     // <Form list={JSON.parse('../resources/dropdownDefinition.js')}/>,
     // <EditTaskForm list={list} />,
-    <TaskListForm />,
+    <Main dropDownListContracts={dropDownListContracts}/>,
     document.getElementById('root')
 );

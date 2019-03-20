@@ -1,4 +1,4 @@
-a.task-list {
+.task-list {
     display: block;
     width: 600px;
     line-height: 2em;
@@ -9,7 +9,7 @@ a.task-list {
     padding: 2em;
 }
 
-a.task-list:hover {
+.task-list:hover {
     display: block;
     width: 600px;
     line-height: 2em;
