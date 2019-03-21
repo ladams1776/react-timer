@@ -24,15 +24,19 @@ class Main extends React.Component {
         <div>
           <div className="content">
             {/* @todo: need to manage the state here, if we click on a link we need to hide the list, the edit form is showing */}
-            <Route 
-                path="/" 
-                component={TaskListForm}
-            />  
 
             <Route 
                 path="/task/:id" 
                 render={(props) => <EditTaskForm {...props} list={this.state.dropDownListContracts}/>}
             />
+
+            <Route 
+                exact 
+                path="/" 
+                component={TaskListForm}
+            />  
+
+
 
           </div>
         </div>
