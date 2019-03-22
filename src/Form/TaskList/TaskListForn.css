@@ -1,4 +1,27 @@
+.task-list__header {
+    display: block;
+    text-align: right;
+    margin: 4em auto;
+    width: 600px;
+}
+
+.button-add {
+    background-color: #c600e8;
+    color: white;
+    border-radius: 4px;
+    width: 100px;
+    height: 1.5em;
+    border: none;
+    padding: 1em;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
 .task-list {
+    list-style: none;
     display: block;
     width: 600px;
     line-height: 2em;

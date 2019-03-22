@@ -19,6 +19,7 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
+    "server-start": "node ./src/server.js & npm start",
     "nodemon": "nodemon ./server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -28,6 +29,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://localhost:3001/",
   "browserslist": [
     ">0.2%",
     "not dead",

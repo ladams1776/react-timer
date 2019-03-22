@@ -30,11 +30,6 @@ export default class DropDown extends React.Component {
     }
 
 
-
-
-
-
-
     render() {
 
         const { headerTitle } = this.state;
@@ -57,9 +52,4 @@ export default class DropDown extends React.Component {
             </div>
         );
     }
-
-
-
-
-    
 }

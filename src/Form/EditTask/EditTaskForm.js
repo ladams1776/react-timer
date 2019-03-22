@@ -37,6 +37,7 @@ export default class EditTaskForm extends React.Component {
         const date = new Date();
         const dateFormatted = date.getMonth().toString() + "/" + date.getDate().toString() + "/" + date.getFullYear().toString()
         const timeTask = {
+            id: dropDownSelection.key,
             date: dateFormatted,
             WorkUnit: [
                 {
@@ -47,8 +48,15 @@ export default class EditTaskForm extends React.Component {
                 }
             ]
         };
+        
+        
 
-        this.state.writer.write(timeTask);
+        // this.state.writer.write(timeTask);
+        fetch('http://localhost:3001/api/task', {
+                method: 'POST',
+                body: JSON.stringify(timeTask),
+                headers: {'Content-Type': 'application/json'}
+        }).then(response => console.log(response.json()));
     }
 
     descriptionChange = (dataFromChild) => {
@@ -67,6 +75,7 @@ export default class EditTaskForm extends React.Component {
     render() {
         return (
             <div className="m-a w-400px">
+                
                 <form onSubmit={this.handleSubmit}>
                     <TextArea title="Description:" description={this.state.description} handler={this.descriptionChange} />
                     <DropDown title="Contract Drop Down" list={this.state.dropDownList} handler={this.dropDownChange} />

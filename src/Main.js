@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   Route,
-  NavLink,
   HashRouter
 } from "react-router-dom";
 import TaskListForm from "./Form/TaskList/TaskListForm";
@@ -26,6 +25,7 @@ class Main extends React.Component {
             {/* @todo: need to manage the state here, if we click on a link we need to hide the list, the edit form is showing */}
 
             <Route 
+                exact
                 path="/task/:id" 
                 render={(props) => <EditTaskForm {...props} list={this.state.dropDownListContracts}/>}
             />

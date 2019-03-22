@@ -3,7 +3,7 @@ const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-require('./src/models/Task');
+require('./models/Task');
 
 
 
@@ -50,7 +50,21 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/task", function (req, res) {
+app.post("/api/task", function (req, res) {
+    //@todo: left off here
+    res.json({
+        description: "Optimizing and setting up SEO",
+            customer: "Acme Corp",
+            contract: "Search Engine Optimization",
+            id: 0,
+            time: 3.33
+    });
+});
+
+app.get("/api/task", function (req, res) {
+
+    var Task = mongoose.model('task', taskSchema);
+    Task.findOne([]);
     //@todo: simulate db
     res.jsonp([
         {
