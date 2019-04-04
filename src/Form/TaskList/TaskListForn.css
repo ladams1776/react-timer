@@ -59,8 +59,8 @@ li {
 }
 
 .task-list__time {
-    display: block;
     line-height: 1em;
+    float: right;
 }
 
 .task-list__time-label {

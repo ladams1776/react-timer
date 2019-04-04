@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactRouterDom  from "react-router-dom";
 import DropDown from '../../components/DropDown/DropDown';
 import Timer from '../../components/Timer/Timer';
 import TextArea from '../../components/TextArea/TextArea';
@@ -12,7 +13,7 @@ export default class EditTaskForm extends React.Component {
         super(props);
 
         this.state = {
-            description: 'Project Description', // text area
+            description: '', // text area
             time: 0,     // from timer
             selectedProject: 0,
             dropDownList: this.props.list,
@@ -23,6 +24,33 @@ export default class EditTaskForm extends React.Component {
         // this.dropDownChange = this.dropDownChange(this);
         // this.timeChangeHandler = this.timeChangeHandler(this);
     }
+
+
+    //@todo: this is firing after the child component is rendered so I am not getting the description in the TextArea.
+    //@todo: I need to do something like do this request in the child first. 
+
+    //@todo: i sometimes see this.
+    componentWillMount() {
+        const taskId = this.props.match.params.id;
+        
+        if (taskId !== -1) {
+            fetch('http://localhost:3001/api/task/'+taskId)
+            .then(response => {
+                return response.json();
+            })
+            .then((task) => {
+                const id = task._id;
+                this.setState({
+                  description: task.description,
+                  time: task.time,
+                  selectedProject: task.contractId
+                });
+            });
+        }
+      }
+  
+  
+ 
 
     textChangeHandler = (dataFromChild) => {
         this.setState({
@@ -37,12 +65,10 @@ export default class EditTaskForm extends React.Component {
         const date = new Date();
         const dateFormatted = date.getMonth().toString() + "/" + date.getDate().toString() + "/" + date.getFullYear().toString()
         const timeTask = {
-            id: dropDownSelection.key,
             date: dateFormatted,
             WorkUnit: [
                 {
-                    customer: dropDownSelection.customer,
-                    contract: dropDownSelection.contract,
+                    contractId: dropDownSelection.key,
                     description: description,
                     time: time,
                 }
@@ -56,7 +82,7 @@ export default class EditTaskForm extends React.Component {
                 method: 'POST',
                 body: JSON.stringify(timeTask),
                 headers: {'Content-Type': 'application/json'}
-        }).then(response => console.log(response.json()));
+        });
     }
 
     descriptionChange = (dataFromChild) => {

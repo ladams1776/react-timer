@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Route,
   HashRouter
@@ -33,7 +33,8 @@ class Main extends React.Component {
             <Route 
                 exact 
                 path="/" 
-                component={TaskListForm}
+                render={(props) => <TaskListForm {...props} list={this.state.dropDownListContracts}/>}
+                // component={TaskListForm}
             />  
 
 
