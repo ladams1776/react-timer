@@ -81,17 +81,30 @@ app.get("/api/task/:id", function (req, res) {
 
 
 app.post("/api/task", function (req, res) {
-    const myModel = mongoose.model('tasks', taskSchema);
-    const m = new myModel;
+    const TaskModel = mongoose.model('tasks', taskSchema);
+    
 
-    m.toObject();
-    m.date = req.body.date;
-    m.description = req.body.WorkUnit[0].description;
-    m.contractId = req.body.WorkUnit[0].contractId;
-    m.time = req.body.WorkUnit[0].time;
+    if (req.body._id !== -1) {
+        TaskModel.findById(req.body._id, function (err, foundTask) {
+            if (err) throw err;
+            foundTask.date = req.body.date;
+            foundTask.description = req.body.WorkUnit[0].description;
+            foundTask.contractId = req.body.WorkUnit[0].contractId;
+            foundTask.time = req.body.WorkUnit[0].time;
+            foundTask.save( function (err) {
+                if (err) throw err;
+            })
+        });
+    } else {  
+        const m = new TaskModel;   
+        m.toObject();
+        m.date = req.body.date;
+        m.description = req.body.WorkUnit[0].description;
+        m.contractId = req.body.WorkUnit[0].contractId;
+        m.time = req.body.WorkUnit[0].time;
 
-    m.save(function (err) {
-        console.log(err);
-    });
-    res.jsonp(req.body);
+        m.save(function (err) {
+            if (err) throw err;
+        });
+    }
 });
