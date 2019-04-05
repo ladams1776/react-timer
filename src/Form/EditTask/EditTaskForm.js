@@ -4,7 +4,6 @@ import DropDown from '../../components/DropDown/DropDown';
 import Timer from '../../components/Timer/Timer';
 import TextArea from '../../components/TextArea/TextArea';
 import './EditTaskForm.css';
-import JsonWriter from './JsonWriter';
 
 export default class EditTaskForm extends React.Component {
 
@@ -18,7 +17,6 @@ export default class EditTaskForm extends React.Component {
             time: 0,     // from timer
             selectedProject: 0,
             dropDownList: this.props.list,
-            writer: new JsonWriter()
         };
     }
 
@@ -33,7 +31,7 @@ export default class EditTaskForm extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        
+
         const dropDownSelection = this.state.dropDownList[this.state.selectedProject];
         const time = this.state.time;
         const description = this.state.description;
