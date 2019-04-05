@@ -29,6 +29,9 @@ export default class TextArea extends React.Component {
                     this.setState({
                         description: description,
                     });
+
+                    this.props.handler(description);
+
                 });
         }
     }

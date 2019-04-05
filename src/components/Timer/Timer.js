@@ -33,8 +33,13 @@ export default class Timer extends React.Component {
                         taskId: task._id,
                         time: task.time,
                     });
+
+                    this.setState({ stoppedTimeAt: task.time });
+                    this.props.handler(task.time)
                 });
         }
+
+
     }
 
 

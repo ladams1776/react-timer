@@ -34,6 +34,8 @@ export default class DropDown extends React.Component {
                     this.setState({
                         selectedOption: {value: contractId},
                     });
+
+                    this.props.handler(contractId);
                 });
         }
     }
