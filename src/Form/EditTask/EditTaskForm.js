@@ -32,6 +32,8 @@ export default class EditTaskForm extends React.Component {
     }
 
     handleSubmit = (event) => {
+        event.preventDefault();
+        
         const dropDownSelection = this.state.dropDownList[this.state.selectedProject];
         const time = this.state.time;
         const description = this.state.description;
