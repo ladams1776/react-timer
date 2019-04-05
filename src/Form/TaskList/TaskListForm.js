@@ -27,7 +27,7 @@ export default class TaskListForm extends React.Component {
                         return (
                             <li key={task._id}>
                                 <NavLink to={"/task/" + task._id} id={task._id} className="task-list" >
-                                    <span className="task-list__time"><span className="task-list__time-label">Time: </span> <span className="task-list__time-value"> {task.time}</span></span>
+                                    <span className="task-list__time"><span className="task-list__time-label">Time: </span> <span className="task-list__time-value"> {((((task.time / 1000) / 60) / 60)).toFixed(2)}</span></span>
                                     <span className="task-list__description">{task.description}</span>
                                     <span className="task-list__customer">{this.retrieveCustomerNameFromContractId(task.contractId)}</span> - <span className="task-list__contract">{this.retrieveContractNameFromContractId(task.contractId)}</span>
                                 </NavLink>

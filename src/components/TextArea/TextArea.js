@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactRouterDom  from "react-router-dom";
+import ReactRouterDom from "react-router-dom";
 
 import './TextArea.css';
 
@@ -8,23 +8,38 @@ export default class TextArea extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            taskId: props.taskId,
             labelTitle: props.title,
-            description: props.description
+            description: ''
         }
     }
 
 
 
+    componentDidMount() {
+        const taskId = this.state.taskId;
 
+        if (taskId !== -1) {
+            fetch('http://localhost:3001/api/task/' + taskId)
+                .then(response => {
+                    return response.json();
+                })
+                .then((task) => {
+                    const description = task.description ? task.description : '';
+                    this.setState({
+                        description: description,
+                    });
+                });
+        }
+    }
 
     handleChange = (e) => {
         const newDescription = e.target.value;
-        this.setState({description: newDescription});
+        this.setState({ description: newDescription });
         this.props.handler(newDescription);
     }
 
     render() {
-
 
         return (
             <div className="text-area">
@@ -34,14 +49,14 @@ export default class TextArea extends React.Component {
                 >
                     {this.state.labelTitle}
                 </label>
-                <textarea className="text-area__description" 
-                        name="description" 
-                        value={this.state.description} 
-                        onChange={this.handleChange}
-                        maxLength="255"
-                        rows="5"
-                        cols="52"
-                    />
+                <textarea className="text-area__description"
+                    name="description"
+                    value={this.state.description}
+                    onChange={this.handleChange}
+                    maxLength="254"
+                    rows="5"
+                    cols="52"
+                />
                 <span className="text-area__character-length">{this.state.description.length} character(s)</span>
             </div>
         )
