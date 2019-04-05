@@ -3,6 +3,8 @@ import {
     NavLink
 } from "react-router-dom";
 import './TaskListForn.css';
+import JsonWriter from './JsonWriter';
+
 
 
 export default class TaskListForm extends React.Component {
@@ -10,8 +12,11 @@ export default class TaskListForm extends React.Component {
         super(props);
         this.state = {
             tasks: [],
-            existingTasks: props.list
+            existingTasks: props.list,
+            writer: new JsonWriter()
         };
+
+        this.showPrintTasks = this.showPrintTasks.bind(this);
     }
 
     componentDidMount() {
@@ -37,23 +42,7 @@ export default class TaskListForm extends React.Component {
                     this.setState({ tasks: tasks });
                 }
             });
-
     }
-
-    render() {
-        return (
-            <div>
-                <div className="task-list__header">
-                    <NavLink to={"/task/-1"} className="button-add">New Task</NavLink>
-                </div>
-
-                <ul>
-                    {this.state.tasks}
-                </ul>
-            </div>
-        );
-    }
-
 
     retrieveCustomerNameFromContractId(contractId) {
         const existingTasks = this.state.existingTasks;
@@ -80,5 +69,59 @@ export default class TaskListForm extends React.Component {
 
         return contractName;
     }
+
+
+    handleDownload (event) {
+
+        //TODO: left off here 4/5/2019 - 7:11AM
+
+        // fetch("http://localhost:3001/api/tasks")
+        // .then(response => response.json())
+        // .then((tasks) => {
+
+        //     postingTasks = [];
+
+        //     const date = new Date();
+        //     const timeTask = {        
+        //         date: dateFormatted,
+        //         WorkUnit: [
+        //             {
+        //                 contractId: dropDownSelection.key,
+        //                 description: description,
+        //                 time: time,
+        //             }
+        //         ]
+        //     };
+
+        //     for (let i = 0; i < tasks.WorkUnit.length; i++) {
+
+        //     }
+
+        // });
+    }
+
+
+    render() {
+        return (
+            <div>
+                <div className="task-list__header">
+                    <NavLink to={"/task/-1"} className="button-add">New Task</NavLink>
+                    { this.showPrintTasks() }
+                </div>
+                <ul>
+                    {this.state.tasks}
+                </ul>
+            </div>
+        );
+    }
+
+
+
+    showPrintTasks() {
+        if (this.state.tasks !== null) {
+            return <button className="button-download" click={this.handleDownload}>Download Tasks</button>;
+        }
+    }
+   
 
 }

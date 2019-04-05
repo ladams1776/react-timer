@@ -16,6 +16,16 @@
     text-decoration: none;
 }
 
+.button-download {
+    background-color: #0096e8;
+    color: white;
+    border-radius: 4px;
+    width: 100px;
+    height: 4em;
+    border: none;
+    padding: .7em;
+}
+
 li {
     list-style: none;
 }
