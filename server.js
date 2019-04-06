@@ -46,6 +46,8 @@ mongoose.connection
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "*");
+
     next();
 });
 
@@ -107,4 +109,13 @@ app.post("/api/task", function (req, res) {
             if (err) throw err;
         });
     }
+});
+
+
+app.delete("/api/task", function (req, res) {
+    const TaskModel = mongoose.model('tasks', taskSchema);
+
+    TaskModel.deleteMany({}, function (e) {
+        let d = '';
+    });
 });

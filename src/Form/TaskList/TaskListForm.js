@@ -16,6 +16,7 @@ export default class TaskListForm extends React.Component {
         };
 
         this.handleDownload = this.handleDownload.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -103,13 +104,23 @@ export default class TaskListForm extends React.Component {
             });
     }
 
+    handleDelete() {
+        fetch("http://localhost:3001/api/task", {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(response => response.json());
+        window.location.reload();
+    }
+
 
     render() {
         return (
             <div>
                 <div className="task-list__header">
+                    {this.showDeleteButton()}
+                    {this.showDownloadButton()}
                     <NavLink to={"/task/-1"} className="button-add">New Task</NavLink>
-                    {this.showPrintTasks(this)}
                 </div>
                 <ul>
                     {this.state.tasks}
@@ -120,9 +131,15 @@ export default class TaskListForm extends React.Component {
 
 
 
-    showPrintTasks(componentRef) {
+    showDownloadButton() {
         if (this.state.tasks !== null) {
-            return <button className="button-download" onClick={this.handleDownload}>Download Tasks</button>;
+            return <a href="#" className="button-download" onClick={this.handleDownload}>Download</a>;
+        }
+    }
+    
+    showDeleteButton() {
+        if (this.state.tasks !== null) {
+            return <a href="#" className="button-delete" onClick={this.handleDelete}>Delete</a>;
         }
     }
 
