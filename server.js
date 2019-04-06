@@ -3,26 +3,12 @@ const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-// require('./src/models/Task');
+const TaskSchema = require("./src/models/TaskSchema");
 
 
 
 
-const taskSchema = new mongoose.Schema({
-    id: { type: Number, index: true },
-    date: {
-        type: Date
-    },
-    description: {
-        type: String,
-        maxlength: 254,
-        trim: true,
-    },
-    contractId: {
-        type: Number,
-    },
-    time: { type: Number }
-});
+
 
 
 
@@ -58,7 +44,7 @@ app.use(bodyParser.json());
 
 app.get("/api/tasks", function (req, res) {
 
-    var Task = mongoose.model('tasks', taskSchema);
+    var Task = mongoose.model('tasks', TaskSchema);
 
     Task.find({}, function (err, docs) {
         if (err) {
@@ -73,7 +59,7 @@ app.get("/api/tasks", function (req, res) {
 app.get("/api/task/:id", function (req, res) {
 
     const taskId = req.params.id;
-    var Task = mongoose.model('tasks', taskSchema);
+    var Task = mongoose.model('tasks', TaskSchema);
     Task.findById(taskId, function (err, docs) {
         if (!err) {
             res.jsonp(docs);
@@ -83,7 +69,7 @@ app.get("/api/task/:id", function (req, res) {
 
 
 app.post("/api/task", function (req, res) {
-    const TaskModel = mongoose.model('tasks', taskSchema);
+    const TaskModel = mongoose.model('tasks', TaskSchema);
     
 
     if (req.body._id !== "-1") {
@@ -113,9 +99,7 @@ app.post("/api/task", function (req, res) {
 
 
 app.delete("/api/task", function (req, res) {
-    const TaskModel = mongoose.model('tasks', taskSchema);
+    const TaskModel = mongoose.model('tasks', TaskSchema);
 
-    TaskModel.deleteMany({}, function (e) {
-        let d = '';
-    });
+    TaskModel.deleteMany({}, function (e) { if (e) throw e; });
 });
