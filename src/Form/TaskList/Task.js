@@ -26,31 +26,4 @@ export default class Task extends React.Component{
             </li>
         );
     }
-
-
-    retrieveCustomerNameFromContractId(contractId) {
-        const existingTasks = this.state.existingTasks;
-        let customerName;
-
-        existingTasks.forEach((task) => {
-            if (task.key === contractId) {
-                customerName = task.customer;
-            }
-        });
-
-        return customerName;
-    }
-
-    retrieveContractNameFromContractId(contractId) {
-        const existingTasks = this.state.existingTasks;
-        let contractName;
-
-        existingTasks.forEach((task) => {
-            if (task.key === contractId) {
-                contractName = task.contract;
-            }
-        });
-
-        return contractName;
-    }
 }
