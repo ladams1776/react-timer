@@ -84,7 +84,7 @@ app.post("/api/task", function (req, res) {
     const TaskModel = mongoose.model('tasks', taskSchema);
     
 
-    if (req.body._id !== -1) {
+    if (req.body._id !== "-1") {
         TaskModel.findById(req.body._id, function (err, foundTask) {
             if (err) throw err;
             foundTask.date = req.body.date;
