@@ -3,10 +3,12 @@ import ms from 'pretty-ms';
 import './Timer.css';
 
 export default class Timer extends React.Component {
+
     constructor(props) {
         super(props);
 
         this.state = {
+            taskId: this.props.taskId ? this.props.taskId : -1,
             time: 0,
             isOn: false,
             start: 0,
@@ -15,6 +17,29 @@ export default class Timer extends React.Component {
 
         this.startTimer = this.startTimer.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
+    }
+
+
+    componentDidMount() {
+        const taskId = this.state.taskId;
+
+        if (taskId !== -1) {
+            fetch('http://localhost:3001/api/task/' + taskId)
+                .then(response => {
+                    return response.json();
+                })
+                .then((task) => {
+                    this.setState({
+                        taskId: task._id,
+                        time: task.time,
+                    });
+
+                    this.setState({ stoppedTimeAt: task.time });
+                    this.props.handler(task.time)
+                });
+        }
+
+
     }
 
 
@@ -31,10 +56,10 @@ export default class Timer extends React.Component {
     }
 
     stopTimer = (e) => {
-        this.setState({ isOn: false });        
+        this.setState({ isOn: false });
         clearInterval(this.timer);
-        let timePassed = ((((this.state.time / 1000) / 60) / 60)).toFixed(2);
-        this.setState({stoppedTimeAt: timePassed});
+        let timePassed = this.state.time;
+        this.setState({ stoppedTimeAt: timePassed });
         this.props.handler(timePassed)
     }
 
@@ -68,10 +93,10 @@ export default class Timer extends React.Component {
         return (
             <div className="timer mt-1em">
                 <label className="timer__label">
-                    timer: 
+                    timer:
                 </label>
                 <div>
-                    {ms(this.state.time)} - hours: {((((this.state.time / 1000) / 60) / 60)).toFixed(2)}    
+                    {ms(this.state.time)} - hours: {((((this.state.time / 1000) / 60) / 60)).toFixed(2)}
                 </div>
                 {start}
                 <div className="w-140 m-a mt-25">

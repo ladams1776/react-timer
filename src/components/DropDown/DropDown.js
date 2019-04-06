@@ -7,6 +7,7 @@ export default class DropDown extends React.Component {
         super(props);
 
         this.state = {
+            taskId: this.props.taskId ? this.props.taskId : -1,
             selectedOption: {
                 value: 0
             },
@@ -15,6 +16,28 @@ export default class DropDown extends React.Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+    }
+
+
+    componentDidMount() {
+        const taskId = this.state.taskId;
+
+        if (taskId !== -1) {
+            fetch('http://localhost:3001/api/task/' + taskId)
+                .then(response => {
+                    return response.json();
+                })
+                .then((task) => {
+                    
+                    const contractId = task.contractId ? task.contractId : 0;
+
+                    this.setState({
+                        selectedOption: {value: contractId},
+                    });
+
+                    this.props.handler(contractId);
+                });
+        }
     }
 
 
@@ -28,6 +51,7 @@ export default class DropDown extends React.Component {
 
         this.props.handler(newValue);
     }
+
 
     render() {
 

@@ -3,15 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "file-saver": "^2.0.1",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.20",
     "pretty-ms": "^4.0.0",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-onclickoutside": "^6.8.0",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.5",
-    "react-select": "^2.4.1",
-    "typescript": "^3.3.3333"
+    "react-select": "^2.4.2",
+    "typescript": "^3.4.1"
   },
   "scripts": {
+    "server-start": "node ./src/server.js & npm start",
+    "nodemon": "nodemon ./server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -20,10 +29,14 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://localhost:3001/",
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }
