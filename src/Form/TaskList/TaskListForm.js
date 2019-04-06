@@ -12,11 +12,10 @@ export default class TaskListForm extends React.Component {
         super(props);
         this.state = {
             tasks: [],
-            existingTasks: props.list,
-            writer: new JsonWriter()
+            existingTasks: props.list
         };
 
-        this.showPrintTasks = this.showPrintTasks.bind(this);
+        this.handleDownload = this.handleDownload.bind(this);
     }
 
     componentDidMount() {
@@ -71,33 +70,37 @@ export default class TaskListForm extends React.Component {
     }
 
 
-    handleDownload (event) {
+    handleDownload() {
 
-        //TODO: left off here 4/5/2019 - 7:11AM
+        fetch("http://localhost:3001/api/tasks")
+            .then(response => response.json())
+            .then((tasks) => {
 
-        // fetch("http://localhost:3001/api/tasks")
-        // .then(response => response.json())
-        // .then((tasks) => {
+                const date = new Date();
+                const dateFormatted = date.getMonth() + 1 + "/" + date.getDate().toString() + "/" + date.getFullYear().toString();
 
-        //     postingTasks = [];
+                const timeTask = {
+                    date: dateFormatted,
+                };
 
-        //     const date = new Date();
-        //     const timeTask = {        
-        //         date: dateFormatted,
-        //         WorkUnit: [
-        //             {
-        //                 contractId: dropDownSelection.key,
-        //                 description: description,
-        //                 time: time,
-        //             }
-        //         ]
-        //     };
+                const existingTasks = this.state.existingTasks;
 
-        //     for (let i = 0; i < tasks.WorkUnit.length; i++) {
+                tasks.forEach(function (task) {
+                    task.time = ((((task.time / 1000) / 60) / 60)).toFixed(2);
 
-        //     }
+                    existingTasks.forEach(function (existingTask) {
+                        if (task.contractId === existingTask.key) {
+                            task.contract = existingTask.contract;
+                            task.customer = existingTask.customer;
+                        }
+                    });
+                });
 
-        // });
+                timeTask.WorkUnit = tasks;
+
+                const writer = new JsonWriter();
+                writer.write(timeTask);
+            });
     }
 
 
@@ -106,7 +109,7 @@ export default class TaskListForm extends React.Component {
             <div>
                 <div className="task-list__header">
                     <NavLink to={"/task/-1"} className="button-add">New Task</NavLink>
-                    { this.showPrintTasks() }
+                    {this.showPrintTasks(this)}
                 </div>
                 <ul>
                     {this.state.tasks}
@@ -117,11 +120,11 @@ export default class TaskListForm extends React.Component {
 
 
 
-    showPrintTasks() {
+    showPrintTasks(componentRef) {
         if (this.state.tasks !== null) {
-            return <button className="button-download" click={this.handleDownload}>Download Tasks</button>;
+            return <button className="button-download" onClick={this.handleDownload}>Download Tasks</button>;
         }
     }
-   
+
 
 }

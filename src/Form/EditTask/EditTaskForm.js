@@ -41,9 +41,9 @@ export default class EditTaskForm extends React.Component {
             date: dateFormatted,
             WorkUnit: [
                 {
+                    time: time,
                     contractId: dropDownSelection.key,
                     description: description,
-                    time: time,
                 }
             ]
         };
