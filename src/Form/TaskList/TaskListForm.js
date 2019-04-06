@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import './TaskListForn.css';
 import JsonWriter from './JsonWriter';
-
+import Task from './Task';
 
 
 export default class TaskListForm extends React.Component {
@@ -29,47 +29,12 @@ export default class TaskListForm extends React.Component {
             .then(data => {
                 if (data.length > 0) {
                     let tasks = data.map((task) => {
-                        return (
-                            <li key={task._id}>
-                                <NavLink to={"/task/" + task._id} id={task._id} className="task-list" >
-                                    <span className="task-list__time"><span className="task-list__time-label">Time: </span> <span className="task-list__time-value"> {((((task.time / 1000) / 60) / 60)).toFixed(2)}</span></span>
-                                    <span className="task-list__description">{task.description}</span>
-                                    <span className="task-list__customer">{this.retrieveCustomerNameFromContractId(task.contractId)}</span> - <span className="task-list__contract">{this.retrieveContractNameFromContractId(task.contractId)}</span>
-                                </NavLink>
-                            </li>
-                        )
+                        return <Task task={task} existingTasks={this.state.existingTasks} />
                     })
                     this.setState({ tasks: tasks });
                 }
             });
     }
-
-    retrieveCustomerNameFromContractId(contractId) {
-        const existingTasks = this.state.existingTasks;
-        let customerName;
-
-        existingTasks.forEach((task) => {
-            if (task.key === contractId) {
-                customerName = task.customer;
-            }
-        });
-
-        return customerName;
-    }
-
-    retrieveContractNameFromContractId(contractId) {
-        const existingTasks = this.state.existingTasks;
-        let contractName;
-
-        existingTasks.forEach((task) => {
-            if (task.key === contractId) {
-                contractName = task.contract;
-            }
-        });
-
-        return contractName;
-    }
-
 
     handleDownload() {
 
@@ -107,9 +72,9 @@ export default class TaskListForm extends React.Component {
     handleDelete() {
         fetch("http://localhost:3001/api/task", {
             method: 'DELETE',
-            headers: {'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         })
-        .then(response => response.json());
+            .then(response => response.json());
         window.location.reload();
     }
 
@@ -136,12 +101,10 @@ export default class TaskListForm extends React.Component {
             return <a href="#" className="button-download" onClick={this.handleDownload}>Download</a>;
         }
     }
-    
+
     showDeleteButton() {
         if (this.state.tasks !== null) {
             return <a href="#" className="button-delete" onClick={this.handleDelete}>Delete</a>;
         }
     }
-
-
 }
