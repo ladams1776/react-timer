@@ -64,6 +64,7 @@ export default class Timer extends React.Component {
     }
 
     resetTimer() {
+        this.stopTimer();
         this.setState({ time: 0, isOn: false });
     }
 
@@ -74,7 +75,7 @@ export default class Timer extends React.Component {
     render() {
 
         let start = (this.state.time === 0 && !this.state.isOn)
-            ? <button className="timer__start  mt-5em   m-a   w-50" onClick={this.startTimer}>start</button>
+            ? <button className="timer__start" onClick={this.startTimer}>start</button>
             : null
 
         let stop = (this.state.isOn)
@@ -91,20 +92,22 @@ export default class Timer extends React.Component {
 
 
         return (
-            <div className="timer mt-1em">
-                <label className="timer__label">
-                    timer:
-                </label>
-                <div>
-                    {ms(this.state.time)} - hours: {((((this.state.time / 1000) / 60) / 60)).toFixed(2)}
+            <div className="timer">
+                <div className="timer__display">
+                    <label className="timer__display__label">Time: </label>
+                    <div className="timer__display__content">
+                        {ms(this.state.time)} - hours: {((((this.state.time / 1000) / 60) / 60)).toFixed(2)}
+                    </div>
                 </div>
-                {start}
-                <div className="w-140 m-a mt-25">
+
+                <div className="timer__buttons">
+                    {start}
                     {resume}
                     {stop}
                     {reset}
                 </div>
+
             </div>
-        )
+        );
     }
 }
