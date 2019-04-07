@@ -81,6 +81,7 @@ app.post("/api/task", function (req, res) {
             foundTask.time = req.body.WorkUnit[0].time;
             foundTask.save( function (err) {
                 if (err) throw err;
+                res.jsonp({ isSuccess: true});
             })
         });
     } else {  
@@ -93,6 +94,7 @@ app.post("/api/task", function (req, res) {
 
         m.save(function (err) {
             if (err) throw err;
+            res.jsonp({ isSuccess: true});
         });
     }
 });
