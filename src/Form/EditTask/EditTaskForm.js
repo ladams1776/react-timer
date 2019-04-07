@@ -4,11 +4,13 @@ import DropDown from '../../components/DropDown/DropDown';
 import Timer from '../../components/Timer/Timer';
 import TextArea from '../../components/TextArea/TextArea';
 import './EditTaskForm.css';
+import FlashMessage from '../../components/FlashMessage/FlashMessage';
+import { throws } from 'assert';
+
 
 export default class EditTaskForm extends React.Component {
 
     constructor(props) {
-        console.log('EditTaskForm is called');
         super(props);
 
         this.state = {
@@ -17,6 +19,7 @@ export default class EditTaskForm extends React.Component {
             time: 0,     // from timer
             selectedProject: 0,
             dropDownList: this.props.list,
+            isFlashMessageShowing: 0
         };
     }
 
@@ -59,6 +62,13 @@ export default class EditTaskForm extends React.Component {
                 method: 'POST',
                 body: JSON.stringify(timeTask),
                 headers: {'Content-Type': 'application/json'}
+        })
+        .then(e => {
+            if (e.status === 200) {
+                let isFlashMessageShowing = this.state.isFlashMessageShowing;
+                isFlashMessageShowing = 1;
+                this.setState({isFlashMessageShowing: isFlashMessageShowing});
+            }
         });
     }
 
@@ -77,8 +87,8 @@ export default class EditTaskForm extends React.Component {
 
     render() {
         return (
-            <div className="m-a w-400px">
-                
+            <div className="m-a w-400px mt-4em">
+                <FlashMessage message="Success" opacity={this.state.isFlashMessageShowing} handler={this.updateFlashMessage}/>
                 <form onSubmit={this.handleSubmit}>
                     <TextArea title="Description:" taskId={this.state.taskId} handler={this.descriptionChange} />
                     <DropDown title="Contract Drop Down" taskId={this.state.taskId} list={this.state.dropDownList} handler={this.dropDownChange} />
@@ -88,4 +98,12 @@ export default class EditTaskForm extends React.Component {
             </div>
         );
     }
+
+
+    updateFlashMessage = (isVisible) => {
+        if (this.state.isFlashMessageShowing) {
+            this.setState({isFlashMessageShowing: isVisible});            
+        }
+    }
+
 }

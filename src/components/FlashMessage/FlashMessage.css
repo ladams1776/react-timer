@@ -1,0 +1,7 @@
+.flash-message {
+    padding: 1em 1em 1em 2em;
+    margin-bottom: .25em;
+    background: #5ec232;
+    color: white;
+    font-size: 1.1rem;
+}
