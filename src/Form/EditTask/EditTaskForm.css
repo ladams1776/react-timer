@@ -1,3 +1,17 @@
+/**
+
+    Accent: #ff6358;
+    
+    Success: #5ec232;
+    Warning: #fdce3e;
+    Danger: #d51923;
+    Info: #3e80ed;
+
+
+
+**/
+
+
 .m-a {
     margin: auto;
 }
@@ -15,11 +29,10 @@
 }
 
 .form-submit {
-    background-color: #c600e8;
+    background-color: #2d73f5;
     color: white;
     border-radius: 4px;
-    width: 4em;
-    height: 3em;
+    height: 50px;
     border: none;
-    float: left;
+    width: 75px;
 }

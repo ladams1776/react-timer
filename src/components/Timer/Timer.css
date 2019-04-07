@@ -1,3 +1,17 @@
+/**
+
+    Accent: #ff6358;
+    
+    Success: #5ec232;
+    Warning: #fdce3e;
+    Danger: #d51923;
+    Info: #3e80ed;
+
+
+
+**/
+
+
 .mt-1em {
     margin-top: 1em;
 }
@@ -15,52 +29,66 @@
 }
 
 .timer {
-    background-color: #d8d8d8b3;
+    margin-top: 1em;
 }
 
-.timer__label {
+.timer__display {
     display: block;
-    width: 175px;
-    margin: auto;
+
+    background: #d8d8d8b3;
+    padding: 1em;
+}
+
+.timer__display__label {
+    display: inline-block;
+    margin-left: .5em;
+}
+
+.timer__display__content {
+    display: inline-block;
+    margin-left: 1em;
+}
+
+.timer__buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    background: #d8d8d8b3;
+    padding: 1em;
+    justify-content: space-around;
 }
 
 .timer__start {
-    float: right;
-    background-color: #00e81f;
-    color: black;
+    background-color: #ff6358;
+    color: white;
     border-radius: 4px;
-    width: 4em;
-    height: 3em;
+    height: 50px;
     border: none;
+    width: 75px;
 }
 
 .timer__reset {
-    float: right;
-    background-color: #d30000;
+    background-color: #d51923;
     color: white;
     border-radius: 4px;
-    width: 4em;
-    height: 3em;
+    height: 50px;
     border: none;
+    width: 75px;
 }
 
 .timer__resume {
-    float: left;
-    float: left;
-    background-color: #00e8bb;
-    color: black;
+    background-color: #5ec232;
+    color: white;
     border-radius: 4px;
-    width: 5em;
-    height: 40px;
+    height: 50px;
     border: none;
+    width: 75px;
 }
 
 .timer__stop {
-    float: left;
-    background-color: #d6e800;
-    color: black;
+    background-color: #3e80ed;
+    color: white;
     border-radius: 4px;
-    width: 4em;
-    height: 3em;
+    height: 50px;
     border: none;
+    width: 75px;
 }
