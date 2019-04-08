@@ -35,6 +35,12 @@ export default class FlashMessage extends React.Component {
     }
 
     render() {
-        return <div className="flash-message" onClick={this.handleClick} style={{opacity: this.state.opacity}}>{this.state.message}</div>
+        return <div 
+        className="flash-message" 
+        onClick={this.handleClick} 
+        style={{opacity: this.state.opacity}}>
+            {this.state.message}
+            <div className="flash-message-cancel">X</div>
+        </div>
     }
 }
