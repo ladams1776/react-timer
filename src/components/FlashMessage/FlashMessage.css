@@ -5,3 +5,8 @@
     color: white;
     font-size: 1.1rem;
 }
+
+.flash-message-cancel {
+    display: inline-block;
+    float: right;
+}
