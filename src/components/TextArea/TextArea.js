@@ -10,7 +10,8 @@ export default class TextArea extends React.Component {
         this.state = {
             taskId: props.taskId,
             labelTitle: props.title,
-            description: ''
+            description: '',
+            isLoading: true,
         }
     }
 
@@ -28,6 +29,7 @@ export default class TextArea extends React.Component {
                     const description = task.description ? task.description : '';
                     this.setState({
                         description: description,
+                        isLoading: false
                     });
 
                     this.props.handler(description);
@@ -38,8 +40,18 @@ export default class TextArea extends React.Component {
 
     handleChange = (e) => {
         const newDescription = e.target.value;
-        this.setState({ description: newDescription });
+        this.setState({ 
+            description: newDescription
+        });
         this.props.handler(newDescription);
+    }
+
+    displayTitleOrLoading() {
+        if (this.state.isLoading) {
+            return <p>Loading...</p>;
+        } else {
+            return this.state.labelTitle;
+        }
     }
 
     render() {
@@ -50,7 +62,7 @@ export default class TextArea extends React.Component {
                     className="text-area__label"
                     htmlFor="description"
                 >
-                    {this.state.labelTitle}
+                    {this.displayTitleOrLoading()}
                 </label>
                 <textarea className="text-area__description"
                     name="description"
