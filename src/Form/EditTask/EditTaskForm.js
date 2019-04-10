@@ -5,7 +5,6 @@ import Timer from '../../components/Timer/Timer';
 import TextArea from '../../components/TextArea/TextArea';
 import './EditTaskForm.css';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';
-import { throws } from 'assert';
 
 
 export default class EditTaskForm extends React.Component {
@@ -58,7 +57,7 @@ export default class EditTaskForm extends React.Component {
         
 
         // this.state.writer.write(timeTask);
-        fetch('http://localhost:3001/api/task', {
+        fetch('/api/task', {
                 method: 'POST',
                 body: JSON.stringify(timeTask),
                 headers: {'Content-Type': 'application/json'}

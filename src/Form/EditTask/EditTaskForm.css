@@ -36,3 +36,12 @@
     border: none;
     width: 75px;
 }
+
+.form-submit:hover {
+    background-color: #275ab9;
+    color: white;
+    border-radius: 4px;
+    height: 50px;
+    border: none;
+    width: 75px;
+}

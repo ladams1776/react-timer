@@ -100,7 +100,7 @@ app.post("/api/task", function (req, res) {
 });
 
 
-app.delete("/api/task", function (req, res) {
+app.delete("/api/tasks", function (req, res) {
     const TaskModel = mongoose.model('tasks', TaskSchema);
 
     TaskModel.deleteMany({}, function (e) { if (e) throw e; });
