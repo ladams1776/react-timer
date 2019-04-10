@@ -11,6 +11,7 @@ export default class Task extends React.Component{
         this.state = {
             task: this.props.task,
             existingTasks: this.props.existingTasks,
+            key: this.props.task.id,
         };
     }
 

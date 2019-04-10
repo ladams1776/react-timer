@@ -22,14 +22,14 @@ export default class TaskListForm extends React.Component {
     componentDidMount() {
         this.setState({ tasks: null });
         console.log('component did mount');
-        fetch('http://localhost:3001/api/tasks')
+        fetch('/api/tasks')
             .then(response => {
                 return response.json()
             })
             .then(data => {
                 if (data.length > 0) {
                     let tasks = data.map((task) => {
-                        return <Task task={task} existingTasks={this.state.existingTasks} />
+                        return <Task task={task} key={task.id} existingTasks={this.state.existingTasks} />
                     })
                     this.setState({ tasks: tasks });
                 }
@@ -38,7 +38,7 @@ export default class TaskListForm extends React.Component {
 
     handleDownload() {
 
-        fetch("http://localhost:3001/api/tasks")
+        fetch("/api/tasks")
             .then(response => response.json())
             .then((tasks) => {
 
@@ -70,9 +70,8 @@ export default class TaskListForm extends React.Component {
     }
 
     handleDelete() {
-        fetch("http://localhost:3001/api/task", {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' }
+        fetch("/api/tasks", {
+            method: 'DELETE'
         })
             .then(response => response.json());
         window.location.reload();

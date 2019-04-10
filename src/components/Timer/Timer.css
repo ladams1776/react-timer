@@ -34,7 +34,6 @@
 
 .timer__display {
     display: block;
-
     background: #d8d8d8b3;
     padding: 1em;
 }
@@ -66,8 +65,28 @@
     width: 75px;
 }
 
+.timer__start:hover {
+    background-color: #a8423b;
+    color: white;
+    border-radius: 4px;
+    height: 50px;
+    border: none;
+    width: 75px;
+}
+
+
+
 .timer__reset {
     background-color: #d51923;
+    color: white;
+    border-radius: 4px;
+    height: 50px;
+    border: none;
+    width: 75px;
+}
+
+.timer__reset:hover {
+    background-color: #971118;
     color: white;
     border-radius: 4px;
     height: 50px;
@@ -84,8 +103,27 @@
     width: 75px;
 }
 
+.timer__resume:hover {
+    background-color: #458f26;
+    color: white;
+    border-radius: 4px;
+    height: 50px;
+    border: none;
+    width: 75px;
+}
+
+
 .timer__stop {
     background-color: #3e80ed;
+    color: white;
+    border-radius: 4px;
+    height: 50px;
+    border: none;
+    width: 75px;
+}
+
+.timer__stop:hover {
+    background-color: #3468bb;
     color: white;
     border-radius: 4px;
     height: 50px;
