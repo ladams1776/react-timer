@@ -5,6 +5,7 @@ import Timer from '../../components/Timer/Timer';
 import TextArea from '../../components/TextArea/TextArea';
 import './EditTaskForm.css';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';
+import ReactLoading from "react-loading";
 
 
 export default class EditTaskForm extends React.Component {
@@ -18,8 +19,30 @@ export default class EditTaskForm extends React.Component {
             time: 0,     // from timer
             selectedProject: 0,
             dropDownList: this.props.list,
-            isFlashMessageShowing: 0
+            isFlashMessageShowing: 0,
+            isLoading: true,
         };
+    }
+
+
+    componentDidMount() {
+        const taskId = this.state.taskId;
+
+        if (taskId !== "-1") {
+            fetch('/api/task/' + taskId)
+                .then(response => {
+                    return response.json();
+                })
+                .then((task) => {
+                    // const description = task.description ? task.description : '';
+                    this.setState({
+                        // description: description,
+                        isLoading: false
+                    });
+                });
+        } else {
+            this.setState({isLoading: false});
+        }
     }
 
 
@@ -55,6 +78,7 @@ export default class EditTaskForm extends React.Component {
             timeTask._id = this.state.taskId;
         }
         
+        // this.setState({isLoading: true});
 
         // this.state.writer.write(timeTask);
         fetch('/api/task', {
@@ -68,6 +92,7 @@ export default class EditTaskForm extends React.Component {
                 isFlashMessageShowing = 1;
                 this.setState({isFlashMessageShowing: isFlashMessageShowing});
             }
+            this.setState({isLoading: false});
         });
     }
 
@@ -87,6 +112,18 @@ export default class EditTaskForm extends React.Component {
     render() {
         return (
             <div className="m-a w-400px mt-4em">
+                {this.displayTaskOrLoading()}
+            </div>
+        );
+    }
+
+    displayTaskOrLoading() {
+
+        if (this.state.isLoading) {
+            return <div className="react-loading"><div className="react-loading__content"><ReactLoading type="bars" color="#000"/></div></div>
+        } else {
+            return (
+                <div>
                 <FlashMessage message="Success" opacity={this.state.isFlashMessageShowing} handler={this.updateFlashMessage}/>
                 <form onSubmit={this.handleSubmit}>
                     <TextArea title="Description:" taskId={this.state.taskId} handler={this.descriptionChange} />
@@ -94,8 +131,9 @@ export default class EditTaskForm extends React.Component {
                     <Timer taskId={this.state.taskId} handler={this.timeChangeHandler} />
                     <input className="form-submit f-r mt-4em" type="submit" value="Submit" />
                 </form>
-            </div>
-        );
+                </div>
+            )
+        }        
     }
 
 

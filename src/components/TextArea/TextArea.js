@@ -11,7 +11,6 @@ export default class TextArea extends React.Component {
             taskId: props.taskId,
             labelTitle: props.title,
             description: '',
-            isLoading: true,
         }
     }
 
@@ -21,7 +20,7 @@ export default class TextArea extends React.Component {
         const taskId = this.state.taskId;
 
         if (taskId !== -1) {
-            fetch('http://localhost:3001/api/task/' + taskId)
+            fetch('/api/task/' + taskId)
                 .then(response => {
                     return response.json();
                 })
@@ -29,7 +28,6 @@ export default class TextArea extends React.Component {
                     const description = task.description ? task.description : '';
                     this.setState({
                         description: description,
-                        isLoading: false
                     });
 
                     this.props.handler(description);
@@ -46,14 +44,6 @@ export default class TextArea extends React.Component {
         this.props.handler(newDescription);
     }
 
-    displayTitleOrLoading() {
-        if (this.state.isLoading) {
-            return <p>Loading...</p>;
-        } else {
-            return this.state.labelTitle;
-        }
-    }
-
     render() {
 
         return (
@@ -62,7 +52,7 @@ export default class TextArea extends React.Component {
                     className="text-area__label"
                     htmlFor="description"
                 >
-                    {this.displayTitleOrLoading()}
+                    {this.state.labelTitle}
                 </label>
                 <textarea className="text-area__description"
                     name="description"
