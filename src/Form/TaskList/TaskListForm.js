@@ -29,7 +29,9 @@ export default class TaskListForm extends React.Component {
             .then(data => {
                 if (data.length > 0) {
                     let tasks = data.map((task) => {
-                        return <Task task={task} key={task.id} existingTasks={this.state.existingTasks} />
+                        return <div key={task._id} > 
+                            <Task task={task} existingTasks={this.state.existingTasks} />
+                        </div>
                     })
                     this.setState({ tasks: tasks });
                 }

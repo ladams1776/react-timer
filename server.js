@@ -70,7 +70,7 @@ app.get("/api/task/:id", function (req, res) {
 
 app.post("/api/task", function (req, res) {
     const TaskModel = mongoose.model('tasks', TaskSchema);
-    
+
 
     if (req.body._id !== "-1") {
         TaskModel.findById(req.body._id, function (err, foundTask) {
@@ -79,13 +79,13 @@ app.post("/api/task", function (req, res) {
             foundTask.description = req.body.WorkUnit[0].description;
             foundTask.contractId = req.body.WorkUnit[0].contractId;
             foundTask.time = req.body.WorkUnit[0].time;
-            foundTask.save( function (err) {
+            foundTask.save(function (err) {
                 if (err) throw err;
-                res.jsonp({ isSuccess: true});
+                res.jsonp({ isSuccess: true });
             })
         });
-    } else {  
-        const m = new TaskModel;   
+    } else {
+        const m = new TaskModel;
         m.toObject();
         m.date = req.body.date;
         m.description = req.body.WorkUnit[0].description;
@@ -94,11 +94,21 @@ app.post("/api/task", function (req, res) {
 
         m.save(function (err) {
             if (err) throw err;
-            res.jsonp({ isSuccess: true});
+            res.jsonp({ isSuccess: true });
         });
     }
 });
 
+app.delete("/api/task/:id", function (req, res) {
+    const TaskModel = mongoose.model('tasks', TaskSchema);
+    const id = req.params.id;
+    
+    TaskModel.deleteOne(
+        { _id: id }, function (e) {
+            if (e) throw e;
+        }
+    );
+});
 
 app.delete("/api/tasks", function (req, res) {
     const TaskModel = mongoose.model('tasks', TaskSchema);

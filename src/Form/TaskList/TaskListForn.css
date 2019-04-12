@@ -155,3 +155,30 @@ li {
 .task-list__time-value {
     display: inline-block;
 }
+
+.task-list__delete-btn {
+    background-color: #af111a;
+    color: white;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 1em;
+    font-size: 16px
+}
+
+
+.task-list__delete-btn:hover {
+    background-color: #f01c27;
+    color: rgb(34, 33, 33);
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 1em;
+    font-size: 16px
+}
