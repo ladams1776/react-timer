@@ -1,34 +1,18 @@
 [
     {
-        "customer": "Acme Corp",
-        "contract": "Search Engine Optimization",
+        "customer": "Self",
+        "contract": "React/Redux Course",
         "key": 0,
         "value": 0, 
         "selected": true,
-        "label": "Search Engine Optimization"
+        "label": "React/Redux Course"
     },
     {
-        "customer": "Wonka Industries",
-        "contract": "Usability",
+        "customer": "Self",
+        "contract": "Gradle",
         "key": 1,
         "value": 1,
         "selected": false,
-        "label": "Usability"
-    },
-    {
-        "customer": "Stark Industries",
-        "contract": "Speed and Performance",
-        "key": 2,
-        "value": 2,
-        "selected": false,
-        "label": "Speed and Performance"
-    },
-    {
-        "customer": "Ollivanders Wand Shop",
-        "contract": "ANalytics",
-        "key": 3,
-        "value": 3,
-        "selected": false,
-        "label": "Analytics"
+        "label": "Gradle Course"
     }
 ]
