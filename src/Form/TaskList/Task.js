@@ -39,7 +39,7 @@ export default class Task extends React.Component {
                         </span>
                     </span>
                     <span className="task-list__description">{this.state.task.description}</span>
-                    <span className="task-list__customer">{this.state.existingTasks[this.state.task.contractId].customer}</span> - <span className="task-list__contract">{this.state.existingTasks[this.state.task.contractId].customer}</span>
+                    <span className="task-list__customer">{this.state.existingTasks[this.state.task.contractId].label}</span> - <span className="task-list__contract">{this.state.existingTasks[this.state.task.contractId].customer}</span>
                 </NavLink>
             </li>
         );

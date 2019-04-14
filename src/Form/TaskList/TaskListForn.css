@@ -10,6 +10,11 @@
 
 
 **/
+
+.mr-5px {
+    margin-right: 5px;
+}
+
 .task-list__header {
     display: block;
     margin: 4em auto;
@@ -29,7 +34,7 @@
     text-decoration: none;
     float: right;
     text-align: center;
-    width: 75px;
+    width: 80px;
 }
 
 .button-add:hover {
@@ -42,14 +47,14 @@
     text-decoration: none;
     float: right;
     text-align: center;
-    width: 75px;
+    width: 80px;
 }
 
 .button-download {
     background-color: #3e80ed;
     color: white;
     border-radius: 4px;
-    width: 75px;
+    width: 90px;
     height: 1.5em;
     border: none;
     padding: 1em;
@@ -62,7 +67,7 @@
     background-color: #184693;
     color: white;
     border-radius: 4px;
-    width: 75px;
+    width: 90px;
     height: 1.5em;
     border: none;
     padding: 1em;
