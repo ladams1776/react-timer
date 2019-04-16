@@ -131,9 +131,16 @@ li {
     display: block;
     overflow: hidden;
     font-size: .95rem;
-    line-height: 1em;
+    line-height: .5;
     margin-bottom: .5em;
     padding-bottom: .5em;
+}
+
+.task-list__description-item {
+    white-space: nowrap;
+
+    /* overflow: hidden;
+    line-height: 1; */
 }
 
 .task-list__customer {
@@ -161,6 +168,11 @@ li {
     display: inline-block;
 }
 
+.task-list__item-date {
+    display: block;
+    margin-top: 1em;
+}
+
 .task-list__delete-btn {
     background-color: #af111a;
     color: white;
@@ -171,9 +183,8 @@ li {
     text-align: center;
     text-decoration: none;
     margin-left: 1em;
-    font-size: 16px
+    font-size: 16px;
 }
-
 
 .task-list__delete-btn:hover {
     background-color: #f01c27;
@@ -185,5 +196,5 @@ li {
     text-align: center;
     text-decoration: none;
     margin-left: 1em;
-    font-size: 16px
+    font-size: 16px;
 }
