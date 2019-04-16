@@ -111,7 +111,7 @@ export default class EditTaskForm extends React.Component {
 
     render() {
         return (
-            <div className="m-a w-400px mt-4em">
+            <div className="m-a w-400px">
                 {this.displayTaskOrLoading()}
             </div>
         );
