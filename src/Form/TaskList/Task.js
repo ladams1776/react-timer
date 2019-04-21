@@ -10,8 +10,7 @@ export default class Task extends React.Component {
 
         this.state = {
             task: this.props.task,
-            existingTasks: this.props.existingTasks,
-            key: this.props.task.id,
+            existingTasks: this.props.existingTasks
         };
 
         this.onClick = this.onClick.bind(this);
@@ -37,15 +36,21 @@ export default class Task extends React.Component {
                         <span className="task-list__time-value"> {((((this.state.task.time / 1000) / 60) / 60)).toFixed(2)}
                             <button onClick={this.onClick} className="task-list__delete-btn glyphicon glyphicon-remove"></button>
                         </span>
-                        <span className="task-list__item-date">{new Date(this.state.task.date).toDateString()}</span>
+                        <span className="task-list__item-date">{this.getFormattedDate()}</span>
                     </span>
-                    <p className="task-list__description">{this.state.task.description.split("\n").map((paragraph, index) => { 
+                    <div className="task-list__description">{this.state.task.description.split("\n").map((paragraph, index) => { 
                         return <p key={index} className="task-list__description-item">{paragraph}</p> 
                     })
-                    }</p>
+                    }</div>
                     <span className="task-list__customer">{this.state.existingTasks[this.state.task.contractId].label}</span> - <span className="task-list__contract">{this.state.existingTasks[this.state.task.contractId].customer}</span>
                 </NavLink>
             </li>
         );
+    }
+
+    getFormattedDate() {
+        const existingDate = new Date(this.state.task.date)
+        const dateFormatted = existingDate.getMonth().toString() + "/" + existingDate.getDate().toString() + "/" + existingDate.getFullYear().toString();
+        return dateFormatted;
     }
 }
