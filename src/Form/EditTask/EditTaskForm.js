@@ -61,7 +61,7 @@ export default class EditTaskForm extends React.Component {
         const time = this.state.time;
         const description = this.state.description;
         const date = new Date();
-        const dateFormatted = date.getMonth().toString() + "/" + date.getDate().toString() + "/" + date.getFullYear().toString()
+        const dateFormatted = (date.getMonth()+1).toString() + "/" + date.getDate().toString() + "/" + date.getFullYear().toString()
         const timeTask = {        
             date: dateFormatted,
             WorkUnit: [
