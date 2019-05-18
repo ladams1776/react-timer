@@ -2,12 +2,12 @@ import React from 'react';
 import {
     NavLink
 } from "react-router-dom";
-import './TaskListForn.css';
+import './TaskListView.css';
 import JsonWriter from './JsonWriter';
 import Task from './Task';
+import { getFormattedDate } from '../../utils/DateFormat'
 
-
-export default class TaskListForm extends React.Component {
+export default class TaskListView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,13 +21,12 @@ export default class TaskListForm extends React.Component {
 
     componentDidMount() {
         this.setState({ tasks: null });
-        console.log('component did mount');
         fetch('/api/tasks')
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                if (data.length > 0) {
+                if (data.length >= 1) {
                     let tasks = data.map((task) => {    
                         return <div key={task._id} > 
                             <Task task={task} existingTasks={this.state.existingTasks} />
@@ -45,7 +44,7 @@ export default class TaskListForm extends React.Component {
             .then((tasks) => {
 
                 const date = new Date();
-                const dateFormatted = date.getMonth() + 1 + "/" + date.getDate().toString() + "/" + date.getFullYear().toString();
+                const dateFormatted = getFormattedDate(date);
 
                 const timeTask = {
                     date: dateFormatted,

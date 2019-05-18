@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactRouterDom  from "react-router-dom";
 import DropDown from '../../components/DropDown/DropDown';
 import Timer from '../../components/Timer/Timer';
 import TextArea from '../../components/TextArea/TextArea';
 import './EditTaskForm.css';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';
 import ReactLoading from "react-loading";
-
+import { getFormattedDate } from '../../utils/DateFormat';
 
 export default class EditTaskForm extends React.Component {
 
@@ -34,9 +33,7 @@ export default class EditTaskForm extends React.Component {
                     return response.json();
                 })
                 .then((task) => {
-                    // const description = task.description ? task.description : '';
                     this.setState({
-                        // description: description,
                         isLoading: false
                     });
                 });
@@ -61,7 +58,8 @@ export default class EditTaskForm extends React.Component {
         const time = this.state.time;
         const description = this.state.description;
         const date = new Date();
-        const dateFormatted = (date.getMonth()+1).toString() + "/" + date.getDate().toString() + "/" + date.getFullYear().toString()
+        const dateFormatted = getFormattedDate(date);
+
         const timeTask = {        
             date: dateFormatted,
             WorkUnit: [

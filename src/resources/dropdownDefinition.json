@@ -3,8 +3,8 @@
         "customer": "Self",
         "contract": "React/Redux Course",
         "key": 0,
-        "value": 0, 
-        "selected": true,
+        "value": 0,
+        "selected": false,
         "label": "React/Redux Course"
     },
     {
@@ -14,5 +14,21 @@
         "value": 1,
         "selected": false,
         "label": "Gradle Course"
+    },
+    {
+        "customer": "Self",
+        "contract": "React/Redux/Enzyme Course",
+        "key": 2,
+        "value": 2,
+        "selected": true,
+        "label": "React/Redux/Enzyme Course"
+    },
+    {
+        "customer": "Self",
+        "contract": "React Timer App",
+        "key": 3,
+        "value": 3,
+        "selected": false,
+        "label": "React Timer App"
     }
 ]

@@ -3,7 +3,7 @@ import {
   Route,
   HashRouter
 } from "react-router-dom";
-import TaskListForm from "./Form/TaskList/TaskListForm";
+import TaskListView from "./components/TaskListView/TaskListView";
 import EditTaskForm from "./Form/EditTask/EditTaskForm";
 
  
@@ -33,8 +33,8 @@ class Main extends React.Component {
             <Route 
                 exact 
                 path="/" 
-                render={(props) => <TaskListForm {...props} list={this.state.dropDownListContracts}/>}
-                // component={TaskListForm}
+                render={(props) => <TaskListView {...props} list={this.state.dropDownListContracts}/>}
+                // component={TaskListView}
             />  
 
 
