@@ -19,8 +19,9 @@ export default class Task extends React.Component {
     e.preventDefault();
     fetch(`/api/task/${this.state.task._id}`, {
       method: "DELETE"
-    }).then(response => response.json());
-    window.location.reload();
+    })
+      .then(response => response.json())
+      .then(setTimeout(() => window.location.reload(), 500));
   }
 
   render() {
@@ -31,7 +32,7 @@ export default class Task extends React.Component {
           id={this.state.task._id}
           className="task-item"
         >
-          <div class="task-item__left">
+          <div className="task-item__left">
             <div className="task-item__description">
               {this.state.task.description
                 .split("\n")
