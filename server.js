@@ -1,16 +1,8 @@
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 const TaskSchema = require("./src/models/TaskSchema");
-
-
-
-
-
-
-
 
 
 mongoose.connect('mongodb://localhost:27017/tasks');
@@ -102,7 +94,7 @@ app.post("/api/task", function (req, res) {
 app.delete("/api/task/:id", function (req, res) {
     const TaskModel = mongoose.model('tasks', TaskSchema);
     const id = req.params.id;
-    
+
     TaskModel.deleteOne(
         { _id: id }, function (e) {
             if (e) throw e;
@@ -112,6 +104,5 @@ app.delete("/api/task/:id", function (req, res) {
 
 app.delete("/api/tasks", function (req, res) {
     const TaskModel = mongoose.model('tasks', TaskSchema);
-
     TaskModel.deleteMany({}, function (e) { if (e) throw e; });
 });
