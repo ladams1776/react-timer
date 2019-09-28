@@ -11,7 +11,7 @@ const Task = props => {
 
   const _onClick = e => {
     e.preventDefault();
-    fetch(`/api/task/${this.state.task._id}`, {
+    fetch(`/api/task/${state.task._id}`, {
       method: "DELETE"
     })
       .then(response => response.json())
@@ -19,15 +19,15 @@ const Task = props => {
   };
 
   return (
-    <li key={this.state.task._id}>
+    <li key={state.task._id}>
       <NavLink
-        to={"/task/" + this.state.task._id}
-        id={this.state.task._id}
+        to={"/task/" + state.task._id}
+        id={state.task._id}
         className="task-item"
       >
         <div className="task-item__left">
           <div className="task-item__description">
-            {this.state.task.description.split("\n").map((paragraph, index) => {
+            {state.task.description.split("\n").map((paragraph, index) => {
               return (
                 <p key={index} className="task-item__description-item">
                   {paragraph}
@@ -36,11 +36,11 @@ const Task = props => {
             })}
           </div>
           <span className="task-item__customer">
-            {this.state.existingTasks[this.state.task.contractId].label}
+            {state.existingTasks[state.task.contractId].label}
           </span>{" "}
           -{" "}
           <span className="task-item__contract">
-            {this.state.existingTasks[this.state.task.contractId].customer}
+            {state.existingTasks[state.task.contractId].customer}
           </span>
         </div>
 
@@ -48,14 +48,14 @@ const Task = props => {
           <span className="task-item__time-label">Time:</span>
           <span className="task-item__time-value">
             {" "}
-            {(this.state.task.time / 1000 / 60 / 60).toFixed(2)}
+            {(state.task.time / 1000 / 60 / 60).toFixed(2)}
             <button
               onClick={_onClick}
               className="task-item__delete-btn glyphicon glyphicon-remove"
             />
           </span>
           <span className="task-item__item-date">
-            {getFormattedDate(this.state.task.date)}
+            {getFormattedDate(state.task.date)}
           </span>
         </span>
       </NavLink>
