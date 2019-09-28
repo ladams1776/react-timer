@@ -12,8 +12,6 @@ export default class TaskListView extends React.Component {
       tasks: [],
       existingTasks: props.list
     };
-
-    this.handleDownload = this.handleDownload.bind(this);
   }
 
   componentDidMount() {
@@ -36,7 +34,7 @@ export default class TaskListView extends React.Component {
       });
   }
 
-  handleDownload() {
+  handleDownload = () => {
     fetch(`/api/tasks`)
       .then(response => response.json())
       .then(tasks => {
@@ -65,7 +63,7 @@ export default class TaskListView extends React.Component {
         const writer = new JsonWriter();
         writer.write(timeTask);
       });
-  }
+  };
 
   /**
    * Setting a timeout when reloading, because I think the reloading is happening too fast.
