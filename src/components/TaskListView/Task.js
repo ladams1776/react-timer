@@ -5,8 +5,8 @@ import "./Task.css";
 
 const Task = props => {
   const state = {
-    task: this.props.task,
-    existingTasks: this.props.existingTasks
+    task: props.task,
+    existingTasks: props.existingTasks
   };
 
   const _onClick = e => {
