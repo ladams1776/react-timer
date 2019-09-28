@@ -30,5 +30,29 @@
         "value": 3,
         "selected": false,
         "label": "React Timer App"
+    },
+    {
+        "customer": "Self",
+        "contract": "Java Streams",
+        "key": 4,
+        "value": 4,
+        "selected": false,
+        "label": "Java Streams Udemy"
+    },
+    {
+        "customer": "Work",
+        "contract": "SOLID research and Architecture",
+        "key": 5,
+        "value": 5,
+        "selected": false,
+        "label": "SOLID research and Architecture"
+    },
+    {
+        "customer": "Self",
+        "contract": "React Tetris Game",
+        "key": 6,
+        "value": 6,
+        "selected": false,
+        "label": "React Tetris Game"
     }
 ]
