@@ -11,18 +11,16 @@ export default class Task extends React.Component {
       task: this.props.task,
       existingTasks: this.props.existingTasks
     };
-
-    this.onClick = this.onClick.bind(this);
   }
 
-  onClick(e) {
+  onClick = e => {
     e.preventDefault();
     fetch(`/api/task/${this.state.task._id}`, {
       method: "DELETE"
     })
       .then(response => response.json())
       .then(setTimeout(() => window.location.reload(), 500));
-  }
+  };
 
   render() {
     return (
