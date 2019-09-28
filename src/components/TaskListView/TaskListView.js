@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import "./TaskListView.css";
 import JsonWriter from "./JsonWriter";
 import Task from "./Task";
@@ -7,15 +8,12 @@ import { getFormattedDate } from "../../utils/DateFormat";
 
 const TaskListView = props => {
   const state = {
-    tasks: [],
     existingTasks: props.list
   };
 
   const [tasks, setTasks] = useState(null);
 
   useEffect(() => {
-    setTasks({ tasks: null });
-
     fetch(`/api/tasks`)
       .then(response => {
         return response.json();
@@ -29,10 +27,10 @@ const TaskListView = props => {
               </div>
             );
           });
-          setTasks({ tasks: tasks });
+          setTasks(tasks);
         }
       });
-  });
+  }, []);
 
   const handleDownload = () => {
     fetch(`/api/tasks`)
@@ -78,9 +76,9 @@ const TaskListView = props => {
   };
 
   const showDownloadButton = () => {
-    if (state.tasks !== null) {
+    if (tasks !== null) {
       return (
-        <a href="#" className="button-download" onClick={this.handleDownload}>
+        <a href="#" className="button-download" onClick={handleDownload}>
           <span className="glyphicon glyphicon-download-alt mr-5px"></span>
           Download
         </a>
@@ -89,9 +87,9 @@ const TaskListView = props => {
   };
 
   const showDeleteButton = () => {
-    if (state.tasks !== null) {
+    if (tasks !== null) {
       return (
-        <a href="#" className="button-delete" onClick={this.handleDelete}>
+        <a href="#" className="button-delete" onClick={handleDelete}>
           <span className="glyphicon glyphicon-remove mr-5px"></span>Delete
         </a>
       );
@@ -107,9 +105,13 @@ const TaskListView = props => {
           <span className="glyphicon glyphicon-plus mr-5px"></span>New Task
         </NavLink>
       </div>
-      <ul>{state.tasks}</ul>
+      <ul>{tasks}</ul>
     </div>
   );
+};
+
+TaskListView.propTypes = {
+  tasks: PropTypes.array
 };
 
 export default TaskListView;
