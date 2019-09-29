@@ -1,46 +1,31 @@
-import React from "react";
-import './FlashMessage.css';
+import React, { useState, useEffect } from "react";
+import "./FlashMessage.css";
 
-export default class FlashMessage extends React.Component {
-    constructor(props) {
-        super(props);
+const FlashMessage = ({opacity, message, handler}) => {
 
+  const [stateOpacity, setStateOpacity] = useState(0);
 
-        this.state = {
-            message: props.message,
-            opacity: this.props.opacity,            
-        }
-
-
-        this.handleClick = this.handleClick.bind(this);
+  useEffect(() => {
+    if (opacity !== stateOpacity) {
+      setStateOpacity(opacity);
     }
+  });
 
-    static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.opacity !== prevState.opacity) {
-            return { opacity: nextProps.opacity};
-       }
-       else return null;
-     }
-     
-     componentDidUpdate(prevProps, prevState) {
-       if(prevProps.opacity!==this.state.opacity){
-        this.setState({opacity: prevProps.opacity});
-       }
-     }
+  const handleClick = e => {
+    setStateOpacity(0);
+    handler(0);
+  };
 
+  return (
+    <div
+      className="flash-message"
+      onClick={handleClick}
+      style={{ opacity: opacity }}
+    >
+      {message}
+      <div className="flash-message-cancel">X</div>
+    </div>
+  );
+};
 
-    handleClick = (e) => {
-        // this.props.opacity = 0;
-        this.props.handler(0);  
-    }
-
-    render() {
-        return <div 
-        className="flash-message" 
-        onClick={this.handleClick} 
-        style={{opacity: this.state.opacity}}>
-            {this.state.message}
-            <div className="flash-message-cancel">X</div>
-        </div>
-    }
-}
+export default FlashMessage;
