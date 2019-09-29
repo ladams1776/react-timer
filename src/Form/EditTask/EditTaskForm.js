@@ -72,7 +72,7 @@ export default class EditTaskForm extends React.Component {
     if (this.state.taskId !== -1) {
       timeTask._id = this.state.taskId;
     }
-    
+
     fetch("/api/task", {
       method: "POST",
       body: JSON.stringify(timeTask),
@@ -112,40 +112,38 @@ export default class EditTaskForm extends React.Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div>
-          { (this.state.isFlashMessageShowing) ?   <FlashMessage
+    }
+
+    return (
+      <div>
+        {this.state.isFlashMessageShowing && (
+          <FlashMessage
             message="Success"
             opacity={this.state.isFlashMessageShowing}
             onClick={this.updateFlashMessage}
-          /> : []}
-          
-          <form onSubmit={this.handleSubmit}>
-            <TextArea
-              title="Description:"
-              taskId={this.state.taskId}
-              handler={this.descriptionChange}
-            />
-            <DropDown
-              title="Contract Drop Down"
-              taskId={this.state.taskId}
-              list={this.state.dropDownList}
-              handler={this.dropDownChange}
-            />
-            <Timer
-              taskId={this.state.taskId}
-              handler={this.timeChangeHandler}
-            />
-            <input
-              className="form-submit f-r mt-4em"
-              type="submit"
-              value="Submit"
-            />
-          </form>
-        </div>
-      );
-    }
+          />
+        )}
+
+        <form onSubmit={this.handleSubmit}>
+          <TextArea
+            taskId={this.state.taskId}
+            handler={this.descriptionChange}
+          />
+          <DropDown
+            title="Contract Drop Down"
+            taskId={this.state.taskId}
+            list={this.state.dropDownList}
+            handler={this.dropDownChange}
+          />
+          <Timer taskId={this.state.taskId} handler={this.timeChangeHandler} />
+          <input
+            className="form-submit f-r mt-4em"
+            type="submit"
+            value="Submit"
+          />
+        </form>
+      </div>
+    );
   }
 
   updateFlashMessage = isVisible => {
