@@ -5,7 +5,6 @@ import "./TaskListView.css";
 import JsonWriter from "./JsonWriter";
 import Task from "./Task";
 import { getFormattedDate } from "../../utils/DateFormat";
-
 const TaskListView = props => {
   const state = {
     existingTasks: props.list
@@ -102,7 +101,8 @@ const TaskListView = props => {
         {showDeleteButton()}
         {showDownloadButton()}
         <NavLink to={"/task/-1"} className="button-add">
-          <span className="glyphicon glyphicon-plus mr-5px"></span>New Task
+          <span className="glyphicon glyphicon-plus mr-5px"/>
+          New Task
         </NavLink>
       </div>
       <ul>{tasks}</ul>
