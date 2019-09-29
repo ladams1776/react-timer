@@ -22,6 +22,7 @@ export default class EditTaskForm extends React.Component {
     };
   }
 
+  //@TODO: Handle if there is a bad response.
   componentDidMount() {
     const taskId = this.state.taskId;
 
@@ -71,10 +72,7 @@ export default class EditTaskForm extends React.Component {
     if (this.state.taskId !== -1) {
       timeTask._id = this.state.taskId;
     }
-
-    // this.setState({isLoading: true});
-
-    // this.state.writer.write(timeTask);
+    
     fetch("/api/task", {
       method: "POST",
       body: JSON.stringify(timeTask),
@@ -117,11 +115,12 @@ export default class EditTaskForm extends React.Component {
     } else {
       return (
         <div>
-          <FlashMessage
+          { (this.state.isFlashMessageShowing) ?   <FlashMessage
             message="Success"
             opacity={this.state.isFlashMessageShowing}
-            handler={this.updateFlashMessage}
-          />
+            onClick={this.updateFlashMessage}
+          /> : []}
+          
           <form onSubmit={this.handleSubmit}>
             <TextArea
               title="Description:"
