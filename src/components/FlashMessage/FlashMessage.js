@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import PropTypes from 'prop-types';
 import "./FlashMessage.css";
 
-const FlashMessage = ({opacity, message, handler}) => {
-
-  const [stateOpacity, setStateOpacity] = useState(0);
-
-  useEffect(() => {
-    if (opacity !== stateOpacity) {
-      setStateOpacity(opacity);
-    }
-  });
-
+const FlashMessage = ({ message, onClick }) => {
   const handleClick = e => {
-    setStateOpacity(0);
-    handler(0);
+    onClick(false);
   };
 
   return (
-    <div
-      className="flash-message"
-      onClick={handleClick}
-      style={{ opacity: opacity }}
-    >
+    <div className="flash-message" onClick={handleClick}>
       {message}
       <div className="flash-message-cancel">X</div>
     </div>
   );
+};
+
+FlashMessage.propTypes = {
+  message: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default FlashMessage;
