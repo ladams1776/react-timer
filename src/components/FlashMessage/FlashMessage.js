@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "./FlashMessage.css";
 
 const FlashMessage = ({ message, onClick }) => {
@@ -17,7 +17,7 @@ const FlashMessage = ({ message, onClick }) => {
 
 FlashMessage.propTypes = {
   message: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default FlashMessage;

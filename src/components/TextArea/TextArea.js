@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import PropType from 'prop-types';
+import PropType from "prop-types";
 import "./TextArea.css";
 
-const TextArea = ({taskId, handler}) => {
+const TextArea = ({ taskId, handler }) => {
   const [description, setDescription] = useState(null);
 
   useEffect(() => {
@@ -46,9 +46,9 @@ const TextArea = ({taskId, handler}) => {
 };
 
 TextArea.PropType = {
-  taskId: PropType.string, 
+  taskId: PropType.string,
   handler: PropType.func,
-  description: PropType.string,
-}
+  description: PropType.string
+};
 
 export default TextArea;

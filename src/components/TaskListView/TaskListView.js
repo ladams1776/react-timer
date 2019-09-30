@@ -6,8 +6,7 @@ import JsonWriter from "./JsonWriter";
 import Task from "./Task";
 import { getFormattedDate } from "../../utils/DateFormat";
 
-const TaskListView = ({list}) => {
-
+const TaskListView = ({ list }) => {
   const [tasks, setTasks] = useState(null);
 
   useEffect(() => {
@@ -97,7 +96,7 @@ const TaskListView = ({list}) => {
         {showDeleteButton()}
         {showDownloadButton()}
         <NavLink to={"/task/-1"} className="button-add">
-          <span className="glyphicon glyphicon-plus mr-5px"/>
+          <span className="glyphicon glyphicon-plus mr-5px" />
           New Task
         </NavLink>
       </div>
@@ -108,7 +107,7 @@ const TaskListView = ({list}) => {
 
 TaskListView.propTypes = {
   tasks: PropTypes.array,
-  list: PropTypes.array,
+  list: PropTypes.array
 };
 
 export default TaskListView;
