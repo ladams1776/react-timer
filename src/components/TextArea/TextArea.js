@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import ReactRouterDom from "react-router-dom";
-
+import PropType from 'prop-types';
 import "./TextArea.css";
 
-const TextArea = props => {
+const TextArea = ({taskId, handler}) => {
   const [description, setDescription] = useState(null);
-  const { taskId, handler } = props;
 
   useEffect(() => {
     if (taskId !== -1) {
-      fetch("/api/task/" + props.taskId)
+      fetch("/api/task/" + taskId)
         .then(response => {
           return response.json();
         })
         .then(task => {
-          //   const description = task.description ? task.description : '';
           setDescription(task && task.description ? task.description : "");
           handler(task && task.description ? task.description : "");
         });
@@ -24,7 +21,7 @@ const TextArea = props => {
   const handleChange = e => {
     const newDescription = e.target.value;
     setDescription(newDescription);
-    props.handler(newDescription);
+    handler(newDescription);
   };
 
   return (
@@ -47,5 +44,11 @@ const TextArea = props => {
     </div>
   );
 };
+
+TextArea.PropType = {
+  taskId: PropType.string, 
+  handler: PropType.func,
+  description: PropType.string,
+}
 
 export default TextArea;
