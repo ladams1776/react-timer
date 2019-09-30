@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { getFormattedDate } from "../../utils/DateFormat";
 import "./Task.css";
 
-const Task = ({ task, existingTasks }) => {
+const Task = ({ task, list }) => {
   const _onClick = e => {
     e.preventDefault();
     fetch(`/api/task/${task._id}`, {
@@ -28,11 +28,11 @@ const Task = ({ task, existingTasks }) => {
             })}
           </div>
           <span className="task-item__customer">
-            {existingTasks[task.contractId].label}
+            {list[task.contractId].label}
           </span>{" "}
           -{" "}
           <span className="task-item__contract">
-            {existingTasks[task.contractId].customer}
+            {list[task.contractId].customer}
           </span>
         </div>
 
@@ -57,7 +57,7 @@ const Task = ({ task, existingTasks }) => {
 
 Task.PropType = {
   task: PropType.object,
-  existingTasks: PropType.arrayOf.object
+  list: PropType.arrayOf.object
 };
 
 export default Task;
