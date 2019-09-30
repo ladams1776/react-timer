@@ -5,10 +5,8 @@ import "./TaskListView.css";
 import JsonWriter from "./JsonWriter";
 import Task from "./Task";
 import { getFormattedDate } from "../../utils/DateFormat";
-const TaskListView = props => {
-  const state = {
-    existingTasks: props.list
-  };
+
+const TaskListView = ({list}) => {
 
   const [tasks, setTasks] = useState(null);
 
@@ -22,7 +20,7 @@ const TaskListView = props => {
           let tasks = data.map(task => {
             return (
               <div key={task._id}>
-                <Task task={task} existingTasks={state.existingTasks} />
+                <Task task={task} list={list} />
               </div>
             );
           });
@@ -42,12 +40,10 @@ const TaskListView = props => {
           date: dateFormatted
         };
 
-        const existingTasks = state.existingTasks;
-
         tasks.forEach(function(task) {
           task.time = (task.time / 1000 / 60 / 60).toFixed(2);
 
-          existingTasks.forEach(function(existingTask) {
+          list.forEach(function(existingTask) {
             if (task.contractId === existingTask.key) {
               task.contract = existingTask.contract;
               task.customer = existingTask.customer;
@@ -111,7 +107,8 @@ const TaskListView = props => {
 };
 
 TaskListView.propTypes = {
-  tasks: PropTypes.array
+  tasks: PropTypes.array,
+  list: PropTypes.array,
 };
 
 export default TaskListView;
