@@ -1,17 +1,13 @@
 import React from "react";
+import PropType from "prop-types";
 import { NavLink } from "react-router-dom";
 import { getFormattedDate } from "../../utils/DateFormat";
 import "./Task.css";
 
-const Task = props => {
-  const state = {
-    task: props.task,
-    existingTasks: props.existingTasks
-  };
-
+const Task = ({ task, existingTasks }) => {
   const _onClick = e => {
     e.preventDefault();
-    fetch(`/api/task/${state.task._id}`, {
+    fetch(`/api/task/${task._id}`, {
       method: "DELETE"
     })
       .then(response => response.json())
@@ -19,15 +15,11 @@ const Task = props => {
   };
 
   return (
-    <li key={state.task._id}>
-      <NavLink
-        to={"/task/" + state.task._id}
-        id={state.task._id}
-        className="task-item"
-      >
+    <li key={task._id}>
+      <NavLink to={"/task/" + task._id} id={task._id} className="task-item">
         <div className="task-item__left">
           <div className="task-item__description">
-            {state.task.description.split("\n").map((paragraph, index) => {
+            {task.description.split("\n").map((paragraph, index) => {
               return (
                 <p key={index} className="task-item__description-item">
                   {paragraph}
@@ -36,11 +28,11 @@ const Task = props => {
             })}
           </div>
           <span className="task-item__customer">
-            {state.existingTasks[state.task.contractId].label}
+            {existingTasks[task.contractId].label}
           </span>{" "}
           -{" "}
           <span className="task-item__contract">
-            {state.existingTasks[state.task.contractId].customer}
+            {existingTasks[task.contractId].customer}
           </span>
         </div>
 
@@ -48,19 +40,24 @@ const Task = props => {
           <span className="task-item__time-label">Time:</span>
           <span className="task-item__time-value">
             {" "}
-            {(state.task.time / 1000 / 60 / 60).toFixed(2)}
+            {(task.time / 1000 / 60 / 60).toFixed(2)}
             <button
               onClick={_onClick}
               className="task-item__delete-btn glyphicon glyphicon-remove"
             />
           </span>
           <span className="task-item__item-date">
-            {getFormattedDate(state.task.date)}
+            {getFormattedDate(task.date)}
           </span>
         </span>
       </NavLink>
     </li>
   );
+};
+
+Task.PropType = {
+  task: PropType.object,
+  existingTasks: PropType.arrayOf.object
 };
 
 export default Task;
