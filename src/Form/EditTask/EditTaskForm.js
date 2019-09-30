@@ -1,60 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import PropType from "prop-types";
 import DropDown from "../../components/DropDown/DropDown";
 import Timer from "../../components/Timer/Timer";
 import TextArea from "../../components/TextArea/TextArea";
-import "./EditTaskForm.css";
 import FlashMessage from "../../components/FlashMessage/FlashMessage";
 import ReactLoading from "react-loading";
 import { getFormattedDate } from "../../utils/DateFormat";
+import "./EditTaskForm.css";
 
-export default class EditTaskForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      taskId: this.props.match.params.id,
-      description: "", // text area
-      time: 0, // from timer
-      selectedProject: 0,
-      dropDownList: this.props.list,
-      isFlashMessageShowing: 0,
-      isLoading: true
-    };
-  }
+const EditTaskForm = ({ match, list }) => {
+  const taskId = match.params.id;
+  const [isLoading, setIsLoading] = useState(true);
+  const [description, setDescription] = useState("");
+  const [time, setTime] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(0);
+  const [isFlashMessageShowing, setIsFlashMessageShowing] = useState(0);
 
   //@TODO: Handle if there is a bad response.
-  componentDidMount() {
-    const taskId = this.state.taskId;
-
+  useEffect(() => {
     if (taskId !== "-1") {
       fetch("/api/task/" + taskId)
         .then(response => {
           return response.json();
         })
         .then(task => {
-          this.setState({
-            isLoading: false
-          });
+          setIsLoading(false);
         });
     } else {
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     }
-  }
+  }, []);
 
-  textChangeHandler = dataFromChild => {
-    this.setState({
-      description: dataFromChild
-    });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    const dropDownSelection = this.state.dropDownList[
-      this.state.selectedProject
-    ];
-    const time = this.state.time;
-    const description = this.state.description;
+    const dropDownSelection = list[selectedProject];
+
     const date = new Date();
     const dateFormatted = getFormattedDate(date);
 
@@ -69,9 +50,7 @@ export default class EditTaskForm extends React.Component {
       ]
     };
 
-    if (this.state.taskId !== -1) {
-      timeTask._id = this.state.taskId;
-    }
+    timeTask._id = taskId !== -1 ? taskId : null;
 
     fetch("/api/task", {
       method: "POST",
@@ -79,32 +58,26 @@ export default class EditTaskForm extends React.Component {
       headers: { "Content-Type": "application/json" }
     }).then(e => {
       if (e.status === 200) {
-        let isFlashMessageShowing = this.state.isFlashMessageShowing;
-        isFlashMessageShowing = 1;
-        this.setState({ isFlashMessageShowing: isFlashMessageShowing });
+        setIsFlashMessageShowing(1);
       }
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     });
   };
 
-  descriptionChange = dataFromChild => {
-    this.setState({ description: dataFromChild ? dataFromChild : null });
+  const descriptionChange = dataFromChild => {
+    setDescription(dataFromChild || "");
   };
 
-  dropDownChange = dataFromChild => {
-    this.setState({ selectedProject: dataFromChild });
+  const dropDownChange = dataFromChild => {
+    setSelectedProject(dataFromChild);
   };
 
-  timeChangeHandler = dataFromChild => {
-    this.setState({ time: dataFromChild });
+  const timeChangeHandler = dataFromChild => {
+    setTime(dataFromChild);
   };
 
-  render() {
-    return <div className="m-a w-400px">{this.displayTaskOrLoading()}</div>;
-  }
-
-  displayTaskOrLoading() {
-    if (this.state.isLoading) {
+  const displayTaskOrLoading = () => {
+    if (isLoading) {
       return (
         <div className="react-loading">
           <div className="react-loading__content">
@@ -113,42 +86,49 @@ export default class EditTaskForm extends React.Component {
         </div>
       );
     }
+  };
 
-    return (
-      <div>
-        {this.state.isFlashMessageShowing && (
-          <FlashMessage
-            message="Success"
-            opacity={this.state.isFlashMessageShowing}
-            onClick={this.updateFlashMessage}
-          />
-        )}
-
-        <form onSubmit={this.handleSubmit}>
-          <TextArea
-            taskId={this.state.taskId}
-            handler={this.descriptionChange}
-          />
-          <DropDown
-            title="Contract Drop Down"
-            taskId={this.state.taskId}
-            list={this.state.dropDownList}
-            handler={this.dropDownChange}
-          />
-          <Timer taskId={this.state.taskId} handler={this.timeChangeHandler} />
-          <input
-            className="form-submit f-r mt-4em"
-            type="submit"
-            value="Submit"
-          />
-        </form>
-      </div>
-    );
-  }
-
-  updateFlashMessage = isVisible => {
-    if (this.state.isFlashMessageShowing) {
-      this.setState({ isFlashMessageShowing: isVisible });
+  const updateFlashMessage = isVisible => {
+    if (isFlashMessageShowing) {
+      setIsFlashMessageShowing(isVisible);
     }
   };
-}
+
+  return (
+    <div className="m-a mt-50px w-500px">
+      {displayTaskOrLoading()}
+      {isFlashMessageShowing ? (
+        <FlashMessage
+          message="Success"
+          opacity={isFlashMessageShowing}
+          onClick={updateFlashMessage}
+        />
+      ) : (
+        []
+      )}
+
+      <form onSubmit={handleSubmit}>
+        <TextArea taskId={taskId} handler={descriptionChange} />
+        <DropDown
+          title="Contract Drop Down"
+          taskId={taskId}
+          list={list}
+          handler={dropDownChange}
+        />
+        <Timer taskId={taskId} handler={timeChangeHandler} />
+        <input
+          className="form-submit f-r mt-4em"
+          type="submit"
+          value="Submit"
+        />
+      </form>
+    </div>
+  );
+};
+
+EditTaskForm.PropType = {
+  match: PropType.object,
+  list: PropType.array
+};
+
+export default EditTaskForm;

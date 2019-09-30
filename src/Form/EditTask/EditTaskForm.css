@@ -15,7 +15,11 @@
     margin: auto;
 }
 
-.w-400px {
+.mt-50px {
+    margin-top: 50px;
+}
+
+.w-500px {
     width: 500px;
 }
 
