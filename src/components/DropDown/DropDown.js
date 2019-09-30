@@ -1,78 +1,62 @@
-import React from 'react';
-import './DropDown.css';
+import React, { useState, useEffect } from "react";
+import PropType from "prop-types";
+import "./DropDown.css";
 
+const DropDown = ({ taskId, title, list, handler }) => {
+  let [selectedOption, setSelectedOption] = useState({ value: 0 });
 
-export default class DropDown extends React.Component {
-    constructor(props) {
-        super(props);
+  useEffect(() => {
+    taskId = taskId || -1;
 
-        this.state = {
-            taskId: this.props.taskId ? this.props.taskId : -1,
-            selectedOption: {
-                value: 0
-            },
-            headerTitle: this.props.title,
-            items: this.props.list
-        }
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-
-    componentDidMount() {
-        const taskId = this.state.taskId;
-
-        if (taskId !== -1) {
-            fetch('http://localhost:3001/api/task/' + taskId)
-                .then(response => {
-                    return response.json();
-                })
-                .then((task) => {
-                    
-                    const contractId = task.contractId ? task.contractId : 0;
-
-                    this.setState({
-                        selectedOption: {value: contractId},
-                    });
-
-                    this.props.handler(contractId);
-                });
-        }
-    }
-
-
-    handleChange(event) {
-        const newValue = event.currentTarget.selectedIndex;
-        this.setState({
-            selectedOption: {
-                value: newValue
-            }
+    if (taskId !== -1) {
+      fetch("http://localhost:3001/api/task/" + taskId)
+        .then(response => {
+          return response.json();
+        })
+        .then(task => {
+          const contractId = task.contractId || 0;
+          setSelectedOption({ value: contractId });
+          handler(contractId);
         });
-
-        this.props.handler(newValue);
     }
+  }, []);
 
+  const handleChange = event => {
+    const newValue = event.currentTarget.selectedIndex;
+    setSelectedOption({ value: newValue });
+    handler(newValue);
+  };
 
-    render() {
+  return (
+    <div className="drop-down">
+      <label className="drop-down__title">{title}: </label>
+      <select
+        className="drop-down__select"
+        value={selectedOption.value}
+        onChange={handleChange}
+      >
+        {list.map(item => {
+          return (
+            <option
+              className="drop-down__option"
+              key={item.key}
+              label={item.label}
+              value={item.value}
+            >
+              {item.label}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
 
-        const { headerTitle } = this.state;
-        return (
-            <div className="drop-down">
-                <label className="drop-down__title">{headerTitle}: </label>
-                <select className="drop-down__select" value={this.state.selectedOption.value} onChange={this.handleChange}>
-                    {this.state.items.map(item => {
-                        return (
-                            <option
-                                className="drop-down__option"
-                                key={item.key}
-                                label={item.label}
-                                value={item.value}>
-                                {item.label}
-                            </option>
-                        );
-                    })}
-                </select>
-            </div>
-        );
-    }
-}
+DropDown.PropType = {
+  taskId: PropType.string,
+  title: PropType.string,
+  list: PropType.array,
+  handler: PropType.func
+};
+
+export default DropDown;
