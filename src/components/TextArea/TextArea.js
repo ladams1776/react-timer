@@ -1,39 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import TaskEditFormContext from '../../TaskEditFormContext';
 import PropType from "prop-types";
 import "./TextArea.css";
 
-const TextArea = ({ taskId, handler }) => {
-  const [description, setDescription] = useState(null);
-
-  useEffect(() => {
-    if (taskId !== -1) {
-      fetch("/api/task/" + taskId)
-        .then(response => {
-          return response.json();
-        })
-        .then(task => {
-          setDescription(task && task.description ? task.description : "");
-          handler(task && task.description ? task.description : "");
-        });
-    }
-  }, [taskId]);
-
-  const handleChange = e => {
-    const newDescription = e.target.value;
-    setDescription(newDescription);
-    handler(newDescription);
-  };
+const TextArea = () => {
+  const context = useContext(TaskEditFormContext);
+  const { description, updateDescription } = context;
 
   return (
     <div className="text-area">
       <label className="text-area__label" htmlFor="description">
-        {"Description"}
+        Description
       </label>
       <textarea
         className="text-area__description"
         name="description"
         value={description}
-        onChange={handleChange}
+        onChange={e => updateDescription(e.target.value)}
         maxLength="254"
         rows="5"
         cols="52"

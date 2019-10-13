@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import TaskEditFormContext from "../../TaskEditFormContext";
 import PropType from "prop-types";
 import DropDown from "../../components/DropDown/DropDown";
 import Timer from "../../components/Timer/Timer";
@@ -8,13 +9,23 @@ import ReactLoading from "react-loading";
 import { getFormattedDate } from "../../utils/DateFormat";
 import "./EditTaskForm.css";
 
-const EditTaskForm = ({ match, list }) => {
-  const taskId = match.params.id;
+const EditTaskForm = ({ match }) => {
+  const context = useContext(TaskEditFormContext);
+  const {
+    time,
+    updateTime,
+    isFlashMessageShowing,
+    updateFlashMessage,
+    description,
+    updateDescription,
+    selectedProject,
+    updateDropDown,
+    dropDownListContracts
+  } = context;
+
   const [isLoading, setIsLoading] = useState(true);
-  const [description, setDescription] = useState("");
-  const [time, setTime] = useState(0);
-  const [selectedProject, setSelectedProject] = useState(0);
-  const [isFlashMessageShowing, setIsFlashMessageShowing] = useState(0);
+
+  const taskId = match.params.id;
 
   //@TODO: Handle if there is a bad response.
   useEffect(() => {
@@ -24,17 +35,20 @@ const EditTaskForm = ({ match, list }) => {
           return response.json();
         })
         .then(task => {
+          updateDescription(task.description);
+          updateTime(task.time);
+          updateDropDown(task.contractId);
           setIsLoading(false);
         });
     } else {
-      setIsLoading(false);
+      setIsLoading(true);
     }
-  }, []);
+  }, [taskId]);
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    const dropDownSelection = list[selectedProject];
+    const dropDownSelection = dropDownListContracts[selectedProject];
 
     const date = new Date();
     const dateFormatted = getFormattedDate(date);
@@ -58,77 +72,57 @@ const EditTaskForm = ({ match, list }) => {
       headers: { "Content-Type": "application/json" }
     }).then(e => {
       if (e.status === 200) {
-        setIsFlashMessageShowing(1);
+        updateFlashMessage(1);
+        setIsLoading(false);
       }
-      setIsLoading(false);
     });
-  };
-
-  const descriptionChange = dataFromChild => {
-    setDescription(dataFromChild || "");
-  };
-
-  const dropDownChange = dataFromChild => {
-    setSelectedProject(dataFromChild);
-  };
-
-  const timeChangeHandler = dataFromChild => {
-    setTime(dataFromChild);
-  };
-
-  const displayTaskOrLoading = () => {
-    if (isLoading) {
-      return (
-        <div className="react-loading">
-          <div className="react-loading__content">
-            <ReactLoading type="bars" color="#000" />
-          </div>
-        </div>
-      );
-    }
-  };
-
-  const updateFlashMessage = isVisible => {
-    if (isFlashMessageShowing) {
-      setIsFlashMessageShowing(isVisible);
-    }
   };
 
   return (
     <div className="m-a mt-50px w-500px">
-      {displayTaskOrLoading()}
-      {isFlashMessageShowing ? (
+      {!isFlashMessageShowing || (
         <FlashMessage
           message="Success"
           opacity={isFlashMessageShowing}
           onClick={updateFlashMessage}
         />
-      ) : (
-        []
       )}
 
-      <form onSubmit={handleSubmit}>
-        <TextArea taskId={taskId} handler={descriptionChange} />
-        <DropDown
-          title="Contract Drop Down"
-          taskId={taskId}
-          list={list}
-          handler={dropDownChange}
-        />
-        <Timer taskId={taskId} handler={timeChangeHandler} />
-        <input
-          className="form-submit f-r mt-4em"
-          type="submit"
-          value="Submit"
-        />
-      </form>
+      {!isLoading || (
+        <div className="react-loading">
+          <div className="react-loading__content">
+            <ReactLoading type="bars" color="#000" />
+          </div>
+        </div>
+      )}
+
+      {!isLoading && (
+        <form onSubmit={handleSubmit}>
+          <TextArea />
+          <DropDown />
+          <Timer taskId={taskId} />
+          <input
+            className="form-submit f-r mt-4em"
+            type="submit"
+            value="Submit"
+          />
+        </form>
+      )}
     </div>
   );
 };
 
 EditTaskForm.PropType = {
-  match: PropType.object,
-  list: PropType.array
+  match: PropType.object.isRequired,
+  time: PropType.number.isRequired,
+  updateTime: PropType.func.isRequired,
+  isFlashMessageShowing: PropType.bool.isRequired,
+  updateFlashMessage: PropType.func.isRequired,
+  description: PropType.string.isRequired,
+  updateDescription: PropType.func.isRequired,
+  selectedProject: PropType.number.isRequired,
+  updateDropDown: PropType.func.isRequired,
+  dropDownListContracts: PropType.array.isRequired
 };
 
 export default EditTaskForm;

@@ -1,41 +1,20 @@
-import React, { useState, useEffect } from "react";
-import PropType from "prop-types";
+import React, { useContext } from "react";
+import TaskEditFormContext from "../../TaskEditFormContext";
 import "./DropDown.css";
 
-const DropDown = ({ taskId, title, list, handler }) => {
-  let [selectedOption, setSelectedOption] = useState({ value: 0 });
-
-  useEffect(() => {
-    taskId = taskId || -1;
-
-    if (taskId !== -1) {
-      fetch("http://localhost:3001/api/task/" + taskId)
-        .then(response => {
-          return response.json();
-        })
-        .then(task => {
-          const contractId = task.contractId || 0;
-          setSelectedOption({ value: contractId });
-          handler(contractId);
-        });
-    }
-  }, []);
-
-  const handleChange = event => {
-    const newValue = event.currentTarget.selectedIndex;
-    setSelectedOption({ value: newValue });
-    handler(newValue);
-  };
+const DropDown = () => {
+  const context = useContext(TaskEditFormContext);
+  const { selectedProject, updateDropDown, dropDownListContracts } = context;
 
   return (
     <div className="drop-down">
-      <label className="drop-down__title">{title}: </label>
+      <label className="drop-down__title">Contract Drop Down: </label>
       <select
         className="drop-down__select"
-        value={selectedOption.value}
-        onChange={handleChange}
+        value={selectedProject}
+        onChange={event => updateDropDown(event.currentTarget.selectedIndex)}
       >
-        {list.map(item => {
+        {!dropDownListContracts || dropDownListContracts.map(item => {
           return (
             <option
               className="drop-down__option"
@@ -50,13 +29,6 @@ const DropDown = ({ taskId, title, list, handler }) => {
       </select>
     </div>
   );
-};
-
-DropDown.PropType = {
-  taskId: PropType.string,
-  title: PropType.string,
-  list: PropType.array,
-  handler: PropType.func
 };
 
 export default DropDown;

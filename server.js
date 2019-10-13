@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 const TaskSchema = require("./src/models/TaskSchema");
 
 
-mongoose.connect('mongodb://localhost:27017/tasks');
+mongoose.connect('mongodb://192.168.99.100:32768/tasks');
 mongoose.Promise = global.Promise;
 mongoose.connection
     .on('connected', () => {
-        console.log(`Mongoose connection open on mongodb://localhost:27017/tasks`)
+        console.log(`Mongoose connection open on mongodb://192.168.99.100:32768/tasks`)
         app.listen(3001, function () {
             console.log('Backend has started on port 3001');
         });

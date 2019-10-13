@@ -1,40 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import ms from "pretty-ms";
 import "./Timer.css";
+import TaskEditFormContext from "../../TaskEditFormContext";
 
-const Timer = ({ taskId, handler }) => {
-  const [time, setTime] = useState(0);
+const Timer = () => {
+  const context = useContext(TaskEditFormContext);
+  const { time, updateTime } = context;
+
   const [isOn, setIsOn] = useState(false);
   const [timer, setTimer] = useState(null);
-
-  useEffect(() => {
-    if (taskId !== -1) {
-      fetch("http://localhost:3001/api/task/" + taskId)
-        .then(response => {
-          return response.json();
-        })
-        .then(task => {
-          setTime(task.time);
-          handler(task.time);
-        });
-    }
-  }, []);
 
   const startTimer = () => {
     setIsOn(true);
     let timeOffset = Date.now() - time;
-    setTimer(setInterval(() => setTime(Date.now() - timeOffset), 1));
+    setTimer(setInterval(() => updateTime(Date.now() - timeOffset), 1));
   };
 
   const stopTimer = e => {
     setIsOn(false);
     clearInterval(timer);
-    handler(time);
+    updateTime(time);
   };
 
   const resetTimer = () => {
     stopTimer();
-    setTime(0);
+    updateTime(0);
     setIsOn(false);
   };
 

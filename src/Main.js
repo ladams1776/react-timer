@@ -1,49 +1,69 @@
-import React from "react";
-import {
-  Route,
-  HashRouter
-} from "react-router-dom";
+import React, { useState } from "react";
+import { TaskEditFormProvider } from "./TaskEditFormContext";
+
+import { Route, HashRouter } from "react-router-dom";
 import TaskListView from "./components/TaskListView/TaskListView";
 import EditTaskForm from "./Form/EditTask/EditTaskForm";
 
- 
-class Main extends React.Component {
-    constructor(props) {
-        super(props);
+const Main = ({ dropDownListContracts }) => {
+  const [taskId, setTaskId] = useState(-1);
+  const [description, setDescription] = useState("");
+  const [time, setTime] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(0);
+  const [isFlashMessageShowing, setIsFlashMessageShowing] = useState(0);
 
-        this.state = {
-            dropDownListContracts: this.props.dropDownListContracts
+  return (
+    <TaskEditFormProvider
+      value={{
+        taskId,
+        description,
+        time,
+        selectedProject,
+        isFlashMessageShowing,
+        dropDownListContracts,
+        updateTaskId: taskId => {
+          setTaskId(taskId);
+        },
+        updateDescription: description => {
+          setDescription(description);
+        },
+        updateTime: time => {
+          setTime(time);
+        },
+        updateDropDown: selectedProject => {
+          setSelectedProject(selectedProject);
+        },
+        updateFlashMessage: isVisible => {
+          setIsFlashMessageShowing(isVisible);
         }
-    }
-
-
-  render() {
-    return (
-        <HashRouter>
+      }}
+    >
+      <HashRouter>
         <div>
           <div className="content">
             {/* @todo: need to manage the state here, if we click on a link we need to hide the list, the edit form is showing */}
 
-            <Route 
-                exact
-                path="/task/:id" 
-                render={(props) => <EditTaskForm {...props} list={this.state.dropDownListContracts}/>}
+            <Route
+              exact
+              path="/task/:id"
+              render={props => (
+                <EditTaskForm {...props} list={dropDownListContracts} />
+              )}
             />
 
-            <Route 
-                exact 
-                path="/" 
-                render={(props) => <TaskListView {...props} list={this.state.dropDownListContracts}/>}
-                // component={TaskListView}
-            />  
-
-
-
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <TaskListView {...props} list={dropDownListContracts} />
+              )}
+              // component={TaskListView}
+            />
           </div>
         </div>
-        </HashRouter>
-    );
-  }
-}
- 
+      </HashRouter>
+    </TaskEditFormProvider>
+  );
+};
+
 export default Main;
