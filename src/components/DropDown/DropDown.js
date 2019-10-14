@@ -11,6 +11,7 @@ const DropDown = () => {
       <label className="drop-down__title">Contract Drop Down: </label>
       <select
         className="drop-down__select"
+        data-test-id="select"
         value={selectedProject}
         onChange={event => updateDropDown(event.currentTarget.selectedIndex)}
       >
