@@ -2,45 +2,72 @@ import React from "react";
 import sinon from "sinon";
 import * as useTaskEditContext from "../../../Form/EditTask/useTaskEditContext";
 import chai, { expect } from "chai";
-import SinonChai from 'sinon-chai';
+import SinonChai from "sinon-chai";
 import DropDown from "../DropDown";
-import Enzyme, { shallow, render, mount } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
 
-const SELECT_OPTION = 1001;
-
-describe("<DropDown />", () => {
-  const context = {
-    selectedProject: 0,
-    updateDropDown: sinon.spy(),
-    dropDownListContracts: [
-      { key: 0, label: "test", value: "test" },
-      { key: 1, label: "test", value: "test" }
-    ]
-  };
-
+describe("src/components/DropDown/__test__/DropDown.test.js", () => {
+  let wrapper;
   let stuber;
+  stuber = sinon.stub(useTaskEditContext, "default");
 
-  beforeEach(() => {
-    stuber = sinon.stub(useTaskEditContext, "default");
+  describe("DropDown", () => {
+    it("should not display when no options", () => {
+      const context = {
+        selectedProject: 0,
+        dropDownListContracts: []
+      };
+
+      stuber.returns(context);
+
+      wrapper = shallow(<DropDown />);
+      const props = wrapper.find("[data-test-id='select']").props();
+      expect(props.children).to.have.lengthOf(0);
+    });
+
+    it("should have as many options as dropDownListContracts", () => {
+      const context = {
+        selectedProject: 0,
+        dropDownListContracts: [
+          { key: 0, label: "test", value: "test" },
+          { key: 1, label: "test", value: "test" }
+        ]
+      };
+
+      // stuber = sinon.stub(useTaskEditContext, "default");
+      stuber.returns(context);
+
+      wrapper = shallow(<DropDown />);
+      const props = (wrapper.find("[data-test-id='select']")).props();
+      expect(props.children).to.have.lengthOf(2);
+    });
   });
 
-  afterEach(() => {
-    stuber.restore();
-  });
+  describe("onClick ", () => {
+    it("should invoke updateDropDown when an option is selected, with the value of the option", () => {
+      const context = {
+        selectedProject: 0,
+        updateDropDown: sinon.spy(),
+        dropDownListContracts: [
+          { key: 0, label: "test", value: "test" },
+          { key: 1, label: "test", value: "test" }
+        ]
+      };
 
-  it("should render DropDown", () => {
-    stuber.returns(context);
-    const wrapper = shallow(<DropDown />);
+      const SELECT_OPTION = 1001;
+      stuber.returns(context);
+      wrapper = shallow(<DropDown />);
 
-    wrapper
-      .find('[data-test-id="select"]')
-      .props()
-      .onChange({ currentTarget: { selectedIndex: 1 } });
+      wrapper
+        .find("[data-test-id='select']")
+        .props()
+        .onChange({ currentTarget: { selectedIndex: SELECT_OPTION } });
 
-    expect(context.updateDropDown).to.have.been.calledOnceWith(SELECT_OPTION);
+      expect(context.updateDropDown).to.have.been.calledOnceWith(SELECT_OPTION);
+    });
   });
 });
