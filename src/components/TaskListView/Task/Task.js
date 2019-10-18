@@ -1,11 +1,12 @@
 import React from "react";
 import PropType from "prop-types";
 import { NavLink } from "react-router-dom";
-import { getFormattedDate } from "../../utils/DateFormat";
+import { getFormattedDate } from "../../../utils/DateFormat";
 import "./Task.css";
 
 const Task = ({ task, list }) => {
-  const _onClick = e => {
+
+  const _deleteClick = e => {
     e.preventDefault();
     fetch(`/api/task/${task._id}`, {
       method: "DELETE"
@@ -42,7 +43,7 @@ const Task = ({ task, list }) => {
             {" "}
             {(task.time / 1000 / 60 / 60).toFixed(2)}
             <button
-              onClick={_onClick}
+              onClick={_deleteClick}
               className="task-item__delete-btn glyphicon glyphicon-remove"
             />
           </span>

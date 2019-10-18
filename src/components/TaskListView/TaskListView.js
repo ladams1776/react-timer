@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./TaskListView.css";
 import JsonWriter from "./JsonWriter";
-import Task from "./Task";
+import Task from "./Task/Task";
 import { getFormattedDate } from "../../utils/DateFormat";
 
 const TaskListView = ({ list }) => {
