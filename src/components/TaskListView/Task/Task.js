@@ -1,23 +1,16 @@
 import React from "react";
 import PropType from "prop-types";
 import { NavLink } from "react-router-dom";
+import DeleteTaskButton from "./DeleteTaskButton";
 import { getFormattedDate } from "../../../utils/DateFormat";
 import "./Task.css";
 
 const Task = ({ task, list }) => {
-
-  const _deleteClick = e => {
-    e.preventDefault();
-    fetch(`/api/task/${task._id}`, {
-      method: "DELETE"
-    })
-      .then(response => response.json())
-      .then(setTimeout(() => window.location.reload(), 500));
-  };
+  const taskId = task._id;
 
   return (
-    <li key={task._id}>
-      <NavLink to={"/task/" + task._id} id={task._id} className="task-item">
+    <li key={taskId}>
+      <NavLink to={"/task/" + taskId} id={taskId} className="task-item">
         <div className="task-item__left">
           <div className="task-item__description">
             {task.description.split("\n").map((paragraph, index) => {
@@ -26,7 +19,7 @@ const Task = ({ task, list }) => {
                   {paragraph}
                 </p>
               );
-            })}
+            })} 
           </div>
           <span className="task-item__customer">
             {list[task.contractId].label}
@@ -42,10 +35,7 @@ const Task = ({ task, list }) => {
           <span className="task-item__time-value">
             {" "}
             {(task.time / 1000 / 60 / 60).toFixed(2)}
-            <button
-              onClick={_deleteClick}
-              className="task-item__delete-btn glyphicon glyphicon-remove"
-            />
+            <DeleteTaskButton taskId={taskId} /> 
           </span>
           <span className="task-item__item-date">
             {getFormattedDate(task.date)}
