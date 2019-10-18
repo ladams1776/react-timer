@@ -31,6 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
+    "test:coverage": "set CI=true && react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
