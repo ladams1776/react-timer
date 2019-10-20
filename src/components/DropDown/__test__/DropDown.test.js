@@ -38,11 +38,10 @@ describe("src/components/DropDown/__test__/DropDown.test.js", () => {
         ]
       };
 
-      // stuber = sinon.stub(useTaskEditContext, "default");
       stuber.returns(context);
 
       wrapper = shallow(<DropDown />);
-      const props = (wrapper.find("[data-test-id='select']")).props();
+      const props = wrapper.find("[data-test-id='select']").props();
       expect(props.children).to.have.lengthOf(2);
     });
   });
