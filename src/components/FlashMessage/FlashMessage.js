@@ -7,13 +7,14 @@ import "./FlashMessage.css";
 //@TODO: Then use `ref` and `context` to toggle it on and off and then
 //@TODO: we won't need to have to declare/instantiate it in other components,
 //@TODO: the other comps can just call the func provided by the context.
-const FlashMessage = ({ message }) => {
-  const { isFlashMessageShowing, updateFlashMessage } = useTaskEditContext();
+const FlashMessage = () => {
+  const { message, setMessage } = useTaskEditContext();
+
   return (
-    !isFlashMessageShowing || (
+    !message || (
       <div
         className="flash-message"
-        onClick={() => updateFlashMessage(false)}
+        onClick={() => setMessage(null)}
         data-test-id="flash-message"
       >
         {message}

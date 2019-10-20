@@ -2,10 +2,12 @@ import React from "react";
 import PropType from "prop-types";
 import { NavLink } from "react-router-dom";
 import DeleteTaskButton from "./DeleteTaskButton";
+import useTaskEditContext from "../../../Form/EditTask/useTaskEditContext";
 import { getFormattedDate } from "../../../utils/DateFormat";
 import "./Task.css";
 
-const Task = ({ task, list }) => {
+const Task = ({ task }) => {
+  const { projects } = useTaskEditContext();
   const taskId = task._id;
 
   return (
@@ -19,14 +21,14 @@ const Task = ({ task, list }) => {
                   {paragraph}
                 </p>
               );
-            })} 
+            })}
           </div>
           <span className="task-item__customer">
-            {list[task.contractId].label}
+            {projects[task.contractId].label}
           </span>{" "}
           -{" "}
           <span className="task-item__contract">
-            {list[task.contractId].customer}
+            {projects[task.contractId].customer}
           </span>
         </div>
 
@@ -35,7 +37,7 @@ const Task = ({ task, list }) => {
           <span className="task-item__time-value">
             {" "}
             {(task.time / 1000 / 60 / 60).toFixed(2)}
-            <DeleteTaskButton taskId={taskId} /> 
+            <DeleteTaskButton taskId={taskId} />
           </span>
           <span className="task-item__item-date">
             {getFormattedDate(task.date)}
@@ -48,7 +50,7 @@ const Task = ({ task, list }) => {
 
 Task.PropType = {
   task: PropType.object,
-  list: PropType.arrayOf.object
+  dropDownListContracts: PropType.arrayOf.object
 };
 
 export default Task;

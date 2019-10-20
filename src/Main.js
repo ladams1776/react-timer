@@ -4,13 +4,15 @@ import { TaskEditFormProvider } from "./TaskEditFormContext";
 import { Route, HashRouter } from "react-router-dom";
 import TaskListView from "./components/TaskListView/TaskListView";
 import EditTaskForm from "./Form/EditTask/EditTaskForm";
+import FlashMessage from "./components/FlashMessage/FlashMessage";
 
 const Main = ({ dropDownListContracts }) => {
   const [taskId, setTaskId] = useState(-1);
   const [description, setDescription] = useState("");
   const [time, setTime] = useState(0);
   const [selectedProject, setSelectedProject] = useState(0);
-  const [isFlashMessageShowing, setIsFlashMessageShowing] = useState(0);
+  const [message, setMessage] = useState(null);
+  const [projects, setProjects] = useState(dropDownListContracts);
 
   return (
     <TaskEditFormProvider
@@ -19,8 +21,8 @@ const Main = ({ dropDownListContracts }) => {
         description,
         time,
         selectedProject,
-        isFlashMessageShowing,
-        dropDownListContracts,
+        message,
+        projects,
         updateTaskId: taskId => {
           setTaskId(taskId);
         },
@@ -33,21 +35,20 @@ const Main = ({ dropDownListContracts }) => {
         updateDropDown: selectedProject => {
           setSelectedProject(selectedProject);
         },
-        updateFlashMessage: isVisible => {
-          setIsFlashMessageShowing(isVisible);
+        setMessage: isVisible => {
+          setMessage(isVisible);
         }
       }}
     >
       <HashRouter>
         <div>
           <div className="content">
-            {/* @todo: need to manage the state here, if we click on a link we need to hide the list, the edit form is showing */}
-
+            <FlashMessage />
             <Route
               exact
               path="/task/:id"
               render={props => (
-                <EditTaskForm {...props} list={dropDownListContracts} />
+                <EditTaskForm {...props} />
               )}
             />
 
@@ -55,7 +56,7 @@ const Main = ({ dropDownListContracts }) => {
               exact
               path="/"
               render={props => (
-                <TaskListView {...props} list={dropDownListContracts} />
+                <TaskListView {...props} />
               )}
               // component={TaskListView}
             />

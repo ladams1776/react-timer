@@ -3,12 +3,7 @@ import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
 import "./DropDown.css";
 
 const DropDown = () => {
-  // const context = useContext(TaskEditFormContext);
-  const {
-    selectedProject,
-    updateDropDown,
-    dropDownListContracts
-  } = useTaskEditContext();
+  const { selectedProject, updateDropDown, projects } = useTaskEditContext();
 
   return (
     <div className="drop-down">
@@ -19,8 +14,8 @@ const DropDown = () => {
         value={selectedProject}
         onChange={event => updateDropDown(event.currentTarget.selectedIndex)}
       >
-        {!dropDownListContracts ||
-          dropDownListContracts.map(item => {
+        {!projects ||
+          projects.map(item => {
             return (
               <option
                 className="drop-down__option"

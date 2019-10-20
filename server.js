@@ -98,6 +98,7 @@ app.delete("/api/task/:id", function (req, res) {
     TaskModel.deleteOne(
         { _id: id }, function (e) {
             if (e) throw e;
+            res.jsonp({ taskId: id, isSuccess: true });
         }
     );
 });

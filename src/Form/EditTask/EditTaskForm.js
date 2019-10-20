@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
 import PropType from "prop-types";
-import FlashMessage from "../../components/FlashMessage/FlashMessage";
 import DropDown from "../../components/DropDown/DropDown";
 import Timer from "../../components/Timer/Timer";
 import TextArea from "../../components/TextArea/TextArea";
@@ -13,12 +12,12 @@ const EditTaskForm = ({ match }) => {
   const {
     time,
     updateTime,
-    updateFlashMessage,
+    setMessage,
     description,
     updateDescription,
     selectedProject,
     updateDropDown,
-    dropDownListContracts
+    projects
   } = useTaskEditContext();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +26,8 @@ const EditTaskForm = ({ match }) => {
 
   //@TODO: Handle if there is a bad response.
   useEffect(() => {
+    setIsLoading(true);
+
     if (taskId !== "-1") {
       fetch("/api/task/" + taskId)
         .then(response => {
@@ -39,14 +40,17 @@ const EditTaskForm = ({ match }) => {
           setIsLoading(false);
         });
     } else {
-      setIsLoading(true);
+      updateDescription('');
+      updateTime(0);
+      updateDropDown(0);
+      setIsLoading(false);
     }
-  }, [taskId]);
+  }, []);
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    const dropDownSelection = dropDownListContracts[selectedProject];
+    const dropDownSelection = projects[selectedProject];
 
     const date = new Date();
     const dateFormatted = getFormattedDate(date);
@@ -70,7 +74,7 @@ const EditTaskForm = ({ match }) => {
       headers: { "Content-Type": "application/json" }
     }).then(e => {
       if (e.status === 200) {
-        updateFlashMessage(true);
+        setMessage("Successfully created/updated a Task");
         setIsLoading(false);
       }
     });
@@ -78,8 +82,6 @@ const EditTaskForm = ({ match }) => {
 
   return (
     <div className="m-a mt-50px w-500px">
-      <FlashMessage message="Created new Task!" />
-
       {!isLoading || (
         <div className="react-loading">
           <div className="react-loading__content">
@@ -113,7 +115,7 @@ EditTaskForm.PropType = {
   updateDescription: PropType.func.isRequired,
   selectedProject: PropType.number.isRequired,
   updateDropDown: PropType.func.isRequired,
-  dropDownListContracts: PropType.array.isRequired
+  projects: PropType.array.isRequired
 };
 
 export default EditTaskForm;
