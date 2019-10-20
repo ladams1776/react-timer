@@ -1,27 +1,25 @@
-import React, { useEffect, useContext, useState } from "react";
-import TaskEditFormContext from "../../TaskEditFormContext";
+import React, { useEffect, useState } from "react";
+import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
 import PropType from "prop-types";
+import FlashMessage from "../../components/FlashMessage/FlashMessage";
 import DropDown from "../../components/DropDown/DropDown";
 import Timer from "../../components/Timer/Timer";
 import TextArea from "../../components/TextArea/TextArea";
-import FlashMessage from "../../components/FlashMessage/FlashMessage";
 import ReactLoading from "react-loading";
 import { getFormattedDate } from "../../utils/DateFormat";
 import "./EditTaskForm.css";
 
 const EditTaskForm = ({ match }) => {
-  const context = useContext(TaskEditFormContext);
   const {
     time,
     updateTime,
-    isFlashMessageShowing,
     updateFlashMessage,
     description,
     updateDescription,
     selectedProject,
     updateDropDown,
     dropDownListContracts
-  } = context;
+  } = useTaskEditContext();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -72,7 +70,7 @@ const EditTaskForm = ({ match }) => {
       headers: { "Content-Type": "application/json" }
     }).then(e => {
       if (e.status === 200) {
-        updateFlashMessage(1);
+        updateFlashMessage(true);
         setIsLoading(false);
       }
     });
@@ -80,13 +78,7 @@ const EditTaskForm = ({ match }) => {
 
   return (
     <div className="m-a mt-50px w-500px">
-      {!isFlashMessageShowing || (
-        <FlashMessage
-          message="Success"
-          opacity={isFlashMessageShowing}
-          onClick={updateFlashMessage}
-        />
-      )}
+      <FlashMessage message="Created new Task!" />
 
       {!isLoading || (
         <div className="react-loading">
@@ -116,7 +108,6 @@ EditTaskForm.PropType = {
   match: PropType.object.isRequired,
   time: PropType.number.isRequired,
   updateTime: PropType.func.isRequired,
-  isFlashMessageShowing: PropType.bool.isRequired,
   updateFlashMessage: PropType.func.isRequired,
   description: PropType.string.isRequired,
   updateDescription: PropType.func.isRequired,
