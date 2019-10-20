@@ -1,17 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
+import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
 import "./FlashMessage.css";
 
-const FlashMessage = ({ message, onClick }) => {
-  const handleClick = e => {
-    onClick(false);
-  };
-
+//@TODO: Probably want to just drop this component at the top of the app
+//@TODO: Then use `ref` and `context` to toggle it on and off and then
+//@TODO: we won't need to have to declare/instantiate it in other components,
+//@TODO: the other comps can just call the func provided by the context.
+const FlashMessage = ({ message }) => {
+  const { isFlashMessageShowing, updateFlashMessage } = useTaskEditContext();
   return (
-    <div className="flash-message" onClick={handleClick}>
-      {message}
-      <div className="flash-message-cancel">X</div>
-    </div>
+    !isFlashMessageShowing || (
+      <div
+        className="flash-message"
+        onClick={() => updateFlashMessage(false)}
+        data-test-id="flash-message"
+      >
+        {message}
+        <div className="flash-message-cancel">X</div>
+      </div>
+    )
   );
 };
 
