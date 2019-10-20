@@ -19,7 +19,7 @@ describe("src/components/DropDown/__test__/DropDown.test.js", () => {
     it("should not display when no options", () => {
       const context = {
         selectedProject: 0,
-        dropDownListContracts: []
+        projects: []
       };
 
       stuber.returns(context);
@@ -32,7 +32,7 @@ describe("src/components/DropDown/__test__/DropDown.test.js", () => {
     it("should have as many options as dropDownListContracts", () => {
       const context = {
         selectedProject: 0,
-        dropDownListContracts: [
+        projects: [
           { key: 0, label: "test", value: "test" },
           { key: 1, label: "test", value: "test" }
         ]
@@ -51,11 +51,11 @@ describe("src/components/DropDown/__test__/DropDown.test.js", () => {
       const context = {
         selectedProject: 0,
         updateDropDown: sinon.spy(),
-        dropDownListContracts: [
+        projects: [
           { key: 0, label: "test", value: "test" },
           { key: 1, label: "test", value: "test" }
         ]
-      };
+      }; 
 
       const SELECT_OPTION = 1001;
       stuber.returns(context);
