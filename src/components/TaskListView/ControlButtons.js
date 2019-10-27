@@ -1,3 +1,7 @@
+// @TODO: Left off here moving the 3 buttons from TaskListView over into this component
+// @TODO: Then we want to control when to display the other 2 buttons
+// @TODO: Based on if there are any tasks. So we might be pushing Tasks into the context as well and
+// @TODO: Creating a new context or adding to the existing one.
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -22,7 +26,12 @@ const TaskListView = ({ list }) => {
           let tasks = data.map(task => {
             return (
               <div key={task._id}>
-                <Task task={task} list={list} />
+                <Task
+                  task={task}
+                  list={list}
+                  tasks={tasks}
+                  setTasks={setTasks}
+                />
               </div>
             );
           });
