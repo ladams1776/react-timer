@@ -2,7 +2,7 @@
 // @TODO: Then we want to control when to display the other 2 buttons
 // @TODO: Based on if there are any tasks. So we might be pushing Tasks into the context as well and
 // @TODO: Creating a new context or adding to the existing one.
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./TaskListView.css";
@@ -60,26 +60,15 @@ const ControlButtons = ({ list, tasks, setTasks }) => {
       );
   };
 
-  const showDownloadButton = () => {
-    if (tasks !== null) {
-      return (
-        <a href="#" className="button-download" onClick={handleDownload}>
-          <span className="glyphicon glyphicon-download-alt mr-5px"></span>
-          Download
-        </a>
-      );
-    }
-  };
-
   return (
     <div className="task-list__header">
-      {tasks?.length && (
+      {!tasks?.length || (
         <button type="a" className="button-delete" onClick={handleDelete}>
           <span className="glyphicon glyphicon-remove mr-5px"></span>
           Delete
         </button>
       )}
-      {tasks?.length && (
+      {!tasks?.length || (
         <button type="a" className="button-download" onClick={handleDownload}>
           <span className="glyphicon glyphicon-download-alt mr-5px"></span>
           Download
@@ -91,6 +80,12 @@ const ControlButtons = ({ list, tasks, setTasks }) => {
       </NavLink>
     </div>
   );
+};
+
+ControlButtons.propTypes = {
+  list: PropTypes.array,
+  tasks: PropTypes.array,
+  setTasks: PropTypes.func
 };
 
 export default ControlButtons;
