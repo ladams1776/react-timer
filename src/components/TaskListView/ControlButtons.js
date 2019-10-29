@@ -7,38 +7,12 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./TaskListView.css";
 import JsonWriter from "./JsonWriter";
-import Task from "./Task/Task";
 import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
 
 import { getFormattedDate } from "../../utils/DateFormat";
 
-const TaskListView = ({ list }) => {
+const ControlButtons = ({ list, tasks, setTasks }) => {
   const { setMessage } = useTaskEditContext();
-  const [tasks, setTasks] = useState(null);
-
-  useEffect(() => {
-    fetch(`/api/tasks`)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        if (data.length >= 1) {
-          let tasks = data.map(task => {
-            return (
-              <div key={task._id}>
-                <Task
-                  task={task}
-                  list={list}
-                  tasks={tasks}
-                  setTasks={setTasks}
-                />
-              </div>
-            );
-          });
-          setTasks(tasks);
-        }
-      });
-  }, [tasks]);
 
   const handleDownload = () => {
     fetch(`/api/tasks`)
@@ -97,34 +71,26 @@ const TaskListView = ({ list }) => {
     }
   };
 
-  const showDeleteButton = () => {
-    if (tasks !== null) {
-      return (
-        <a href="#" className="button-delete" onClick={handleDelete}>
-          <span className="glyphicon glyphicon-remove mr-5px"></span>Delete
-        </a>
-      );
-    }
-  };
-
   return (
-    <div>
-      <div className="task-list__header">
-        {showDeleteButton()}
-        {showDownloadButton()}
-        <NavLink to={"/task/-1"} className="button-add">
-          <span className="glyphicon glyphicon-plus mr-5px" />
-          New Task
-        </NavLink>
-      </div>
-      <ul>{tasks}</ul>
+    <div className="task-list__header">
+      {tasks?.length && (
+        <button type="a" className="button-delete" onClick={handleDelete}>
+          <span className="glyphicon glyphicon-remove mr-5px"></span>
+          Delete
+        </button>
+      )}
+      {tasks?.length && (
+        <button type="a" className="button-download" onClick={handleDownload}>
+          <span className="glyphicon glyphicon-download-alt mr-5px"></span>
+          Download
+        </button>
+      )}
+      <NavLink to={"/task/-1"} className="button-add">
+        <span className="glyphicon glyphicon-plus mr-5px" />
+        New Task
+      </NavLink>
     </div>
   );
 };
 
-TaskListView.propTypes = {
-  tasks: PropTypes.array,
-  list: PropTypes.array
-};
-
-export default TaskListView;
+export default ControlButtons;
