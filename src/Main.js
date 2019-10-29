@@ -12,7 +12,7 @@ const Main = ({ dropDownListContracts }) => {
   const [time, setTime] = useState(0);
   const [selectedProject, setSelectedProject] = useState(0);
   const [message, setMessage] = useState(null);
-  const [projects, setProjects] = useState(dropDownListContracts);
+  const [projects] = useState(dropDownListContracts);
 
   return (
     <TaskEditFormProvider
@@ -47,18 +47,13 @@ const Main = ({ dropDownListContracts }) => {
             <Route
               exact
               path="/task/:id"
-              render={props => (
-                <EditTaskForm {...props} />
-              )}
+              render={props => <EditTaskForm {...props} />}
             />
 
             <Route
               exact
               path="/"
-              render={props => (
-                <TaskListView {...props} />
-              )}
-              // component={TaskListView}
+              render={props => <TaskListView {...props} />}
             />
           </div>
         </div>
