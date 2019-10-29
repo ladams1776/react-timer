@@ -9,10 +9,10 @@ import Adapter from "enzyme-adapter-react-16";
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
 
-describe.only("src/components/Task/__test__/Task.test.js", () => {
+describe("src/components/Task/__test__/Task.test.js", () => {
   describe("Task", () => {
     it("should display Task with ", () => {
-      const wrapper = mount(<Task />);
+      const wrapper = mount(<Task task={{ _id: "" }} />);
       const preventDefaultSpy = sinon.spy();
 
       wrapper
