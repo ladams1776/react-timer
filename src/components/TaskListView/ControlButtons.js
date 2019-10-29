@@ -11,8 +11,8 @@ import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
 
 import { getFormattedDate } from "../../utils/DateFormat";
 
-const ControlButtons = ({ list, tasks, setTasks }) => {
-  const { setMessage } = useTaskEditContext();
+const ControlButtons = ({ haveTasks, setTasks }) => {
+  const { setMessage, projects } = useTaskEditContext();
 
   const handleDownload = () => {
     fetch(`/api/tasks`)
@@ -28,7 +28,7 @@ const ControlButtons = ({ list, tasks, setTasks }) => {
         tasks.forEach(function(task) {
           task.time = (task.time / 1000 / 60 / 60).toFixed(2);
 
-          list.forEach(function(existingTask) {
+          projects.forEach(existingTask => {
             if (task.contractId === existingTask.key) {
               task.contract = existingTask.contract;
               task.customer = existingTask.customer;
@@ -62,19 +62,29 @@ const ControlButtons = ({ list, tasks, setTasks }) => {
 
   return (
     <div className="task-list__header">
-      {!tasks?.length || (
-        <button type="a" className="button-delete" onClick={handleDelete}>
+      {!haveTasks || (
+        <button
+          type="a"
+          className="button-delete"
+          onClick={handleDelete}
+          data-test-id="btn-delete"
+        >
           <span className="glyphicon glyphicon-remove mr-5px"></span>
           Delete
         </button>
       )}
-      {!tasks?.length || (
-        <button type="a" className="button-download" onClick={handleDownload}>
+      {!haveTasks || (
+        <button
+          type="a"
+          className="button-download"
+          onClick={handleDownload}
+          data-test-id="btn-download"
+        >
           <span className="glyphicon glyphicon-download-alt mr-5px"></span>
           Download
         </button>
       )}
-      <NavLink to={"/task/-1"} className="button-add">
+      <NavLink to={"/task/-1"} className="button-add" data-test-id="btn-new">
         <span className="glyphicon glyphicon-plus mr-5px" />
         New Task
       </NavLink>
@@ -84,7 +94,7 @@ const ControlButtons = ({ list, tasks, setTasks }) => {
 
 ControlButtons.propTypes = {
   list: PropTypes.array,
-  tasks: PropTypes.array,
+  haveTasks: PropTypes.bool,
   setTasks: PropTypes.func
 };
 

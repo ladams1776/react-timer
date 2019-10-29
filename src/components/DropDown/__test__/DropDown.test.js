@@ -55,7 +55,7 @@ describe("src/components/DropDown/__test__/DropDown.test.js", () => {
           { key: 0, label: "test", value: "test" },
           { key: 1, label: "test", value: "test" }
         ]
-      }; 
+      };
 
       const SELECT_OPTION = 1001;
       stuber.returns(context);
