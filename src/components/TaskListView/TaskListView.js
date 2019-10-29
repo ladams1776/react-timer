@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropTypes, { array } from "prop-types";
+import PropTypes from "prop-types";
 import "./TaskListView.css";
 import Task from "./Task/Task";
 import ControlButtons from "./ControlButtons";
@@ -18,7 +18,7 @@ const TaskListView = ({ list }) => {
             data.map(task => {
               return (
                 <div key={task._id}>
-                  <Task task={task} list={list} />
+                  <Task task={task} />
                 </div>
               );
             })
@@ -30,7 +30,7 @@ const TaskListView = ({ list }) => {
 
   return (
     <div>
-      <ControlButtons list={list} tasks={tasks} setTasks={setTasks} />
+      <ControlButtons haveTasks={!!tasks?.length} setTasks={setTasks} />
       <ul>{tasks}</ul>
     </div>
   );
