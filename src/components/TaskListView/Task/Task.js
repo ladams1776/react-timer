@@ -49,8 +49,7 @@ const Task = ({ task }) => {
 };
 
 Task.PropType = {
-  task: PropType.object,
-  dropDownListContracts: PropType.arrayOf.object
+  task: PropType.object
 };
 
 export default Task;
