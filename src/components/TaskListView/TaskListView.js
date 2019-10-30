@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import "./TaskListView.css";
 import Task from "./Task/Task";
 import ControlButtons from "./ControlButtons";
 
-const TaskListView = ({ list }) => {
+const TaskListView = () => {
   const [tasks, setTasks] = useState(null);
 
   useEffect(() => {
@@ -34,10 +33,6 @@ const TaskListView = ({ list }) => {
       <ul>{tasks}</ul>
     </div>
   );
-};
-
-TaskListView.propTypes = {
-  list: PropTypes.array
 };
 
 export default TaskListView;
