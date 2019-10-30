@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./TaskListView.css";
 import Task from "./Task/Task";
 import ControlButtons from "./ControlButtons";
+import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
 
 const TaskListView = () => {
-  const [tasks, setTasks] = useState(null);
+  const { tasks, updateTasks } = useTaskEditContext();
 
   useEffect(() => {
     fetch(`/api/tasks`)
@@ -13,24 +14,24 @@ const TaskListView = () => {
       })
       .then(data => {
         if (data.length >= 1) {
-          setTasks(
-            data.map(task => {
-              return (
-                <div key={task._id}>
-                  <Task task={task} />
-                </div>
-              );
-            })
-          );
+          updateTasks(data);
         }
       })
-      .catch(e => {});
+      .catch(e => {}); //@TODO: Flash the error
   }, [tasks]);
 
   return (
     <div>
-      <ControlButtons haveTasks={!!tasks?.length} setTasks={setTasks} />
-      <ul>{tasks}</ul>
+      <ControlButtons />
+      <ul>
+        {tasks.map(task => {
+          return (
+            <div key={task._id}>
+              <Task task={task} />
+            </div>
+          );
+        })}
+      </ul>
     </div>
   );
 };
