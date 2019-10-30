@@ -7,6 +7,7 @@ import EditTaskForm from "./Form/EditTask/EditTaskForm";
 import FlashMessage from "./components/FlashMessage/FlashMessage";
 
 const Main = ({ dropDownListContracts }) => {
+  const [tasks, setTasks] = useState([]);
   const [taskId, setTaskId] = useState(-1);
   const [description, setDescription] = useState("");
   const [time, setTime] = useState(0);
@@ -23,6 +24,10 @@ const Main = ({ dropDownListContracts }) => {
         selectedProject,
         message,
         projects,
+        tasks,
+        updateTasks: tasks => {
+          setTasks(tasks);
+        },
         updateTaskId: taskId => {
           setTaskId(taskId);
         },
