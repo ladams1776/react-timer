@@ -4,43 +4,61 @@
 // @TODO: Creating a new context or adding to the existing one.
 import React from "react";
 import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
+import FileSaver from "file-saver";
 import "./TaskListView.css";
 import JsonWriter from "./JsonWriter";
 import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
 
 import { getFormattedDate } from "../../utils/DateFormat";
 
-const ControlButtons = ({ haveTasks, setTasks }) => {
-  const { setMessage, projects } = useTaskEditContext();
+export const updateTaskToWriteToFile = (task, projects) => {
+  const taskWithProject = { ...task };
+
+  taskWithProject.time = (task.time / 1000 / 60 / 60).toFixed(2);
+
+  projects.forEach(project => {
+    if (taskWithProject.contractId === project.key) {
+      taskWithProject.contract = project.contract;
+      taskWithProject.customer = project.customer;
+    }
+  });
+
+  return taskWithProject;
+};
+
+export const writeJsonFile = taskBundle => {
+  let json = JSON.stringify(taskBundle);
+  let blob = new Blob([json], { type: "application/json" });
+
+  let fileName =
+    new Date().toString() +
+    "_" +
+    taskBundle.description +
+    "_" +
+    taskBundle.time +
+    ".json";
+
+  FileSaver.saveAs(blob, fileName);
+};
+
+const ControlButtons = () => {
+  const { setMessage, projects, tasks, updateTasks } = useTaskEditContext();
 
   const handleDownload = () => {
-    fetch(`/api/tasks`)
-      .then(response => response.json())
-      .then(tasks => {
-        const date = new Date();
-        const dateFormatted = getFormattedDate(date);
+    const date = new Date();
+    const dateFormatted = getFormattedDate(date);
 
-        const timeTask = {
-          date: dateFormatted
-        };
+    const timeTask = {
+      date: dateFormatted
+    };
 
-        tasks.forEach(function(task) {
-          task.time = (task.time / 1000 / 60 / 60).toFixed(2);
+    const tasksWithProjects = tasks.map(task =>
+      updateTaskToWriteToFile(task, projects)
+    );
 
-          projects.forEach(existingTask => {
-            if (task.contractId === existingTask.key) {
-              task.contract = existingTask.contract;
-              task.customer = existingTask.customer;
-            }
-          });
-        });
+    timeTask.WorkUnit = tasksWithProjects;
 
-        timeTask.WorkUnit = tasks;
-
-        const writer = new JsonWriter();
-        writer.write(timeTask);
-      });
+    writeJsonFile(timeTask);
   };
 
   /**
@@ -54,7 +72,7 @@ const ControlButtons = ({ haveTasks, setTasks }) => {
       .then(response => response.json())
       .then(
         setTimeout(() => {
-          setTasks([]);
+          updateTasks([]);
           setMessage("Successfully deleted all tasks");
         }, 500)
       );
@@ -62,7 +80,7 @@ const ControlButtons = ({ haveTasks, setTasks }) => {
 
   return (
     <div className="task-list__header">
-      {!haveTasks || (
+      {!tasks?.length || (
         <button
           type="a"
           className="button-delete"
@@ -73,7 +91,7 @@ const ControlButtons = ({ haveTasks, setTasks }) => {
           Delete
         </button>
       )}
-      {!haveTasks || (
+      {!tasks?.length || (
         <button
           type="a"
           className="button-download"
@@ -90,12 +108,6 @@ const ControlButtons = ({ haveTasks, setTasks }) => {
       </NavLink>
     </div>
   );
-};
-
-ControlButtons.propTypes = {
-  list: PropTypes.array,
-  haveTasks: PropTypes.bool,
-  setTasks: PropTypes.func
 };
 
 export default ControlButtons;
