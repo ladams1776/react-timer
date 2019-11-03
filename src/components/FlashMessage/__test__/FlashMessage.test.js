@@ -1,6 +1,6 @@
 import React from "react";
 import sinon from "sinon";
-import * as useTaskEditContext from "../../../Form/EditTask/useTaskEditContext";
+import * as useTaskEditContext from "~/useTaskEditContext";
 import chai, { expect } from "chai";
 import SinonChai from "sinon-chai";
 import FlashMessage from "../FlashMessage";

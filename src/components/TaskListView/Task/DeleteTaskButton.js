@@ -1,12 +1,12 @@
-import React from "react";
-import useTaskEditContext from "../../../Form/EditTask/useTaskEditContext";
+import React from 'react';
+import * as useTaskEditContext from '~/useTaskEditContext';
 
 const DeleteTaskButton = ({ taskId }) => {
   const { setMessage } = useTaskEditContext();
   const _deleteClick = e => {
     e.preventDefault();
     fetch(`/api/task/${taskId}`, {
-      method: "DELETE"
+      method: 'DELETE'
     })
       .then(response => response.json())
       .then(() =>

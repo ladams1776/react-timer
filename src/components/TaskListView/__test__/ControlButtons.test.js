@@ -1,6 +1,6 @@
 import React from "react";
 import sinon from "sinon";
-import * as useTaskEditContext from "../../../Form/EditTask/useTaskEditContext";
+import * as useTaskEditContext from "~/useTaskEditContext";
 import chai from "chai";
 import SinonChai from "sinon-chai";
 import ControlButtons, { updateTaskToWriteToFile } from "../ControlButtons";
@@ -16,7 +16,6 @@ describe("src/components/ControlButtons/__test__/ControlButtons.test.js", () => 
   stuber = sinon.stub(useTaskEditContext, "default");
 
   describe.only("ControlButtons", () => {
-  
     it("should display ControlButtons with all 3 buttons when we `haveTask`", () => {
       const context = {
         setMessage: sinon.spy(),

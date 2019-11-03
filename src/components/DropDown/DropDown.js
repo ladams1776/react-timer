@@ -1,6 +1,6 @@
-import React from "react";
-import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
-import "./DropDown.css";
+import React from 'react';
+import * as useTaskEditContext from '~/useTaskEditContext';
+import './DropDown.css';
 
 const DropDown = () => {
   const { selectedProject, updateDropDown, projects } = useTaskEditContext();

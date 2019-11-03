@@ -2,14 +2,14 @@
 // @TODO: Then we want to control when to display the other 2 buttons
 // @TODO: Based on if there are any tasks. So we might be pushing Tasks into the context as well and
 // @TODO: Creating a new context or adding to the existing one.
-import React from "react";
-import { NavLink } from "react-router-dom";
-import FileSaver from "file-saver";
-import "./TaskListView.css";
-import JsonWriter from "./JsonWriter";
-import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import FileSaver from 'file-saver';
+import './TaskListView.css';
+import JsonWriter from './JsonWriter';
+import * as useTaskEditContext from '~/useTaskEditContext';
 
-import { getFormattedDate } from "../../utils/DateFormat";
+import getFormattedDate from '../../utils/DateFormat';
 
 export const updateTaskToWriteToFile = (task, projects) => {
   const taskWithProject = { ...task };
@@ -28,15 +28,15 @@ export const updateTaskToWriteToFile = (task, projects) => {
 
 export const writeJsonFile = taskBundle => {
   let json = JSON.stringify(taskBundle);
-  let blob = new Blob([json], { type: "application/json" });
+  let blob = new Blob([json], { type: 'application/json' });
 
   let fileName =
     new Date().toString() +
-    "_" +
+    '_' +
     taskBundle.description +
-    "_" +
+    '_' +
     taskBundle.time +
-    ".json";
+    '.json';
 
   FileSaver.saveAs(blob, fileName);
 };
@@ -67,13 +67,13 @@ const ControlButtons = () => {
   const handleDelete = e => {
     e.preventDefault();
     fetch(`/api/tasks`, {
-      method: "DELETE"
+      method: 'DELETE'
     })
       .then(response => response.json())
       .then(
         setTimeout(() => {
           updateTasks([]);
-          setMessage("Successfully deleted all tasks");
+          setMessage('Successfully deleted all tasks');
         }, 500)
       );
   };
@@ -102,7 +102,7 @@ const ControlButtons = () => {
           Download
         </button>
       )}
-      <NavLink to={"/task/-1"} className="button-add" data-test-id="btn-new">
+      <NavLink to={'/task/-1'} className="button-add" data-test-id="btn-new">
         <span className="glyphicon glyphicon-plus mr-5px" />
         New Task
       </NavLink>

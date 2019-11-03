@@ -20,13 +20,9 @@
     "customize-cra": "^0.8.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "5.12.0",
     "eslint-config-react-app": "^3.0.7",
     "eslint-loader": "2.1.1",
     "eslint-plugin-flowtype": "2.50.1",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.2",
-    "eslint-plugin-react": "7.12.4",
     "express": "^4.17.1",
     "file-loader": "2.0.0",
     "file-saver": "^2.0.2",
@@ -100,6 +96,12 @@
     "concurrently": "^4.1.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
     "jest-fetch-mock": "^2.1.2",
     "nodemon": "^1.19.4"
   },
@@ -155,6 +157,26 @@
     "watchPlugins": [
       "C:\\Programming\\react\\react-timer\\node_modules\\jest-watch-typeahead\\filename.js",
       "C:\\Programming\\react\\react-timer\\node_modules\\jest-watch-typeahead\\testname.js"
-    ]
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "root": [
+            "./src"
+          ],
+          "alias": {
+            "~": "./src"
+          }
+        }
+      ],
+      "react",
+      "import"
+    ],
+    "settings": {
+      "import/resolver": {
+        "babel-module": {}
+      }
+    }
   }
 }

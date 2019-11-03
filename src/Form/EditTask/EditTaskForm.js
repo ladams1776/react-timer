@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
-import PropType from "prop-types";
-import DropDown from "../../components/DropDown/DropDown";
-import Timer from "../../components/Timer/Timer";
-import TextArea from "../../components/TextArea/TextArea";
-import ReactLoading from "react-loading";
-import { getFormattedDate } from "../../utils/DateFormat";
-import "./EditTaskForm.css";
+import React, { useEffect, useState } from 'react';
+import * as useTaskEditContext from '~/useTaskEditContext';
+import PropType from 'prop-types';
+import DropDown from '../../components/DropDown/DropDown';
+import Timer from '../../components/Timer/Timer';
+import TextArea from '../../components/TextArea/TextArea';
+import ReactLoading from 'react-loading';
+import getFormattedDate from '../../utils/DateFormat';
+import './EditTaskForm.css';
 
 const EditTaskForm = ({ match }) => {
   const {
@@ -28,8 +28,8 @@ const EditTaskForm = ({ match }) => {
   useEffect(() => {
     setIsLoading(true);
 
-    if (taskId !== "-1") {
-      fetch("/api/task/" + taskId)
+    if (taskId !== '-1') {
+      fetch('/api/task/' + taskId)
         .then(response => {
           return response.json();
         })
@@ -68,13 +68,13 @@ const EditTaskForm = ({ match }) => {
 
     timeTask._id = taskId !== -1 ? taskId : null;
 
-    fetch("/api/task", {
-      method: "POST",
+    fetch('/api/task', {
+      method: 'POST',
       body: JSON.stringify(timeTask),
-      headers: { "Content-Type": "application/json" }
+      headers: { 'Content-Type': 'application/json' }
     }).then(e => {
       if (e.status === 200) {
-        setMessage("Successfully created/updated a Task");
+        setMessage('Successfully created/updated a Task');
         setIsLoading(false);
       }
     });
