@@ -1,4 +1,4 @@
-let FileSaver = require('file-saver');
+const FileSaver = require('file-saver');
 
 export default class JsonWriter {
   write(taskBundle) {

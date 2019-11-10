@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 import TaskEditFormContext from '../../TaskEditFormContext';
-import PropType from "prop-types";
-import "./TextArea.css";
+import PropType from 'prop-types';
+import './TextArea.css';
 
 const TextArea = () => {
   const context = useContext(TaskEditFormContext);

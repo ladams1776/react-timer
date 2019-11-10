@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import "./TaskListView.css";
-import Task from "./Task/Task";
-import ControlButtons from "./ControlButtons";
-import * as useTaskEditContext from "~/useTaskEditContext";
+import React, { useEffect } from 'react';
+import './TaskListView.css';
+import Task from './Task/Task';
+import ControlButtons from './ControlButtons';
+import * as useTaskEditContext from '~/useTaskEditContext';
 
 const TaskListView = () => {
   const { tasks, updateTasks } = useTaskEditContext();

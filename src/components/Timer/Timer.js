@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
-import ms from "pretty-ms";
-import "./Timer.css";
-import TaskEditFormContext from "../../TaskEditFormContext";
+import React, { useState, useContext } from 'react';
+import ms from 'pretty-ms';
+import './Timer.css';
+import TaskEditFormContext from '../../TaskEditFormContext';
 
 const Timer = () => {
   const context = useContext(TaskEditFormContext);
@@ -12,11 +12,11 @@ const Timer = () => {
 
   const startTimer = () => {
     setIsOn(true);
-    let timeOffset = Date.now() - time;
+    const timeOffset = Date.now() - time;
     setTimer(setInterval(() => updateTime(Date.now() - timeOffset), 1));
   };
 
-  const stopTimer = e => {
+  const stopTimer = () => {
     setIsOn(false);
     clearInterval(timer);
     updateTime(time);
