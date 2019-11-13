@@ -2,14 +2,14 @@
 // @TODO: Then we want to control when to display the other 2 buttons
 // @TODO: Based on if there are any tasks. So we might be pushing Tasks into the context as well and
 // @TODO: Creating a new context or adding to the existing one.
-import React from "react";
-import { NavLink } from "react-router-dom";
-import FileSaver from "file-saver";
-import "./TaskListView.css";
-import JsonWriter from "./JsonWriter";
-import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import FileSaver from 'file-saver';
+import './TaskListView.css';
+import JsonWriter from './JsonWriter';
+import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
 
-import { getFormattedDate } from "../../utils/DateFormat";
+import { getFormattedDate } from '../../utils/DateFormat';
 
 export const updateTaskToWriteToFile = (task, projects) => {
   const taskWithProject = { ...task };
@@ -28,15 +28,10 @@ export const updateTaskToWriteToFile = (task, projects) => {
 
 export const writeJsonFile = taskBundle => {
   let json = JSON.stringify(taskBundle);
-  let blob = new Blob([json], { type: "application/json" });
+  let blob = new Blob([json], { type: 'application/json' });
 
   let fileName =
-    new Date().toString() +
-    "_" +
-    taskBundle.description +
-    "_" +
-    taskBundle.time +
-    ".json";
+    new Date().toString() + '_' + taskBundle.description + '_' + taskBundle.time + '.json';
 
   FileSaver.saveAs(blob, fileName);
 };
@@ -49,12 +44,10 @@ const ControlButtons = () => {
     const dateFormatted = getFormattedDate(date);
 
     const timeTask = {
-      date: dateFormatted
+      date: dateFormatted,
     };
 
-    const tasksWithProjects = tasks.map(task =>
-      updateTaskToWriteToFile(task, projects)
-    );
+    const tasksWithProjects = tasks.map(task => updateTaskToWriteToFile(task, projects));
 
     timeTask.WorkUnit = tasksWithProjects;
 
@@ -64,29 +57,22 @@ const ControlButtons = () => {
   /**
    * Setting a timeout when reloading, because I think the reloading is happening too fast.
    */
-  const handleDelete = e => {
+  const handleDelete = async e => {
     e.preventDefault();
-    fetch(`/api/tasks`, {
-      method: "DELETE"
-    })
-      .then(response => response.json())
-      .then(
-        setTimeout(() => {
-          updateTasks([]);
-          setMessage("Successfully deleted all tasks");
-        }, 500)
-      );
+    await fetch(`/api/tasks`, {
+      method: 'DELETE',
+    }).then(response => {
+      setTimeout(() => {
+        updateTasks([]);
+        setMessage('Successfully deleted all tasks');
+      }, 500);
+    });
   };
 
   return (
     <div className="task-list__header">
       {!tasks?.length || (
-        <button
-          type="a"
-          className="button-delete"
-          onClick={handleDelete}
-          data-test-id="btn-delete"
-        >
+        <button type="a" className="button-delete" onClick={handleDelete} data-test-id="btn-delete">
           <span className="glyphicon glyphicon-remove mr-5px"></span>
           Delete
         </button>
@@ -102,7 +88,7 @@ const ControlButtons = () => {
           Download
         </button>
       )}
-      <NavLink to={"/task/-1"} className="button-add" data-test-id="btn-new">
+      <NavLink to={'/task/-1'} className="button-add" data-test-id="btn-new">
         <span className="glyphicon glyphicon-plus mr-5px" />
         New Task
       </NavLink>
