@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
-import PropType from "prop-types";
-import DropDown from "../../components/DropDown/DropDown";
-import Timer from "../../components/Timer/Timer";
-import TextArea from "../../components/TextArea/TextArea";
-import ReactLoading from "react-loading";
-import { getFormattedDate } from "../../utils/DateFormat";
-import "./EditTaskForm.css";
+import React, { useEffect, useState } from 'react';
+import useTaskEditContext from './useTaskEditContext';
+import PropType from 'prop-types';
+import DropDown from '../../components/DropDown/DropDown';
+import Timer from '../../components/Timer/Timer';
+import TextArea from '../../components/TextArea/TextArea';
+import ReactLoading from 'react-loading';
+import { getFormattedDate } from '../../utils/DateFormat';
+import './EditTaskForm.css';
 
 const EditTaskForm = ({ match }) => {
   const {
@@ -17,7 +17,7 @@ const EditTaskForm = ({ match }) => {
     updateDescription,
     selectedProject,
     updateDropDown,
-    projects
+    projects,
   } = useTaskEditContext();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -28,8 +28,8 @@ const EditTaskForm = ({ match }) => {
   useEffect(() => {
     setIsLoading(true);
 
-    if (taskId !== "-1") {
-      fetch("/api/task/" + taskId)
+    if (taskId !== '-1') {
+      fetch('/api/task/' + taskId)
         .then(response => {
           return response.json();
         })
@@ -61,20 +61,20 @@ const EditTaskForm = ({ match }) => {
         {
           time: time,
           contractId: dropDownSelection.key,
-          description: description
-        }
-      ]
+          description: description,
+        },
+      ],
     };
 
     timeTask._id = taskId !== -1 ? taskId : null;
 
-    fetch("/api/task", {
-      method: "POST",
+    fetch('/api/task', {
+      method: 'POST',
       body: JSON.stringify(timeTask),
-      headers: { "Content-Type": "application/json" }
+      headers: { 'Content-Type': 'application/json' },
     }).then(e => {
       if (e.status === 200) {
-        setMessage("Successfully created/updated a Task");
+        setMessage('Successfully created/updated a Task');
         setIsLoading(false);
       }
     });
@@ -95,11 +95,7 @@ const EditTaskForm = ({ match }) => {
           <TextArea />
           <DropDown />
           <Timer taskId={taskId} />
-          <input
-            className="form-submit f-r mt-4em"
-            type="submit"
-            value="Submit"
-          />
+          <input className="form-submit f-r mt-4em" type="submit" value="Submit" />
         </form>
       )}
     </div>
@@ -115,7 +111,7 @@ EditTaskForm.PropType = {
   updateDescription: PropType.func.isRequired,
   selectedProject: PropType.number.isRequired,
   updateDropDown: PropType.func.isRequired,
-  projects: PropType.array.isRequired
+  projects: PropType.array.isRequired,
 };
 
 export default EditTaskForm;
