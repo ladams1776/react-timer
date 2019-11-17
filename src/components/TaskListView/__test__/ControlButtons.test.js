@@ -4,8 +4,10 @@ import * as useTaskEditContext from '../../../Form/EditTask/useTaskEditContext';
 import chai from 'chai';
 import SinonChai from 'sinon-chai';
 import ControlButtons, { updateTaskToWriteToFile } from '../ControlButtons';
+import { getFormattedDate } from '../../../utils/DateFormat';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import TaskFormatter from '../TaskFormatter';
 
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
@@ -115,6 +117,37 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         expect(context.setMessage).toHaveBeenCalledTimes(1);
       });
     });
-    //@TODO: Figure out how to test the Delete, Download, and Save buttons
+
+    describe('#_handleDownload', () => {
+      it('should prepare "tasks" into a format', () => {
+        // mock the promise return
+        // global.fetch = jest.fn().mockImplementation(() => Promise.resolve());
+
+        const mockTaskFormatter = TaskFormatter.mock.instances[0];
+
+        // const context = {
+        //   setMessage: jest.fn().mockImplementation(),
+        //   projects: [],
+        //   tasks: [{ id: 'id' }, { id: 'id' }],
+        //   updateTasks: jest.fn().mockImplementation(),
+        // };
+
+        // stuber.returns(context);
+
+        // const wrapper = shallow(<ControlButtons />);
+        // const response = wrapper
+        //   .find("[data-test-id='btn-download']")
+        //   .props()
+        //   .onClick();
+
+        // jest.runTimersToTime(1000); // speed up the time on the setTimeout
+
+        // expect(context.updateTasks).toHaveBeenCalledTimes(1);
+        // expect(context.updateTasks).toHaveBeenCalledWith([]);
+        // expect(context.setMessage).toHaveBeenCalledWith('Successfully deleted all tasks');
+        // expect(context.setMessage).toHaveBeenCalledTimes(1);
+      });
+    });
+    //@TODO: Figure out how to test the Download, and Save buttons
   });
 });

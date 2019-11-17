@@ -7,34 +7,10 @@ import { NavLink } from 'react-router-dom';
 import FileSaver from 'file-saver';
 import './TaskListView.css';
 import JsonWriter from './JsonWriter';
+import TaskFormatter from './TaskFormatter';
 import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
 
 import { getFormattedDate } from '../../utils/DateFormat';
-
-export const updateTaskToWriteToFile = (task, projects) => {
-  const taskWithProject = { ...task };
-
-  taskWithProject.time = (task.time / 1000 / 60 / 60).toFixed(2);
-
-  projects.forEach(project => {
-    if (taskWithProject.contractId === project.key) {
-      taskWithProject.contract = project.contract;
-      taskWithProject.customer = project.customer;
-    }
-  });
-
-  return taskWithProject;
-};
-
-export const writeJsonFile = taskBundle => {
-  let json = JSON.stringify(taskBundle);
-  let blob = new Blob([json], { type: 'application/json' });
-
-  let fileName =
-    new Date().toString() + '_' + taskBundle.description + '_' + taskBundle.time + '.json';
-
-  FileSaver.saveAs(blob, fileName);
-};
 
 const ControlButtons = () => {
   const { setMessage, projects, tasks, updateTasks } = useTaskEditContext();
@@ -47,11 +23,9 @@ const ControlButtons = () => {
       date: dateFormatted,
     };
 
-    const tasksWithProjects = tasks.map(task => updateTaskToWriteToFile(task, projects));
+    timeTask.WorkUnit = tasks.map(task => TaskFormatter.format(task, projects));
 
-    timeTask.WorkUnit = tasksWithProjects;
-
-    writeJsonFile(timeTask);
+    JsonWriter.write(timeTask);
   };
 
   /**
