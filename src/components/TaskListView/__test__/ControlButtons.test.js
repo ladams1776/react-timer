@@ -85,8 +85,8 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       });
     });
 
-    describe('eeee', () => {
-      it('dddd', async () => {
+    describe('#_handleDelete', () => {
+      it('should should display FlashMessage and empty the "tasks" array', async () => {
         // mock the promise return
         global.fetch = jest.fn().mockImplementation(() => Promise.resolve());
 
