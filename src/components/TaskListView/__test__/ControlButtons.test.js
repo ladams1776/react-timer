@@ -4,20 +4,22 @@ import * as useTaskEditContext from '../../../Form/EditTask/useTaskEditContext';
 import chai from 'chai';
 import SinonChai from 'sinon-chai';
 import ControlButtons, { updateTaskToWriteToFile } from '../ControlButtons';
+import TaskFormatter from '../TaskFormatter';
 import { getFormattedDate } from '../../../utils/DateFormat';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import TaskFormatter from '../TaskFormatter';
 
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
+
+jest.mock('../__mocks__/task-formatter');
 
 describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => {
   let stuber;
 
   stuber = sinon.stub(useTaskEditContext, 'default');
 
-  describe.only('ControlButtons', () => {
+  describe('ControlButtons', () => {
     it('should display ControlButtons with all 3 buttons when we `haveTask`', () => {
       const context = {
         setMessage: sinon.spy(),
@@ -118,30 +120,28 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       });
     });
 
+    //@TODO: 11/17/2019 - LEFT OFF HERE
     describe('#_handleDownload', () => {
+      beforeEach(() => {
+        TaskFormatter.mockClear();
+      });
       it('should prepare "tasks" into a format', () => {
         // mock the promise return
         // global.fetch = jest.fn().mockImplementation(() => Promise.resolve());
-
-        const mockTaskFormatter = TaskFormatter.mock.instances[0];
-
+        // const mockTaskFormatter = TaskFormatter.mock.instances[0];
         // const context = {
         //   setMessage: jest.fn().mockImplementation(),
         //   projects: [],
         //   tasks: [{ id: 'id' }, { id: 'id' }],
         //   updateTasks: jest.fn().mockImplementation(),
         // };
-
         // stuber.returns(context);
-
         // const wrapper = shallow(<ControlButtons />);
         // const response = wrapper
         //   .find("[data-test-id='btn-download']")
         //   .props()
         //   .onClick();
-
         // jest.runTimersToTime(1000); // speed up the time on the setTimeout
-
         // expect(context.updateTasks).toHaveBeenCalledTimes(1);
         // expect(context.updateTasks).toHaveBeenCalledWith([]);
         // expect(context.setMessage).toHaveBeenCalledWith('Successfully deleted all tasks');

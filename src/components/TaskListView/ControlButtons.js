@@ -4,10 +4,9 @@
 // @TODO: Creating a new context or adding to the existing one.
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import FileSaver from 'file-saver';
 import './TaskListView.css';
 import JsonWriter from './JsonWriter';
-import TaskFormatter from './TaskFormatter';
+import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
 
 import { getFormattedDate } from '../../utils/DateFormat';
@@ -23,7 +22,7 @@ const ControlButtons = () => {
       date: dateFormatted,
     };
 
-    timeTask.WorkUnit = tasks.map(task => TaskFormatter.format(task, projects));
+    timeTask.WorkUnit = tasks.map(task => formatTimeContractAndCustomer(task, projects));
 
     JsonWriter.write(timeTask);
   };
