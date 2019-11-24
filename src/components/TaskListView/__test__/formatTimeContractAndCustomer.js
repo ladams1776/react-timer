@@ -1,5 +1,5 @@
 import formatTimeContractAndCustomer from '../formatTimeContractAndCustomer';
-import displayMsInFractionalHourFormat from '../../../utils/DisplayTime';
+import displayMsInFractionalHourFormat from '../../../utils/displayMsInFractionalHourFormat';
 
 describe('src/components/TaskListView/__test__/formatTimeContractAndCustomer.test.js', () => {
   describe('formatTimeContractAndCustomer', () => {

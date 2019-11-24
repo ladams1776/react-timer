@@ -5,7 +5,7 @@ import DropDown from '../../components/DropDown/DropDown';
 import Timer from '../../components/Timer/Timer';
 import TextArea from '../../components/TextArea/TextArea';
 import ReactLoading from 'react-loading';
-import { getFormattedDate } from '../../utils/DateFormat';
+import getFormattedDate from '../../utils/getFormattedDate';
 import './EditTaskForm.css';
 
 const EditTaskForm = ({ match }) => {

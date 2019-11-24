@@ -1,4 +1,4 @@
-import displayMsInFractionalHourFormat from '../../utils/DisplayTime';
+import displayMsInFractionalHourFormat from '../../utils/displayMsInFractionalHourFormat';
 
 /**
  * Take a task object and an array of projects and reformat the
@@ -14,8 +14,12 @@ export default function formatTimeContractAndCustomer(task, projects) {
 
   taskWithProject.time = displayMsInFractionalHourFormat(task.time);
 
-  taskWithProject.contract = projects[task.contractId].contractId;
-  taskWithProject.customer = projects[task.contractId].customer;
+  projects.forEach(project => {
+    if (taskWithProject.contractId === project.key) {
+      taskWithProject.contract = project.contract;
+      taskWithProject.customer = project.customer;
+    }
+  });
 
   return taskWithProject;
 }
