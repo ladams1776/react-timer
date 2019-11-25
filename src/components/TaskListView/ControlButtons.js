@@ -5,18 +5,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './TaskListView.css';
-import JsonWriter from './JsonWriter';
+import writeJsonFile from './writeJsonFile';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
-
-import { getFormattedDate } from '../../utils/DateFormat';
+import getFormattedDate from '../../utils/getFormattedDate';
 
 const ControlButtons = () => {
   const { setMessage, projects, tasks, updateTasks } = useTaskEditContext();
 
   const handleDownload = () => {
-    const date = new Date();
-    const dateFormatted = getFormattedDate(date);
+    const dateFormatted = getFormattedDate(new Date());
 
     const timeTask = {
       date: dateFormatted,
@@ -24,7 +22,7 @@ const ControlButtons = () => {
 
     timeTask.WorkUnit = tasks.map(task => formatTimeContractAndCustomer(task, projects));
 
-    JsonWriter.write(timeTask);
+    writeJsonFile(timeTask);
   };
 
   /**
