@@ -54,6 +54,9 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       expect(wrapper.find("[data-test-id='btn-new']")).toHaveLength(1);
     });
 
+    //@TODO: This is now broken because we have 2 `then`'s and we need to
+    // figure out how to mock 2 in a row and cause the response we see in
+    // the actual handleDelete method
     describe('#_handleDelete', () => {
       it('should should display FlashMessage and empty the "tasks" array', async () => {
         // mock the promise return

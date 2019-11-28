@@ -32,12 +32,14 @@ const ControlButtons = () => {
     e.preventDefault();
     await fetch(`/api/tasks`, {
       method: 'DELETE',
-    }).then(response => {
-      setTimeout(() => {
-        updateTasks([]);
-        setMessage('Successfully deleted all tasks');
-      }, 500);
-    });
+    })
+      .then(response => response.json())
+      .then(
+        setTimeout(() => {
+          updateTasks([]);
+          setMessage('Successfully deleted all tasks');
+        }, 500)
+      );
   };
 
   return (
