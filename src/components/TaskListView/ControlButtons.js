@@ -5,7 +5,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './TaskListView.css';
-import writeJsonFile from './writeJsonFile';
+import { writeJsonFile } from './writeJsonFile';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
 import getFormattedDate from '../../utils/getFormattedDate';
