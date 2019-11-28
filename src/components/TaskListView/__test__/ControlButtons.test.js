@@ -12,8 +12,6 @@ import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
 
-jest.mock('../__mocks__/task-formatter');
-
 describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => {
   let stuber;
 
@@ -25,7 +23,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
   });
 
   describe('ControlButtons', () => {
-    it('should display ControlButtons with all 3 buttons when we `haveTask`', () => {
+    it('should display ControlButtons with all 3 buttons when we have Tasks', () => {
       const context = {
         setMessage: sinon.spy(),
         projects: [],
@@ -41,7 +39,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       expect(wrapper.find("[data-test-id='btn-new']")).toHaveLength(1);
     });
 
-    it("should display ControlButtons with all only new button when we don't `haveTask`", () => {
+    it("should display ControlButtons with only new button when we don't have a task", () => {
       const context = {
         setMessage: sinon.spy(),
         projects: [],
