@@ -6,7 +6,6 @@
  */
 export default function getFormattedDate(taskDate) {
   const existingDate = new Date(taskDate);
-  console.log(existingDate, 'existingDatre');
   const dateFormatted =
     existingDate.getMonth() +
     1 +
