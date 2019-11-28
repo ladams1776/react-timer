@@ -1,8 +1,6 @@
+import { writeJsonFile } from '../writeJsonFile';
 // must import the way library is being imported in function
 var FileSaver = require('file-saver');
-import writeJsonFile from '../writeJsonFile';
-import formatTimeContractAndCustomer from '../formatTimeContractAndCustomer';
-import displayMsInFractionalHourFormat from '../../../utils/displayMsInFractionalHourFormat';
 
 describe('src/components/TaskListView/__test__/writeJsonFile.test.js', () => {
   /**
