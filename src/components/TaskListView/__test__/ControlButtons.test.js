@@ -54,13 +54,13 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       expect(wrapper.find("[data-test-id='btn-new']")).toHaveLength(1);
     });
 
-    //@TODO: This is now broken because we have 2 `then`'s and we need to
-    // figure out how to mock 2 in a row and cause the response we see in
-    // the actual handleDelete method
     describe('#_handleDelete', () => {
       it('should should display FlashMessage and empty the "tasks" array', async () => {
-        // mock the promise return
-        global.fetch = jest.fn().mockImplementation(() => Promise.resolve());
+        global.fetch = jest
+          .fn()
+          .mockImplementation(() =>
+            Promise.resolve({ json: jest.fn().mockImplementation(() => Promise.resolve()) })
+          );
 
         jest.useFakeTimers(); // Need to declare we are using setTimeout
 
@@ -74,12 +74,13 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         stuber.returns(context);
 
         const wrapper = shallow(<ControlButtons />);
+
         const response = await wrapper
           .find("[data-test-id='btn-delete']")
           .props()
           .onClick({ preventDefault: jest.fn().mockImplementation() });
 
-        jest.runTimersToTime(1000); // speed up the time on the setTimeout
+        jest.runTimersToTime(500); // speed up the time on the setTimeout
 
         expect(context.updateTasks).toHaveBeenCalledTimes(1);
         expect(context.updateTasks).toHaveBeenCalledWith([]);
@@ -135,6 +136,6 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         expect(writeJsonFileSpy).toHaveBeenCalledWith(expectTaskBundle);
       });
     });
-    //@TODO: Figure out how to test the Download, and Save buttons
+    //@TODO: New Task
   });
 });
