@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
-import "./FlashMessage.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
+import './FlashMessage.css';
 
 //@TODO: Probably want to just drop this component at the top of the app
 //@TODO: Then use `ref` and `context` to toggle it on and off and then
@@ -12,12 +12,8 @@ const FlashMessage = () => {
 
   return (
     !message || (
-      <div
-        className="flash-message"
-        onClick={() => setMessage(null)}
-        data-test-id="flash-message"
-      >
-        {message}
+      <div className="flash-message" onClick={() => setMessage(null)}>
+        <div test-data-id="flash-message">{message}</div>
         <div className="flash-message-cancel">X</div>
       </div>
     )
@@ -26,7 +22,7 @@ const FlashMessage = () => {
 
 FlashMessage.propTypes = {
   message: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 export default FlashMessage;
