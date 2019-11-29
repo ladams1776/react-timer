@@ -1,7 +1,7 @@
 import displayMsInFractionalHourFormat from '../DisplayTime';
 
-describe('src/utils/__test__/DisplayTime.test.js', () => {
-  describe('displayTime', () => {
+describe('src/utils/__test__/displayMsInFractionalHourFormat.test.js', () => {
+  describe('displayMsInFractionalHourFormat', () => {
     it('should format the time correctly - 1 hr', () => {
       const tenSeconds = displayMsInFractionalHourFormat(3600000);
       expect(tenSeconds).toEqual('1.00');
