@@ -10,6 +10,7 @@ import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
 
+//@TODO: Test the clicking functionality
 describe('src/components/FlashMessage/__test__/FlashMessage.test.js', () => {
   describe('FlashMessage', () => {
     let wrapper;
