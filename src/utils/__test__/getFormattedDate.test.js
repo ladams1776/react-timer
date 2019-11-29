@@ -1,4 +1,4 @@
-import getFormattedDate from '../DateFormat';
+import getFormattedDate from '../getFormattedDate';
 
 describe('src/utils/__test__/DateFormat.test.js', () => {
   describe('getFormattedDate', () => {
