@@ -2,9 +2,9 @@ import React from 'react';
 import sinon from 'sinon';
 import chai from 'chai';
 import SinonChai from 'sinon-chai';
-import * as useTaskEditContext from '../../../Form/EditTask/useTaskEditContext';
+import * as useTaskEditContext from '../../../../Form/EditTask/useTaskEditContext';
 import Task from '../Task';
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -15,24 +15,20 @@ describe('src/components/Task/__test__/Task.test.js', () => {
   stuber = sinon.stub(useTaskEditContext, 'default');
 
   describe('Task', () => {
-    it('should display Task with ', () => {
+    it('should display Task when one is present', () => {
       const context = {
-        selectedProject: 0,
-        projects: [],
+        projects: [{ label: 'label of project' }],
       };
+
       stuber.returns(context);
-      const wrapper = mount(
-        <Task task={{ _id: '', description: 'this is a wonderful description' }} />
+
+      const wrapper = shallow(
+        <Task
+          task={{ _id: 'taskId', contractId: 0, description: 'this is a wonderful description' }}
+        />
       );
-      const preventDefaultSpy = sinon.spy();
 
-      wrapper
-        .find("[data-test-id='delete-task-button']")
-        .props()
-        .onClick({ preventDefault: preventDefaultSpy });
-
-      expect(preventDefaultSpy).toHaveBeenCalled();
+      expect(wrapper).toBeTruthy();
     });
-    //@TODO: Must figure out how to test the `fetch` pieces.
   });
 });
