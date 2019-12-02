@@ -1,4 +1,4 @@
-import displayMsInFractionalHourFormat from '../DisplayTime';
+import displayMsInFractionalHourFormat from '../displayMsInFractionalHourFormat';
 
 describe('src/utils/__test__/displayMsInFractionalHourFormat.test.js', () => {
   describe('displayMsInFractionalHourFormat', () => {
