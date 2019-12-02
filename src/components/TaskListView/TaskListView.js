@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
-import "./TaskListView.css";
-import Task from "./Task/Task";
-import ControlButtons from "./ControlButtons";
-import useTaskEditContext from "../../Form/EditTask/useTaskEditContext";
+import React, { useEffect } from 'react';
+import './TaskListView.css';
+import Task from './Task/Task';
+import ControlButtons from './ControlButtons';
+import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
 
 const TaskListView = () => {
-  const { tasks, updateTasks } = useTaskEditContext();
+  const { projects, tasks, updateTasks, setMessage } = useTaskEditContext();
+
+  useEffect(() => {
+    if (!projects.length) {
+      setMessage('Please add Projects to ');
+    }
+  }, [projects, setMessage]);
 
   useEffect(() => {
     fetch(`/api/tasks`)
