@@ -10,7 +10,7 @@ const TaskListView = () => {
 
   useEffect(() => {
     if (!projects.length) {
-      setMessage('Please add Projects to ');
+      setMessage('Please add Projects to the dropdownDefinition.json file');
     }
   }, [projects, setMessage]);
 

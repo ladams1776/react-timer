@@ -8,6 +8,8 @@ import ReactLoading from 'react-loading';
 import getFormattedDate from '../../utils/getFormattedDate';
 import './EditTaskForm.css';
 
+//@TODO: Need to test this
+//@TODO: Split the form into 2 forms (Edit and New)
 const EditTaskForm = ({ match }) => {
   const {
     time,
