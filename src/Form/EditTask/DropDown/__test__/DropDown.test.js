@@ -10,7 +10,7 @@ import Adapter from "enzyme-adapter-react-16";
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
 
-describe("src/components/DropDown/__test__/DropDown.test.js", () => {
+describe("src/Form/EditTask/DropDown/__test__/DropDown.test.js", () => {
   let wrapper;
   let stuber;
   stuber = sinon.stub(useTaskEditContext, "default");
