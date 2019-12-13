@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import TaskEditFormContext from "../../../TaskEditFormContext";
+import useTaskEditContext from "../useTaskEditContext";
 import PropType from "prop-types";
 import "./TextArea.css";
 
 const TextArea = () => {
-  const context = useContext(TaskEditFormContext);
-  const { description, updateDescription } = context;
+  const { description, updateDescription } = useTaskEditContext();
 
   return (
     <div className="text-area">
