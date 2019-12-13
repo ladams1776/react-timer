@@ -7,6 +7,9 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
+    "chai": "^4.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "file-saver": "^2.0.2",
     "mongoose": "^5.8.0",
     "nodemon": "^2.0.1",
@@ -16,7 +19,9 @@
     "react-loading": "^2.0.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
-    "serialize-javascript": "^2.1.2"
+    "serialize-javascript": "^2.1.2",
+    "sinon": "^7.5.0",
+    "sinon-chai": "^3.3.0"
   },
   "proxy": "http://localhost:3001",
   "scripts": {
