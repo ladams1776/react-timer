@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import ms from "pretty-ms";
+import TaskEditFormContext from "../../../TaskEditFormContext";
 import "./Timer.css";
-import TaskEditFormContext from "../../TaskEditFormContext";
 
 const Timer = () => {
   const context = useContext(TaskEditFormContext);

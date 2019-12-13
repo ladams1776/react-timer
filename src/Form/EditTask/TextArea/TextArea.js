@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import TaskEditFormContext from '../../TaskEditFormContext';
+import TaskEditFormContext from "../../../TaskEditFormContext";
 import PropType from "prop-types";
 import "./TextArea.css";
 
@@ -20,8 +20,12 @@ const TextArea = () => {
         maxLength="254"
         rows="5"
         cols="52"
+        data-test-id="description-textarea"
       />
-      <span className="text-area__character-length">
+      <span
+        className="text-area__character-length"
+        data-test-id="description-count"
+      >
         {description && description.length} character(s)
       </span>
     </div>
