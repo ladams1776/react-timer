@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './TaskListView.css';
 import Task from './Task/Task';
 import ControlButtons from './ControlButtons';
-import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
+import useTaskEditContext from '../../Form/EditTask/hooks/useTaskEditContext';
 
 //@TODO: Need test for this component.
 const TaskListView = () => {
@@ -25,7 +25,7 @@ const TaskListView = () => {
         }
       })
       .catch(e => {}); //@TODO: Flash the error
-  }, [tasks]);
+  }, [updateTasks, tasks]);
 
   return (
     <div>
