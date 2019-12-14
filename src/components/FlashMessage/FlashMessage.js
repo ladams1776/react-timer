@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
+import useTaskEditContext from '../../Form/EditTask/hooks/useTaskEditContext';
 import './FlashMessage.css';
 
 //@TODO: Probably want to just drop this component at the top of the app
@@ -22,7 +22,7 @@ const FlashMessage = () => {
 
 FlashMessage.propTypes = {
   message: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default FlashMessage;

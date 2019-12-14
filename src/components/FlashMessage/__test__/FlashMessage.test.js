@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import * as useTaskEditContext from '../../../Form/EditTask/useTaskEditContext';
+import * as useTaskEditContext from '../../../Form/EditTask/hooks/useTaskEditContext';
 import chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
 import FlashMessage from '../FlashMessage';
@@ -19,7 +19,7 @@ describe('src/components/FlashMessage/__test__/FlashMessage.test.js', () => {
 
     it('should not show FlashMessage when no message is present.', () => {
       context = {
-        message: undefined,
+        message: undefined
       };
       stuber.returns(context);
 
@@ -29,12 +29,14 @@ describe('src/components/FlashMessage/__test__/FlashMessage.test.js', () => {
 
     it('should show FlashMessage when message has a value.', () => {
       context = {
-        message: 'Success',
+        message: 'Success'
       };
       stuber.returns(context);
 
       wrapper = mount(<FlashMessage />);
-      expect(wrapper.find("[test-data-id='flash-message']").text()).to.be.eql('Success');
+      expect(wrapper.find("[test-data-id='flash-message']").text()).to.be.eql(
+        'Success'
+      );
     });
   });
 });
