@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import * as useTaskEditContext from '../../../Form/EditTask/useTaskEditContext';
+import * as useTaskEditContext from '../../../Form/EditTask/hooks/useTaskEditContext';
 import chai from 'chai';
 import SinonChai from 'sinon-chai';
 import ControlButtons from '../ControlButtons';
@@ -27,7 +27,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       const context = {
         setMessage: sinon.spy(),
         projects: [],
-        tasks: [{ id: 'id' }, { id: 'id' }],
+        tasks: [{ id: 'id' }, { id: 'id' }]
       };
 
       stuber.returns(context);
@@ -43,7 +43,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       const context = {
         setMessage: sinon.spy(),
         projects: [],
-        tasks: [],
+        tasks: []
       };
       stuber.returns(context);
 
@@ -59,7 +59,9 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         global.fetch = jest
           .fn()
           .mockImplementation(() =>
-            Promise.resolve({ json: jest.fn().mockImplementation(() => Promise.resolve()) })
+            Promise.resolve({
+              json: jest.fn().mockImplementation(() => Promise.resolve())
+            })
           );
 
         jest.useFakeTimers(); // Need to declare we are using setTimeout
@@ -68,7 +70,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
           setMessage: jest.fn().mockImplementation(),
           projects: [],
           tasks: [{ id: 'id' }, { id: 'id' }],
-          updateTasks: jest.fn().mockImplementation(),
+          updateTasks: jest.fn().mockImplementation()
         };
 
         stuber.returns(context);
@@ -84,7 +86,9 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
 
         expect(context.updateTasks).toHaveBeenCalledTimes(1);
         expect(context.updateTasks).toHaveBeenCalledWith([]);
-        expect(context.setMessage).toHaveBeenCalledWith('Successfully deleted all tasks');
+        expect(context.setMessage).toHaveBeenCalledWith(
+          'Successfully deleted all tasks'
+        );
         expect(context.setMessage).toHaveBeenCalledTimes(1);
       });
     });
@@ -93,31 +97,31 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       const task = {
         time: 10000,
         contractId: 'project Id',
-        description: 'task description becomes file name',
+        description: 'task description becomes file name'
       };
 
       const projects = [
         {
           key: 'project Id',
           contract: 'contract for the project',
-          customer: 'customer for the contract',
+          customer: 'customer for the contract'
         },
         {
           key: 'project Id2',
           contract: 'contract for the project2',
-          customer: 'customer for the contract2',
+          customer: 'customer for the contract2'
         },
         {
           key: 'project Id3',
           contract: 'contract for the project3',
-          customer: 'customer for the contract3',
-        },
+          customer: 'customer for the contract3'
+        }
       ];
 
       it('should prepare "tasks" into a format', () => {
         const context = {
           projects,
-          tasks: [task],
+          tasks: [task]
         };
         stuber.returns(context);
 
@@ -130,7 +134,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
 
         const expectTaskBundle = {
           date: getFormattedDate(new Date()),
-          WorkUnit: [formatTimeContractAndCustomer(context.tasks[0], projects)],
+          WorkUnit: [formatTimeContractAndCustomer(context.tasks[0], projects)]
         };
 
         expect(writeJsonFileSpy).toHaveBeenCalledWith(expectTaskBundle);

@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import './TaskListView.css';
 import { writeJsonFile } from './writeJsonFile';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
-import useTaskEditContext from '../../Form/EditTask/useTaskEditContext';
+import useTaskEditContext from '../../Form/EditTask/hooks/useTaskEditContext';
 import getFormattedDate from '../../utils/getFormattedDate';
 
 const ControlButtons = () => {
@@ -17,10 +17,12 @@ const ControlButtons = () => {
     const dateFormatted = getFormattedDate(new Date());
 
     const timeTask = {
-      date: dateFormatted,
+      date: dateFormatted
     };
 
-    timeTask.WorkUnit = tasks.map(task => formatTimeContractAndCustomer(task, projects));
+    timeTask.WorkUnit = tasks.map(task =>
+      formatTimeContractAndCustomer(task, projects)
+    );
 
     writeJsonFile(timeTask);
   };
@@ -31,7 +33,7 @@ const ControlButtons = () => {
   const handleDelete = async e => {
     e.preventDefault();
     await fetch(`/api/tasks`, {
-      method: 'DELETE',
+      method: 'DELETE'
     })
       .then(response => response.json())
       .then(
@@ -45,7 +47,12 @@ const ControlButtons = () => {
   return (
     <div className="task-list__header">
       {!tasks?.length || (
-        <button type="a" className="button-delete" onClick={handleDelete} data-test-id="btn-delete">
+        <button
+          type="a"
+          className="button-delete"
+          onClick={handleDelete}
+          data-test-id="btn-delete"
+        >
           <span className="glyphicon glyphicon-remove mr-5px"></span>
           Delete
         </button>
