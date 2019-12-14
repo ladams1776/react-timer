@@ -2,7 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import DeleteTaskButton from './DeleteTaskButton';
-import useTaskEditContext from '../../../Form/EditTask/useTaskEditContext';
+import useTaskEditContext from '../../../Form/EditTask/hooks/useTaskEditContext';
 import getFormattedDate from '../../../utils/getFormattedDate';
 import './Task.css';
 
@@ -23,8 +23,13 @@ const Task = ({ task }) => {
               );
             })}
           </div>
-          <span className="task-item__customer">{projects[task.contractId].label}</span> -{' '}
-          <span className="task-item__contract">{projects[task.contractId].customer}</span>
+          <span className="task-item__customer">
+            {projects[task.contractId].label}
+          </span>{' '}
+          -{' '}
+          <span className="task-item__contract">
+            {projects[task.contractId].customer}
+          </span>
         </div>
 
         <span className="task-item__time">
@@ -34,7 +39,9 @@ const Task = ({ task }) => {
             {(task.time / 1000 / 60 / 60).toFixed(2)}
             <DeleteTaskButton taskId={taskId} />
           </span>
-          <span className="task-item__item-date">{getFormattedDate(task.date)}</span>
+          <span className="task-item__item-date">
+            {getFormattedDate(task.date)}
+          </span>
         </span>
       </NavLink>
     </li>
@@ -42,7 +49,7 @@ const Task = ({ task }) => {
 };
 
 Task.PropType = {
-  task: PropType.object,
+  task: PropType.object
 };
 
 export default Task;
