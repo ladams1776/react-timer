@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import PropType from "prop-types";
-import ReactLoading from "react-loading";
-import getFormattedDate from "../../utils/getFormattedDate";
-import DropDown from "./DropDown/DropDown";
-import Timer from "./Timer/Timer";
-import TextArea from "./TextArea/TextArea";
-import useTaskEditContext from "./useTaskEditContext";
-import "./EditTaskForm.css";
+import React, { useEffect, useState } from 'react';
+import PropType from 'prop-types';
+import ReactLoading from 'react-loading';
+import getFormattedDate from '../../utils/getFormattedDate';
+import DropDown from './DropDown/DropDown';
+import Timer from './Timer/Timer';
+import TextArea from './TextArea/TextArea';
+import useTaskEditContext from './hooks/useTaskEditContext';
+import './EditTaskForm.css';
 
 //@TODO: Need to test this
 //@TODO: Split the form into 2 forms (Edit and New)
@@ -30,8 +30,8 @@ const EditTaskForm = ({ match }) => {
   useEffect(() => {
     setIsLoading(true);
 
-    if (taskId !== "-1") {
-      fetch("/api/task/" + taskId)
+    if (taskId !== '-1') {
+      fetch('/api/task/' + taskId)
         .then(response => {
           return response.json();
         })
@@ -42,7 +42,7 @@ const EditTaskForm = ({ match }) => {
           setIsLoading(false);
         });
     } else {
-      updateDescription("");
+      updateDescription('');
       updateTime(0);
       updateDropDown(0);
       setIsLoading(false);
@@ -70,13 +70,13 @@ const EditTaskForm = ({ match }) => {
 
     timeTask._id = taskId !== -1 ? taskId : null;
 
-    fetch("/api/task", {
-      method: "POST",
+    fetch('/api/task', {
+      method: 'POST',
       body: JSON.stringify(timeTask),
-      headers: { "Content-Type": "application/json" }
+      headers: { 'Content-Type': 'application/json' }
     }).then(e => {
       if (e.status === 200) {
-        setMessage("Successfully created/updated a Task");
+        setMessage('Successfully created/updated a Task');
         setIsLoading(false);
       }
     });
