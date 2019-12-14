@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { TaskEditFormProvider } from "./TaskEditFormContext";
+import React, { useState } from 'react';
+import { TaskEditFormProvider } from './Form/EditTask/TaskEditFormContext';
 
-import { Route, HashRouter } from "react-router-dom";
-import TaskListView from "./components/TaskListView/TaskListView";
-import EditTaskForm from "./Form/EditTask/EditTaskForm";
-import FlashMessage from "./components/FlashMessage/FlashMessage";
+import { Route, HashRouter } from 'react-router-dom';
+import TaskListView from './components/TaskListView/TaskListView';
+import EditTaskForm from './Form/EditTask/EditTaskForm';
+import FlashMessage from './components/FlashMessage/FlashMessage';
 
 const Main = ({ dropDownListContracts }) => {
   const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState({});
   const [taskId, setTaskId] = useState(-1);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const [time, setTime] = useState(0);
   const [selectedProject, setSelectedProject] = useState(0);
   const [message, setMessage] = useState(null);

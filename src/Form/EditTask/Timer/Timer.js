@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
-import ms from "pretty-ms";
-import TaskEditFormContext from "../../../TaskEditFormContext";
-import "./Timer.css";
+import React, { useState } from 'react';
+import ms from 'pretty-ms';
+import useTaskEditContext from '../hooks/useTaskEditContext';
+import './Timer.css';
 
 const Timer = () => {
-  const context = useContext(TaskEditFormContext);
-  const { time, updateTime } = context;
-
+  const { time, updateTime } = useTaskEditContext();
   const [isOn, setIsOn] = useState(false);
   const [timer, setTimer] = useState(null);
 
