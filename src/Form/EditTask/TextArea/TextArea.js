@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import useTaskEditContext from "../useTaskEditContext";
-import PropType from "prop-types";
-import "./TextArea.css";
+import React from 'react';
+import useTaskEditContext from '../useTaskEditContext';
+import PropType from 'prop-types';
+import './TextArea.css';
 
 const TextArea = () => {
   const { description, updateDescription } = useTaskEditContext();
