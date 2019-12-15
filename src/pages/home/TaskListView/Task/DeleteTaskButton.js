@@ -1,5 +1,5 @@
 import React from 'react';
-import useTaskEditContext from 'Form/EditTask/hooks/useTaskEditContext';
+import useTaskEditContext from 'pages/CreateOrEditTask/Form/EditTask/hooks/useTaskEditContext';
 
 const DeleteTaskButton = ({ taskId }) => {
   const { setMessage } = useTaskEditContext();

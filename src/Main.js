@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { TaskEditFormProvider } from './Form/EditTask/TaskEditFormContext';
-
 import { Route, HashRouter } from 'react-router-dom';
-import IndexPage from './pages/home/IndexPage';
-import EditTaskForm from './Form/EditTask/EditTaskForm';
-import FlashMessage from './components/FlashMessage/FlashMessage';
+import { TaskEditFormProvider } from 'pages/CreateOrEditTask/Form/EditTask/TaskEditFormContext';
+import CreateOrEditTaskPage from 'pages/CreateOrEditTask/CreateOrEditTaskPage';
+import IndexPage from 'pages/home/IndexPage';
+import FlashMessage from 'components/FlashMessage/FlashMessage';
 
 const Main = ({ dropDownListContracts }) => {
   const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState({});
   const [taskId, setTaskId] = useState(-1);
   const [description, setDescription] = useState('');
   const [time, setTime] = useState(0);
@@ -53,7 +51,7 @@ const Main = ({ dropDownListContracts }) => {
             <Route
               exact
               path="/task/:id"
-              render={props => <EditTaskForm {...props} />}
+              render={props => <CreateOrEditTaskPage {...props} />}
             />
 
             <Route exact path="/" render={props => <IndexPage {...props} />} />

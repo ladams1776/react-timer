@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import './TaskListView.css';
 import { writeJsonFile } from './writeJsonFile';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
-import useTaskEditContext from 'Form/EditTask/hooks/useTaskEditContext';
+import useTaskEditContext from 'pages/CreateOrEditTask/Form/EditTask/hooks/useTaskEditContext';
 import { getFormattedDate } from 'utils';
 
 const ControlButtons = () => {
