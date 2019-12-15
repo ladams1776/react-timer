@@ -2,8 +2,8 @@ import React from 'react';
 import PropType from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import DeleteTaskButton from './DeleteTaskButton';
-import useTaskEditContext from '../../../Form/EditTask/hooks/useTaskEditContext';
-import getFormattedDate from '../../../utils/getFormattedDate';
+import useTaskEditContext from 'Form/EditTask/hooks/useTaskEditContext';
+import { getFormattedDate } from 'utils';
 import './Task.css';
 
 const Task = ({ task }) => {

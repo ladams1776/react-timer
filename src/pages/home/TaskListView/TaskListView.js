@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
+import useTaskEditContext from 'Form/EditTask/hooks/useTaskEditContext';
 import './TaskListView.css';
 import Task from './Task/Task';
 import ControlButtons from './ControlButtons';
-import useTaskEditContext from '../../Form/EditTask/hooks/useTaskEditContext';
 
 //@TODO: Need test for this component.
 const TaskListView = () => {

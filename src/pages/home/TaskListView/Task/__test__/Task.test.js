@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import chai from 'chai';
 import SinonChai from 'sinon-chai';
-import * as useTaskEditContext from '../../../../Form/EditTask/hooks/useTaskEditContext';
+import * as useTaskEditContext from 'Form/EditTask/hooks/useTaskEditContext';
 import Task from '../Task';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

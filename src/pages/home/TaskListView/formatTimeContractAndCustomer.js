@@ -1,4 +1,4 @@
-import displayMsInFractionalHourFormat from '../../utils/displayMsInFractionalHourFormat';
+import { displayMsInFractionalHourFormat } from 'utils';
 
 /**
  * Take a task object and an array of projects and reformat the
