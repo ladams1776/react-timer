@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropType from 'prop-types';
 import ReactLoading from 'react-loading';
-import getFormattedDate from '../../utils/getFormattedDate';
+import getFormattedDate from 'utils/getFormattedDate';
 import DropDown from './DropDown/DropDown';
 import Timer from './Timer/Timer';
 import TextArea from './TextArea/TextArea';
