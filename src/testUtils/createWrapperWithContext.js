@@ -1,6 +1,12 @@
-import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import * as useTaskEditContext from '../Form/EditTask/hooks/useTaskEditContext';
+import Enzyme, { shallow } from 'enzyme';
+import chai from 'chai';
+import SinonChai from 'sinon-chai';
+import Adapter from 'enzyme-adapter-react-16';
+import * as useTaskEditContext from 'Form/EditTask/hooks/useTaskEditContext';
+
+Enzyme.configure({ adapter: new Adapter() });
+chai.use(SinonChai);
 
 let stuber;
 stuber = sinon.stub(useTaskEditContext, 'default');
