@@ -1,14 +1,8 @@
 import React from 'react';
 import sinon from 'sinon';
-import { findByTestId, createWrapperWithContext } from '../../../../testUtils';
-import chai, { expect } from 'chai';
-import SinonChai from 'sinon-chai';
+import { expect } from 'chai';
+import { findByTestId, createWrapperWithContext } from 'testUtils';
 import DropDown from '../DropDown';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({ adapter: new Adapter() });
-chai.use(SinonChai);
 
 describe('src/Form/EditTask/DropDown/__test__/DropDown.test.js', () => {
   let wrapper;
@@ -23,6 +17,7 @@ describe('src/Form/EditTask/DropDown/__test__/DropDown.test.js', () => {
       wrapper = createWrapperWithContext(<DropDown />, context);
 
       const props = wrapper.find(findByTestId('select')).props();
+
       expect(props.children).to.have.lengthOf(0);
     });
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import sinon from 'sinon';
-import * as useTaskEditContext from '../../../Form/EditTask/hooks/useTaskEditContext';
 import chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
 import FlashMessage from '../FlashMessage';
+import * as useTaskEditContext from 'pages/CreateOrEditTask/Form/EditTask/hooks/useTaskEditContext';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 

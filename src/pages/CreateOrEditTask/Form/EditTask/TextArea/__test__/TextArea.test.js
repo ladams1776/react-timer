@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import { findByTestId, createWrapperWithContext } from '../../../../testUtils';
+import { findByTestId, createWrapperWithContext } from 'testUtils';
 import chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
 import TextArea from '../TextArea';
