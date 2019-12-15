@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TaskEditFormProvider } from './Form/EditTask/TaskEditFormContext';
 
 import { Route, HashRouter } from 'react-router-dom';
-import TaskListView from './components/TaskListView/TaskListView';
+import IndexPage from './pages/home/IndexPage';
 import EditTaskForm from './Form/EditTask/EditTaskForm';
 import FlashMessage from './components/FlashMessage/FlashMessage';
 
@@ -56,11 +56,7 @@ const Main = ({ dropDownListContracts }) => {
               render={props => <EditTaskForm {...props} />}
             />
 
-            <Route
-              exact
-              path="/"
-              render={props => <TaskListView {...props} />}
-            />
+            <Route exact path="/" render={props => <IndexPage {...props} />} />
           </div>
         </div>
       </HashRouter>
