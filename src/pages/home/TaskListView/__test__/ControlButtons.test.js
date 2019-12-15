@@ -1,21 +1,14 @@
 import React from 'react';
 import sinon from 'sinon';
-import * as useTaskEditContext from '../../../Form/EditTask/hooks/useTaskEditContext';
-import chai from 'chai';
-import SinonChai from 'sinon-chai';
+import { getFormattedDate } from 'utils';
+import { createWrapperWithContext } from 'testUtils';
 import ControlButtons from '../ControlButtons';
 import formatTimeContractAndCustomer from '../formatTimeContractAndCustomer';
-import getFormattedDate from '../../../utils/getFormattedDate';
 import * as writeJsonFile from '../writeJsonFile';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-chai.use(SinonChai);
 
 describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => {
-  let stuber;
+  let wrapper;
 
-  stuber = sinon.stub(useTaskEditContext, 'default');
   const writeJsonFileSpy = jest.spyOn(writeJsonFile, 'writeJsonFile');
 
   beforeEach(() => {
@@ -30,9 +23,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         tasks: [{ id: 'id' }, { id: 'id' }]
       };
 
-      stuber.returns(context);
-
-      const wrapper = shallow(<ControlButtons />);
+      wrapper = createWrapperWithContext(<ControlButtons />, context);
 
       expect(wrapper.find("[data-test-id='btn-download']")).toHaveLength(1);
       expect(wrapper.find("[data-test-id='btn-delete']")).toHaveLength(1);
@@ -45,9 +36,8 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         projects: [],
         tasks: []
       };
-      stuber.returns(context);
 
-      const wrapper = shallow(<ControlButtons />);
+      wrapper = createWrapperWithContext(<ControlButtons />, context);
 
       expect(wrapper.find("[data-test-id='btn-download']")).toHaveLength(0);
       expect(wrapper.find("[data-test-id='btn-delete']")).toHaveLength(0);
@@ -56,13 +46,11 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
 
     describe('#_handleDelete', () => {
       it('should should display FlashMessage and empty the "tasks" array', async () => {
-        global.fetch = jest
-          .fn()
-          .mockImplementation(() =>
-            Promise.resolve({
-              json: jest.fn().mockImplementation(() => Promise.resolve())
-            })
-          );
+        global.fetch = jest.fn().mockImplementation(() =>
+          Promise.resolve({
+            json: jest.fn().mockImplementation(() => Promise.resolve())
+          })
+        );
 
         jest.useFakeTimers(); // Need to declare we are using setTimeout
 
@@ -73,9 +61,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
           updateTasks: jest.fn().mockImplementation()
         };
 
-        stuber.returns(context);
-
-        const wrapper = shallow(<ControlButtons />);
+        wrapper = createWrapperWithContext(<ControlButtons />, context);
 
         const response = await wrapper
           .find("[data-test-id='btn-delete']")
@@ -123,9 +109,8 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
           projects,
           tasks: [task]
         };
-        stuber.returns(context);
 
-        const wrapper = shallow(<ControlButtons />);
+        wrapper = createWrapperWithContext(<ControlButtons />, context);
 
         const response = wrapper
           .find("[data-test-id='btn-download']")
@@ -140,6 +125,6 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         expect(writeJsonFileSpy).toHaveBeenCalledWith(expectTaskBundle);
       });
     });
-    //@TODO: New Task
+    //@TODO: Test New Task
   });
 });
