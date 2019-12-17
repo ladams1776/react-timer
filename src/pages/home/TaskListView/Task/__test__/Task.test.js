@@ -1,35 +1,26 @@
-import React from 'react';
-import sinon from 'sinon';
-import chai from 'chai';
-import SinonChai from 'sinon-chai';
-import * as useTaskEditContext from 'pages/CreateOrEditTask/Form/EditTask/hooks/useTaskEditContext';
-import Task from '../Task';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import React from "react";
+import sinon from "sinon";
+import { createWrapperWithContext } from "testUtils";
+import Task from "../Task";
 
-Enzyme.configure({ adapter: new Adapter() });
-chai.use(SinonChai);
+describe("src/pages/home/TaskListView/Task/__test__/Task.test.js", () => {
+  let wrapper;
 
-describe('src/components/Task/__test__/Task.test.js', () => {
-  let stuber;
-  stuber = sinon.stub(useTaskEditContext, 'default');
-
-  describe('Task', () => {
-    it('should display Task when one is present', () => {
+  describe("Task", () => {
+    it("should display Task when one is present", () => {
       const context = {
-        projects: [{ label: 'label of project' }]
+        projects: [{ label: "label of project" }]
       };
 
-      stuber.returns(context);
-
-      const wrapper = shallow(
+      wrapper = createWrapperWithContext(
         <Task
           task={{
-            _id: 'taskId',
+            _id: "taskId",
             contractId: 0,
-            description: 'this is a wonderful description'
+            description: "this is a wonderful description"
           }}
-        />
+        />,
+        context
       );
 
       expect(wrapper).toBeTruthy();
