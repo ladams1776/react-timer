@@ -12,7 +12,7 @@ describe("src/pages/home/TaskListView/Task/__test__/DeleteTaskButton/__test__/De
           {}
         );
 
-        expect(wrapper.length).toEqual(1);
+        expect(wrapper).toBeTruthy();
       });
 
       describe("#_deleteClick", () => {
