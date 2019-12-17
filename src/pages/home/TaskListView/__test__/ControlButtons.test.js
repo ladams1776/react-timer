@@ -1,33 +1,33 @@
-import React from 'react';
-import sinon from 'sinon';
-import { getFormattedDate } from 'utils';
-import { createWrapperWithContext } from 'testUtils';
-import ControlButtons from '../ControlButtons';
-import formatTimeContractAndCustomer from '../formatTimeContractAndCustomer';
-import * as writeJsonFile from '../writeJsonFile';
+import React from "react";
+import sinon from "sinon";
+import { getFormattedDate } from "utils";
+import { createWrapperWithContext, findByTestId } from "testUtils";
+import ControlButtons from "../ControlButtons";
+import formatTimeContractAndCustomer from "../formatTimeContractAndCustomer";
+import * as writeJsonFile from "../writeJsonFile";
 
-describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => {
+describe("src/components/ControlButtons/__test__/ControlButtons.test.js", () => {
   let wrapper;
 
-  const writeJsonFileSpy = jest.spyOn(writeJsonFile, 'writeJsonFile');
+  const writeJsonFileSpy = jest.spyOn(writeJsonFile, "writeJsonFile");
 
   beforeEach(() => {
     writeJsonFileSpy.mockReset();
   });
 
-  describe('ControlButtons', () => {
-    it('should display ControlButtons with all 3 buttons when we have Tasks', () => {
+  describe("ControlButtons", () => {
+    it("should display ControlButtons with all 3 buttons when we have Tasks", () => {
       const context = {
         setMessage: sinon.spy(),
         projects: [],
-        tasks: [{ id: 'id' }, { id: 'id' }]
+        tasks: [{ id: "id" }, { id: "id" }]
       };
 
       wrapper = createWrapperWithContext(<ControlButtons />, context);
 
-      expect(wrapper.find("[data-test-id='btn-download']")).toHaveLength(1);
-      expect(wrapper.find("[data-test-id='btn-delete']")).toHaveLength(1);
-      expect(wrapper.find("[data-test-id='btn-new']")).toHaveLength(1);
+      expect(wrapper.find(findByTestId("btn-download"))).toHaveLength(1);
+      expect(wrapper.find(findByTestId("btn-delete"))).toHaveLength(1);
+      expect(wrapper.find(findByTestId("btn-new"))).toHaveLength(1);
     });
 
     it("should display ControlButtons with only new button when we don't have a task", () => {
@@ -44,7 +44,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
       expect(wrapper.find("[data-test-id='btn-new']")).toHaveLength(1);
     });
 
-    describe('#_handleDelete', () => {
+    describe("#_handleDelete", () => {
       it('should should display FlashMessage and empty the "tasks" array', async () => {
         global.fetch = jest.fn().mockImplementation(() =>
           Promise.resolve({
@@ -57,7 +57,7 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         const context = {
           setMessage: jest.fn().mockImplementation(),
           projects: [],
-          tasks: [{ id: 'id' }, { id: 'id' }],
+          tasks: [{ id: "id" }, { id: "id" }],
           updateTasks: jest.fn().mockImplementation()
         };
 
@@ -73,34 +73,34 @@ describe('src/components/ControlButtons/__test__/ControlButtons.test.js', () => 
         expect(context.updateTasks).toHaveBeenCalledTimes(1);
         expect(context.updateTasks).toHaveBeenCalledWith([]);
         expect(context.setMessage).toHaveBeenCalledWith(
-          'Successfully deleted all tasks'
+          "Successfully deleted all tasks"
         );
         expect(context.setMessage).toHaveBeenCalledTimes(1);
       });
     });
 
-    describe('#_handleDownload', () => {
+    describe("#_handleDownload", () => {
       const task = {
         time: 10000,
-        contractId: 'project Id',
-        description: 'task description becomes file name'
+        contractId: "project Id",
+        description: "task description becomes file name"
       };
 
       const projects = [
         {
-          key: 'project Id',
-          contract: 'contract for the project',
-          customer: 'customer for the contract'
+          key: "project Id",
+          contract: "contract for the project",
+          customer: "customer for the contract"
         },
         {
-          key: 'project Id2',
-          contract: 'contract for the project2',
-          customer: 'customer for the contract2'
+          key: "project Id2",
+          contract: "contract for the project2",
+          customer: "customer for the contract2"
         },
         {
-          key: 'project Id3',
-          contract: 'contract for the project3',
-          customer: 'customer for the contract3'
+          key: "project Id3",
+          contract: "contract for the project3",
+          customer: "customer for the contract3"
         }
       ];
 
