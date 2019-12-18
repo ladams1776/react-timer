@@ -1,3 +1,11 @@
+### First time running the project?
+1. Will need Mongo
+2. Need to make sure we create 'tasks' db in the Mongo
+3. Pull down the react app
+4. run yarn install to get all the libraries
+5. yarn start in one cli
+6. yarn nodemon server.js in another cli
+
 In order to run the application you will need to run both `yarn start` and `yarn nodemon server.js`
 
 In the project directory, you can run:
