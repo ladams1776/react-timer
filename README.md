@@ -21,6 +21,11 @@ Runs the backend portion of the application.
 
 You might have to tweak `server.js`, and what mongodb server it is pointing at. Currently just setting it based on the port Kitematic spins up for a docker mongodb instance
 
+
+### Dockerhub image is located at: https://hub.docker.com/r/ladams1776/mongo-react-timer
+It will have everything ready to go right out of the box. You just need to run the 2 commands in two seperate command prompts.
+
+
 ### What I want to do
 
 -- Adjust all existing tests that use a context to use helper
