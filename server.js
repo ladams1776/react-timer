@@ -1,29 +1,29 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const mongoose = require('mongoose');
-const TaskSchema = require('./src/models/TaskSchema');
+const mongoose = require("mongoose");
+const TaskSchema = require("./src/models/TaskSchema");
 
-mongoose.connect('mongodb://127.0.0.1:27017/tasks');
+mongoose.connect("mongodb://127.0.0.1:32768/tasks");
 mongoose.Promise = global.Promise;
 mongoose.connection
-  .on('connected', () => {
-    console.log(`Mongoose connection open on mongodb://127.0.0.1:27017/tasks`);
+  .on("connected", () => {
+    console.log(`Mongoose connection open on mongodb://127.0.0.1:32768/tasks`);
     app.listen(3001, function() {
-      console.log('Backend has started on port 3001');
+      console.log("Backend has started on port 3001");
     });
   })
-  .on('error', err => {
+  .on("error", err => {
     console.log(`Connection error: ${err.message}`);
   });
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header("Access-Control-Allow-Origin", "*");
   res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header('Access-Control-Allow-Methods', '*');
+  res.header("Access-Control-Allow-Methods", "*");
 
   next();
 });
@@ -31,8 +31,8 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/api/tasks', function(req, res) {
-  var Task = mongoose.model('tasks', TaskSchema);
+app.get("/api/tasks", function(req, res) {
+  var Task = mongoose.model("tasks", TaskSchema);
 
   Task.find({}, function(err, docs) {
     if (err) {
@@ -44,9 +44,9 @@ app.get('/api/tasks', function(req, res) {
   });
 });
 
-app.get('/api/task/:id', function(req, res) {
+app.get("/api/task/:id", function(req, res) {
   const taskId = req.params.id;
-  var Task = mongoose.model('tasks', TaskSchema);
+  var Task = mongoose.model("tasks", TaskSchema);
   Task.findById(taskId, function(err, docs) {
     if (!err) {
       res.jsonp(docs);
@@ -54,10 +54,10 @@ app.get('/api/task/:id', function(req, res) {
   });
 });
 
-app.post('/api/task', function(req, res) {
-  const TaskModel = mongoose.model('tasks', TaskSchema);
+app.post("/api/task", function(req, res) {
+  const TaskModel = mongoose.model("tasks", TaskSchema);
 
-  if (req.body._id !== '-1') {
+  if (req.body._id !== "-1") {
     TaskModel.findById(req.body._id, function(err, foundTask) {
       if (err) throw err;
       foundTask.date = req.body.date;
@@ -84,8 +84,8 @@ app.post('/api/task', function(req, res) {
   }
 });
 
-app.delete('/api/task/:id', function(req, res) {
-  const TaskModel = mongoose.model('tasks', TaskSchema);
+app.delete("/api/task/:id", function(req, res) {
+  const TaskModel = mongoose.model("tasks", TaskSchema);
   const id = req.params.id;
 
   TaskModel.deleteOne({ _id: id }, function(e) {
@@ -94,8 +94,8 @@ app.delete('/api/task/:id', function(req, res) {
   });
 });
 
-app.delete('/api/tasks', function(req, res) {
-  const TaskModel = mongoose.model('tasks', TaskSchema);
+app.delete("/api/tasks", function(req, res) {
+  const TaskModel = mongoose.model("tasks", TaskSchema);
   TaskModel.deleteMany({}, function(e) {
     if (e) throw e;
   });
