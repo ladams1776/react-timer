@@ -1,3 +1,11 @@
+### First time running the project?
+1. Will need Mongo
+2. Need to make sure we create 'tasks' db in the Mongo
+3. Pull down the react app
+4. run yarn install to get all the libraries
+5. yarn start in one cli
+6. yarn nodemon server.js in another cli
+
 In order to run the application you will need to run both `yarn start` and `yarn nodemon server.js`
 
 In the project directory, you can run:
@@ -12,6 +20,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Runs the backend portion of the application.
 
 You might have to tweak `server.js`, and what mongodb server it is pointing at. Currently just setting it based on the port Kitematic spins up for a docker mongodb instance
+
+
+### Dockerhub image is located at: https://hub.docker.com/r/ladams1776/mongo-react-timer
+It will have everything ready to go right out of the box. You just need to run the 2 commands in two seperate command prompts.
+
 
 ### What I want to do
 
