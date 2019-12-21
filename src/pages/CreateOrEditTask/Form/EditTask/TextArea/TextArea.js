@@ -1,7 +1,7 @@
-import React from 'react';
-import useTaskEditContext from '../hooks/useTaskEditContext';
-import PropType from 'prop-types';
-import './TextArea.css';
+import React from "react";
+import useTaskEditContext from "../hooks/useTaskEditContext";
+import PropType from "prop-types";
+import "./TextArea.css";
 
 const TextArea = () => {
   const { description, updateDescription } = useTaskEditContext();
@@ -16,7 +16,7 @@ const TextArea = () => {
         name="description"
         value={description}
         onChange={e => updateDescription(e.target.value)}
-        maxLength="254"
+        // maxLength="254"
         rows="5"
         cols="52"
         data-test-id="description-textarea"
