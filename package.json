@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev":"(yarn nodemon server.js) & yarn start"
+    "dev":"(yarn nodemon server/server.js) & yarn start"
   },
   "eslintConfig": {
     "extends": "react-app"

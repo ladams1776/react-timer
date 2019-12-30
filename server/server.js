@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
-const TaskSchema = require("./src/models/TaskSchema");
+const TaskSchema = require("./models/TaskSchema");
 
 mongoose.connect("mongodb://127.0.0.1:27017/tasks");
 mongoose.Promise = global.Promise;

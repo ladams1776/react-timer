@@ -1,0 +1,13 @@
+{
+  "name": "react-timer-server",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "mongoose": "^5.8.0",    
+    "pretty-ms": "^5.1.0",
+    "serialize-javascript": "^2.1.2"
+  },
+  "scripts": {
+    "server": "nodemon server.js"
+  }
+}
