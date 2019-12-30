@@ -5,6 +5,7 @@
   "dependencies": {
     "mongoose": "^5.8.0",    
     "pretty-ms": "^5.1.0",
+    "nodemon": "^2.0.1",
     "serialize-javascript": "^2.1.2"
   },
   "scripts": {
