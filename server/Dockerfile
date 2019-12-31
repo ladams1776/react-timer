@@ -11,7 +11,7 @@ WORKDIR /app
 COPY . .
 RUN npm install
 
-FROM node 
+FROM node
 EXPOSE 3001
 WORKDIR /app
 COPY --from=builder /app .
