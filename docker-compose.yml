@@ -1,0 +1,26 @@
+version: "2"
+services:
+    db: 
+        restart: always
+        image: "mongo:latest"
+        container_name: "mongodb"
+        volumes:
+            - ./data/db:/var/micro-data/mongodb/data/db
+        ports:
+            - 27017:27017
+    backend:
+        container_name: server
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        ports:
+            - "3001:3001"
+        image: ladams1776/server
+    frontend:
+        container_name: client
+        build: 
+            context: .
+            dockerfile: dockerfile
+        ports:
+            - "3000:3000"
+        image: ladams1776/client
