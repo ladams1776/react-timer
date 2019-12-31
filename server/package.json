@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "mongoose": "^5.8.0",    
+    "express": "^4.17.1",
+    "mongoose": "^5.8.0",
+    "nodemon": "^2.0.2",
     "pretty-ms": "^5.1.0",
-    "nodemon": "^2.0.1",
     "serialize-javascript": "^2.1.2"
   },
   "scripts": {
