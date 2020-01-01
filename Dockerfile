@@ -17,4 +17,4 @@ EXPOSE 3000
 WORKDIR /app
 COPY --from=builder /app .
 ENV DEBIAN_FRONTEND teletype
-CMD ["yarn", "run", "dev"]
+CMD ["yarn", "run", "start"] 

@@ -23,7 +23,7 @@
     "sinon": "^7.5.0",
     "sinon-chai": "^3.3.0"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "http://172.20.0.1:3001",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
