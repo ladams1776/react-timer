@@ -4,20 +4,39 @@ const app = express();
 const mongoose = require("mongoose");
 const TaskSchema = require("./models/TaskSchema");
 
-mongoose.connect("mongodb://172.20.0.4:27017/tasks");
+
+const config = {
+  db: "mongodb://172.28.1.4:27017/tasks",
+  opts: {
+    reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+    reconnectInterval: 500, // Reconnect every 500ms
+  }
+}
+
+const connectWithRetry = () => {
+  console.log('MongoDB connection with retry')
+  return mongoose.connect(config.db, config.opts)
+}
+
+mongoose.connect(config.db, config.opts)
+  .catch(error => setTimeout(connectWithRetry, 5000));
+
 mongoose.Promise = global.Promise;
+
 mongoose.connection
   .on("connected", () => {
-    console.log(`Mongoose connection open on mongodb://172.20.0.4:27017/tasks`);
-    app.listen(3001, function() {
-      console.log("Backend has started on port 3001");
-    });
+    console.log(`Mongoose connection open on mongodb://172.28.1.4:27017/tasks`);
   })
   .on("error", err => {
     console.log(`Connection error: ${err.message}`);
   });
 
-app.use(function(req, res, next) {
+app.listen(3001, function () {
+  console.log("Backend has started on port 3001");
+});
+
+
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -31,10 +50,10 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/api/tasks", function(req, res) {
+app.get("/api/tasks", function (req, res) {
   var Task = mongoose.model("tasks", TaskSchema);
 
-  Task.find({}, function(err, docs) {
+  Task.find({}, function (err, docs) {
     if (err) {
       //@todo: have not tested for this scenario yet.
       res.jsonp([{ isSuccess: 0 }]);
@@ -44,27 +63,27 @@ app.get("/api/tasks", function(req, res) {
   });
 });
 
-app.get("/api/task/:id", function(req, res) {
+app.get("/api/task/:id", function (req, res) {
   const taskId = req.params.id;
   var Task = mongoose.model("tasks", TaskSchema);
-  Task.findById(taskId, function(err, docs) {
+  Task.findById(taskId, function (err, docs) {
     if (!err) {
       res.jsonp(docs);
     }
   });
 });
 
-app.post("/api/task", function(req, res) {
+app.post("/api/task", function (req, res) {
   const TaskModel = mongoose.model("tasks", TaskSchema);
 
   if (req.body._id !== "-1") {
-    TaskModel.findById(req.body._id, function(err, foundTask) {
+    TaskModel.findById(req.body._id, function (err, foundTask) {
       if (err) throw err;
       foundTask.date = req.body.date;
       foundTask.description = req.body.WorkUnit[0].description;
       foundTask.contractId = req.body.WorkUnit[0].contractId;
       foundTask.time = req.body.WorkUnit[0].time;
-      foundTask.save(function(err) {
+      foundTask.save(function (err) {
         if (err) throw err;
         res.jsonp({ isSuccess: true });
       });
@@ -77,26 +96,26 @@ app.post("/api/task", function(req, res) {
     m.contractId = req.body.WorkUnit[0].contractId;
     m.time = req.body.WorkUnit[0].time;
 
-    m.save(function(err) {
+    m.save(function (err) {
       if (err) throw err;
       res.jsonp({ isSuccess: true });
     });
   }
 });
 
-app.delete("/api/task/:id", function(req, res) {
+app.delete("/api/task/:id", function (req, res) {
   const TaskModel = mongoose.model("tasks", TaskSchema);
   const id = req.params.id;
 
-  TaskModel.deleteOne({ _id: id }, function(e) {
+  TaskModel.deleteOne({ _id: id }, function (e) {
     if (e) throw e;
     res.jsonp({ taskId: id, isSuccess: true });
   });
 });
 
-app.delete("/api/tasks", function(req, res) {
+app.delete("/api/tasks", function (req, res) {
   const TaskModel = mongoose.model("tasks", TaskSchema);
-  TaskModel.deleteMany({}, function(e) {
+  TaskModel.deleteMany({}, function (e) {
     if (e) throw e;
   });
 });
