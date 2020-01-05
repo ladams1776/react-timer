@@ -8,25 +8,16 @@ const TextArea = () => {
 
   return (
     <div className="text-area">
-      <label className="text-area__label" htmlFor="description">
-        Description
-      </label>
       <textarea
         className="text-area__description"
         name="description"
         value={description}
         onChange={e => updateDescription(e.target.value)}
         // maxLength="254"
-        rows="5"
-        cols="52"
+        rows="2"
+        cols="50"
         data-test-id="description-textarea"
       />
-      <span
-        className="text-area__character-length"
-        data-test-id="description-count"
-      >
-        {description && description.length} character(s)
-      </span>
     </div>
   );
 };

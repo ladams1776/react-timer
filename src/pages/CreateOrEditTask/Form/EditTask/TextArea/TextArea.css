@@ -2,18 +2,18 @@ textarea {
     resize: none;
 }
 .text-area {
-    background-color:  #d8d8d8b3;
+    background-color:
+    #d8d8d8b3;
     border-radius: 4px;
     padding: 2em;
-}
-
-
-.text-area__label {
-    display: block;
-    margin: auto;
-}
-
-.text-area__character-length {
-    display: block;
-    text-align: right;
+    flex: content;
+        flex-grow: 1;
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    height: 200px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-top: 1em;
+    height: 192px;
 }
