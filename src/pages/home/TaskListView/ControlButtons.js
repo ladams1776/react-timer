@@ -4,11 +4,11 @@
 // @TODO: Creating a new context or adding to the existing one.
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './TaskListView.css';
 import { writeJsonFile } from './writeJsonFile';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 import useTaskEditContext from 'pages/CreateOrEditTask/Form/EditTask/hooks/useTaskEditContext';
 import { getFormattedDate } from 'utils';
+import './ControlButtons.css';
 
 const ControlButtons = () => {
   const { setMessage, projects, tasks, updateTasks } = useTaskEditContext();

@@ -30,10 +30,10 @@ const TaskListView = () => {
   return (
     <div>
       <ControlButtons />
-      <ul>
+      <ul className="task-list">
         {tasks.map(task => {
           return (
-            <div key={task._id}>
+            <div key={task._id} className="task">
               <Task task={task} />
             </div>
           );
