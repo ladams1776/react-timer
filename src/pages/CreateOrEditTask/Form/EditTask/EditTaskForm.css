@@ -11,27 +11,8 @@
 
 **/
 
-.m-a {
-    margin: auto;
-}
-
-.mt-50px {
-    margin-top: 50px;
-}
-
-.w-500px {
-    width: 500px;
-}
-
-.f-r {
-    float: right;
-}
-
-.mt-4em {
-    margin-top: 4em;
-}
-
-.form-submit {
+.form-submit,
+.form-submit:hover {
     background-color: #2d73f5;
     color: white;
     border-radius: 4px;
@@ -42,11 +23,6 @@
 
 .form-submit:hover {
     background-color: #275ab9;
-    color: white;
-    border-radius: 4px;
-    height: 50px;
-    border: none;
-    width: 75px;
 }
 
 .react-loading {
@@ -73,4 +49,11 @@
 .react-loading div svg {
     width: 100px;
     margin: auto 0;
+}
+
+.sub-form {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 1em;
 }
