@@ -60,13 +60,19 @@ const Timer = () => {
         <div className="timer__display__content">
           {ms(time)} - hours: {(time / 1000 / 60 / 60).toFixed(2)}
         </div>
-      </div>
 
-      <div className="timer__buttons">
-        {startTime}
-        {resumeTime}
-        {stopTime}
-        {resetTime}
+        <div className="timer__buttons">
+          {startTime}
+          {resumeTime}
+          {stopTime}
+          {resetTime}
+          <input
+            className="form-submit f-r mt-4em"
+            type="submit"
+            value="Submit"
+          />
+        </div>
+
       </div>
     </div>
   );

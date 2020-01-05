@@ -96,13 +96,10 @@ const EditTaskForm = ({ match }) => {
       {!isLoading && (
         <form onSubmit={handleSubmit}>
           <TextArea />
-          <DropDown />
-          <Timer taskId={taskId} />
-          <input
-            className="form-submit f-r mt-4em"
-            type="submit"
-            value="Submit"
-          />
+          <div className="sub-form">
+            <DropDown />
+            <Timer taskId={taskId} />
+          </div>
         </form>
       )}
     </div>

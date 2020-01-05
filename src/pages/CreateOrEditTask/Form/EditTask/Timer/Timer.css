@@ -41,6 +41,7 @@
 .timer__display__label {
     display: inline-block;
     margin-left: .5em;
+    margin-top: 10px;
 }
 
 .timer__display__content {
@@ -51,12 +52,15 @@
 .timer__buttons {
     display: flex;
     flex-direction: row-reverse;
-    background: #d8d8d8b3;
+    background:
+    #d8d8d8b3;
     padding: 1em;
     justify-content: space-around;
+    margin-top: 10px;
 }
 
-.timer__start {
+.timer__start,
+.timer__start:hover {
     background-color: #ff6358;
     color: white;
     border-radius: 4px;
@@ -67,16 +71,12 @@
 
 .timer__start:hover {
     background-color: #a8423b;
-    color: white;
-    border-radius: 4px;
-    height: 50px;
-    border: none;
-    width: 75px;
 }
 
 
 
-.timer__reset {
+.timer__reset,
+.timer__reset:hover {
     background-color: #d51923;
     color: white;
     border-radius: 4px;
@@ -87,14 +87,10 @@
 
 .timer__reset:hover {
     background-color: #971118;
-    color: white;
-    border-radius: 4px;
-    height: 50px;
-    border: none;
-    width: 75px;
 }
 
-.timer__resume {
+.timer__resume,
+.timer__resume:hover {
     background-color: #5ec232;
     color: white;
     border-radius: 4px;
@@ -105,15 +101,10 @@
 
 .timer__resume:hover {
     background-color: #458f26;
-    color: white;
-    border-radius: 4px;
-    height: 50px;
-    border: none;
-    width: 75px;
 }
 
-
-.timer__stop {
+.timer__stop,
+.timer__stop:hover {
     background-color: #3e80ed;
     color: white;
     border-radius: 4px;
@@ -124,9 +115,4 @@
 
 .timer__stop:hover {
     background-color: #3468bb;
-    color: white;
-    border-radius: 4px;
-    height: 50px;
-    border: none;
-    width: 75px;
 }
