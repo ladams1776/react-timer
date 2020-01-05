@@ -8,7 +8,6 @@ const TaskSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        maxlength: 254,
         trim: true,
     },
     contractId: {
