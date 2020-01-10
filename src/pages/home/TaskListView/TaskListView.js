@@ -24,20 +24,14 @@ const TaskListView = () => {
           updateTasks(data);
         }
       })
-      .catch(e => {}); //@TODO: Flash the error
+      .catch(e => { }); //@TODO: Flash the error
   }, [updateTasks, tasks]);
 
   return (
     <div>
       <ControlButtons />
       <ul className="task-list">
-        {tasks.map(task => {
-          return (
-            <div key={task._id} className="task">
-              <Task task={task} />
-            </div>
-          );
-        })}
+        {tasks.map(task => <Task task={task} />)}
       </ul>
     </div>
   );

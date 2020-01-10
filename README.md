@@ -22,8 +22,11 @@ Runs the backend portion of the application.
 You might have to tweak `server.js`, and what mongodb server it is pointing at. Currently just setting it based on the port Kitematic spins up for a docker mongodb instance
 
 
-### Dockerhub image is located at: https://hub.docker.com/r/ladams1776/mongo-react-timer
-It will have everything ready to go right out of the box. You just need to run the 2 commands in two seperate command prompts.
+### Docker
+
+Can run `docker-compose up` and run the 3 containers, 1 for client, 1 for server, 1 for db.
+
+Client should be visitable at: http://172.28.1.2:3000
 
 
 ### What I want to do
