@@ -23,9 +23,3 @@
     display: flex;
     justify-content: space-between;
 }
-
-.task-list {
-    flex-direction: inherit;
-    display: flex;
-    flex-wrap: wrap;
-}

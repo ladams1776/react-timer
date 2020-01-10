@@ -31,7 +31,13 @@ const TaskListView = () => {
     <div>
       <ControlButtons />
       <ul className="task-list">
-        {tasks.map(task => <Task task={task} />)}
+        {tasks.map(task =>
+          (
+            <li key={task._id} className="task">
+              <Task task={task} />
+            </li>
+          )
+        )}
       </ul>
     </div>
   );

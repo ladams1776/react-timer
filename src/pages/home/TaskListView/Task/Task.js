@@ -11,7 +11,6 @@ const Task = ({ task }) => {
   const taskId = task._id;
 
   return (
-    <li key={taskId}>
       <NavLink to={'/task/' + taskId} id={taskId} className="task-item">
         <div className="task-item__left">
           <div className="task-item__description">
@@ -44,7 +43,6 @@ const Task = ({ task }) => {
           </span>
         </span>
       </NavLink>
-    </li>
   );
 };
 
