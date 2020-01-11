@@ -94,9 +94,9 @@ const EditTaskForm = ({ match }) => {
       )}
 
       {!isLoading && (
-        <form onSubmit={handleSubmit}>
+        <form className="task-form" onSubmit={handleSubmit}>
           <TextArea />
-          <div className="sub-form">
+          <div className="task-form__control">
             <DropDown />
             <Timer taskId={taskId} />
           </div>

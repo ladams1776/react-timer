@@ -11,6 +11,29 @@
 
 **/
 
+.react-loading {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    display: flex;
+    height: 600px;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.task-form {
+    display: flex;
+}
+
+.task-form__control {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 1em;
+    flex: .25 .15;
+}
+
 .form-submit,
 .form-submit:hover {
     background-color: #2d73f5;
@@ -23,17 +46,6 @@
 
 .form-submit:hover {
     background-color: #275ab9;
-}
-
-.react-loading {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    display: flex;
-    height: 600px;
-    flex-wrap: wrap;
-    align-content: space-around;
 }
 
 .react-loading__content {
@@ -49,11 +61,4 @@
 .react-loading div svg {
     width: 100px;
     margin: auto 0;
-}
-
-.sub-form {
-    display: inline-flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-top: 1em;
 }
