@@ -2,18 +2,23 @@ textarea {
     resize: none;
 }
 .text-area {
-    background-color:
-    #d8d8d8b3;
+    background-color: #d8d8d8b3;
     border-radius: 4px;
     padding: 2em;
     flex: content;
-        flex-grow: 1;
+    /* flex-grow: 1; */
     display: inline-flex;
-    flex-wrap: wrap;
-    flex-grow: 1;
-    height: 200px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-top: 1em;
+    /* flex-wrap: wrap; */
+    /* flex-grow: 1; */
+    /* height: 200px; */
+    /* margin-right: 10px; */
+    /* margin-top: 10px; */
+    /* margin-top: 1em; */
     height: 192px;
+    flex: .75 .85;
+}
+
+.text-area__description {
+    overflow: auto;
+    width: 100%;
 }
