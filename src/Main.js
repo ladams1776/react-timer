@@ -4,6 +4,7 @@ import { TaskEditFormProvider } from 'pages/CreateOrEditTask/Form/EditTask/TaskE
 import CreateOrEditTaskPage from 'pages/CreateOrEditTask/CreateOrEditTaskPage';
 import IndexPage from 'pages/home/IndexPage';
 import FlashMessage from 'components/FlashMessage/FlashMessage';
+import './Main.css';
 
 const Main = ({ dropDownListContracts }) => {
   const [tasks, setTasks] = useState([]);
