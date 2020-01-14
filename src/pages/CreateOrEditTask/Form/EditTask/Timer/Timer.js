@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ms from 'pretty-ms';
 import useTaskEditContext from '../hooks/useTaskEditContext';
+import { displayMsInFractionalHourFormat } from 'utils';
 import './Timer.css';
 
 const Timer = () => {
@@ -13,6 +14,8 @@ const Timer = () => {
     let timeOffset = Date.now() - time;
     setTimer(setInterval(() => updateTime(Date.now() - timeOffset), 1));
   };
+  
+  //@TODO: Need to stop the timer when we leave the comps
 
   const stopTimer = e => {
     setIsOn(false);
@@ -58,7 +61,7 @@ const Timer = () => {
       <div className="timer__display">
         <label className="timer__display__label">Time: </label>
         <div className="timer__display__content">
-          {ms(time)} - hours: {(time / 1000 / 60 / 60).toFixed(2)}
+          {`${ms(time)} - hours: ${displayMsInFractionalHourFormat(time)}`}
         </div>
 
         <div className="timer__buttons">
