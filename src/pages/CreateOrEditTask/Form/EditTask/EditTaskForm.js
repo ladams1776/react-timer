@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import PropType from "prop-types";
 import ReactLoading from "react-loading";
 import getFormattedDate from "utils/getFormattedDate";
@@ -23,32 +23,49 @@ const EditTaskForm = ({ match }) => {
   } = useTaskEditContext();
 
   const [isLoading, setIsLoading] = useState(true);
-
+  const [task, setTask] = useState(null);
   const taskId = match.params.id;
 
   //@TODO: Break this up into multiple hooks
-  //@TODO: Handle if there is a bad response.
   useEffect(() => {
-    setIsLoading(true);
+    const fetchData = async () => {
+      setIsLoading(true);
 
-    if (taskId !== "-1") {
-      fetch("/api/task/" + taskId)
+      await fetch("/api/task/" + taskId)
         .then(response => {
           return response.json();
         })
         .then(task => {
-          updateDescription(task.description);
-          updateTime(task.time);
-          updateDropDown(task.contractId);
-          setIsLoading(false);
-        });
+          updateDescription(task?.description);
+          updateTime(task?.time);
+          updateDropDown(task?.contractId);
+        }).catch(error => {
+          //@TODO: Could add some sort of flag to change oclor to red.
+          setMessage(`Error: ${error}`);
+        })
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  const updateAllFields = useCallback(() => {
+    if (task) {
+      updateDescription(task?.description);
+      updateTime(task?.time);
+      updateDropDown(task?.contractId);
     } else {
       updateDescription("");
       updateTime(0);
       updateDropDown(0);
-      setIsLoading(false);
     }
-  }, []);
+    setIsLoading(false);
+
+  }, [task]);
+
+  useEffect(() => {
+    updateAllFields(task);
+  }, [task, updateAllFields]);
 
   const handleSubmit = event => {
     event.preventDefault();
