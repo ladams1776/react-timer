@@ -43,6 +43,7 @@
 .timer__display__content {
     display: inline-block;
     margin-left: 1em;
+    padding: 1.2em;
 }
 
 .timer__buttons {

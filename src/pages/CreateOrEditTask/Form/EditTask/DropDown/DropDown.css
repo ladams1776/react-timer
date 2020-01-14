@@ -1,16 +1,13 @@
 .drop-down {
-    display: block;
     padding: 1em;
-    background-color:
-    #d8d8d8b3;
+    background-color: #d8d8d8b3;
     border-radius: 4px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .drop-down__title {
     display:block;
     padding-bottom: .5em
-}
-
-.drop-down__select {
-
 }

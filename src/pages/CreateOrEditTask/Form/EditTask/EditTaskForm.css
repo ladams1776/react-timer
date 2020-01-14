@@ -24,14 +24,15 @@
 
 .task-form {
     display: flex;
+    height: 200px;
+    flex-direction: row;
 }
 
 .task-form__control {
-    display: inline-flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    margin-top: 1em;
     flex: .25 .15;
+    display: inline-flex;
+    height: 100%;
 }
 
 .form-submit,
