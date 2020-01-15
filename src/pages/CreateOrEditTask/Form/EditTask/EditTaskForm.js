@@ -25,7 +25,6 @@ function useUpdateForm(taskId) {
     const fetchData = async () => {
       setIsLoading(true);
 
-      console.log('taskId is: ', taskId);
       if (taskId !== -1) {
         await fetch("/api/task/" + taskId)
           .then(response => {
