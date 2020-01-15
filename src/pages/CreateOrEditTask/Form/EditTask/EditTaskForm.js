@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import PropType from "prop-types";
 import ReactLoading from "react-loading";
 import getFormattedDate from "utils/getFormattedDate";
@@ -8,64 +8,64 @@ import TextArea from "./TextArea/TextArea";
 import useTaskEditContext from "./hooks/useTaskEditContext";
 import "./EditTaskForm.css";
 
+
+function useUpdateForm(taskId) {
+  const {
+    updateTime,
+    setMessage,
+    updateDescription,
+    updateDropDown,
+  } = useTaskEditContext();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  //@TODO: Break this up into multiple hooks
+  useEffect(() => {
+
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      console.log('taskId is: ', taskId);
+      if (taskId !== -1) {
+        await fetch("/api/task/" + taskId)
+          .then(response => {
+            return response.json();
+          })
+          .then(task => {
+            updateDescription(task?.description);
+            updateTime(task?.time);
+            updateDropDown(task?.contractId);
+          }).catch(error => {
+            //@TODO: Could add some sort of flag to change oclor to red.
+            setMessage(`Error: ${error}`);
+          })
+      } else {
+        updateDescription("");
+        updateTime(0);
+        updateDropDown(0);
+      }
+
+    }
+
+    fetchData();
+    setIsLoading(false);
+  }, []);
+  return { isLoading, setIsLoading };
+};
+
 //@TODO: Need to test this
 //@TODO: Split the form into 2 forms (Edit and New)
 const EditTaskForm = ({ match }) => {
   const {
     time,
-    updateTime,
     setMessage,
     description,
-    updateDescription,
     selectedProject,
-    updateDropDown,
     projects
   } = useTaskEditContext();
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [task, setTask] = useState(null);
   const taskId = match.params.id;
+  const { isLoading, setIsLoading } = useUpdateForm(taskId);
 
-  //@TODO: Break this up into multiple hooks
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      await fetch("/api/task/" + taskId)
-        .then(response => {
-          return response.json();
-        })
-        .then(task => {
-          updateDescription(task?.description);
-          updateTime(task?.time);
-          updateDropDown(task?.contractId);
-        }).catch(error => {
-          //@TODO: Could add some sort of flag to change oclor to red.
-          setMessage(`Error: ${error}`);
-        })
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  const updateAllFields = useCallback(() => {
-    if (task) {
-      updateDescription(task?.description);
-      updateTime(task?.time);
-      updateDropDown(task?.contractId);
-    } else {
-      updateDescription("");
-      updateTime(0);
-      updateDropDown(0);
-    }
-    setIsLoading(false);
-
-  }, [task]);
-
-  useEffect(() => {
-    updateAllFields(task);
-  }, [task, updateAllFields]);
 
   const handleSubmit = event => {
     event.preventDefault();
