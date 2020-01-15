@@ -4,16 +4,17 @@ import { TaskEditFormProvider } from 'pages/CreateOrEditTask/Form/EditTask/TaskE
 import CreateOrEditTaskPage from 'pages/CreateOrEditTask/CreateOrEditTaskPage';
 import IndexPage from 'pages/home/IndexPage';
 import FlashMessage from 'components/FlashMessage/FlashMessage';
+import { useFetchProjectOptions } from 'hooks/useFetchProjectOptions';
 import './Main.css';
 
-const Main = ({ dropDownListContracts }) => {
+const Main = () => {
   const [tasks, setTasks] = useState([]);
   const [taskId, setTaskId] = useState(-1);
   const [description, setDescription] = useState('');
   const [time, setTime] = useState(0);
   const [selectedProject, setSelectedProject] = useState(0);
   const [message, setMessage] = useState(null);
-  const [projects] = useState(dropDownListContracts);
+  const projects = useFetchProjectOptions();
 
   return (
     <TaskEditFormProvider
