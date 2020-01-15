@@ -13,19 +13,18 @@ const DropDown = () => {
         value={selectedProject}
         onChange={event => updateDropDown(event.currentTarget.selectedIndex)}
       >
-        {!projects ||
-          projects.map(item => {
-            return (
-              <option
-                className="drop-down__option"
-                key={item.key}
-                label={item.label}
-                value={item.value}
-              >
-                {item.label}
-              </option>
-            );
-          })}
+        {projects.map(item => {
+          return (
+            <option
+              className="drop-down__option"
+              key={item.key}
+              label={item.label}
+              value={item.value}
+            >
+              {item.label}
+            </option>
+          );
+        })}
       </select>
     </div>
   );
