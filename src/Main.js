@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
-import { TaskEditFormProvider } from 'pages/CreateOrEditTask/Form/EditTask/TaskEditFormContext';
+import { TaskEditFormProvider } from './TaskEditFormContext';
 import CreateOrEditTaskPage from 'pages/CreateOrEditTask/CreateOrEditTaskPage';
 import IndexPage from 'pages/home/IndexPage';
 import FlashMessage from 'components/FlashMessage/FlashMessage';
-import { useFetchProjectOptions } from 'hooks/useFetchProjectOptions';
+import { useFetchProjectOptions } from 'hooks';
 import './Main.css';
 
 const Main = () => {

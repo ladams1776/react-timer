@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ms from 'pretty-ms';
-import useTaskEditContext from '../hooks/useTaskEditContext';
+import useTaskEditContext from 'hooks/useTaskEditContext';
 import { displayMsInFractionalHourFormat } from 'utils';
 import './Timer.css';
 
@@ -69,13 +69,8 @@ const Timer = () => {
           {resumeTime}
           {stopTime}
           {resetTime}
-          <input
-            className="form-submit f-r mt-4em"
-            type="submit"
-            value="Submit"
-          />
         </div>
-
+        {/* <input name="time" type="hidden" value={time} /> */}
       </div>
     </div>
   );

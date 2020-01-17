@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
 import FlashMessage from '../FlashMessage';
-import * as useTaskEditContext from 'pages/CreateOrEditTask/Form/EditTask/hooks/useTaskEditContext';
+import * as useTaskEditContext from 'hooks/useTaskEditContext';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 

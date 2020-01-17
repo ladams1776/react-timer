@@ -3,7 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import chai from 'chai';
 import SinonChai from 'sinon-chai';
 import Adapter from 'enzyme-adapter-react-16';
-import * as useTaskEditContext from 'pages/CreateOrEditTask/Form/EditTask/hooks/useTaskEditContext';
+import * as useTaskEditContext from 'hooks/useTaskEditContext';
 
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
