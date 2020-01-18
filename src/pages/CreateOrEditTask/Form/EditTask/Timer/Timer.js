@@ -14,7 +14,7 @@ const Timer = () => {
     let timeOffset = Date.now() - time;
     setTimer(setInterval(() => updateTime(Date.now() - timeOffset), 1));
   };
-  
+
   //@TODO: Need to stop the timer when we leave the comps
 
   const stopTimer = e => {
@@ -70,10 +70,11 @@ const Timer = () => {
           {stopTime}
           {resetTime}
         </div>
-        {/* <input name="time" type="hidden" value={time} /> */}
       </div>
     </div>
   );
 };
+
+
 
 export default Timer;
