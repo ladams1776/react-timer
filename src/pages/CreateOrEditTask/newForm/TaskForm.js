@@ -1,26 +1,15 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { Form, Field } from 'react-final-form';
-import useTaskEditContext from "hooks/useTaskEditContext";
+import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
 import Timer from "../Form/EditTask/Timer/Timer";
-import { useFetchProjectOptions } from 'hooks';
+import useFetchTaskById from './useFetchTaskById';
 
-// const onSubmit = values => {
-//     window.alert(JSON.stringify(values, 0, 2));
-// }
-
-const TaskForm = () => {
+const TaskForm = ({ match }) => {
+    const taskId = match?.params?.id || "-1"
     const projectOptions = useFetchProjectOptions();
-    const {
-        time,
-        setMessage,
-        description,
-        selectedProject,
-        projects
-    } = useTaskEditContext();
-    const taskId = -1;
-    // const taskId = match.params.id;
+    const { time, setMessage } = useTaskEditContext();
+    const task = useFetchTaskById(taskId);
 
     const onSubmit = event => {
         const date = new Date();
@@ -37,8 +26,8 @@ const TaskForm = () => {
             ]
         };
 
-        timeTask._id = taskId !== -1 ? taskId : null;
-
+        timeTask._id = taskId;
+        console.log('timeTask is: ', timeTask);
         fetch("/api/task", {
             method: "POST",
             body: JSON.stringify(timeTask),
@@ -48,16 +37,14 @@ const TaskForm = () => {
                 setMessage("Successfully created/updated a Task");
                 // setIsLoading(false);
             }
-        });
+        }).catch(error => console.log(error, 'Error!'));
     };
 
-    // @TODO: LEFT OFF HERE - initializing state, but need to find a way of updating the timer and updating the form - this might have it: https://codesandbox.io/s/oq52p6v96y
     return (
         <Form
             initialValues={{
-                description: 'this is a description',
-                projects: 1,
-                time: 1235
+                description: '',
+                time
             }}
             onSubmit={onSubmit}
             render={({ handleSubmit, form, submitting, pristine, values }) => (
@@ -73,7 +60,7 @@ const TaskForm = () => {
                             {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
                         </Field>
                     </div>
-                    <Field name="time" component={Timer} type="text"/>
+                    <Field name="time" component={Timer} type="hidden" />
                     <button type="submit" disabled={submitting || pristine}>
                         Submit
                 </button>
