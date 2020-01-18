@@ -3,11 +3,11 @@
 const projectOptions = [
     {
         "label": "🐓 Project1",
-        "value": "project-one"
+        "value": 0
     },
     {
         "label": "🐷 Project2",
-        "value": "project-two"
+        "value": 1
     }
 ]
 
