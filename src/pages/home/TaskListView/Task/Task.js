@@ -2,47 +2,47 @@ import React from 'react';
 import PropType from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import DeleteTaskButton from './DeleteTaskButton';
-import useTaskEditContext from 'hooks/useTaskEditContext';
+import { useFetchProjectOptions } from 'hooks';
 import { getFormattedDate } from 'utils';
 import './Task.css';
 
-const Task = ({ task }) => {
-  const { projects } = useTaskEditContext();
-  const taskId = task._id;
+const Task = task => {
+  const { projects } = useFetchProjectOptions();
+  const {_id, description, contractId, time } = task._id;
 
   return (
-      <NavLink to={'/task/' + taskId} id={taskId} className="task-item">
-        <div className="task-item__left">
-          <div className="task-item__description">
-            {task.description.split('\n').map((paragraph, index) => {
-              return (
-                <p key={index} className="task-item__description-item">
-                  {paragraph}
-                </p>
-              );
-            })}
-          </div>
-          <span className="task-item__customer">
-            {projects[task.contractId].label}
-          </span>{' '}
-          -{' '}
-          <span className="task-item__contract">
-            {projects[task.contractId].customer}
-          </span>
+    <NavLink to={'/task/' + taskId} id={taskId} className="task-item">
+      <div className="task-item__left">
+        <div className="task-item__description">
+          {task.description.split('\n').map((paragraph, index) => {
+            return (
+              <p key={index} className="task-item__description-item">
+                {paragraph}
+              </p>
+            );
+          })}
         </div>
-
-        <span className="task-item__time">
-          <span className="task-item__time-label">Time:</span>
-          <span className="task-item__time-value">
-            {' '}
-            {(task.time / 1000 / 60 / 60).toFixed(2)}
-            <DeleteTaskButton taskId={taskId} />
-          </span>
-          <span className="task-item__item-date">
-            {getFormattedDate(task.date)}
-          </span>
+        <span className="task-item__customer">
+          {projects[task.contractId].label}
+        </span>{' '}
+        -{' '}
+        <span className="task-item__contract">
+          {projects[task.contractId].customer}
         </span>
-      </NavLink>
+      </div>
+
+      <span className="task-item__time">
+        <span className="task-item__time-label">Time:</span>
+        <span className="task-item__time-value">
+          {' '}
+          {(task.time / 1000 / 60 / 60).toFixed(2)}
+          <DeleteTaskButton taskId={taskId} />
+        </span>
+        <span className="task-item__item-date">
+          {getFormattedDate(task.date)}
+        </span>
+      </span>
+    </NavLink>
   );
 };
 

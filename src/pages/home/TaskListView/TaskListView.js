@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react';
-import useTaskEditContext from 'hooks/useTaskEditContext';
+import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import './TaskListView.css';
 import Task from './Task/Task';
 import ControlButtons from './ControlButtons';
 
 //@TODO: Need test for this component.
 const TaskListView = () => {
-  const { projects, tasks, updateTasks, setMessage } = useTaskEditContext();
-
-  useEffect(() => {
-    if (!projects.length) {
-      setMessage('Please add Projects to the dropdownDefinition.json file');
-    }
-  }, [projects, setMessage]);
+  const { tasks, updateTasks, setMessage } = useTaskEditContext();
 
   useEffect(() => {
     fetch(`/api/tasks`)
