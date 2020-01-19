@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
+import { useFetchProjectOptions } from 'hooks';
 import { TaskEditFormProvider } from './TaskEditFormContext';
 import CreateOrEditTaskPage from 'pages/CreateOrEditTask/CreateOrEditTaskPage';
 import IndexPage from 'pages/home/IndexPage';
 import FlashMessage from 'components/FlashMessage/FlashMessage';
-import { useFetchProjectOptions } from 'hooks';
 import './Main.css';
 
 const Main = () => {
+  const [task, setTask] = useState({});
   const [tasks, setTasks] = useState([]);
   const [taskId, setTaskId] = useState(-1);
   const [description, setDescription] = useState('');
@@ -26,24 +27,28 @@ const Main = () => {
         message,
         projects,
         tasks,
-        updateTasks: tasks => {
+        task,
+        updateTask: useCallback(task => {
+          setTask(task);
+        }, []),
+        updateTasks: useCallback(tasks => {
           setTasks(tasks);
-        },
-        updateTaskId: taskId => {
+        }, []),
+        updateTaskId: useCallback(taskId => {
           setTaskId(taskId);
-        },
-        updateDescription: description => {
+        }, []),
+        updateDescription: useCallback(description => {
           setDescription(description);
-        },
+        }, []),
         updateTime: time => {
           setTime(time);
         },
-        updateDropDown: selectedProject => {
+        updateDropDown: useCallback(selectedProject => {
           setSelectedProject(selectedProject);
-        },
-        setMessage: isVisible => {
-          setMessage(isVisible);
-        }
+        }, []),
+        setMessage: useCallback(message => {
+          setMessage(message);
+        }, [])
       }}
     >
       <HashRouter>
