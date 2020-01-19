@@ -20,7 +20,7 @@ const TaskForm = ({ match }) => {
             WorkUnit: [
                 {
                     time: event.time,
-                    contractId: event.projects,
+                    contractId: event?.projects || 0,
                     description: event.description
                 }
             ]
