@@ -23,7 +23,7 @@ const TaskForm = () => {
             ]
         };
 
-        timeTask._id = task._id;
+        timeTask._id = task?._id || "-1";
         console.log('timeTask is: ', timeTask);
         fetch("/api/task", {
             method: "POST",
