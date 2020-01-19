@@ -1,31 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useTaskEditContext } from 'hooks';
 
-function useFetchTaskById(taskId) {
-    const { task, setTask } = useState({});
+const useFetchTaskById = (taskId) => {
+    const { updateTask } = useTaskEditContext();
 
-    useEffect(() => {
-
-        function handleTaskChange(task) {
-            setTask(task);
-        }
-
-        // setIsLoading(true);
-        if (taskId !== -1) {
+    return useEffect(() => {
+        if (taskId !== "-1") {
             fetch("/api/task/" + taskId)
                 .then(response => {
                     return response.json();
                 })
-                .then(task => { handleTaskChange(task) })
+                .then(task => updateTask(task))
                 .catch(error => {
                     //@TODO: Could add some sort of flag to change oclor to red.
                     // setMessage(`Error: ${error}`);
+                    updateTask({});
                 })
-        } else {
-            handleTaskChange({ description: '', _id: -1, time: 0, project: 0 });
         }
-    }, [taskId]);
-
-    return task;
+    }, []);
 };
 
 export default useFetchTaskById
