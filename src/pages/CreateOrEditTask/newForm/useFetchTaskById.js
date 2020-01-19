@@ -17,7 +17,7 @@ const useFetchTaskById = (taskId) => {
                     updateTask({});
                 })
         }
-    }, []);
+    }, [taskId, useFetchTaskById]);
 };
 
 export default useFetchTaskById
