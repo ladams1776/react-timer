@@ -93,7 +93,7 @@ app.post("/api/task", function (req, res) {
     m.toObject();
     m.date = req.body.date;
     m.description = req.body.WorkUnit[0].description;
-    m.contractId = req.body.WorkUnit[0]?.contractId || 0;
+    m.contractId = req.body.WorkUnit[0].contractId || 0;
     m.time = req.body.WorkUnit[0].time;
 
     m.save(function (err) {
