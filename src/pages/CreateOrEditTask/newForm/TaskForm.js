@@ -3,13 +3,10 @@ import { Form, Field } from 'react-final-form';
 import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
 import Timer from "../Form/EditTask/Timer/Timer";
-import useFetchTaskById from './useFetchTaskById';
 
-const TaskForm = ({ match }) => {
-    const taskId = match?.params?.id || "-1"
+const TaskForm = () => {
     const projectOptions = useFetchProjectOptions();
-    const { time, setMessage } = useTaskEditContext();
-    const task = useFetchTaskById(taskId);
+    const { time, setMessage, task } = useTaskEditContext();
 
     const onSubmit = event => {
         const date = new Date();
@@ -19,14 +16,14 @@ const TaskForm = ({ match }) => {
             date: dateFormatted,
             WorkUnit: [
                 {
-                    time: event.time,
+                    time,
                     contractId: event?.projects || 0,
                     description: event.description
                 }
             ]
         };
 
-        timeTask._id = taskId;
+        timeTask._id = task._id;
         console.log('timeTask is: ', timeTask);
         fetch("/api/task", {
             method: "POST",
@@ -43,11 +40,11 @@ const TaskForm = ({ match }) => {
     return (
         <Form
             initialValues={{
-                description: '',
-                time
+                description: task?.description || '',
+                projects: task?.project || 0
             }}
             onSubmit={onSubmit}
-            render={({ handleSubmit, form, submitting, pristine, values }) => (
+            render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Description</label>
@@ -60,8 +57,8 @@ const TaskForm = ({ match }) => {
                             {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
                         </Field>
                     </div>
-                    <Field name="time" component={Timer} type="hidden" />
-                    <button type="submit" disabled={submitting || pristine}>
+                    <Timer />
+                    <button type="submit">
                         Submit
                 </button>
                 </form>
