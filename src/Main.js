@@ -8,9 +8,9 @@ import FlashMessage from 'components/FlashMessage/FlashMessage';
 import './Main.css';
 
 const Main = () => {
+  const [taskId, setTaskId] = useState(-1);
   const [task, setTask] = useState({});
   const [tasks, setTasks] = useState([]);
-  const [taskId, setTaskId] = useState(-1);
   const [description, setDescription] = useState('');
   const [time, setTime] = useState(0);
   const [selectedProject, setSelectedProject] = useState(0);
@@ -40,9 +40,9 @@ const Main = () => {
         updateDescription: useCallback(description => {
           setDescription(description);
         }, []),
-        updateTime: time => {
+        updateTime: useCallback(time => {
           setTime(time);
-        },
+        }, []),
         updateDropDown: useCallback(selectedProject => {
           setSelectedProject(selectedProject);
         }, []),
