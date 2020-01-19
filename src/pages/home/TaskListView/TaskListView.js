@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
+import { useTaskEditContext } from 'hooks';
 import './TaskListView.css';
 import Task from './Task/Task';
 import ControlButtons from './ControlButtons';
 
 //@TODO: Need test for this component.
 const TaskListView = () => {
-  const { tasks, updateTasks, setMessage } = useTaskEditContext();
+  const { tasks, updateTasks } = useTaskEditContext();
 
   useEffect(() => {
     fetch(`/api/tasks`)

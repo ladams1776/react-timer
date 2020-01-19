@@ -6,15 +6,15 @@ import { useFetchProjectOptions } from 'hooks';
 import { getFormattedDate } from 'utils';
 import './Task.css';
 
-const Task = task => {
-  const { projects } = useFetchProjectOptions();
-  const {_id, description, contractId, time } = task._id;
+const Task = ({ task }) => {
+  const { _id, description, contractId, time, date } = task;
+  const projectOptions = useFetchProjectOptions();
 
   return (
-    <NavLink to={'/task/' + taskId} id={taskId} className="task-item">
+    <NavLink to={'/task/' + _id} id={_id} className="task-item">
       <div className="task-item__left">
         <div className="task-item__description">
-          {task.description.split('\n').map((paragraph, index) => {
+          {description.split('\n').map((paragraph, index) => {
             return (
               <p key={index} className="task-item__description-item">
                 {paragraph}
@@ -23,11 +23,7 @@ const Task = task => {
           })}
         </div>
         <span className="task-item__customer">
-          {projects[task.contractId].label}
-        </span>{' '}
-        -{' '}
-        <span className="task-item__contract">
-          {projects[task.contractId].customer}
+          {projectOptions[contractId].label}
         </span>
       </div>
 
@@ -35,11 +31,11 @@ const Task = task => {
         <span className="task-item__time-label">Time:</span>
         <span className="task-item__time-value">
           {' '}
-          {(task.time / 1000 / 60 / 60).toFixed(2)}
-          <DeleteTaskButton taskId={taskId} />
+          {(time / 1000 / 60 / 60).toFixed(2)}
+          <DeleteTaskButton taskId={_id} />
         </span>
         <span className="task-item__item-date">
-          {getFormattedDate(task.date)}
+          {getFormattedDate(date)}
         </span>
       </span>
     </NavLink>
