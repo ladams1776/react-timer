@@ -36,7 +36,7 @@ app.listen(3001, function () {
 });
 
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -73,37 +73,37 @@ app.get("/api/task/:id", function (req, res) {
   });
 });
 
-app.post("/api/task", function (req, res) {
+app.post("/api/task", (req, res) => {
   const TaskModel = mongoose.model("tasks", TaskSchema);
 
-  if (req.body._id !== "-1") {
-    TaskModel.findById(req.body._id, function (err, foundTask) {
-      if (err) throw err;
-      foundTask.date = req.body.date;
-      foundTask.description = req.body.WorkUnit[0].description;
-      foundTask.contractId = req.body.WorkUnit[0].contractId;
-      foundTask.time = req.body.WorkUnit[0].time;
-      foundTask.save(function (err) {
-        if (err) throw err;
-        res.jsonp({ isSuccess: true });
-      });
-    });
-  } else {
-    const m = new TaskModel();
-    m.toObject();
-    m.date = req.body.date;
-    m.description = req.body.WorkUnit[0].description;
-    m.contractId = req.body.WorkUnit[0].contractId || 0;
-    m.time = req.body.WorkUnit[0].time;
+  const m = new TaskModel();
+  m.toObject();
+  m.date = req.body.date;
+  m.description = req.body.WorkUnit[0].description;
+  m.contractId = req.body.WorkUnit[0].contractId;
+  m.time = req.body.WorkUnit[0].time;
 
-    m.save(function (err) {
-      if (err) throw err;
-      res.jsonp({ isSuccess: true });
-    });
-  }
+  m.save((err, task) => {
+    if (err) throw err;
+    res.jsonp(task);
+  });
 });
 
-app.delete("/api/task/:id", function (req, res) {
+app.put("/api/task", (req, res) => {
+  const TaskModel = mongoose.model("tasks", TaskSchema);
+  TaskModel.findById(req.body._id, function (err, foundTask) {
+    if (err) throw err;
+    foundTask.date = req.body.date;
+    foundTask.description = req.body.WorkUnit[0].description;
+    foundTask.contractId = req.body.WorkUnit[0].contractId;
+    foundTask.time = req.body.WorkUnit[0].time;
+
+    if (err) throw err;
+    res.jsonp(foundTask);
+  });
+});
+
+app.delete("/api/task/:id", (req, res) => {
   const TaskModel = mongoose.model("tasks", TaskSchema);
   const id = req.params.id;
 
@@ -113,7 +113,7 @@ app.delete("/api/task/:id", function (req, res) {
   });
 });
 
-app.delete("/api/tasks", function (req, res) {
+app.delete("/api/tasks", (req, res) => {
   const TaskModel = mongoose.model("tasks", TaskSchema);
   TaskModel.deleteMany({}, function (e) {
     if (e) throw e;
