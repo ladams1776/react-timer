@@ -1,12 +1,17 @@
 import React from 'react';
-import TaskForm from './newForm/TaskForm';
-import useFetchTaskById from './newForm/useFetchTaskById';
+import EditTaskForm from './newForm/EditTaskForm';
+import AddTaskForm from './newForm/AddTaskForm';
 
 const CreateOrEditTaskPage = ({ match }) => {
-    const taskId = match?.params?.id || "-1"
-    useFetchTaskById(taskId);
+    const taskId = match?.params?.id;
 
-    return <TaskForm />
+    if (taskId && taskId !== "-1") {
+        return <EditTaskForm taskId={taskId} />
+    } else {
+        return <AddTaskForm />
+    }
+
+
 };
 
 export default CreateOrEditTaskPage;
