@@ -2,9 +2,11 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
+import useFetchTaskById from './useFetchTaskById';
 import Timer from "../Form/EditTask/Timer/Timer";
 
-const TaskForm = () => {
+const EditTaskForm = ({ taskId }) => {
+    useFetchTaskById(taskId);
     const projectOptions = useFetchProjectOptions();
     const { time, setMessage, task } = useTaskEditContext();
 
@@ -23,10 +25,10 @@ const TaskForm = () => {
             ]
         };
 
-        timeTask._id = task?._id || "-1";
-        console.log('timeTask is: ', timeTask);
+        timeTask._id = task._id
+
         fetch("/api/task", {
-            method: "POST",
+            method: "PUT",
             body: JSON.stringify(timeTask),
             headers: { "Content-Type": "application/json" }
         }).then(e => {
@@ -40,8 +42,8 @@ const TaskForm = () => {
     return (
         <Form
             initialValues={{
-                description: task?.description || '',
-                projects: task?.project || 0
+                description: task.description,
+                projects: task.project
             }}
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
@@ -60,11 +62,11 @@ const TaskForm = () => {
                     <Timer />
                     <button type="submit">
                         Submit
-                </button>
+                    </button>
                 </form>
             )}
         />
     )
 };
 
-export default TaskForm;
+export default EditTaskForm;
