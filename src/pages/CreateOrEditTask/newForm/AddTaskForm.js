@@ -3,6 +3,7 @@ import { Form, Field } from 'react-final-form';
 import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
 import Timer from "../Form/EditTask/Timer/Timer";
+import styles from './TaskForm.scss';
 
 const AddTaskForm = () => {
     const projectOptions = useFetchProjectOptions();
@@ -46,7 +47,7 @@ const AddTaskForm = () => {
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
-                    <div>
+                    <div className={styles.description}>
                         <label>Description</label>
                         <Field name="description" component="textarea" />
                     </div>

@@ -4,51 +4,28 @@ import useTaskEditContext from 'hooks/useTaskEditContext';
 import { displayMsInFractionalHourFormat } from 'utils';
 import './Timer.css';
 
-
-const status = {
-  ON: 'ON',
-  OFF: 'OFF',
-  RESET: 'RESET'
-}
-
 const Timer = () => {
   const { time, updateTime } = useTaskEditContext();
-  const [currentTimerStatus, setCurrentTimerStatus] = useState(status.OFF);
+  const [isActive, setIsActive] = useState(false);
   const [timer, setTimer] = useState(null);
 
-  //@TODO: Still not cleaning up if the timer is on and we back out
+  const toggle = () => setIsActive(!isActive);
+
+  const reset = () => {
+    setIsActive(false);
+    updateTime(0);
+  }
+
   useEffect(() => {
-    switch (currentTimerStatus) {
-      case status.ON:
-        let timeOffset = Date.now() - time;
-        setTimer(setInterval(() => updateTime(Date.now() - timeOffset), 1));
-        break;
-      case status.OFF:
-        timer && clearInterval(timer);
-        updateTime(time);
-        break;
-      case status.RESET:
-        updateTime(0);
-        setCurrentTimerStatus(status.OFF)
-        break;
+    if (isActive) {
+      let timeOffset = Date.now() - time;
+      setTimer(setInterval(() => updateTime(Date.now() - timeOffset), 1));
+    } else if (!isActive && time !== 0) {
+      clearInterval(timer)
     }
 
-    return () => setCurrentTimerStatus(status.ON)
-  }, [currentTimerStatus]);
-
-
-  const startTimer = () => {
-    setCurrentTimerStatus(status.ON);
-  };
-
-  const stopTimer = e => {
-    setCurrentTimerStatus(status.OFF);
-  };
-
-  const resetTimer = () => {
-    setCurrentTimerStatus(status.RESET);
-  };
-
+    return () => clearInterval(timer)
+  }, [isActive, time]);
 
   return (
     <div className="timer">
@@ -59,23 +36,24 @@ const Timer = () => {
         </div>
 
         <div className="timer__buttons">
-          {time === 0 && currentTimerStatus === status.OFF &&
-            (<button className="timer__start" onClick={startTimer}>
+          {time === 0 && !isActive &&
+            (<button className="timer__start" onClick={toggle}>
               start
           </button>)}
 
-          {time !== 0 && currentTimerStatus == status.OFF && (
-            <button className="timer__resume" onClick={startTimer}>
+          {isActive &&
+            (<button className="timer__stop" onClick={toggle}>
+              stop
+          </button>)}
+
+          {time !== 0 && !isActive && (
+            <button className="timer__resume" onClick={toggle}>
               resume
             </button>
           )}
 
-          {currentTimerStatus === status.ON &&
-            (<button className="timer__stop" onClick={stopTimer}>
-              stop
-          </button>)}
 
-          {timer > 0 && <button className="timer__reset" onClick={resetTimer}>
+          {time > 0 && <button className="timer__reset" onClick={reset}>
             reset
           </button>}
         </div>
