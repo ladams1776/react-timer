@@ -1,3 +1,96 @@
-.description {
-    background-color: green($color: #000000);
+/**
+
+    Accent: #ff6358;
+    
+    Success: #5ec232;
+    Warning: #fdce3e;
+    Danger: #d51923;
+    Info: #3e80ed;
+
+
+
+**/
+
+.react-loading {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    display: flex;
+    height: 600px;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+
+.textArea {
+    background-color:#d8d8d8b3;
+    padding: 2em;
+    display: inline-flex;
+    height: 100%;
+    flex: .75 .85;
+}
+
+.textAreaContent {
+    overflow: auto;
+    width: 100%;
+}
+
+
+.taskFormContainer {
+    max-width: 1000px;
+    margin-top: 50px;
+    margin: auto
+}
+
+.taskForm {
+    display: flex;
+    height: 200px;
+    flex-direction: row;
+}
+
+.taskForm__control {
+    flex-wrap: wrap;
+    flex: .25 .15;
+    display: inline-flex;
+    height: 100%;
+}
+
+.dropDown {
+    padding: 1em;
+    background-color: #d8d8d8b3;
+    border-radius: 4px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.submit,
+.submit:hover {
+    background-color: #2d73f5;
+    color: white;
+    border-radius: 4px;
+    height: 50px;
+    border: none;
+    width: 75px;
+}
+
+.submit:hover {
+    background-color: #275ab9;
+}
+
+.react-loading__content {
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    width: 100px;
+    margin: auto;
+    text-align: center;
+    line-height: 75px;
+}
+
+.react-loading div svg {
+    width: 100px;
+    margin: auto 0;
 }

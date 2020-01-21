@@ -30,7 +30,6 @@ const Timer = () => {
   return (
     <div className="timer">
       <div className="timer__display">
-        <label className="timer__display__label">Time: </label>
         <div className="timer__display__content">
           {`${ms(time)} - hours: ${displayMsInFractionalHourFormat(time)}`}
         </div>
