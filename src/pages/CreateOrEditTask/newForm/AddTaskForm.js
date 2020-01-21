@@ -46,23 +46,29 @@ const AddTaskForm = () => {
             }}
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
-                    <div className={styles.description}>
-                        <label>Description</label>
-                        <Field name="description" component="textarea" />
-                    </div>
+                <div className="taskFormContainer">
+                    <div class="form">
+                        <form className="taskForm" onSubmit={handleSubmit}>
+                            <div className="textArea">
+                                <div className="textAreaContent">
+                                    <Field name="description" component="textarea" cols="55" rows="10" />
+                                </div>
+                            </div>
 
-                    <div>
-                        <label>Projects</label>
-                        <Field name="projects" component="select" >
-                            {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
-                        </Field>
+                            <div className="taskForm__control">
+                                <div className="dropDown">
+                                    <Field name="projects" component="select" >
+                                        {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
+                                    </Field>
+                                </div>
+                                <Timer />
+                            </div>
+                            {/* <button type="submit" className="submit">
+                                Submit
+                                </button> */}
+                        </form>
                     </div>
-                    <Timer />
-                    <button type="submit">
-                        Submit
-                </button>
-                </form>
+                </div>
             )}
         />
     )
