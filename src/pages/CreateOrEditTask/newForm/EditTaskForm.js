@@ -47,23 +47,28 @@ const EditTaskForm = ({ taskId }) => {
             }}
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Description</label>
-                        <Field name="description" component="textarea" />
-                    </div>
+                <div className="taskFormContainer">
+                    <div class="form">
+                        <form className="taskForm" onSubmit={handleSubmit}>
+                            <div className="textArea">
+                                <Field name="description" component="textarea" cols="80" rows="10" />
+                            </div>
 
-                    <div>
-                        <label>Projects</label>
-                        <Field name="projects" component="select" >
-                            {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
-                        </Field>
+                            <div className="taskForm__control">
+                                <div className="dropDown">
+                                    <Field name="projects" component="select" >
+                                        {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
+                                    </Field>
+                                </div>
+                                <Timer>
+                                    <button type="submit" className="submit">
+                                        Submit
+                                    </button>
+                                </Timer>
+                            </div>
+                        </form>
                     </div>
-                    <Timer />
-                    <button type="submit">
-                        Submit
-                    </button>
-                </form>
+                </div>
             )}
         />
     )

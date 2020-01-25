@@ -4,7 +4,8 @@ import useTaskEditContext from 'hooks/useTaskEditContext';
 import { displayMsInFractionalHourFormat } from 'utils';
 import './Timer.css';
 
-const Timer = () => {
+//@TODO: Left off here. Something going on with the timer
+const Timer = ({ children }) => {
   const { time, updateTime } = useTaskEditContext();
   const [isActive, setIsActive] = useState(false);
   const [timer, setTimer] = useState(null);
@@ -35,10 +36,10 @@ const Timer = () => {
         </div>
 
         <div className="timer__buttons">
-          {time === 0 && !isActive &&
-            (<button className="timer__start" onClick={toggle}>
-              start
-          </button>)}
+
+          {time > 0 && <button className="timer__reset" onClick={reset}>
+            reset
+          </button>}
 
           {isActive &&
             (<button className="timer__stop" onClick={toggle}>
@@ -51,10 +52,14 @@ const Timer = () => {
             </button>
           )}
 
+          {time === 0 && !isActive &&
+            (<button className="timer__start" onClick={toggle}>
+              start
+          </button>)}
 
-          {time > 0 && <button className="timer__reset" onClick={reset}>
-            reset
-          </button>}
+
+          {children}
+
         </div>
       </div>
     </div>
