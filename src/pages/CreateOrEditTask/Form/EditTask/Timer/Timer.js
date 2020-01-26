@@ -8,7 +8,6 @@ import './Timer.css';
 const Timer = ({ children }) => {
   const { time, updateTime } = useTaskEditContext();
   const [isActive, setIsActive] = useState(false);
-  const [timer, setTimer] = useState(null);
 
   const toggle = () => setIsActive(!isActive);
 
@@ -18,14 +17,16 @@ const Timer = ({ children }) => {
   }
 
   useEffect(() => {
+    let interval;
+
     if (isActive) {
       let timeOffset = Date.now() - time;
-      setTimer(setInterval(() => updateTime(Date.now() - timeOffset), 1));
+      interval = setInterval(() => updateTime(Date.now() - timeOffset), 1000);
     } else if (!isActive && time !== 0) {
-      clearInterval(timer)
+      clearInterval(interval);
     }
 
-    return () => clearInterval(timer)
+    return () => clearInterval(interval)
   }, [isActive, time]);
 
   return (
