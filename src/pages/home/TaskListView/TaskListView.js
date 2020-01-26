@@ -19,7 +19,7 @@ const TaskListView = () => {
         }
       })
       .catch(e => { }); //@TODO: Flash the error
-  }, [updateTasks, tasks]);
+  }, []);
 
   return (
     <div>
