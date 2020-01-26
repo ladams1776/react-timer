@@ -19,7 +19,7 @@ const AddTaskForm = () => {
                 {
                     time,
                     contractId: event?.projects || 0,
-                    description: event.description
+                    description: event.description || ''
                 }
             ]
         };

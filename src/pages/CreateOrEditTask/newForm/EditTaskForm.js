@@ -10,6 +10,7 @@ const EditTaskForm = ({ taskId }) => {
     const projectOptions = useFetchProjectOptions();
     const { time, setMessage, task } = useTaskEditContext();
 
+    //@TODO: Time is not getting saved it looks liek
     const onSubmit = event => {
         const date = new Date();
         const dateFormatted = getFormattedDate(date);
@@ -20,7 +21,7 @@ const EditTaskForm = ({ taskId }) => {
                 {
                     time,
                     contractId: event?.projects || 0,
-                    description: event.description
+                    description: event.description || ''
                 }
             ]
         };
