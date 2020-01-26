@@ -7,7 +7,7 @@ import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
 import './Task.css';
 
 const Task = ({ task }) => {
-  const { _id, description, contractId, time, date } = task;
+  const { _id, description = '', contractId, time, date } = task;
   const projectOptions = useFetchProjectOptions();
 
   return (
