@@ -21,7 +21,7 @@ const Timer = ({ children }) => {
 
     if (isActive) {
       let timeOffset = Date.now() - time;
-      interval = setInterval(() => updateTime(Date.now() - timeOffset), 1000);
+      interval = setInterval(() => updateTime(Date.now() - timeOffset), 25);
     } else if (!isActive && time !== 0) {
       clearInterval(interval);
     }
