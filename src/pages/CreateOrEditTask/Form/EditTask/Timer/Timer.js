@@ -4,10 +4,10 @@ import useTaskEditContext from 'hooks/useTaskEditContext';
 import { displayMsInFractionalHourFormat } from 'utils';
 import './Timer.css';
 
-const Timer = () => {
+//@TODO: Left off here. Something going on with the timer
+const Timer = ({ children }) => {
   const { time, updateTime } = useTaskEditContext();
   const [isActive, setIsActive] = useState(false);
-  const [timer, setTimer] = useState(null);
 
   const toggle = () => setIsActive(!isActive);
 
@@ -17,14 +17,16 @@ const Timer = () => {
   }
 
   useEffect(() => {
+    let interval;
+
     if (isActive) {
       let timeOffset = Date.now() - time;
-      setTimer(setInterval(() => updateTime(Date.now() - timeOffset), 1));
+      interval = setInterval(() => updateTime(Date.now() - timeOffset), 25);
     } else if (!isActive && time !== 0) {
-      clearInterval(timer)
+      clearInterval(interval);
     }
 
-    return () => clearInterval(timer)
+    return () => clearInterval(interval)
   }, [isActive, time]);
 
   return (
@@ -35,10 +37,10 @@ const Timer = () => {
         </div>
 
         <div className="timer__buttons">
-          {time === 0 && !isActive &&
-            (<button className="timer__start" onClick={toggle}>
-              start
-          </button>)}
+
+          {time > 0 && <button className="timer__reset" onClick={reset}>
+            reset
+          </button>}
 
           {isActive &&
             (<button className="timer__stop" onClick={toggle}>
@@ -51,10 +53,14 @@ const Timer = () => {
             </button>
           )}
 
+          {time === 0 && !isActive &&
+            (<button className="timer__start" onClick={toggle}>
+              start
+          </button>)}
 
-          {time > 0 && <button className="timer__reset" onClick={reset}>
-            reset
-          </button>}
+
+          {children}
+
         </div>
       </div>
     </div>

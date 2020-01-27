@@ -91,16 +91,19 @@ app.post("/api/task", (req, res) => {
 
 app.put("/api/task", (req, res) => {
   const TaskModel = mongoose.model("tasks", TaskSchema);
-  TaskModel.findById(req.body._id, function (err, foundTask) {
-    if (err) throw err;
-    foundTask.date = req.body.date;
-    foundTask.description = req.body.WorkUnit[0].description;
-    foundTask.contractId = req.body.WorkUnit[0].contractId;
-    foundTask.time = req.body.WorkUnit[0].time;
 
+  TaskModel.findOneAndUpdate({ _id: req.body._id }, {
+    $set: {
+      date: req.body.date,
+      description: req.body.WorkUnit[0].description,
+      contractId: req.body.WorkUnit[0].contractId,
+      time: req.body.WorkUnit[0].time
+    }
+  }, { new: true }, (err, task) => {
     if (err) throw err;
-    res.jsonp(foundTask);
+    res.jsonp(task);
   });
+
 });
 
 app.delete("/api/task/:id", (req, res) => {

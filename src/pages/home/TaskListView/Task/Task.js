@@ -3,11 +3,11 @@ import PropType from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import DeleteTaskButton from './DeleteTaskButton';
 import { useFetchProjectOptions } from 'hooks';
-import { getFormattedDate } from 'utils';
+import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
 import './Task.css';
 
 const Task = ({ task }) => {
-  const { _id, description, contractId, time, date } = task;
+  const { _id, description = '', contractId, time, date } = task;
   const projectOptions = useFetchProjectOptions();
 
   return (
@@ -31,7 +31,7 @@ const Task = ({ task }) => {
         <span className="task-item__time-label">Time:</span>
         <span className="task-item__time-value">
           {' '}
-          {(time / 1000 / 60 / 60).toFixed(2)}
+          {displayMsInFractionalHourFormat(time)}
           <DeleteTaskButton taskId={_id} />
         </span>
         <span className="task-item__item-date">

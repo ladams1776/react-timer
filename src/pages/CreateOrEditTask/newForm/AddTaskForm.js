@@ -19,7 +19,7 @@ const AddTaskForm = () => {
                 {
                     time,
                     contractId: event?.projects || 0,
-                    description: event.description
+                    description: event.description || ''
                 }
             ]
         };
@@ -50,9 +50,7 @@ const AddTaskForm = () => {
                     <div class="form">
                         <form className="taskForm" onSubmit={handleSubmit}>
                             <div className="textArea">
-                                <div className="textAreaContent">
-                                    <Field name="description" component="textarea" cols="55" rows="10" />
-                                </div>
+                                <Field name="description" component="textarea" cols="80" rows="10" />
                             </div>
 
                             <div className="taskForm__control">
@@ -61,11 +59,12 @@ const AddTaskForm = () => {
                                         {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
                                     </Field>
                                 </div>
-                                <Timer />
+                                <Timer>
+                                    <button type="submit" className="submit">
+                                        Submit
+                                    </button>
+                                </Timer>
                             </div>
-                            {/* <button type="submit" className="submit">
-                                Submit
-                                </button> */}
                         </form>
                     </div>
                 </div>
