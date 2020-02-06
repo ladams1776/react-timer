@@ -33,9 +33,8 @@ Client should be visitable at: http://172.28.1.2:3000
 
 -- Adjust all existing tests that use a context to use helper
 
-0. Refactor EditTaskForm - use Final Form
-1. Use flex instead of floats
+0. Move to EditTaskForm, when New has submitted.
 1. Make formal pages that the form and task list view lives in
-1. break apart the context
-1. finish up the unit test on react components
-1. unit test the endpoints (server.js)
+2. break apart the context
+3. finish up the unit test on react components
+4. unit test the endpoints (server.js)
