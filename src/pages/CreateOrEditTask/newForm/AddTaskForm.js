@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
 import Timer from "../Form/EditTask/Timer/Timer";
 import styles from './TaskForm.scss';
 
-const AddTaskForm = () => {
+const AddTaskForm = ({ history }) => {
     const projectOptions = useFetchProjectOptions();
     const { setMessage, task } = useTaskEditContext();
     const [time, setTime] = useState(0);
@@ -31,11 +32,14 @@ const AddTaskForm = () => {
             method: "POST",
             body: JSON.stringify(timeTask),
             headers: { "Content-Type": "application/json" }
-        }).then(e => {
-            if (e.status === 200) {
+        }).then(res => {
+            if (res.status === 200) {
                 setMessage("Successfully created/updated a Task");
+                return res.json();
                 // setIsLoading(false);
             }
+        }).then(data => {
+            history.push(`/task/${data._id}`);
         }).catch(error => console.log(error, 'Error!'));
     };
 
@@ -74,4 +78,5 @@ const AddTaskForm = () => {
     )
 };
 
-export default AddTaskForm;
+//@TODO: Come back and use pipeline operator
+export default withRouter(AddTaskForm);
