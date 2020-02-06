@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTaskEditContext } from 'hooks';
 
-const useFetchTaskById = (taskId) => {
-    const { updateTask, updateTime } = useTaskEditContext();
+const useFetchTaskById = (taskId, setTime) => {
+    const { updateTask } = useTaskEditContext();
 
     return useEffect(() => {
         if (taskId !== "-1") {
@@ -11,7 +11,7 @@ const useFetchTaskById = (taskId) => {
                     return response.json();
                 })
                 .then(task => {
-                    updateTime(task.time);
+                    setTime(task.time);
                     updateTask(task);
                 }).catch(error => {
                     //@TODO: Could add some sort of flag to change oclor to red.
@@ -19,7 +19,7 @@ const useFetchTaskById = (taskId) => {
                     updateTask({});
                 })
         }
-    }, [taskId, useFetchTaskById]);
+    }, [taskId]);
 };
 
 export default useFetchTaskById

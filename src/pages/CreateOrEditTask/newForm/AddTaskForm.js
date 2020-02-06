@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
@@ -7,7 +7,8 @@ import styles from './TaskForm.scss';
 
 const AddTaskForm = () => {
     const projectOptions = useFetchProjectOptions();
-    const { time, setMessage, task } = useTaskEditContext();
+    const { setMessage, task } = useTaskEditContext();
+    const [time, setTime] = useState(0);
 
     const onSubmit = event => {
         const date = new Date();
@@ -25,7 +26,7 @@ const AddTaskForm = () => {
         };
 
         timeTask._id = task?._id || "-1";
-        console.log('timeTask is: ', timeTask);
+
         fetch("/api/task", {
             method: "POST",
             body: JSON.stringify(timeTask),
@@ -59,7 +60,7 @@ const AddTaskForm = () => {
                                         {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
                                     </Field>
                                 </div>
-                                <Timer>
+                                <Timer time={time} setTime={setTime}>
                                     <button type="submit" className="submit">
                                         Submit
                                     </button>

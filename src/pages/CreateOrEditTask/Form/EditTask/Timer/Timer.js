@@ -5,15 +5,14 @@ import { displayMsInFractionalHourFormat } from 'utils';
 import './Timer.css';
 
 //@TODO: Left off here. Something going on with the timer
-const Timer = ({ children }) => {
-  const { time, updateTime } = useTaskEditContext();
+const Timer = ({ children, time, setTime }) => {
   const [isActive, setIsActive] = useState(false);
 
   const toggle = () => setIsActive(!isActive);
 
   const reset = () => {
     setIsActive(false);
-    updateTime(0);
+    setTime(0);
   }
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const Timer = ({ children }) => {
 
     if (isActive) {
       let timeOffset = Date.now() - time;
-      interval = setInterval(() => updateTime(Date.now() - timeOffset), 25);
+      interval = setInterval(() => setTime(Date.now() - timeOffset), 25);
     } else if (!isActive && time !== 0) {
       clearInterval(interval);
     }

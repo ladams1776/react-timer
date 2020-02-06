@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
@@ -6,9 +6,10 @@ import useFetchTaskById from './useFetchTaskById';
 import Timer from "../Form/EditTask/Timer/Timer";
 
 const EditTaskForm = ({ taskId }) => {
-    useFetchTaskById(taskId);
+    const [time, setTime] = useState(0);
+    useFetchTaskById(taskId, setTime);
     const projectOptions = useFetchProjectOptions();
-    const { time, setMessage, task } = useTaskEditContext();
+    const { setMessage, task } = useTaskEditContext();
 
     const onSubmit = event => {
         const date = new Date();
@@ -60,7 +61,7 @@ const EditTaskForm = ({ taskId }) => {
                                         {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
                                     </Field>
                                 </div>
-                                <Timer>
+                                <Timer time={time} setTime={setTime}>
                                     <button type="submit" className="submit">
                                         Submit
                                     </button>

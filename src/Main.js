@@ -12,7 +12,6 @@ const Main = () => {
   const [task, setTask] = useState({});
   const [tasks, setTasks] = useState([]);
   const [description, setDescription] = useState('');
-  const [time, setTime] = useState(0);
   const [selectedProject, setSelectedProject] = useState(0);
   const [message, setMessage] = useState(null);
   const projects = useFetchProjectOptions();
@@ -22,7 +21,6 @@ const Main = () => {
       value={{
         taskId,
         description,
-        time,
         selectedProject,
         message,
         projects,
@@ -39,9 +37,6 @@ const Main = () => {
         }, []),
         updateDescription: useCallback(description => {
           setDescription(description);
-        }, []),
-        updateTime: useCallback(time => {
-          setTime(time);
         }, []),
         updateDropDown: useCallback(selectedProject => {
           setSelectedProject(selectedProject);
