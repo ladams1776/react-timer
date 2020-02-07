@@ -14,11 +14,15 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.define "server" do |server|
     server.vm.box = "generic/centos7"
+    server.vm.hostname = "server"
     server.vm.synced_folder "./server/", "/vagrant", type: "rsync"
+    server.vm.network "private_network", ip: "172.28.1.4"
+
     server.vm.provision "shell", inline: <<-SHELL
       apt-get update
       npm install
       npm run-script server
+    SHELL
   end
 
 #  config.vm.define "mongodb" do |mongodb|

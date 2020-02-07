@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"disabled":false,"guestpath":"/vagrant","hostpath":"/home/larry/react-timer/server","type":"rsync","__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
