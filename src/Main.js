@@ -2,8 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import { useFetchProjectOptions } from 'hooks';
 import { TaskEditFormProvider } from './TaskEditFormContext';
-import CreateOrEditTaskPage from 'pages/CreateOrEditTask/CreateOrEditTaskPage';
 import IndexPage from 'pages/home/IndexPage';
+import CreateOrEditTaskPage from 'pages/createOrEditTask/CreateOrEditTaskPage';
 import FlashMessage from 'components/FlashMessage/FlashMessage';
 import './Main.css';
 
