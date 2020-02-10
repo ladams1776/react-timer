@@ -3,6 +3,7 @@ li {
 }
 
 .task-item {
+  overflow: hidden;
   list-style: none;
   display: flex;
   width: 600px;
