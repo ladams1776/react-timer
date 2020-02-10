@@ -1,6 +1,6 @@
 import React from 'react';
-import EditTaskForm from './newForm/EditTaskForm';
-import AddTaskForm from './newForm/AddTaskForm';
+import EditTaskForm from './form/EditTaskForm';
+import AddTaskForm from './form/AddTaskForm';
 
 const CreateOrEditTaskPage = ({ match }) => {
     const taskId = match?.params?.id;

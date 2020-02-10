@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
-import { useFetchProjectOptions, useTaskEditContext, useBackButtonListener } from 'hooks';
-import getFormattedDate from "utils/getFormattedDate";
-import useFetchTaskById from './useFetchTaskById';
-import Timer from "../Form/EditTask/Timer/Timer";
+import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
+import { getFormattedDate } from "utils";
+import Timer from "../timer/Timer";
+import './TaskForm.scss';
 
-
-const EditTaskForm = ({ taskId, history }) => {
-    const [time, setTime] = useState(0);
-    useFetchTaskById(taskId, setTime);
+const AddTaskForm = ({ history }) => {
     const projectOptions = useFetchProjectOptions();
     const { setMessage, task } = useTaskEditContext();
-
-    useBackButtonListener(history);
+    const [time, setTime] = useState(0);
 
     const onSubmit = event => {
         const date = new Date();
@@ -30,25 +26,28 @@ const EditTaskForm = ({ taskId, history }) => {
             ]
         };
 
-        timeTask._id = task._id
+        timeTask._id = task?._id || "-1";
 
         fetch("/api/task", {
-            method: "PUT",
+            method: "POST",
             body: JSON.stringify(timeTask),
             headers: { "Content-Type": "application/json" }
-        }).then(e => {
-            if (e.status === 200) {
+        }).then(res => {
+            if (res.status === 200) {
                 setMessage("Successfully created/updated a Task");
+                return res.json();
                 // setIsLoading(false);
             }
+        }).then(data => {
+            history.push(`/task/${data._id}`);
         }).catch(error => console.log(error, 'Error!'));
     };
 
     return (
         <Form
             initialValues={{
-                description: task.description,
-                projects: task.project
+                description: '',
+                projects: 0
             }}
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
@@ -79,5 +78,5 @@ const EditTaskForm = ({ taskId, history }) => {
     )
 };
 
-//@TODO: Replace this with the pipeline operator.
-export default withRouter(EditTaskForm);
+//@TODO: Come back and use pipeline operator
+export default withRouter(AddTaskForm);

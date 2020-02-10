@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ms from 'pretty-ms';
-import useTaskEditContext from 'hooks/useTaskEditContext';
 import { displayMsInFractionalHourFormat } from 'utils';
 import './Timer.css';
 
@@ -56,7 +55,6 @@ const Timer = ({ children, time, setTime }) => {
             (<button className="timer__start" onClick={toggle}>
               start
           </button>)}
-
 
           {children}
 
