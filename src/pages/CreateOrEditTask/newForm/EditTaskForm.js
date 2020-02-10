@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
-import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
+import { useFetchProjectOptions, useTaskEditContext, useBackButtonListener } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
 import useFetchTaskById from './useFetchTaskById';
 import Timer from "../Form/EditTask/Timer/Timer";
 
-const EditTaskForm = ({ taskId }) => {
+
+const EditTaskForm = ({ taskId, history }) => {
     const [time, setTime] = useState(0);
     useFetchTaskById(taskId, setTime);
     const projectOptions = useFetchProjectOptions();
     const { setMessage, task } = useTaskEditContext();
+
+    useBackButtonListener(history);
 
     const onSubmit = event => {
         const date = new Date();
@@ -75,4 +79,5 @@ const EditTaskForm = ({ taskId }) => {
     )
 };
 
-export default EditTaskForm;
+//@TODO: Replace this with the pipeline operator.
+export default withRouter(EditTaskForm);
