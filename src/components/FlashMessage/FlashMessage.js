@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import useTaskEditContext from 'hooks/useTaskEditContext';
 import './FlashMessage.css';
 
-//@TODO: Probably want to just drop this component at the top of the app
-//@TODO: Then use `ref` and `context` to toggle it on and off and then
-//@TODO: we won't need to have to declare/instantiate it in other components,
-//@TODO: the other comps can just call the func provided by the context.
 const FlashMessage = () => {
   const { message, setMessage } = useTaskEditContext();
 
