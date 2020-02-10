@@ -37,4 +37,11 @@ describe('src/components/FlashMessage/__test__/FlashMessage.test.js', () => {
       );
     });
   });
+//@TODO: LEFT OFF HERE Feb 9, Sun 21:56 
+  // describe('onClick', () => {
+  //   it('should set the message on the FlashMessage to null', () => {
+  //     wrapper = mount(<FlashMessage />);
+
+  //   });
+  // });
 });

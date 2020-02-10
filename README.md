@@ -33,7 +33,7 @@ Client should be visitable at: http://172.28.1.2:3000
 
 -- Adjust all existing tests that use a context to use helper
 
-0. Move to EditTaskForm, when New has submitted.
+0. Write test for the onClick functionality of the FlashMessage
 1. Make formal pages that the form and task list view lives in
 2. break apart the context
 3. finish up the unit test on react components
