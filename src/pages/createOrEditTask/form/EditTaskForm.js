@@ -23,7 +23,7 @@ const EditTaskForm = ({ taskId, history }) => {
             WorkUnit: [
                 {
                     time,
-                    contractId: event?.projects || 0,
+                    contractId: event?.selectedProject || 0,
                     description: event.description || ''
                 }
             ]
@@ -46,7 +46,7 @@ const EditTaskForm = ({ taskId, history }) => {
         <Form
             initialValues={{
                 description: task.description,
-                projects: task.project
+                selectedProject: task.contractId
             }}
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
@@ -59,7 +59,7 @@ const EditTaskForm = ({ taskId, history }) => {
 
                             <div className="taskForm__control">
                                 <div className="dropDown">
-                                    <Field name="projects" component="select" >
+                                    <Field name="selectedProject" component="select" >
                                         {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
                                     </Field>
                                 </div>
