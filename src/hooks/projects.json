@@ -6,5 +6,13 @@
     {
         "label": "🐷 Project2",
         "value": "project-two"
+    },
+    {
+    	"label": "shell script course",
+	"value": "shellScriptCourse"
+    },
+    {
+    	"label": "vim course",
+	"value": "vimCourse"
     }
 ]
