@@ -1,21 +1,19 @@
 import React from 'react';
 import sinon from 'sinon';
-import chai, { expect } from 'chai';
+import chai from 'chai';
 import SinonChai from 'sinon-chai';
-import * as useTaskEditContext from 'hooks/useTaskEditContext';
-import FlashMessage from '../FlashMessage';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { createWrapperWithContext } from 'testUtils';
+import { createWrapperWithContext, findByTestId } from 'testUtils';
+import FlashMessage from '../FlashMessage';
 Enzyme.configure({ adapter: new Adapter() });
 chai.use(SinonChai);
 
-//@TODO: Test the clicking functionality
 describe('src/components/FlashMessage/__test__/FlashMessage.test.js', () => {
+  let wrapper;
+  let context;
 
   describe('FlashMessage', () => {
-    let wrapper;
-    let context;
 
     it('should not show FlashMessage when no message is present.', () => {
       context = {
@@ -23,7 +21,7 @@ describe('src/components/FlashMessage/__test__/FlashMessage.test.js', () => {
       };
 
       wrapper = createWrapperWithContext(<FlashMessage />, context);
-      expect(wrapper).to.be.empty;
+      expect(wrapper).tobeNull;
     });
 
     it('should show FlashMessage when message has a value.', () => {
@@ -32,16 +30,24 @@ describe('src/components/FlashMessage/__test__/FlashMessage.test.js', () => {
       };
 
       wrapper = createWrapperWithContext(<FlashMessage />, context);
-      expect(wrapper.find("[test-data-id='flash-message']").text()).to.be.eql(
-        'Success'
-      );
+
+      expect(wrapper.text()).toEqual('SuccessX');
+    }); 
+  });
+
+  describe('onClick', () => {
+    it('should set the message on the FlashMessage to null', () => {
+      context = {
+        message: 'Success',
+        setMessage: jest.fn()
+      };
+
+
+      wrapper = createWrapperWithContext(<FlashMessage />, context);
+
+      wrapper.props().onClick();
+      expect(context.setMessage).toHaveBeenNthCalledWith(1, null);
+      expect(wrapper).tobeNull;
     });
   });
-//@TODO: LEFT OFF HERE Feb 9, Sun 21:56 
-  // describe('onClick', () => {
-  //   it('should set the message on the FlashMessage to null', () => {
-  //     wrapper = mount(<FlashMessage />);
-
-  //   });
-  // });
 });

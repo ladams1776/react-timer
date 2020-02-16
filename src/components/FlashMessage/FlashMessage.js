@@ -8,8 +8,8 @@ const FlashMessage = () => {
 
   return (
     !message || (
-      <div className="flash-message" onClick={() => setMessage(null)}>
-        <div className="flash-message_message" test-data-id="flash-message">{message}</div>
+      <div className="flash-message" test-data-id="flash-message" onClick={() => setMessage(null)}>
+        <div className="flash-message_message" test-data-id="flash-message_message">{message}</div>
         <div className="flash-message_cancel">X</div>
       </div>
     )
