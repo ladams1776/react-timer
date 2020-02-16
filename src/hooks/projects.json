@@ -1,18 +1,18 @@
 [
     {
         "label": "🐓 Project1",
-        "value": "project-one"
+        "value": "0"
     },
     {
         "label": "🐷 Project2",
-        "value": "project-two"
-    },
-    {
-        "label": "shell script course",
         "value": "1"
     },
     {
-        "label": "vim course",
+        "label": "shell script course",
         "value": "2"
+    },
+    {
+        "label": "vim course",
+        "value": "3"
     }
 ]
