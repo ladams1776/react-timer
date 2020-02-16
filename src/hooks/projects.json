@@ -8,11 +8,11 @@
         "value": "project-two"
     },
     {
-    	"label": "shell script course",
-	"value": "shellScriptCourse"
+        "label": "shell script course",
+        "value": "1"
     },
     {
-    	"label": "vim course",
-	"value": "vimCourse"
+        "label": "vim course",
+        "value": "2"
     }
 ]
