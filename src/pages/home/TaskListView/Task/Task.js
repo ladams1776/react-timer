@@ -2,13 +2,13 @@ import React from 'react';
 import PropType from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import DeleteTaskButton from './DeleteTaskButton';
-import { useFetchProjectOptions } from 'hooks';
+import { useGetProjectOptionLabel  } from 'hooks';
 import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
 import './Task.css';
 
 const Task = ({ task }) => {
   const { _id, description = '', contractId, time, date } = task;
-  const projectOptions = useFetchProjectOptions();
+  const projectOptionLabel = useGetProjectOptionLabel(contractId);
 
   return (
     <NavLink to={'/task/' + _id} id={_id} className="task-item">
@@ -23,7 +23,7 @@ const Task = ({ task }) => {
           })}
         </div>
         <span className="task-item__customer">
-          {projectOptions[contractId].label}
+          {projectOptionLabel}
         </span>
       </div>
 
