@@ -9,7 +9,7 @@ describe('src/hooks/__test__/useGetProjectOptionLabel.test.js', () => {
         it('should return project objects', () => {
             useFetchProjectOptions.mockReturnValue(projectOptions);
 
-            const { result } = renderHook(() => useGetProjectOptionLabel(projectOptions[0].value));
+            const { result } = renderHook(() => useGetProjectOptionLabel(+projectOptions[0].value));
             expect(result.current).toEqual(projectOptions[0].label);
         });
     });
