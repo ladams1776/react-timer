@@ -5,14 +5,15 @@ const useUpdateCurrentTime = (time, isActive, setTime) => {
         let interval;
 
         if (isActive) {
-            let timeOffset = Date.now() - time;
-            interval = setInterval(() => setTime(Date.now() - timeOffset), 25);
+            const currentTime = Date.now();
+            let timeOffset = currentTime - time;
+            interval = setInterval(() => setTime(currentTime - timeOffset), 25);
         } else if (!isActive && time !== 0) {
             clearInterval(interval);
         }
 
         return () => clearInterval(interval)
-    }, [isActive, time]);
+    }, [isActive, time]);clearInterval
 };
 
 export default useUpdateCurrentTime;
