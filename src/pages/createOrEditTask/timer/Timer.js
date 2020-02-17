@@ -1,31 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import ms from 'pretty-ms';
 import { displayMsInFractionalHourFormat } from 'utils';
+import { useUpdateCurrentTime } from './hooks';
 import './Timer.css';
 
-//@TODO: Left off here. Something going on with the timer
+
 const Timer = ({ children, time, setTime }) => {
   const [isActive, setIsActive] = useState(false);
-
   const toggle = () => setIsActive(!isActive);
+
+  useUpdateCurrentTime(time, isActive, setTime);
 
   const reset = () => {
     setIsActive(false);
     setTime(0);
   }
-
-  useEffect(() => {
-    let interval;
-
-    if (isActive) {
-      let timeOffset = Date.now() - time;
-      interval = setInterval(() => setTime(Date.now() - timeOffset), 25);
-    } else if (!isActive && time !== 0) {
-      clearInterval(interval);
-    }
-
-    return () => clearInterval(interval)
-  }, [isActive, time]);
 
   return (
     <div className="timer">
