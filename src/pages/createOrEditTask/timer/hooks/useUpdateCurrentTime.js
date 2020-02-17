@@ -1,5 +1,11 @@
 import { useEffect } from 'react';
 
+/**
+ * Use this hook to update the current time for Timer.js
+ * @param {Number} time 
+ * @param {Boolean} isActive 
+ * @param {Function} setTime 
+ */
 const useUpdateCurrentTime = (time, isActive, setTime) => {
     return useEffect(() => {
         let interval;
@@ -13,7 +19,7 @@ const useUpdateCurrentTime = (time, isActive, setTime) => {
         }
 
         return () => clearInterval(interval)
-    }, [isActive, time]);clearInterval
+    }, [isActive, time]);
 };
 
 export default useUpdateCurrentTime;
