@@ -11,7 +11,7 @@ const BACK_BUTTON_EVENT = 'POP';
  */
 const useBackButtonlistener = history => {
     return useEffect(() => {
-        return window.onpopstate = (e) => {
+        return window.onpopstate = e => {
             if (history.action === BACK_BUTTON_EVENT) {
                 history.replace('/');
             }
