@@ -19,7 +19,7 @@ const Timer = ({ children, time, setTime }) => {
   return (
     <div className="timer">
       <div className="timer__display">
-        <div className="timer__display__content">
+        <div className="timer__display__content" data-test-id="timer__display__content">
           {`${ms(time)} - hours: ${displayMsInFractionalHourFormat(time)}`}
         </div>
 
