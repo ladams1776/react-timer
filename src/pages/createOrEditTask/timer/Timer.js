@@ -18,36 +18,30 @@ const Timer = ({ children, time, setTime }) => {
 
   return (
     <div className="timer">
-      <div className="timer__display">
-        <div className="timer__display__content" data-test-id="timer__display__content">
-          {`${ms(time)} - hours: ${displayMsInFractionalHourFormat(time)}`}
-        </div>
-
-        <div className="timer__buttons">
-
-          {time > 0 && <button className="timer__reset" onClick={reset}>
-            reset
+      <div className="timerButtons">
+        {time > 0 && <button className="timerReset" onClick={reset}>
+          reset
           </button>}
 
-          {isActive &&
-            (<button className="timer__stop" onClick={toggle}>
-              stop
+        {isActive &&
+          (<button className="timerStop" onClick={toggle}>
+            stop
           </button>)}
 
-          {time !== 0 && !isActive && (
-            <button className="timer__resume" onClick={toggle}>
-              resume
+        {time !== 0 && !isActive && (
+          <button className="timerResume" onClick={toggle}>
+            resume
             </button>
-          )}
+        )}
 
-          {time === 0 && !isActive &&
-            (<button className="timer__start" onClick={toggle}>
-              start
+        {time === 0 && !isActive &&
+          (<button className="timerStart" onClick={toggle}>
+            start
           </button>)}
-
-          {children}
-
-        </div>
+      </div>
+      <div className="timerDisplay">
+        <div className="timerProject">{children}</div>
+        <span className="timerCurrent" data-test-id="timer__display__content">{`${ms(time)} - hours: ${displayMsInFractionalHourFormat(time)}`}</span>
       </div>
     </div>
   );

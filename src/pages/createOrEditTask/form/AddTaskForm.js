@@ -3,11 +3,11 @@ import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
 import { getFormattedDate } from "utils";
+import ProjectDropDown from "../projectDropdown/ProjectDropdown";
 import Timer from "../timer/Timer";
 import './TaskForm.scss';
 
 const AddTaskForm = ({ history }) => {
-    const projectOptions = useFetchProjectOptions();
     const { setMessage, task } = useTaskEditContext();
     const [time, setTime] = useState(0);
 
@@ -54,22 +54,17 @@ const AddTaskForm = ({ history }) => {
                 <div className="taskFormContainer">
                     <div class="form">
                         <form className="taskForm" onSubmit={handleSubmit}>
+                            <Timer time={time} setTime={setTime}>
+                                <ProjectDropDown />
+                            </Timer>
                             <div className="textArea">
                                 <Field name="description" component="textarea" cols="80" rows="10" />
                             </div>
 
-                            <div className="taskForm__control">
-                                <div className="dropDown">
-                                    <Field name="projects" component="select" >
-                                        {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
-                                    </Field>
-                                </div>
-                                <Timer time={time} setTime={setTime}>
-                                    <button type="submit" className="submit">
-                                        Submit
-                                    </button>
-                                </Timer>
-                            </div>
+                            <button type="submit" className="submit">
+                                Submit
+                            </button>
+
                         </form>
                     </div>
                 </div>

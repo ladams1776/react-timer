@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
-import { useFetchProjectOptions, useTaskEditContext, useBackButtonListener, useFetchTaskById } from 'hooks';
+import { useTaskEditContext, useBackButtonListener, useFetchTaskById } from 'hooks';
 import getFormattedDate from "utils/getFormattedDate";
+import ProjectDropDown from "../projectDropdown/ProjectDropdown";
 import Timer from "../timer/Timer";
 
 
@@ -10,7 +11,6 @@ const EditTaskForm = ({ taskId, history }) => {
     useBackButtonListener(history);
     const [time, setTime] = useState(0);
     useFetchTaskById(taskId, setTime);
-    const projectOptions = useFetchProjectOptions();
     const { setMessage, task } = useTaskEditContext();
 
 
@@ -53,22 +53,16 @@ const EditTaskForm = ({ taskId, history }) => {
                 <div className="taskFormContainer">
                     <div class="form">
                         <form className="taskForm" onSubmit={handleSubmit}>
+                            <Timer time={time} setTime={setTime}>
+                                <ProjectDropDown />
+                            </Timer>
                             <div className="textArea">
                                 <Field name="description" component="textarea" cols="80" rows="10" />
                             </div>
 
-                            <div className="taskForm__control">
-                                <div className="dropDown">
-                                    <Field name="selectedProject" component="select" >
-                                        {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
-                                    </Field>
-                                </div>
-                                <Timer time={time} setTime={setTime}>
-                                    <button type="submit" className="submit">
-                                        Submit
-                                    </button>
-                                </Timer>
-                            </div>
+                            <button type="submit" className="submit">
+                                Submit
+                            </button>
                         </form>
                     </div>
                 </div>

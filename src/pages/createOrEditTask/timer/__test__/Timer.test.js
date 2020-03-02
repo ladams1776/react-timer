@@ -19,7 +19,7 @@ describe.only('src/pages/createOrEditTask/timer/__test__/Timer.test.js', () => {
     describe('Timer', () => {
         let wrapper;
 
-        it('', () => {
+        it('should display the time in the right format', () => {
             const context = {
                 isActive: false,
                 setIsActive: sinon.spy()
@@ -29,5 +29,7 @@ describe.only('src/pages/createOrEditTask/timer/__test__/Timer.test.js', () => {
             wrapper = createWrapperWithContext(<Timer time={time} setTime={setTimeSpy} />, context);
             expect(wrapper.find(findByTestId("timer__display__content")).text()).toEqual(`${ms(time)} - hours: ${displayMsInFractionalHourFormat(time)}`);
         });
+
+        //@TODO: We want to test hte buttons
     });
 });

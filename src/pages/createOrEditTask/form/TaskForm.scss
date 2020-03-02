@@ -7,26 +7,6 @@
     Info: #3e80ed;
 **/
 
-.react-loading {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    display: flex;
-    height: 600px;
-    flex-wrap: wrap;
-    align-content: space-around;
-}
-
-
-.textArea {
-    background-color:#d8d8d8b3;
-    padding: 2em;
-    display: inline-flex;
-    height: 100%;
-    flex: .75 .85;
-}
-
 .taskFormContainer {
     max-width: 1164px;
     margin-top: 50px;
@@ -36,38 +16,43 @@
 .taskForm {
     display: flex;
     height: 200px;
-    flex-direction: row;
-}
-
-.taskForm__control {
-    flex-wrap: wrap;
-    flex: .25 .15;
-    display: inline-flex;
-    height: 283px;
-}
-
-.dropDown {
-    padding: 1em;
-    background-color: #d8d8d8b3;
-    border-radius: 4px;
-    flex: 1;
-    display: flex;
     flex-direction: column;
 }
 
+.textArea {
+    background-color:#d8d8d8b3;
+    padding: 2em;
+    display: inline-flex;
+    height: 100%;
+    flex: .75 .85;
+}
 
 .submit,
 .submit:hover {
+    align-self: flex-end;
     background-color: #2d73f5;
-    color: white;
     border-radius: 4px;
     height: 50px;
     border: none;
     width: 75px;
+    color: white;
 }
 
 .submit:hover {
     background-color: #275ab9;
+}
+
+
+// React-loading styles (probs should move this out). TODO: Make a loading wrapper
+.react-loading {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    display: flex;
+    height: 600px;
+    flex-wrap: wrap;
+    align-content: space-around;
 }
 
 .react-loading__content {
