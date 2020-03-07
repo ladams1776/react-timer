@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { useTaskEditContext, useBackButtonListener, useFetchTaskById } from 'hooks';
@@ -24,7 +24,7 @@ const EditTaskForm = ({ taskId, history }) => {
                 {
                     time,
                     contractId: event?.selectedProject || 0,
-                    description: event.description || ''
+                    description: event?.description || ''
                 }
             ]
         };

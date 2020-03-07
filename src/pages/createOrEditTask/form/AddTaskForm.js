@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
-import { useFetchProjectOptions, useTaskEditContext } from 'hooks';
+import { useTaskEditContext } from 'hooks';
 import { getFormattedDate } from "utils";
 import ProjectDropDown from "../projectDropdown/ProjectDropdown";
 import Timer from "../timer/Timer";
@@ -21,7 +21,7 @@ const AddTaskForm = ({ history }) => {
                 {
                     time,
                     contractId: event?.projects || 0,
-                    description: event.description || ''
+                    description: event?.description || ''
                 }
             ]
         };
