@@ -15,7 +15,6 @@
 
 .taskForm {
     display: flex;
-    height: 200px;
     flex-direction: column;
 }
 
@@ -23,7 +22,6 @@
     background-color:#d8d8d8b3;
     padding: 2em;
     display: inline-flex;
-    height: 100%;
     flex: .75 .85;
 }
 
@@ -36,10 +34,15 @@
     border: none;
     width: 75px;
     color: white;
+    margin-top: 1em;
 }
 
 .submit:hover {
     background-color: #275ab9;
+}
+
+.submit:disabled {
+    background-color: rgba(45, 115, 245, 0.45);
 }
 
 
