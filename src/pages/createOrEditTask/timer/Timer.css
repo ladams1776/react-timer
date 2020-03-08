@@ -27,20 +27,6 @@
     margin-top: 10px;
 }
 
-.timerStart,
-.timerStart:hover {
-    background-color: #ff6358;
-    color: white;
-    border-radius: 4px;
-    height: 50px;
-    border: none;
-    width: 75px;
-}
-
-.timerStart:hover {
-    background-color: #a8423b;
-}
-
 .timerReset,
 .timerReset:hover {
     background-color: #d51923;
@@ -53,6 +39,10 @@
 
 .timerReset:hover {
     background-color: #971118;
+}
+
+.timerReset:disabled {
+    background-color: rgba(199, 82, 82, 0.58);
 }
 
 .timerResume,
@@ -71,8 +61,8 @@
 
 .timerStop,
 .timerStop:hover {
-    background-color: #3e80ed;
-    color: white;
+    background-color: #fdce3e;
+    color: rgb(100,100,100);
     border-radius: 4px;
     height: 50px;
     border: none;
@@ -80,5 +70,5 @@
 }
 
 .timerStop:hover {
-    background-color: #3468bb;
+    background-color: #dcb231;
 }
