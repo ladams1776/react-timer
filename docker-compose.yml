@@ -32,7 +32,8 @@ services:
         ports:
             - "3000:3000"
         image: ladams1776/client
-        volumes: ["./app"]         
+        volumes: ["/app"]     # mac
+        # volumes: ["/.app"] # windows and linux         
         networks:
             react_timer:
                 ipv4_address: 172.28.1.2
