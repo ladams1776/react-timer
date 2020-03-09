@@ -4,7 +4,7 @@ import { displayMsInFractionalHourFormat } from 'utils';
 import { createWrapperWithContext, findByTestId } from 'testUtils';
 import Timer from '../Timer';
 
-describe.only('src/pages/createOrEditTask/timer/__test__/Timer.test.js', () => {
+describe('src/pages/createOrEditTask/timer/__test__/Timer.test.js', () => {
   describe('Timer', () => {
     let wrapper;
 
@@ -68,12 +68,46 @@ describe.only('src/pages/createOrEditTask/timer/__test__/Timer.test.js', () => {
       });
 
       describe('stop button', () => {
+        it("should be displaying, if 'isActive' is true", () => {
+          wrapper = createWrapperWithContext(
+            <Timer time={0} isActive={true} />,
+          );
+
+          expect(wrapper.find(findByTestId('timerStop')).text()).toBe('stop');
+        });
+
+        it("should NOT be displaying, if 'isActive' is false", () => {
+          wrapper = createWrapperWithContext(
+            <Timer time={0} isActive={false} />,
+          );
+
+          expect(wrapper.find(findByTestId('timerStop'))).toEqual({});
+        });
+
         describe('onClick', () => {
-          it("should call 'setIsActive' ", () => {
-            //@TODO: Left off here
+          it("should call 'setIsActive'", () => {
+            const stubTime = 0;
+            const spySetIsActive = jest.fn().mockImplementation();
+
+            wrapper = createWrapperWithContext(
+              <Timer
+                time={stubTime}
+                isActive={true}
+                setIsActive={spySetIsActive}
+              />,
+            );
+
+            wrapper
+              .find(findByTestId('timerStop'))
+              .props()
+              .onClick();
+
+            expect(spySetIsActive).toBeCalledWith(false);
           });
         });
       });
+
+      //@TODO test resume
     });
   });
 });

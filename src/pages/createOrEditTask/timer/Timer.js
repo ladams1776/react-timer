@@ -27,7 +27,9 @@ const Timer = ({ children, time, setTime, isActive = false, setIsActive }) => {
         </button>
 
         {isActive && (
-          <button className="timerStop" onClick={toggle}>
+          <button className="timerStop"           
+          data-test-id="timerStop"
+          onClick={toggle}>
             stop
           </button>
         )}
