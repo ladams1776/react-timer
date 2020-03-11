@@ -1,52 +1,52 @@
-
 .button-add,
 .button-add:hover {
-    background-color: #ff6358;
-    color: white;
-    border-radius: 4px;
-    height: 1.5em;
-    border: none;
-    padding: 1em;
-    text-decoration: none;
-    text-align: center;
-    width: 95px;
+  background-color: #ff6358;
+  color: white;
+  border-radius: 4px;
+  height: 1.5em;
+  border: none;
+  padding: 1em;
+  text-decoration: none;
+  text-align: center;
+  width: 95px;
 }
 
 .button-add:hover {
-    background-color: #a4413a;
+  background-color: #a4413a;
 }
 
 .button-download,
 .button-download:hover {
-    background-color: #3e80ed;
-    color: white;
-    border-radius: 4px;
-    width: 90px;
-    height: 1.5em;
-    border: none;
-    padding: 1em;
-    text-align: center;
-    text-decoration: none;
-    margin-left: .5em;
+  display: flex;
+  background-color: #3e80ed;
+  color: white;
+  border-radius: 4px;
+  width: 90px;
+  height: 1.5em;
+  border: none;
+  padding: 1em;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 0.5em;
 }
 
 .button-download:hover {
-    background-color: #184693;
+  background-color: #184693;
 }
 
 .button-delete,
 .button-delete:hover {
-    background-color: #d51923;
-    color: white;
-    border-radius: 4px;
-    width: 75px;
-    height: 1.5em;
-    border: none;
-    padding: 1em;
-    text-align: center;
-    text-decoration: none;
+  background-color: #d51923;
+  color: white;
+  border-radius: 4px;
+  width: 75px;
+  height: 1.5em;
+  border: none;
+  padding: 1em;
+  text-align: center;
+  text-decoration: none;
 }
 
 .button-delete:hover {
-    background-color: #af111a;
+  background-color: #af111a;
 }
