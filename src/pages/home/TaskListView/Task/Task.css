@@ -2,22 +2,11 @@ li {
   list-style: none;
 }
 
-.task-item {
-  overflow: hidden;
-  list-style: none;
-  display: flex;
-  width: 600px;
-  line-height: 2em;
-  text-decoration: none;
-  margin: 2em auto;
-  background-color: #f6f6f6;
-  color: #3b3b3b;
-  padding: 2em;
-  box-shadow: 1px 1px 4px 4px #DDD; 
+.block {
+  display: block;
 }
 
-
-
+.task-item,
 .task-item:hover {
   list-style: none;
   display: -webkit-flex;
@@ -26,30 +15,31 @@ li {
   line-height: 2em;
   text-decoration: none;
   margin: 2em auto;
-  background-color: #ffffff;
+  background-color: #f6f6f6;
   color: #3b3b3b;
   padding: 2em;
-  box-shadow: 4px 4px 4px 4px #DDD;
+  box-shadow: 1px 1px 4px 4px #ddd;
+}
+
+.task-item:hover {
+  background-color: #ffffff;
+  color: #3b3b3b;
+  box-shadow: 2px 2px 2px 2px #ddd;
 }
 
 .task-item__left {
-  width: 80%;
+  flex: 5;
+  overflow: hidden;
 }
 
 .task-item__description {
   display: block;
   overflow: hidden;
-  font-size: .95rem;
-  line-height: .5;
-  margin-bottom: .5em;
-  padding-bottom: .5em;
-}
-
-.task-item__description-item {
-  white-space: nowrap;
-
-  /* overflow: hidden;
-  line-height: 1; */
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
+  overflow-wrap: break-word;
 }
 
 .task-item__customer {
@@ -58,32 +48,12 @@ li {
   line-height: 1em;
 }
 
-.task-item__contract {
-  display: inline-block;
-  font-weight: 600;
-  line-height: 1em;
+.task-item__date-time {
+  line-height: 1.25em;
 }
 
-.task-item__time {
-  line-height: 1em;
-  flex:none;
-  margin-left: 1em;
-}
-
-.task-item__time-label {
-  display: inline-block;
-}
-
-.task-item__time-value {
-  display: inline-block;
-}
-
-.task-item__item-date {
-  display: block;
-  margin-top: 1em;
-}
-
-.task-item__delete-btn {
+.task-item__delete-btn,
+.task-item__delete-btn:hover {
   background-color: #af111a;
   color: white;
   border-radius: 4px;
@@ -92,19 +62,11 @@ li {
   border: none;
   text-align: center;
   text-decoration: none;
-  margin-left: 1em;
+  margin-left: 0.25em;
   font-size: 16px;
 }
 
 .task-item__delete-btn:hover {
   background-color: #f01c27;
   color: rgb(34, 33, 33);
-  border-radius: 4px;
-  width: 30px;
-  height: 30px;
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  margin-left: 1em;
-  font-size: 16px;
 }
