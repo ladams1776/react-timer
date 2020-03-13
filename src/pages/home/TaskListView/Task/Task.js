@@ -11,7 +11,7 @@ const Task = ({ task }) => {
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
   const displayableDescription = description
     .split('\n')
-    .map(paragraph => paragraph);
+    .map(paragraph => <p>{paragraph}</p>);
 
   return (
     <NavLink to={'/task/' + _id} id={_id} className="task-item">

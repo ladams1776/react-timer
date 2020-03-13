@@ -36,7 +36,7 @@ li {
   display: block;
   overflow: hidden;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: .85;
   margin-bottom: 0.5em;
   padding-bottom: 0.5em;
   overflow-wrap: break-word;
