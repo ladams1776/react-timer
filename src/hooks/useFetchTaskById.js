@@ -3,7 +3,6 @@ import { useTaskEditContext } from 'hooks';
 
 const useFetchTaskById = (taskId, setTime) => {
   const { updateTask } = useTaskEditContext();
-
   return useEffect(() => {
     if (taskId !== '-1') {
       fetch('/api/task/' + taskId)
@@ -20,7 +19,7 @@ const useFetchTaskById = (taskId, setTime) => {
           updateTask({});
         });
     }
-  }, [taskId]);
+  }, [taskId, setTime, updateTask]);
 };
 
 export default useFetchTaskById;
