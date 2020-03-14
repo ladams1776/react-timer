@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ms from 'pretty-ms';
 import { displayMsInFractionalHourFormat } from 'utils';
 import { useUpdateCurrentTime } from './hooks';
