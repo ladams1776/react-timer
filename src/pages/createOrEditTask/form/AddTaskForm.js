@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { useTaskEditContext } from 'hooks';
@@ -10,6 +10,7 @@ import './TaskForm.scss';
 const AddTaskForm = ({ history }) => {
   const { setMessage, task } = useTaskEditContext();
   const [time, setTime] = useState(0);
+  const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
   /**
    * These really can live in the Timer comp, but to be able to Unit test the Timer
    * and not try to figure out how to mock what useState returns... this seems to be
@@ -60,11 +61,11 @@ const AddTaskForm = ({ history }) => {
       onSubmit={onSubmit}
       render={({ handleSubmit, pristine }) => (
         <div className="taskFormContainer">
-          <div class="form">
+          <div className="form">
             <form className="taskForm" onSubmit={handleSubmit}>
               <Timer
                 time={time}
-                setTime={setTime}
+                setTime={setTimeCallback}
                 isActive={isActive}
                 setIsActive={setIsActive}
               >

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import {
@@ -12,9 +12,11 @@ import Timer from '../timer/Timer';
 
 const EditTaskForm = ({ taskId, history }) => {
   useBackButtonListener(history);
-  const [time, setTime] = useState(0);
-  useFetchTaskById(taskId, setTime);
   const { setMessage, task } = useTaskEditContext();
+  const [time, setTime] = useState(0);
+  const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
+  useFetchTaskById(taskId, setTimeCallback);
+
   /**
    * These really can live in the Timer comp, but to be able to Unit test the Timer
    * and not try to figure out how to mock what useState returns... this seems to be
@@ -65,7 +67,7 @@ const EditTaskForm = ({ taskId, history }) => {
             <form className="taskForm" onSubmit={handleSubmit}>
               <Timer
                 time={time}
-                setTime={setTime}
+                setTime={setTimeCallback}
                 isActive={isActive}
                 setIsActive={setIsActive}
               >
