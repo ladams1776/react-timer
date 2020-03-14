@@ -18,7 +18,7 @@ const useUpdateCurrentTime = (time, isActive, setTime) => {
         }
 
         return () => clearInterval(interval)
-    }, [isActive, time]);
+    }, [isActive, time, setTime]);
 };
 
 export default useUpdateCurrentTime;
