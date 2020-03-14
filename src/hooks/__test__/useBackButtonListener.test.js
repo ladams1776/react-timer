@@ -1,6 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useBackButtonListener from '../useBackButtonListener';
-import useBackButtonlistener from '../useBackButtonListener';
 
 describe('src/hooks/__test__/useBackButtonListener.test.js', () => {
     describe('#useBackButtonListener', () => {
