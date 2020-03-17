@@ -12,13 +12,15 @@ describe('src/pages/home/TaskListView/Task/__test__/Task.test.js', () => {
       };
 
       wrapper = createWrapperWithContext(
-        <Task
-          task={{
-            _id: 'taskId',
-            contractId: 0,
-            description: 'this is a wonderful description',
-          }}
-        />,
+        <li key="Need to have a unique key">
+          <Task
+            task={{
+              _id: 'taskId',
+              contractId: 0,
+              description: 'this is a wonderful description',
+            }}
+          />
+        </li>,
         context,
       );
 
