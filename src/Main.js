@@ -43,21 +43,18 @@ const Main = () => {
         }, []),
         setMessage: useCallback(message => {
           setMessage(message);
-        }, [])
+        }, []),
       }}
     >
       <HashRouter>
-        <div>
-          <div className="content">
-            <FlashMessage />
-            <Route
-              exact
-              path="/task/:id"
-              render={props => <CreateOrEditTaskPage {...props} />}
-            />
-
-            <Route exact path="/" render={props => <IndexPage {...props} />} />
-          </div>
+        <div className="content">
+          <FlashMessage />
+          <Route
+            exact
+            path="/task/:id"
+            render={props => <CreateOrEditTaskPage {...props} />}
+          />
+          <Route exact path="/" render={props => <IndexPage {...props} />} />
         </div>
       </HashRouter>
     </TaskEditFormProvider>
