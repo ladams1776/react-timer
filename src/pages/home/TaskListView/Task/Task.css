@@ -27,16 +27,29 @@ li {
   box-shadow: 2px 2px 2px 2px #ddd;
 }
 
-.task-item__left {
+@media only screen and (max-width: 600px) {
+  .task-item,
+  .task-item:hover {
+    width: 96vw;
+    max-height: 300px;
+    font-size: 12px;
+    margin: 4em auto;
+    padding: 0;
+  }
+}
+
+.task-item__left,
+.task-item__left:hover {
   flex: 5;
   overflow: hidden;
 }
 
 .task-item__description {
   display: block;
+  max-height: 230px;
   overflow: hidden;
   font-size: 0.95rem;
-  line-height: .85;
+  line-height: 0.85;
   margin-bottom: 0.5em;
   padding-bottom: 0.5em;
   overflow-wrap: break-word;

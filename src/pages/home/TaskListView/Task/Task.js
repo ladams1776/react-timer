@@ -6,12 +6,15 @@ import { useGetProjectOptionLabel } from 'hooks';
 import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
 import './Task.css';
 
+const MAX_DESCRIPTION_LINE = 9;
+
 const Task = ({ task }) => {
   const { _id, description = '', contractId, time, date } = task;
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
   const displayableDescription = description
     .split('\n')
-    .map(paragraph => <p>{paragraph}</p>);
+    .filter((line, index) => index < MAX_DESCRIPTION_LINE)
+    .map((paragraph, index) => <p>{paragraph}</p>);
 
   return (
     <NavLink to={'/task/' + _id} id={_id} className="task-item">
