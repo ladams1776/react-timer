@@ -6,6 +6,7 @@
     Danger: #d51923;
     Info: #3e80ed;
 **/
+
 .timer {
     display: flex;
     flex-direction: column;
