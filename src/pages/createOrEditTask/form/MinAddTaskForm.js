@@ -1,31 +1,24 @@
 import React, { useState, useCallback } from 'react';
-import className from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
-import {
-  useTaskEditContext,
-  useBackButtonListener,
-  useFetchTaskById,
-} from 'hooks';
-import getFormattedDate from 'utils/getFormattedDate';
+import { useTaskEditContext } from 'hooks';
+import { getFormattedDate } from 'utils';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
-import Timer from '../timer/Timer';
+import MinTimer from '../timer/MinTimer';
+import './MinTaskForm.scss';
 
-const EditTaskForm = ({ taskId, history }) => {
-  useBackButtonListener(history);
+
+//@TODO: Going to restyle this.
+const MinAddTaskForm = ({ history }) => {
   const { setMessage, task } = useTaskEditContext();
   const [time, setTime] = useState(0);
-  const [isMinimized, setIsMinimized] = useState(false);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
-  useFetchTaskById(taskId, setTimeCallback);
-
   /**
-   * These really can live in the Timer comp, but to be able to Unit test the Timer
+   * These really can live in the MinTimer comp, but to be able to Unit test the MinTimer
    * and not try to figure out how to mock what useState returns... this seems to be
    * an easy compromise. Or at least a late night, tired one.
    */
   const [isActive, setIsActive] = useState(false);
-
   const onSubmit = event => {
     const date = new Date();
     const dateFormatted = getFormattedDate(date);
@@ -35,23 +28,28 @@ const EditTaskForm = ({ taskId, history }) => {
       WorkUnit: [
         {
           time,
-          contractId: event?.selectedProject || 0,
+          contractId: event?.projects || 0,
           description: event?.description || '',
         },
       ],
     };
 
-    timeTask._id = task._id;
+    timeTask._id = task?._id || '-1';
 
     fetch('/api/task', {
-      method: 'PUT',
+      method: 'POST',
       body: JSON.stringify(timeTask),
       headers: { 'Content-Type': 'application/json' },
     })
-      .then(e => {
-        if (e.status === 200) {
+      .then(res => {
+        if (res.status === 200) {
           setMessage('Successfully created/updated a Task');
+          return res.json();
+          // setIsLoading(false);
         }
+      })
+      .then(data => {
+        history.push(`/task/${data._id}`);
       })
       .catch(error => console.log(error, 'Error!'));
   };
@@ -59,22 +57,22 @@ const EditTaskForm = ({ taskId, history }) => {
   return (
     <Form
       initialValues={{
-        description: task.description,
-        selectedProject: task.contractId,
+        description: '',
+        projects: 0,
       }}
       onSubmit={onSubmit}
       render={({ handleSubmit, pristine }) => (
         <div className="taskFormContainer">
-          <div class="form">
+          <div className="form">
             <form className="taskForm" onSubmit={handleSubmit}>
-              <Timer
+              <MinTimer
                 time={time}
                 setTime={setTimeCallback}
                 isActive={isActive}
                 setIsActive={setIsActive}
               >
                 <ProjectDropDown />
-              </Timer>
+              </MinTimer>
               <div className="textArea">
                 <Field
                   name="description"
@@ -82,6 +80,7 @@ const EditTaskForm = ({ taskId, history }) => {
                   cols="80"
                   rows="10"
                 />
+
                 <div className="glyphicon glyphicon-collapse-down minimizeTextAreaButton" />
               </div>
 
@@ -90,11 +89,11 @@ const EditTaskForm = ({ taskId, history }) => {
               </button>
             </form>
           </div>
-        </div >
+        </div>
       )}
     />
   );
 };
 
-//@TODO: Replace this with the pipeline operator.
-export default withRouter(EditTaskForm);
+//@TODO: Come back and use pipeline operator
+export default withRouter(MinAddTaskForm);

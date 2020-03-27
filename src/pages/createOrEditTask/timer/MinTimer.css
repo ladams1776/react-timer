@@ -1,0 +1,75 @@
+/**
+    Accent: #ff6358;
+    
+    Success: #5ec232;
+    Warning: #fdce3e;
+    Danger: #d51923;
+    Info: #3e80ed;
+**/
+.timer {
+    display: flex;
+    flex-direction: column;
+}
+
+.timerDisplay {
+    display: flex;
+    flex-direction: row;
+    background: #d8d8d8b3;
+}
+
+.timerButtons {
+    display: flex;
+    background: #d8d8d8b3;
+}
+
+.timerReset,
+.timerReset:hover,
+.timerReset:disabled,
+.timerResume,
+.timerResume:hover,
+.timerStop,
+.timerStop:hover
+ {
+    width: 20px;
+    height: 20px;
+}
+
+.timerReset,
+.timerReset:hover {
+    background-color: #d51923;
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
+.timerReset:hover {
+    background-color: #971118;
+}
+
+.timerReset:disabled {
+    background-color: rgba(199, 82, 82, 0.58);
+}
+
+.timerResume,
+.timerResume:hover {
+    background-color: #5ec232;
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
+.timerResume:hover {
+    background-color: #458f26;
+}
+
+.timerStop,
+.timerStop:hover {
+    background-color: #fdce3e;
+    color: rgb(100,100,100);
+    border-radius: 4px;
+    border: none;
+}
+
+.timerStop:hover {
+    background-color: #dcb231;
+}

@@ -7,7 +7,7 @@ import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import Timer from '../timer/Timer';
 import './TaskForm.scss';
 
-const AddTaskForm = ({ history }) => {
+const AddTaskForm = ({ history, setIsMinimized }) => {
   const { setMessage, task } = useTaskEditContext();
   const [time, setTime] = useState(0);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
@@ -78,6 +78,8 @@ const AddTaskForm = ({ history }) => {
                   cols="80"
                   rows="10"
                 />
+
+                <div className="glyphicon glyphicon-collapse-down minimizeTextAreaButton" onClick={() => setIsMinimized(true)} />
               </div>
 
               <button type="submit" className="submit" disabled={pristine}>
