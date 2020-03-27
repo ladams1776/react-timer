@@ -71,6 +71,7 @@ const MinAddTaskForm = ({ history }) => {
                 isActive={isActive}
                 setIsActive={setIsActive}
               >
+                <button type="submit" className="submit" disabled={pristine} />
                 <ProjectDropDown />
               </MinTimer>
               <div className="textArea">
@@ -84,9 +85,6 @@ const MinAddTaskForm = ({ history }) => {
                 <div className="glyphicon glyphicon-collapse-down minimizeTextAreaButton" />
               </div>
 
-              <button type="submit" className="submit" disabled={pristine}>
-                Submit
-              </button>
             </form>
           </div>
         </div>

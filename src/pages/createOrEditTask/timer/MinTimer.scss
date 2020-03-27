@@ -18,8 +18,9 @@
 }
 
 .timerButtons {
-    display: flex;
     background: #d8d8d8b3;
+    display: flex;
+    flex-direction: column;
 }
 
 .timerReset,

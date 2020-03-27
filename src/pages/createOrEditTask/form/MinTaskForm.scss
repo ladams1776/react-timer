@@ -9,13 +9,16 @@
 
 .taskFormContainer {
     max-width: 1164px;
-    margin-top: 50px;
-    margin: auto;
+        margin: auto;
 }
 
 .taskForm {
     display: flex;
     flex-direction: row-reverse;
+}
+
+.timerProject {
+    background-color: #d8d8d8b3;
 }
 
 .textArea {
@@ -35,11 +38,10 @@
     align-self: flex-end;
     background-color: #2d73f5;
     border-radius: 4px;
-    height: 50px;
+    height: 20px;
     border: none;
-    width: 75px;
+    width: 20px;
     color: white;
-    margin-top: 1em;
 }
 
 .submit:hover {
