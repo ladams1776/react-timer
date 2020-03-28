@@ -1,79 +1,79 @@
-/**
-    Accent: #ff6358;
+// /**
+//     Accent: #ff6358;
     
-    Success: #5ec232;
-    Warning: #fdce3e;
-    Danger: #d51923;
-    Info: #3e80ed;
-**/
+//     Success: #5ec232;
+//     Warning: #fdce3e;
+//     Danger: #d51923;
+//     Info: #3e80ed;
+// **/
 
-.taskFormContainer {
-    max-width: 1164px;
-    margin-top: 50px;
-    margin: auto;
-}
+// .taskFormContainer {
+//     max-width: 1164px;
+//     margin-top: 50px;
+//     margin: auto;
+// }
 
-.taskForm {
-    display: flex;
-    flex-direction: column;
-}
+// .taskForm {
+//     display: flex;
+//     flex-direction: column;
+// }
 
-.textArea {
-    background-color:#d8d8d8b3;
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    flex: .75 .85;
-}
+// .textArea {
+//     background-color:#d8d8d8b3;
+//     padding: 2em;
+//     display: flex;
+//     flex-direction: column;
+//     flex: .75 .85;
+// }
 
-.minimizeTextAreaButton {
-    margin-top: 5px;
-}
+// .minimizeTextAreaButton {
+//     margin-top: 5px;
+// }
 
-.submit,
-.submit:hover {
-    align-self: flex-end;
-    background-color: #2d73f5;
-    border-radius: 4px;
-    height: 50px;
-    border: none;
-    width: 75px;
-    color: white;
-    margin-top: 1em;
-}
+// .submit,
+// .submit:hover {
+//     align-self: flex-end;
+//     background-color: #2d73f5;
+//     border-radius: 4px;
+//     height: 50px;
+//     border: none;
+//     width: 75px;
+//     color: white;
+//     margin-top: 1em;
+// }
 
-.submit:hover {
-    background-color: #275ab9;
-}
+// .submit:hover {
+//     background-color: #275ab9;
+// }
 
-.submit:disabled {
-    background-color: rgba(45, 115, 245, 0.45);
-}
+// .submit:disabled {
+//     background-color: rgba(45, 115, 245, 0.45);
+// }
 
 
-// React-loading styles (probs should move this out). TODO: Make a loading wrapper
-.react-loading {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    display: flex;
-    height: 600px;
-    flex-wrap: wrap;
-    align-content: space-around;
-}
+// // React-loading styles (probs should move this out). TODO: Make a loading wrapper
+// .react-loading {
+//     display: -webkit-flex;
+//     display: flex;
+//     -webkit-flex-direction: column;
+//     flex-direction: column;
+//     display: flex;
+//     height: 600px;
+//     flex-wrap: wrap;
+//     align-content: space-around;
+// }
 
-.react-loading__content {
-    width: 400px;
-    height: 400px;
-    margin: auto;
-    width: 100px;
-    margin: auto;
-    text-align: center;
-    line-height: 75px;
-}
+// .react-loading__content {
+//     width: 400px;
+//     height: 400px;
+//     margin: auto;
+//     width: 100px;
+//     margin: auto;
+//     text-align: center;
+//     line-height: 75px;
+// }
 
-.react-loading div svg {
-    width: 100px;
-    margin: auto 0;
-}
+// .react-loading div svg {
+//     width: 100px;
+//     margin: auto 0;
+// }

@@ -1,22 +1,22 @@
 [
     {
-        "label": "React Timer",
+        "label": "⏲ React Timer",
+        "icon": "⏲",
         "value": "0"
     },
     {
-        "label": "Apache Spark",
+        "label": "✨ Apache Spark",
+        "icon": "✨",
         "value": "1"
     },
     {
-        "label": "shell script course",
+        "label": "🐚 Shell Script",
+        "icon": "🐚",
         "value": "2"
     },
     {
-        "label": "vim course",
+        "label": "🐙 Vim",
+        "icon": "🐙",
         "value": "3"
-    },
-    {
-        "label": "react timer app",
-        "value": "4"
     }
 ]

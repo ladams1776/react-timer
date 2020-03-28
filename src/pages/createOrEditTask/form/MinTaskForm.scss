@@ -29,18 +29,24 @@
     flex: .75 .85;
 }
 
-.minimizeTextAreaButton {
+.maximize {
     margin-top: 5px;
+    color:#333;
+    font-size: 40px;
+    width: 40px;
+}
+
+.maximize:hover {
+    color: #777;
 }
 
 .submit,
 .submit:hover {
-    align-self: flex-end;
     background-color: #2d73f5;
     border-radius: 4px;
-    height: 20px;
+    height: 40px;
     border: none;
-    width: 20px;
+    width: 40px;
     color: white;
 }
 

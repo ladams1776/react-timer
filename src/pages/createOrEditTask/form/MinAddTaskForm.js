@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import classnames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { useTaskEditContext } from 'hooks';
@@ -9,7 +10,7 @@ import './MinTaskForm.scss';
 
 
 //@TODO: Going to restyle this.
-const MinAddTaskForm = ({ history }) => {
+const MinAddTaskForm = ({ history, setIsMinimized}) => {
   const { setMessage, task } = useTaskEditContext();
   const [time, setTime] = useState(0);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
@@ -71,7 +72,7 @@ const MinAddTaskForm = ({ history }) => {
                 isActive={isActive}
                 setIsActive={setIsActive}
               >
-                <button type="submit" className="submit" disabled={pristine} />
+                <button type="submit" className={classnames("submit", "glyphicon glyphicon-floppy-disk")} disabled={pristine} />
                 <ProjectDropDown />
               </MinTimer>
               <div className="textArea">
@@ -82,7 +83,7 @@ const MinAddTaskForm = ({ history }) => {
                   rows="10"
                 />
 
-                <div className="glyphicon glyphicon-collapse-down minimizeTextAreaButton" />
+                <div className={classnames("maximize", "glyphicon glyphicon-fullscreen minimizeTextAreaButton")} onClick={() => setIsMinimized(false)}/>
               </div>
 
             </form>

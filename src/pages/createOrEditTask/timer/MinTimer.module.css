@@ -32,8 +32,9 @@
 .timerStop,
 .timerStop:hover
  {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
 }
 
 .timerReset,
