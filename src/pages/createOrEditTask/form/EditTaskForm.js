@@ -9,6 +9,7 @@ import {
 import getFormattedDate from 'utils/getFormattedDate';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import Timer from '../timer/Timer';
+import styles from './TaskForm.module.css';
 
 const EditTaskForm = ({ taskId, history }) => {
   useBackButtonListener(history);
@@ -62,9 +63,9 @@ const EditTaskForm = ({ taskId, history }) => {
       }}
       onSubmit={onSubmit}
       render={({ handleSubmit, pristine }) => (
-        <div className="taskFormContainer">
-          <div class="form">
-            <form className="taskForm" onSubmit={handleSubmit}>
+        <div className={styles.taskFormContainer}>
+          <div className={styles.form}>
+            <form className={styles.taskForm} onSubmit={handleSubmit}>
               <Timer
                 time={time}
                 setTime={setTimeCallback}
@@ -73,7 +74,7 @@ const EditTaskForm = ({ taskId, history }) => {
               >
                 <ProjectDropDown />
               </Timer>
-              <div className="textArea">
+              <div className={styles.textArea}>
                 <Field
                   name="description"
                   component="textarea"
@@ -82,7 +83,7 @@ const EditTaskForm = ({ taskId, history }) => {
                 />
               </div>
 
-              <button type="submit" className="submit" disabled={pristine}>
+              <button type="submit" className={styles.submit} disabled={pristine}>
                 Submit
               </button>
             </form>

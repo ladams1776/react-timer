@@ -19,12 +19,14 @@ const TaskListView = () => {
           updateTasksCallback(data);
         }
       })
-      .catch(e => {}); //@TODO: Flash the error
+      .catch(e => { }); //@TODO: Flash the error
   }, [updateTasksCallback]);
 
   return (
     <div>
-      <ControlButtons />
+      <div className="task-list__header">
+        <ControlButtons />
+      </div>
       <ul className="task-list">
         {tasks.map(task => (
           <li key={task._id} className="task">

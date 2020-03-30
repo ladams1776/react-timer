@@ -1,5 +1,5 @@
-.button-add,
-.button-add:hover {
+.buttonAdd,
+.buttonAdd:hover {
   background-color: #ff6358;
   color: white;
   border-radius: 4px;
@@ -11,12 +11,12 @@
   width: 95px;
 }
 
-.button-add:hover {
+.buttonAdd:hover {
   background-color: #a4413a;
 }
 
-.button-download,
-.button-download:hover {
+.buttonDownload,
+.buttonDownload:hover {
   display: flex;
   background-color: #3e80ed;
   color: white;
@@ -30,12 +30,12 @@
   margin-left: 0.5em;
 }
 
-.button-download:hover {
+.buttonDownload:hover {
   background-color: #184693;
 }
 
-.button-delete,
-.button-delete:hover {
+.buttonDelete,
+.buttonDelete:hover {
   background-color: #d51923;
   color: white;
   border-radius: 4px;
@@ -47,6 +47,6 @@
   text-decoration: none;
 }
 
-.button-delete:hover {
+.buttonDelete:hover {
   background-color: #af111a;
 }

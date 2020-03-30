@@ -45,8 +45,6 @@
     background-color: rgba(45, 115, 245, 0.45);
 }
 
-
-// React-loading styles (probs should move this out). TODO: Make a loading wrapper
 .react-loading {
     display: -webkit-flex;
     display: flex;

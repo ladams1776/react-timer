@@ -8,7 +8,7 @@ import { writeJsonFile } from './writeJsonFile';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 import useTaskEditContext from 'hooks/useTaskEditContext';
 import { getFormattedDate } from 'utils';
-import './ControlButtons.css';
+import styles from './ControlButtons.module.css';
 
 const ControlButtons = () => {
   const { setMessage, projects, tasks, updateTasks } = useTaskEditContext();
@@ -45,11 +45,11 @@ const ControlButtons = () => {
   };
 
   return (
-    <div className="task-list__header">
+    <>
       {!tasks?.length || (
         <button
           type="a"
-          className="button-delete"
+          className={styles.buttonDelete}
           onClick={handleDelete}
           data-test-id="btn-delete"
         >
@@ -60,19 +60,20 @@ const ControlButtons = () => {
       {!tasks?.length || (
         <button
           type="a"
-          className="button-download"
+          className={styles.buttonDownload}
           onClick={handleDownload}
           data-test-id="btn-download"
         >
           <span className="glyphicon glyphicon-download-alt mr-5px"></span>
           Download
         </button>
-      )}
-      <NavLink to={'/task/-1'} className="button-add" data-test-id="btn-new">
-        <span className="glyphicon glyphicon-plus mr-5px" />
+      )
+      }
+      <NavLink to={'/task/-1'} className={styles.buttonAdd} data-test-id="btn-new">
+        <span className="glyphicon glyphicon- plus mr-5px" />
         New Task
-      </NavLink>
-    </div>
+    </NavLink >
+    </>
   );
 };
 

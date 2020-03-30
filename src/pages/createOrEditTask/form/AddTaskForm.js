@@ -5,7 +5,7 @@ import { useTaskEditContext } from 'hooks';
 import { getFormattedDate } from 'utils';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import Timer from '../timer/Timer';
-import './TaskForm.scss';
+import styles from './TaskForm.module.css';
 
 const AddTaskForm = ({ history }) => {
   const { setMessage, task } = useTaskEditContext();
@@ -60,9 +60,9 @@ const AddTaskForm = ({ history }) => {
       }}
       onSubmit={onSubmit}
       render={({ handleSubmit, pristine }) => (
-        <div className="taskFormContainer">
-          <div className="form">
-            <form className="taskForm" onSubmit={handleSubmit}>
+        <div className={styles.taskFormContainer}>
+          <div className={styles.form}>
+            <form className={styles.taskForm} onSubmit={handleSubmit}>
               <Timer
                 time={time}
                 setTime={setTimeCallback}
@@ -71,7 +71,7 @@ const AddTaskForm = ({ history }) => {
               >
                 <ProjectDropDown />
               </Timer>
-              <div className="textArea">
+              <div className={styles.textArea}>
                 <Field
                   name="description"
                   component="textarea"
@@ -80,7 +80,7 @@ const AddTaskForm = ({ history }) => {
                 />
               </div>
 
-              <button type="submit" className="submit" disabled={pristine}>
+              <button type="submit" className={styles.submit} disabled={pristine}>
                 Submit
               </button>
             </form>

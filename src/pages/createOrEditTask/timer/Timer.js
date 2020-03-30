@@ -2,7 +2,7 @@ import React from 'react';
 import ms from 'pretty-ms';
 import { displayMsInFractionalHourFormat } from 'utils';
 import { useUpdateCurrentTime } from './hooks';
-import './Timer.css';
+import styles from './Timer.module.css';
 
 const Timer = ({ children, time, setTime, isActive = false, setIsActive }) => {
   const toggle = () => setIsActive(!isActive);
@@ -15,10 +15,10 @@ const Timer = ({ children, time, setTime, isActive = false, setIsActive }) => {
   };
 
   return (
-    <div className="timer">
-      <div className="timerButtons">
+    <div className={styles.timer}>
+      <div className={styles.timerButtons}>
         <button
-          className="timerReset"
+          className={styles.timerReset}
           data-test-id="timerReset"
           onClick={reset}
           disabled={time === 0}
@@ -27,29 +27,29 @@ const Timer = ({ children, time, setTime, isActive = false, setIsActive }) => {
         </button>
 
         {isActive && (
-          <button className="timerStop"           
-          data-test-id="timerStop"
-          onClick={toggle}>
+          <button className={styles.timerStop}
+            data-test-id="timerStop"
+            onClick={toggle}>
             stop
           </button>
         )}
 
         {time !== 0 && !isActive && (
-          <button className="timerResume" onClick={toggle}>
+          <button className={styles.timerResume} onClick={toggle}>
             resume
           </button>
         )}
 
         {time === 0 && !isActive && (
-          <button className="timerResume" onClick={toggle}>
+          <button className={styles.timerResume} onClick={toggle}>
             start
           </button>
         )}
       </div>
-      <div className="timerDisplay">
-        <div className="timerProject">{children}</div>
+      <div className={styles.timerDisplay}>
+        <div className={styles.timerProject}>{children}</div>
         <span
-          className="timerCurrent"
+          className={styles.timerCurrent}
           data-test-id="timer__display__content"
         >{`${ms(time)} - hours: ${displayMsInFractionalHourFormat(
           time,
