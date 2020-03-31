@@ -10,16 +10,11 @@ const TaskListView = () => {
   const updateTasksCallback = useCallback(data => updateTasks(data), [updateTasks]);
 
   useEffect(() => {
-    fetch(`/api/tasks`)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        if (data.length >= 1) {
-          updateTasksCallback(data);
-        }
-      })
-      .catch(e => { }); //@TODO: Flash the error
+    (async () => {
+      const result = await fetch(`/api/tasks`);
+      const data = await result.json();
+      updateTasksCallback(data);
+    })();
   }, [updateTasksCallback]);
 
   return (
