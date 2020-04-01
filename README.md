@@ -32,9 +32,7 @@ Client should be visitable at: http://172.28.1.2:3000
 ### What I want to do
 
 -- Adjust all existing tests that use a context to use helper
-
-0. Write test for the onClick functionality of the FlashMessage
-1. Make formal pages that the form and task list view lives in
-2. break apart the context
-3. finish up the unit test on react components
-4. unit test the endpoints (server.js)
+0. (Part of #1) Circle back over to the Contexts and come up with a pattern for handling them.
+1. break apart the context
+2. finish up the unit test on react components
+3. unit test the endpoints (server.js)
