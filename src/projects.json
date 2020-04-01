@@ -1,10 +1,10 @@
 [
     {
-        "label": "🐓 Project1",
+        "label": "React Timer App",
         "value": "0"
     },
     {
-        "label": "🐷 Project2",
+        "label": "Apache Spark",
         "value": "1"
     },
     {
@@ -16,7 +16,7 @@
         "value": "3"
     },
     {
-        "label": "react timer app",
+        "label": "Conference talks",
         "value": "4"
     }
 ]
