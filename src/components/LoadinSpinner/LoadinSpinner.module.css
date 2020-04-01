@@ -1,0 +1,25 @@
+.reactLoadin {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    display: flex;
+    height: 600px;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.reactLoadinContent {
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    width: 100px;
+    margin: auto;
+    text-align: center;
+    line-height: 75px;
+}
+
+.reactLoadin div svg {
+    width: 100px;
+    margin: auto 0;
+}
