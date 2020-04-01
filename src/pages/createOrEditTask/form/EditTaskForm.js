@@ -41,7 +41,7 @@ const EditTaskForm = ({ taskId, history }) => {
     };
 
     timeTask._id = task._id;
-
+    
     fetch('/api/task', {
       method: 'PUT',
       body: JSON.stringify(timeTask),

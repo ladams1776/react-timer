@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { useTaskEditContext } from 'hooks';
+import { useTaskEditContext, useLoadinSpinnerContext } from 'hooks';
 import './TaskListView.css';
 import Task from './Task/Task';
 import ControlButtons from './ControlButtons';
@@ -7,14 +7,18 @@ import ControlButtons from './ControlButtons';
 //@TODO: Need test for this component.
 const TaskListView = () => {
   const { tasks, updateTasks } = useTaskEditContext();
+  const { setIsLoadin } = useLoadinSpinnerContext();
   const updateTasksCallback = useCallback(data => updateTasks(data), [updateTasks]);
 
   useEffect(() => {
+    setIsLoadin(true);
     (async () => {
       const result = await fetch(`/api/tasks`);
       const data = await result.json();
       updateTasksCallback(data);
-    })();
+      setIsLoadin(false);
+    })()
+
   }, [updateTasksCallback]);
 
   return (
