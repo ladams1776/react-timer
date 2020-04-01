@@ -44,29 +44,3 @@
 .submit:disabled {
     background-color: rgba(45, 115, 245, 0.45);
 }
-
-.react-loading {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    display: flex;
-    height: 600px;
-    flex-wrap: wrap;
-    align-content: space-around;
-}
-
-.react-loading__content {
-    width: 400px;
-    height: 400px;
-    margin: auto;
-    width: 100px;
-    margin: auto;
-    text-align: center;
-    line-height: 75px;
-}
-
-.react-loading div svg {
-    width: 100px;
-    margin: auto 0;
-}
