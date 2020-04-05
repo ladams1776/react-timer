@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext } from 'react';
 
 export const LoadinSpinnerContext = createContext();
 export const LoadinSpinnerActionsContext = createContext();
