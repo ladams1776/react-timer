@@ -5,6 +5,7 @@ import {
   useTaskEditContext,
   useBackButtonListener,
   useFetchTaskById,
+  useFlashMessageContext
 } from 'hooks';
 import getFormattedDate from 'utils/getFormattedDate';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
@@ -13,7 +14,8 @@ import styles from './TaskForm.module.css';
 
 const EditTaskForm = ({ taskId, history }) => {
   useBackButtonListener(history);
-  const { setMessage, task } = useTaskEditContext();
+  const { task } = useTaskEditContext();
+  const { setFlashMessage } = useFlashMessageContext();
   const [time, setTime] = useState(0);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
   useFetchTaskById(taskId, setTimeCallback);
@@ -41,7 +43,7 @@ const EditTaskForm = ({ taskId, history }) => {
     };
 
     timeTask._id = task._id;
-    
+
     fetch('/api/task', {
       method: 'PUT',
       body: JSON.stringify(timeTask),
@@ -49,7 +51,7 @@ const EditTaskForm = ({ taskId, history }) => {
     })
       .then(e => {
         if (e.status === 200) {
-          setMessage('Successfully created/updated a Task');
+          setFlashMessage('Successfully created/updated a Task');
         }
       })
       .catch(error => console.log(error, 'Error!'));
