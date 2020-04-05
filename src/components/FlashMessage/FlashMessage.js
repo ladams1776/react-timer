@@ -1,24 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import useTaskEditContext from 'hooks/useTaskEditContext';
-import './FlashMessage.css';
+import useFlashMessageContext from 'hooks/useFlashMessageContext';
+import styles from './FlashMessage.module.css';
 
 const FlashMessage = () => {
-  const { message, setMessage } = useTaskEditContext();
+  const { flashMessage, setFlashMessage } = useFlashMessageContext();
 
   return (
-    !message || (
-      <div className="flash-message" test-data-id="flash-message" onClick={() => setMessage(null)}>
-        <div className="flash-message_message" test-data-id="flash-message_message">{message}</div>
-        <div className="flash-message_cancel">X</div>
+    !flashMessage || (
+      <div className={styles.flashMessage} test-data-id="flash-flashMessage" onClick={() => setFlashMessage(null)}>
+        <div className={styles.flashMessageContent} test-data-id="flash-message_message">{flashMessage}</div>
+        <div className={styles.flashMessageCancel}>X</div>
       </div>
     )
   );
-};
-
-FlashMessage.propTypes = {
-  message: PropTypes.string,
-  onClick: PropTypes.func
 };
 
 export default FlashMessage;
