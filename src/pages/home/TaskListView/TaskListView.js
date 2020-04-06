@@ -14,12 +14,12 @@ const TaskListView = () => {
   
   useEffect(() => {
     setIsLoadin(true);
-    setErrorFlashMessage('Issue with fetching data from server');
 
     (async () => {
       try {
         const result = await fetch(`/api/tasks`);
         const data = await result.json();
+        updateTasksCallback(data);
       } catch (err) {
         setErrorFlashMessage('Issue with fetching data from server');
       } finally {
