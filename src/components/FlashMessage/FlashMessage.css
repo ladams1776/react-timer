@@ -1,18 +1,38 @@
+/**
+    Accent: #ff6358;
+    
+    Success: #5ec232;
+    Warning: #fdce3e;
+    Danger: #d51923;
+    Info: #3e80ed;
+**/
+
 .flashMessage,
 .flashMessage:hover {
     position: absolute;
     top: 50px;
     right: 50px;
     display: flex;
-    background:#5ec232;
     color:white;
     font-size: 1.1rem;
     cursor: pointer;
     width: 200px;
 }
 
-.flashMessage:hover {
+.flashMessage.success {
+    background:#5ec232;
+}
+
+.flashMessage.success:hover {
     background: #418823;
+}
+
+.flashMessage.error {
+    background:#d51923;
+}
+
+.flashMessage.error:hover {
+    background: #991017;
 }
 
 .flashMessageContent { 
