@@ -1,22 +1,29 @@
 import React, { useEffect, useCallback } from 'react';
-import { useTaskEditContext, useLoadinSpinnerContext } from 'hooks';
+import { useTaskEditContext, useLoadinSpinnerContext, useFlashMessageContext } from 'hooks';
 import './TaskListView.css';
 import Task from './Task/Task';
 import ControlButtons from './ControlButtons';
 
-//@TODO: Need test for this component.
+//@TODO: Need test for this component. It is just so much in flush atm
 const TaskListView = () => {
   const { tasks, updateTasks } = useTaskEditContext();
   const { setIsLoadin } = useLoadinSpinnerContext();
+  const { setErrorFlashMessage } = useFlashMessageContext();
   const updateTasksCallback = useCallback(data => updateTasks(data), [updateTasks]);
-
+  
   useEffect(() => {
     setIsLoadin(true);
+    setErrorFlashMessage('Issue with fetching data from server');
+
     (async () => {
-      const result = await fetch(`/api/tasks`);
-      const data = await result.json();
-      updateTasksCallback(data);
-      setIsLoadin(false);
+      try {
+        const result = await fetch(`/api/tasks`);
+        const data = await result.json();
+      } catch (err) {
+        setErrorFlashMessage('Issue with fetching data from server');
+      } finally {
+        setIsLoadin(false);
+      }
     })()
 
   }, [updateTasksCallback]);
