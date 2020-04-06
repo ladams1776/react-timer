@@ -1,13 +1,15 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext } from 'react';
+import useFlashMessage from './hooks/useFlashMessage';
+
 
 export const FlashMessageContext = createContext();
 export const FlashMessageActionsContext = createContext();
 
-const FlashMessageContextProvider = ({ children}) => {
-    const [flashMessage, setFlashMessage] = useState('');
+const FlashMessageContextProvider = ({ children }) => {
+    const { message, success, info, error, setSuccessFlashMessage, setErrorFlashMessage, setInfoFlashMessage, resetFlashMessage } = useFlashMessage();
 
-    return <FlashMessageContext.Provider value={flashMessage}>
-        <FlashMessageActionsContext.Provider value={setFlashMessage}>
+    return <FlashMessageContext.Provider value={{ message, success, info, error }}>
+        <FlashMessageActionsContext.Provider value={{ setSuccessFlashMessage, setErrorFlashMessage, setInfoFlashMessage, resetFlashMessage }}>
             {children}
         </FlashMessageActionsContext.Provider>
     </FlashMessageContext.Provider>

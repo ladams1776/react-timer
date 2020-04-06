@@ -1,15 +1,27 @@
 import React from 'react';
+import classnames from 'classnames';
 import useFlashMessageContext from 'hooks/useFlashMessageContext';
-import styles from './FlashMessage.module.css';
+import './FlashMessage.css';
 
 const FlashMessage = () => {
-  const { flashMessage, setFlashMessage } = useFlashMessageContext();
+  const { message, success, info, error, resetFlashMessage } = useFlashMessageContext();
 
   return (
-    !flashMessage || (
-      <div className={styles.flashMessage} test-data-id="flash-flashMessage" onClick={() => setFlashMessage(null)}>
-        <div className={styles.flashMessageContent} test-data-id="flash-message_message">{flashMessage}</div>
-        <div className={styles.flashMessageCancel}>X</div>
+    !message || (
+      <div className={classnames('flashMessage', {
+        success,
+        info,
+        error
+      })}
+        test-data-id="flash-flashMessage"
+        onClick={() => resetFlashMessage()}>
+
+        <div className="flashMessageContent"
+          test-data-id="flash-message_message">
+          {message}
+        </div>
+
+        <div className="flashMessageCancel">X</div>
       </div>
     )
   );
