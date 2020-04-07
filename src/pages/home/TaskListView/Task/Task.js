@@ -14,7 +14,7 @@ const Task = ({ task }) => {
   const displayableDescription = description
     .split('\n')
     .filter((line, index) => index < MAX_DESCRIPTION_LINE)
-    .map((paragraph, index) => <p>{paragraph}</p>);
+    .map((paragraph, index) => <p key={index}>{paragraph}</p>);
 
   return (
     <NavLink to={'/task/' + _id} id={_id} className="task-item">

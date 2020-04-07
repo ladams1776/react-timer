@@ -11,7 +11,7 @@ const TaskListView = () => {
   const { setIsLoadin } = useLoadinSpinnerContext();
   const { setErrorFlashMessage } = useFlashMessageContext();
   const updateTasksCallback = useCallback(data => updateTasks(data), [updateTasks]);
-  
+
   useEffect(() => {
     setIsLoadin(true);
 

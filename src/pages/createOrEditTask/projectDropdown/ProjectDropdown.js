@@ -7,7 +7,7 @@ const ProjectDropDown = () => {
 
     return <div className="dropDown">
         <Field name="selectedProject" component="select" >
-            {projectOptions.map(project => <option value={project.value}>{project.label}</option>)}
+            {projectOptions.map(project => <option value={project.value} key={project.value}>{project.label}</option>)}
         </Field>
     </div>
 };
