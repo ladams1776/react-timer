@@ -1,10 +1,11 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useCallback } from 'react';
 
 export const LoadinSpinnerContext = createContext();
 export const LoadinSpinnerActionsContext = createContext();
 
 const LoadinSpinnerContextProvider = ({ children }) => {
-    const [isLoadin, setIsLoadin] = useState(false);
+    const [isLoadin, setLoadin] = useState(false);
+    const setIsLoadin = useCallback(isLoadin => setLoadin(isLoadin), [setLoadin]);
 
     return <LoadinSpinnerContext.Provider value={isLoadin}>
         <LoadinSpinnerActionsContext.Provider value={setIsLoadin}>

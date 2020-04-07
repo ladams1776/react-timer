@@ -34,7 +34,7 @@ const Main = () => {
               setTask(task);
             }, []),
             updateTasks: useCallback(tasks => {
-              setTasks(tasks);
+              setTasks(tasks);  
             }, []),
             updateTaskId: useCallback(taskId => {
               setTaskId(taskId);

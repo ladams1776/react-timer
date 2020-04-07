@@ -16,7 +16,7 @@ const useFetchTaskById = (taskId, setTime) => {
     })();
     setIsLoadin(false);
 
-  }, [taskId, setTime, updateTask]);
+  }, [taskId, setTime, updateTask, setIsLoadin]);
 };
 
 export default useFetchTaskById;

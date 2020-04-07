@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { useTaskEditContext, useLoadinSpinnerContext, useFlashMessageContext } from 'hooks';
 import './TaskListView.css';
 import Task from './Task/Task';
@@ -10,7 +10,6 @@ const TaskListView = () => {
   const { tasks, updateTasks } = useTaskEditContext();
   const { setIsLoadin } = useLoadinSpinnerContext();
   const { setErrorFlashMessage } = useFlashMessageContext();
-  const updateTasksCallback = useCallback(data => updateTasks(data), [updateTasks]);
 
   useEffect(() => {
     setIsLoadin(true);
@@ -19,7 +18,7 @@ const TaskListView = () => {
       try {
         const result = await fetch(`/api/tasks`);
         const data = await result.json();
-        updateTasksCallback(data);
+        updateTasks(data);
       } catch (err) {
         setErrorFlashMessage('Issue with fetching data from server');
       } finally {
@@ -27,7 +26,7 @@ const TaskListView = () => {
       }
     })()
 
-  }, [updateTasksCallback]);
+  }, [updateTasks, setIsLoadin, setErrorFlashMessage]);
 
   return (
     <div>
