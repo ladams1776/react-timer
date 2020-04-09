@@ -15,10 +15,13 @@ import styles from './TaskForm.module.css';
 const EditTaskForm = ({ taskId, history }) => {
   useBackButtonListener(history);
   const { task } = useTaskEditContext();
-  const { setFlashMessage } = useFlashMessageContext();
+  const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
   const [time, setTime] = useState(0);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
   useFetchTaskById(taskId, setTimeCallback);
+
+  //@TODO: Use the new flashMessage, not this old one. It does not work
+
 
   /**
    * These really can live in the Timer comp, but to be able to Unit test the Timer
@@ -51,10 +54,10 @@ const EditTaskForm = ({ taskId, history }) => {
     })
       .then(e => {
         if (e.status === 200) {
-          setFlashMessage('Successfully created/updated a Task');
+          setSuccessFlashMessage('Successfully created/updated a Task');
         }
       })
-      .catch(error => console.log(error, 'Error!'));
+      .catch(error => setErrorFlashMessage(error));
   };
 
   return (
