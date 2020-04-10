@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import classnames from 'classnames';
 import useFlashMessageContext from 'hooks/useFlashMessageContext';
 import './FlashMessage.css';
@@ -6,9 +6,17 @@ import './FlashMessage.css';
 const FlashMessage = () => {
   const { message, success, info, error, resetFlashMessage } = useFlashMessageContext();
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      resetFlashMessage()
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [message, resetFlashMessage]);
+
   return (
     !message || (
-      <div className={classnames('flashMessage', {
+      <div className={classnames('flashMessage', 'fade-out', {
         success,
         info,
         error
