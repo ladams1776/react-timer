@@ -10,6 +10,7 @@ import {
 import getFormattedDate from 'utils/getFormattedDate';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import Timer from '../timer/Timer';
+import ControlPanel from '../timer/controlPanel/ControlPanel';
 import styles from './TaskForm.module.css';
 
 const EditTaskForm = ({ taskId, history }) => {
@@ -71,14 +72,18 @@ const EditTaskForm = ({ taskId, history }) => {
         <div className={styles.taskFormContainer}>
           <div className={styles.form}>
             <form className={styles.taskForm} onSubmit={handleSubmit}>
-              <Timer
-                time={time}
+
+              <ControlPanel
                 setTime={setTimeCallback}
+                time={time}
                 isActive={isActive}
-                setIsActive={setIsActive}
-              >
+                setIsActive={setIsActive}>
                 <ProjectDropDown />
-              </Timer>
+                <Timer time={time} />
+              </ControlPanel>
+
+
+
               <div className={styles.textArea}>
                 <Field
                   name="description"
