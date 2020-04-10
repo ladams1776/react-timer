@@ -1,0 +1,69 @@
+
+.navbarHeader {
+    display: flex;
+    background-color: rgba(240,240,240,.3);
+    margin-top: 2em;
+}
+
+.backButton { 
+    text-align: center;
+    margin: auto 1em;
+}
+
+.timerButtons {
+    display: flex;
+    background:
+    #d8d8d8b3;
+    padding: 1em;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.timerReset,
+.timerReset:hover {
+    background-color: #d51923;
+    color: white;
+    height: 50px;
+    border: none;
+    width: 75px;
+}
+
+.timerReset:hover {
+    background-color: #971118;
+}
+
+.timerReset:disabled {
+    background-color: rgba(199, 82, 82, 0.58);
+}
+
+.timerResume,
+.timerResume:hover {
+    background-color: #5ec232;
+    color: white;
+    height: 50px;
+    border: none;
+    width: 75px;
+}
+
+.timerResume:hover {
+    background-color: #458f26;
+}
+
+.timerStop,
+.timerStop:hover {
+    background-color: #fdce3e;
+    color: rgb(100,100,100);
+    height: 50px;
+    border: none;
+    width: 75px;
+}
+
+.timerStop:hover {
+    background-color: #dcb231;
+}
+
+.children {
+    display: inline-flex;
+    flex-direction: column;
+    margin: auto 10px;
+}
