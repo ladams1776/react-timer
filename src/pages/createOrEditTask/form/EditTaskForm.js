@@ -32,8 +32,7 @@ const EditTaskForm = ({ taskId, history }) => {
   const [isActive, setIsActive] = useState(false);
 
   const onSubmit = event => {
-    const date = new Date();
-    const dateFormatted = getFormattedDate(date);
+    const dateFormatted = getFormattedDate(new Date());
 
     const timeTask = {
       date: dateFormatted,
@@ -77,13 +76,12 @@ const EditTaskForm = ({ taskId, history }) => {
                 setTime={setTimeCallback}
                 time={time}
                 isActive={isActive}
-                setIsActive={setIsActive}>
+                setIsActive={setIsActive}
+              >
                 <ProjectDropDown />
                 <Timer time={time} />
               </ControlPanel>
-
-
-
+              
               <div className={styles.textArea}>
                 <Field
                   name="description"
