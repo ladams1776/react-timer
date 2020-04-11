@@ -4,9 +4,10 @@ const app = express();
 const mongoose = require("mongoose");
 const TaskSchema = require("./models/TaskSchema");
 
+const SERVER_AND_PORT = '172.28.1.4:27017';
 
 const config = {
-  db: "mongodb://172.28.1.4:27017/tasks",
+  db: `mongodb://${SERVER_AND_PORT}/tasks`,
   opts: {
     reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
     reconnectInterval: 500, // Reconnect every 500ms
@@ -25,7 +26,7 @@ mongoose.Promise = global.Promise;
 
 mongoose.connection
   .on("connected", () => {
-    console.log(`Mongoose connection open on mongodb://172.28.1.4:27017/tasks`);
+    console.log(`Mongoose connection open on mongodb://${SERVER_AND_PORT}/tasks`);
   })
   .on("error", err => {
     console.log(`Connection error: ${err.message}`);
