@@ -1,9 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import { useUpdateCurrentTime } from '../hooks';
 import styles from './ControlPanel.module.css';
-import { Link } from 'react-router-dom';
 
 const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }) => {
     const toggle = () => setIsActive(!isActive);
@@ -18,32 +18,42 @@ const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }
     return <div class={cn("navbar navbar-default")}>
         <div class="container-fluid">
             <div className={styles.navbarHeader}>
-                <Link className={cn(styles.backButton, "backButton", "glyphicon glyphicon-arrow-left")} to="/" />
+                <Link className={cn(styles.backButton)} to="/">
+                    <span className={cn(styles.backButtonIcon, "glyphicon glyphicon-chevron-left")} />
+                </Link>
 
                 <Button
                     className={cn(styles.timerReset)}
                     data-test-id="timerReset"
                     onClick={reset}
-                    disabled={time === 0}
-                    value="reset" />
+                    disabled={time === 0}>
+                    <span className={cn(styles.resetIcon, "glyphicon glyphicon-refresh")} />
+                       Reset
+                   </Button>
 
                 {isActive && (
                     <Button className={styles.timerStop}
                         data-test-id="timerStop"
-                        onClick={toggle}
-                        value="stop" />
+                        onClick={toggle}>
+                        <span className={cn(styles.stopIcon, "glyphicon glyphicon-pause")} />
+                        Stop
+                    </Button>
                 )}
 
                 {time !== 0 && !isActive && (
                     <Button className={styles.timerResume}
-                        onClick={toggle}
-                        value="resume" />
+                        onClick={toggle}>
+                        <span className={cn(styles.stopIcon, "glyphicon glyphicon-play")} />
+                    Play
+                    </Button>
                 )}
 
                 {time === 0 && !isActive && (
                     <Button className={styles.timerResume}
-                        onClick={toggle}
-                        value="start" />
+                        onClick={toggle}>
+                        <span className={cn(styles.stopIcon, "glyphicon glyphicon-play")} />
+                    Play
+                    </Button>
                 )}
                 <div className={styles.children}>
                     {children}
