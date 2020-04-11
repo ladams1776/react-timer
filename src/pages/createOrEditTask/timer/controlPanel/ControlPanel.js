@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
+    import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import { useUpdateCurrentTime } from '../hooks';
 import styles from './ControlPanel.module.css';
