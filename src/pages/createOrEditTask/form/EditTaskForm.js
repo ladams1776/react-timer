@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import {
@@ -55,6 +55,8 @@ const EditTaskForm = ({ taskId, history }) => {
       .then(e => {
         if (e.status === 200) {
           setSuccessFlashMessage('Successfully created/updated a Task');
+        } else {
+          setErrorFlashMessage(`Problem saving task, status: ${e.status}`);
         }
       })
       .catch(error => setErrorFlashMessage(error));
@@ -81,7 +83,7 @@ const EditTaskForm = ({ taskId, history }) => {
                 <ProjectDropDown />
                 <Timer time={time} />
               </ControlPanel>
-              
+
               <div className={styles.textArea}>
                 <Field
                   name="description"
