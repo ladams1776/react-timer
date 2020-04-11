@@ -19,8 +19,8 @@
 }
 
 .textArea {
-    background-color:#d8d8d8b3;
-    padding: 2em;
+    background-color:beige;
+    padding: 1em;
     display: inline-flex;
     flex: .75 .85;
 }
