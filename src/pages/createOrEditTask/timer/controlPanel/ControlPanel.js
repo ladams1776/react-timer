@@ -7,13 +7,18 @@ import styles from './ControlPanel.module.css';
 
 const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }) => {
     const toggle = () => setIsActive(!isActive);
-
-    useUpdateCurrentTime(time, isActive, setTime);
-
-    const reset = () => {
+    /**
+     * Haven't figured out why, but some reason this reset button is triggering the form's submission. Going to prevetDefault for now.
+     * @param {Object} e 
+     */
+    const reset = e => {
+        e.preventDefault(); 
         setIsActive(false);
         setTime(0);
     };
+
+    useUpdateCurrentTime(time, isActive, setTime);
+
 
     return <div class={cn("navbar navbar-default")}>
         <div class="container-fluid">
