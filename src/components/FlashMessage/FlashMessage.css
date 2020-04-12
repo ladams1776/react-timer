@@ -16,44 +16,50 @@
     color:white;
     font-size: 1.1rem;
     cursor: pointer;
-    width: 200px;
+    min-width: 200px;
+    max-width: 300px;
+    padding: 10px;
 }
 
 .flashMessage.success {
-    background:#5ec232;
+    background:rgb(16, 96, 34);
 }
 
 .flashMessage.success:hover {
-    background: #418823;
+    background: rgb(0, 64, 14);
 }
 
 .flashMessage.error {
-    background:#d51923;
+    background:rgb(126, 21, 24);
 }
 
 .flashMessage.error:hover {
-    background: #991017;
+    background: rgb(84, 0, 2);
+}
+
+.flashMessageIcon {
+  flex: 1 1;
+  margin: auto;
 }
 
 .flashMessageContent { 
-    flex: 1 1;
-    padding: 10px;
-    font-size: 12px;
+    flex: 2 2 auto;
+    font-size: 13px;
+    margin: 0 1em;
 }
 
 .flashMessageCancel {
-    flex: 1 1;
-    text-align: right;
-    font-size: 14px;
-    padding: 10px;
+  margin: auto;
+  flex: 1 1 auto;
+  font-size: 18px;
 }
 
 .fade-out {
-    animation: fadeOut ease 5s;
-    -webkit-animation: fadeOut ease 5s;
-    -moz-animation: fadeOut ease 5s;
-    -o-animation: fadeOut ease 5s;
-    -ms-animation: fadeOut ease 5s;
+    animation: fadeOut ease 10s;
+    -webkit-animation: fadeOut ease 10s;
+    -moz-animation: fadeOut ease 10s;
+    -o-animation: fadeOut ease 10s;
+    -ms-animation: fadeOut ease 10s;
   }
   
   @keyframes fadeOut {
