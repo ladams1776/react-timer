@@ -59,7 +59,7 @@ const EditTaskForm = ({ taskId, history }) => {
           setErrorFlashMessage(`Problem saving task, status: ${e.status}`);
         }
       })
-      .catch(error => setErrorFlashMessage(error));
+      .catch(error => setErrorFlashMessage(`Problem saving task, status: ${error}`));
   };
 
   //@todo: how to auto save
