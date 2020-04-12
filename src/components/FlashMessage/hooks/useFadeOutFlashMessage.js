@@ -6,14 +6,8 @@ const useFadeOutFlashMessage = () => {
     const { message, error, resetFlashMessage } = useFlashMessageContext();
 
     useEffect(() => {
-        let timer;
-
-        if (!error) {
-            timer = setTimeout(() => {
-                resetFlashMessage()
-            }, 10000);
-        }
-
+        const timer = !error && setTimeout(() => resetFlashMessage(), 10000);
+        
         return () => clearTimeout(timer);
     }, [message, resetFlashMessage, error]);
 }
