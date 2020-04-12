@@ -11,7 +11,8 @@ const FlashMessage = () => {
   
   return (
     !message || (
-      <div className={cn('flashMessage', 'fade-out', {
+      <div className={cn('flashMessage', {
+        'fade-out': !error,
         success,
         info,
         error
