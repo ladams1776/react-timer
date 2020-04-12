@@ -20,8 +20,8 @@ const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }
     useUpdateCurrentTime(time, isActive, setTime);
 
 
-    return <div class={cn("navbar navbar-default")}>
-        <div class="container-fluid">
+    return <div className={cn("navbar navbar-default")}>
+        <div className="container-fluid">
             <div className={styles.navbarHeader}>
                 <Link className={cn(styles.backButton)} to="/">
                     <span className={cn(styles.backButtonIcon, "glyphicon glyphicon-chevron-left")} />
