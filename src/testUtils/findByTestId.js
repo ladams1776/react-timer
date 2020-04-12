@@ -4,6 +4,6 @@
  * correct attribute (data-test-id)
  * @param {String} id
  */
-const findByTestId = id => `[data-test-id='${id}']`;
+const findByTestId = (wrapper, id) => wrapper.find(`[data-test-id='${id}']`);
 
 export default findByTestId;

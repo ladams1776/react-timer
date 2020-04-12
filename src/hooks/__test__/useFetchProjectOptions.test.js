@@ -1,6 +1,6 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import useFetchProjectOptions from '../useFetchProjectOptions';
-const projectOptions = require('../projects.json');
+const projectOptions = require('../../projects.json');
 
 describe('src/hooks/__test__/useFetchProjectOptions.test.js', () => {
     describe('#useFetchProjectOptions', () => {

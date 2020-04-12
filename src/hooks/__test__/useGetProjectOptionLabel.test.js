@@ -2,7 +2,8 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import useGetProjectOptionLabel from '../useGetProjectOptionLabel';
 import useFetchProjectOptions from '../useFetchProjectOptions';
 jest.mock('../useFetchProjectOptions');
-const projectOptions = require('../projects.json');
+
+const projectOptions = require('../../projects.json');
 
 describe('src/hooks/__test__/useGetProjectOptionLabel.test.js', () => {
     describe('#useGetProjectOptionLabel', () => {
