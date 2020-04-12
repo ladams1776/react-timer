@@ -3,7 +3,7 @@ import useFlashMessageContext from 'hooks/useFlashMessageContext';
 
 
 const useFadeOutFlashMessage = () => {
-    const { message, success, info, error, resetFlashMessage } = useFlashMessageContext();
+    const { message, error, resetFlashMessage } = useFlashMessageContext();
 
     useEffect(() => {
         let timer;
