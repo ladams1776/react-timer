@@ -1,12 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import { useFetchProjectOptions } from 'hooks';
+import { LoadinSpinner, FlashMessage } from 'components';
+import IndexPage from 'pages/home/IndexPage';
+import TagPage from 'pages/tags/TagsPage';
+import CreateOrEditTaskPage from 'pages/createOrEditTask/CreateOrEditTaskPage';
 import { TaskEditFormProvider } from './contexts/TaskEditFormContext';
 import LoadinSpinnerContextProvider from './contexts/LoadinSpinnerContext';
 import FlashMessageContextProvider from './contexts/FlashMessageContext';
-import IndexPage from 'pages/home/IndexPage';
-import CreateOrEditTaskPage from 'pages/createOrEditTask/CreateOrEditTaskPage';
-import { LoadinSpinner, FlashMessage } from 'components';
 import './Main.css';
 
 const Main = () => {
@@ -34,7 +35,7 @@ const Main = () => {
               setTask(task);
             }, []),
             updateTasks: useCallback(tasks => {
-              setTasks(tasks);  
+              setTasks(tasks);
             }, []),
             updateTaskId: useCallback(taskId => {
               setTaskId(taskId);
@@ -60,6 +61,7 @@ const Main = () => {
                 render={props => <CreateOrEditTaskPage {...props} />}
               />
               <Route exact path="/" render={props => <IndexPage {...props} />} />
+              <Route exact path="/tags/" render={props => <TagPage {...props} />} />
               <LoadinSpinner />
             </div>
           </HashRouter>
