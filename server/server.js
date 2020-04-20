@@ -3,8 +3,13 @@ const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
 const TaskSchema = require("./models/TaskSchema");
+const TagSchema = require("./models/TagSchema");
 
 const SERVER_AND_PORT = '172.28.1.4:27017';
+
+const TAG_MODEL = mongoose.model("tags", TagSchema)
+const TASK_MODEL = mongoose.model("tasks", TaskSchema);
+
 
 const config = {
   db: `mongodb://${SERVER_AND_PORT}/tasks`,
@@ -23,7 +28,7 @@ mongoose.connect(config.db, config.opts)
   .catch(error => setTimeout(connectWithRetry, 5000));
 
 mongoose.Promise = global.Promise;
-
+//@TODO: Need to auto set data
 mongoose.connection
   .on("connected", () => {
     console.log(`Mongoose connection open on mongodb://${SERVER_AND_PORT}/tasks`);
@@ -52,9 +57,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get("/api/tasks", function (req, res) {
-  var Task = mongoose.model("tasks", TaskSchema);
-
-  Task.find({}, function (err, docs) {
+  TASK_MODEL.find({}, function (err, docs) {
     if (err) {
       //@todo: have not tested for this scenario yet.
       res.jsonp([{ isSuccess: 0 }]);
@@ -66,8 +69,7 @@ app.get("/api/tasks", function (req, res) {
 
 app.get("/api/task/:id", function (req, res) {
   const taskId = req.params.id;
-  var Task = mongoose.model("tasks", TaskSchema);
-  Task.findById(taskId, function (err, docs) {
+  TASK_MODEL.findById(taskId, function (err, docs) {
     if (!err) {
       res.jsonp(docs);
     }
@@ -75,9 +77,7 @@ app.get("/api/task/:id", function (req, res) {
 });
 
 app.post("/api/task", (req, res) => {
-  const TaskModel = mongoose.model("tasks", TaskSchema);
-
-  const m = new TaskModel();
+  const m = new TASK_MODEL();
   m.toObject();
   m.date = req.body.date;
   m.description = req.body.WorkUnit[0].description;
@@ -91,9 +91,7 @@ app.post("/api/task", (req, res) => {
 });
 
 app.put("/api/task", (req, res) => {
-  const TaskModel = mongoose.model("tasks", TaskSchema);
-
-  TaskModel.findOneAndUpdate({ _id: req.body._id }, {
+  TASK_MODEL.findOneAndUpdate({ _id: req.body._id }, {
     $set: {
       date: req.body.date,
       description: req.body.WorkUnit[0].description,
@@ -104,22 +102,51 @@ app.put("/api/task", (req, res) => {
     if (err) throw err;
     res.jsonp(task);
   });
-
 });
 
 app.delete("/api/task/:id", (req, res) => {
-  const TaskModel = mongoose.model("tasks", TaskSchema);
   const id = req.params.id;
 
-  TaskModel.deleteOne({ _id: id }, function (e) {
+  TASK_MODEL.deleteOne({ _id: id }, function (e) {
     if (e) throw e;
     res.jsonp({ taskId: id, isSuccess: true });
   });
 });
 
 app.delete("/api/tasks", (req, res) => {
-  const TaskModel = mongoose.model("tasks", TaskSchema);
-  TaskModel.deleteMany({}, function (e) {
+  TASK_MODEL.deleteMany({}, function (e) {
     if (e) throw e;
+  });
+});
+
+// TAGS
+app.get("/api/tags", (req, res) => {
+  TAG_MODEL.find({}, (err, docs) => {
+    if (err) {
+      //@todo: have not tested for this scenario yet.
+      res.jsonp([{ isSuccess: 0 }]);
+    } else {
+      res.jsonp(docs);
+    }
+  });
+});
+
+app.post('/api/tag', (req, res) => {
+  const tag = new TAG_MODEL();
+  console.log('Hi', req);
+  const tagDto = req.body;
+  
+  tag.toObject();
+  tag.description = tagDto.description;
+  tag.name = tagDto.name;
+  
+  // res.jsonp({ status: 200, name: 'yup', description: 'what' });
+  tag.save((err, tag) => {
+    if (err) {
+      console.log(`error saving tag: ${tag}`);
+      // throw err;
+      res.jsonp({ status: 500, ...err })
+    }
+    res.jsonp({ status: 200, ...tag });
   });
 });
