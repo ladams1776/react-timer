@@ -2,8 +2,11 @@ version: "2"
 services:
     db: 
         restart: always
-        image: "mongo:latest"
+        image: "ladams1776/mongo"
         container_name: "mongodb"
+        build: 
+            context: ./mongo
+            dockerfile: Dockerfile
         volumes:
             - react-timer-db:/var/micro-data/mongodb/data/db
         ports:
