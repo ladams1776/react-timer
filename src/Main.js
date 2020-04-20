@@ -3,7 +3,7 @@ import { Route, HashRouter } from 'react-router-dom';
 import { useFetchProjectOptions } from 'hooks';
 import { LoadinSpinner, FlashMessage } from 'components';
 import IndexPage from 'pages/home/IndexPage';
-import TagPage from 'pages/tags/TagsPage';
+import TagsPage from 'pages/tags/TagsPage';
 import CreateOrEditTaskPage from 'pages/createOrEditTask/CreateOrEditTaskPage';
 import { TaskEditFormProvider } from './contexts/TaskEditFormContext';
 import LoadinSpinnerContextProvider from './contexts/LoadinSpinnerContext';
@@ -61,7 +61,7 @@ const Main = () => {
                 render={props => <CreateOrEditTaskPage {...props} />}
               />
               <Route exact path="/" render={props => <IndexPage {...props} />} />
-              <Route exact path="/tags/" render={props => <TagPage {...props} />} />
+              <Route exact path="/tags/" render={props => <TagsPage {...props} />} />
               <LoadinSpinner />
             </div>
           </HashRouter>

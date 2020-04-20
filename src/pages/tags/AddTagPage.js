@@ -25,15 +25,16 @@ const AddTagePage = () => {
                 : setErrorFlashMessage(`Problem creating new tag: ${event.name}`);
 
         } catch (err) {
+            setIsLoadin(false);
             setErrorFlashMessage(`Problem creating new tag: ${event.name}. Error: ${err}`);
         }
 
-        setIsLoadin(false);
     };
 
     return (
-
-        <form>
+        <Form onSubmit={submitForm}
+        render={({handleSubmit, pristine}) => 
+            <form onSubmit={handleSubmit}>
             <div className={styles.addTagPageForm}>
                 <h3>Add a New Tag</h3>
                 <Field
@@ -52,9 +53,10 @@ const AddTagePage = () => {
                     // disabled={pristine}
                     className={styles.description}
                 />
-                <button type="submit" onClick={submitForm} className={cn("btn", "btn-primary", styles.submit)} data-test-id="addTagPageSubmit">Submit</button>
+                <button type="submit" className={cn("btn", "btn-primary", styles.submit)} data-test-id="addTagPageSubmit">Submit</button>
             </div>
         </form>
+        }/>
     );
 }
 
