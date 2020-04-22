@@ -1,7 +1,7 @@
-const mongoose, { Schema } = require('mongoose');
+const mongoose = require('mongoose');
 
 
-const TaskSchema = new Schema({
+const TaskSchema = new mongoose.Schema({
     id: { type: Number, index: true },
     date: {
         type: Date
@@ -13,7 +13,7 @@ const TaskSchema = new Schema({
     contractId: {
         type: Number,
     },
-    time: { type: Number }
+    time: { type: Number },
 });
 
 

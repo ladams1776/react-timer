@@ -5,14 +5,15 @@ const mongoose = require("mongoose");
 const TaskSchema = require("./models/TaskSchema");
 const TagSchema = require("./models/TagSchema");
 
-const SERVER_AND_PORT = '172.28.1.4:27017';
+//@TODO: Move the username and password out of here 
+const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
 
 const TAG_MODEL = mongoose.model("tags", TagSchema)
 const TASK_MODEL = mongoose.model("tasks", TaskSchema);
 
 
 const config = {
-  db: `mongodb://${SERVER_AND_PORT}/tasks`,
+  db: `mongodb://${SERVER_AND_PORT}`,
   opts: {
     reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
     reconnectInterval: 500, // Reconnect every 500ms
