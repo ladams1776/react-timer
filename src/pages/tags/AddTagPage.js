@@ -4,35 +4,37 @@ import { Form, Field } from 'react-final-form';
 import { useFlashMessageContext, useLoadinSpinnerContext } from 'hooks'
 import styles from './AddTagPage.module.css'
 
+export const submitForm = (setSuccessFlashMessage, setErrorFlashMessage, setIsLoadin) => async (event) => {
+    setIsLoadin(true);
+    try {
+        const result = await fetch('/api/tag', {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify({ ...event })
+        });
+        const tag = await result.json();
+        const okStatus = tag.status !== 500;
+
+        //@TODO: Let's get these values from the returned tag
+        okStatus
+            ? setSuccessFlashMessage(`Added Tag: ${tag.name}`)
+            : setErrorFlashMessage(`Problem creating new tag: ${event.name}`);
+
+    } catch (err) {
+        setIsLoadin(false);
+        setErrorFlashMessage(`Problem creating new tag: ${event.name}. Error: ${err}`);
+    }
+
+};
+
 const AddTagePage = () => {
     const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
     const { setIsLoadin } = useLoadinSpinnerContext();
 
-    const submitForm = async (event) => {
-        setIsLoadin(true);
-        try {
-            const result = await fetch('/api/tag', {
-                headers: { 'Content-Type': 'application/json' },
-                method: 'POST',
-                body: JSON.stringify({ ...event })
-            });
-            const tag = await result.json();
-            const okStatus = tag.status !== 500;
-
-            //@TODO: Let's get these values from the returned tag
-            okStatus
-                ? setSuccessFlashMessage(`Added Tag: ${tag.name}`)
-                : setErrorFlashMessage(`Problem creating new tag: ${event.name}`);
-
-        } catch (err) {
-            setIsLoadin(false);
-            setErrorFlashMessage(`Problem creating new tag: ${event.name}. Error: ${err}`);
-        }
-
-    };
+    const onSubmitty = submitForm(setSuccessFlashMessage, setErrorFlashMessage, setIsLoadin);
 
     return (
-        <Form onSubmit={submitForm}
+        <Form onSubmit={onSubmitty}
         render={({handleSubmit, pristine}) => 
             <form onSubmit={handleSubmit}>
             <div className={styles.addTagPageForm}>
