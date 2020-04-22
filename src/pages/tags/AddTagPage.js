@@ -21,10 +21,9 @@ export const submitForm = (setSuccessFlashMessage, setErrorFlashMessage, setIsLo
             : setErrorFlashMessage(`Problem creating new tag: ${event.name}`);
 
     } catch (err) {
-        setIsLoadin(false);
         setErrorFlashMessage(`Problem creating new tag: ${event.name}. Error: ${err}`);
     }
-
+    setIsLoadin(false);
 };
 
 const AddTagePage = () => {
