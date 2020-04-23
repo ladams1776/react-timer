@@ -17,7 +17,7 @@ export const submitForm = (setSuccessFlashMessage, setErrorFlashMessage, setIsLo
 
         okStatus
             ? setSuccessFlashMessage(`Added Tag: ${tag.name}`)
-            : setErrorFlashMessage(`Problem creating new tag: ${event?.name || tag.name}`);
+            : setErrorFlashMessage(`Problem creating new tag: ${event.name}`);
 
     } catch (err) {
         setErrorFlashMessage(`Problem creating new tag: ${event.name}. Error: ${err}`);
@@ -33,30 +33,30 @@ const AddTagePage = () => {
 
     return (
         <Form onSubmit={onSubmitty}
-        render={({handleSubmit, pristine}) => 
-            <form onSubmit={handleSubmit}>
-            <div className={styles.addTagPageForm}>
-                <h3>Add a New Tag</h3>
-                <Field
-                    name="name"
-                    component="input"
-                    placeholder="Tag's Name"
-                    className={styles.name}
-                    autoFocus
-                />
-                <Field
-                    name="description"
-                    component="textarea"
-                    placeholder={"Tag's Description"}
-                    cols="80"
-                    rows="10"
-                    // disabled={pristine}
-                    className={styles.description}
-                />
-                <button type="submit" className={cn("btn", "btn-primary", styles.submit)} data-test-id="addTagPageSubmit">Submit</button>
-            </div>
-        </form>
-        }/>
+            render={({ handleSubmit, pristine }) =>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.addTagPageForm}>
+                        <h3>Add a New Tag</h3>
+                        <Field
+                            name="name"
+                            component="input"
+                            placeholder="Tag's Name"
+                            className={styles.name}
+                            autoFocus
+                        />
+                        <Field
+                            name="description"
+                            component="textarea"
+                            placeholder={"Tag's Description"}
+                            cols="80"
+                            rows="10"
+                            // disabled={pristine}
+                            className={styles.description}
+                        />
+                        <button type="submit" className={cn("btn", "btn-primary", styles.submit)} data-test-id="addTagPageSubmit">Submit</button>
+                    </div>
+                </form>
+            } />
     );
 }
 

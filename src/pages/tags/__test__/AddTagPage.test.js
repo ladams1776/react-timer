@@ -7,8 +7,6 @@ import { shallow } from 'enzyme';
 jest.mock('hooks/useLoadinSpinnerContext');
 jest.mock('hooks/useFlashMessageContext');
 
-//@TODO: Move the testing for the clicking to this function.
-
 describe('src/pages/tags/__test__/AddTagPage.test.js', () => {
     // Arrange
     // Setup Flash Message Context
@@ -45,6 +43,42 @@ describe('src/pages/tags/__test__/AddTagPage.test.js', () => {
                 setSuccessFlashMessageSpy.mockClear();
                 setErrorFlashMessageSpy.mockClear();
                 setIsLoadinSpy.mockReset();
+            });
+
+            it('should fetch data and display success when we get back anything but 500, and there is no error', async () => {
+                // Arrange
+                const expectedTag = {
+                    status: 200,
+                    id: 'stub id',
+                    name: 'another tag name',
+                    description: 'tag description'
+                }
+                const responsePromise = Promise.resolve({
+                    json: jest.fn().mockImplementation(() => Promise.resolve(expectedTag))
+                });
+                global.fetch = jest.fn().mockImplementation(() => responsePromise);
+
+                const expectedAPI = '/api/tag';
+                const expectedAPIOptions = { "body": "{\"name\":\"tag name\",\"description\":\"tag description\"}", "headers": { "Content-Type": "application/json" }, "method": "POST" };
+
+                const tag = {
+                    name: 'tag name',
+                    description: 'tag description'
+                };
+
+                const target = submitForm(setSuccessFlashMessageSpy, setErrorFlashMessageSpy, setIsLoadinSpy);
+
+                // Act
+                await target(tag);
+                // Assert
+                expect(global.fetch).toBeCalledWith(expectedAPI, expectedAPIOptions);
+                expect(setIsLoadinSpy).toHaveBeenCalledTimes(2);
+                expect(setIsLoadinSpy).toHaveBeenNthCalledWith(1, true);
+                expect(setIsLoadinSpy).toHaveBeenNthCalledWith(2, false);
+                expect(setSuccessFlashMessageSpy).toHaveBeenNthCalledWith(1, `Added Tag: ${expectedTag.name}`);
+
+                // Clean up
+                global.fetch.mockClear();
             });
 
             it('should fetch data and display error when done, when 500 status', async () => {
@@ -84,16 +118,17 @@ describe('src/pages/tags/__test__/AddTagPage.test.js', () => {
                 global.fetch.mockClear();
             });
 
-            it('should fetch data and display success when we get back anything but 500, and there is no error', async () => {
+            it('should fetch data and display error when issue with Promise', async () => {
                 // Arrange
-                const expectedTag = {
-                    status: 200,
-                    id: 'stub id',
-                    name: 'another tag name',
-                    description: 'tag description'
-                }
+                // const tag = {
+                //     status: 500,
+                //     id: 'stub id',
+                //     name: 'another tag name',
+                //     description: 'tag description'
+                // }
                 const responsePromise = Promise.resolve({
-                    json: jest.fn().mockImplementation(() => Promise.resolve(expectedTag))
+                    json: jest.fn().mockImplementation(() => Promise.reject())
+
                 });
                 global.fetch = jest.fn().mockImplementation(() => responsePromise);
 
@@ -105,60 +140,22 @@ describe('src/pages/tags/__test__/AddTagPage.test.js', () => {
                     description: 'tag description'
                 };
 
+                // Act
                 const target = submitForm(setSuccessFlashMessageSpy, setErrorFlashMessageSpy, setIsLoadinSpy);
 
                 // Act
                 await target(tag);
+
                 // Assert
                 expect(global.fetch).toBeCalledWith(expectedAPI, expectedAPIOptions);
                 expect(setIsLoadinSpy).toHaveBeenCalledTimes(2);
                 expect(setIsLoadinSpy).toHaveBeenNthCalledWith(1, true);
                 expect(setIsLoadinSpy).toHaveBeenNthCalledWith(2, false);
-                expect(setSuccessFlashMessageSpy).toHaveBeenNthCalledWith(1, `Added Tag: ${expectedTag.name}`);
+                expect(setErrorFlashMessageSpy).toHaveBeenNthCalledWith(1, `Problem creating new tag: ${tag.name}. Error: undefined`);
 
                 // Clean up
                 global.fetch.mockClear();
             });
-
-            // it('should fetch data and display error when issue with Promise', async () => {
-            //     // Arrange
-            //     // const tag = {
-            //     //     status: 500,
-            //     //     id: 'stub id',
-            //     //     name: 'another tag name',
-            //     //     description: 'tag description'
-            //     // }
-            //     const responsePromise = Promise.resolve({
-            //         json: jest.fn().mockImplementation(() => Promise.reject())
-
-            //     });
-            //     global.fetch = jest.fn().mockImplementation(() => responsePromise);
-
-            //     const expectedAPI = '/api/tag';
-            //     const expectedAPIOptions = { "body": "{\"name\":\"tag name\",\"description\":\"tag description\"}", "headers": { "Content-Type": "application/json" }, "method": "POST" };
-
-            //     const expectedFailedTag = {
-            //         name: 'tag name',
-            //         description: 'tag description'
-            //     };
-
-            //     const wrapper = shallow(<AddTagPage />);
-
-            //     // Act
-            //     await findByTestId(wrapper, 'addTagPageSubmit').props().onClick(expectedFailedTag);
-
-            //     // Assert
-            //     expect(global.fetch).toBeCalledWith(expectedAPI, expectedAPIOptions);
-            //     expect(loadinSpinnerContext.setIsLoadin).toHaveBeenCalledTimes(2);
-            //     expect(loadinSpinnerContext.setIsLoadin).toHaveBeenNthCalledWith(1, true);
-            //     expect(loadinSpinnerContext.setIsLoadin).toHaveBeenNthCalledWith(2, false);
-            //     expect(flashMessageContext.setErrorFlashMessage).toHaveBeenNthCalledWith(1, `Problem creating new tag: ${expectedFailedTag.name}. Error: undefined`);
-
-            //     // Clean up
-            //     global.fetch.mockClear();
-            //     loadinSpinnerContext.setIsLoadin.mockClear();
-            //     flashMessageContext.setErrorFlashMessage.mockClear();
-            // });
         });
     });
 });
