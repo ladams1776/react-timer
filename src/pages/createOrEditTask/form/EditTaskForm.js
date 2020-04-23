@@ -54,7 +54,7 @@ const EditTaskForm = ({ taskId, history }) => {
     })
       .then(e => {
         if (e.status === 200) {
-          setSuccessFlashMessage('Successfully created/updated a Task');
+          setSuccessFlashMessage('Successfully updated a Task');
         } else {
           setErrorFlashMessage(`Problem saving task, status: ${e.status}`);
         }

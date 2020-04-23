@@ -14,6 +14,7 @@ const TaskSchema = new mongoose.Schema({
         type: Number,
     },
     time: { type: Number },
+    tags: []
 });
 
 

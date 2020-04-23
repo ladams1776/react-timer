@@ -1,33 +1,68 @@
 import React, { useState, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
-import { useTaskEditContext } from 'hooks';
+import {
+  useTaskEditContext,
+  useBackButtonListener,
+  useFetchTaskById,
+  useFlashMessageContext
+} from 'hooks';
 import { getFormattedDate } from 'utils';
+import ControlPanel from '../timer/controlPanel/ControlPanel';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import Timer from '../timer/Timer';
 import styles from './TaskForm.module.css';
 
+
+//@TODO: Temp
+const tags = [
+  {
+    id: 1,
+    name: 'tag 1 name'
+  },
+  {
+    id: 2,
+    name: 'tag 2 name'
+  },
+  {
+    id: 3,
+    name: 'tag 3 name'
+  },
+  {
+    id: 3,
+    name: 'tag 3 name'
+  },
+]
+
+
 const AddTaskForm = ({ history }) => {
-  const { setMessage, task } = useTaskEditContext();
+  const { task } = useTaskEditContext();
+  const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
   const [time, setTime] = useState(0);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
+
   /**
    * These really can live in the Timer comp, but to be able to Unit test the Timer
    * and not try to figure out how to mock what useState returns... this seems to be
    * an easy compromise. Or at least a late night, tired one.
    */
   const [isActive, setIsActive] = useState(false);
+
   const onSubmit = event => {
     const date = new Date();
     const dateFormatted = getFormattedDate(date);
+
+    const selectedTags = tags.filter(tag => tag.id == event.tags)
 
     const timeTask = {
       date: dateFormatted,
       WorkUnit: [
         {
           time,
+          ...event,
           contractId: event?.projects || 0,
           description: event?.description || '',
+          tags: selectedTags
         },
       ],
     };
@@ -41,15 +76,18 @@ const AddTaskForm = ({ history }) => {
     })
       .then(res => {
         if (res.status === 200) {
-          setMessage('Successfully created/updated a Task');
+          setSuccessFlashMessage('Successfully created a Task');
           return res.json();
           // setIsLoading(false);
+        } else {
+          setErrorFlashMessage(`Problem saving task, status: ${event.status}`);
+          return res.json();
         }
       })
       .then(data => {
         history.push(`/task/${data._id}`);
       })
-      .catch(error => console.log(error, 'Error!'));
+      .catch(error => setErrorFlashMessage(`Problem saving task, status: ${error}`));
   };
 
   return (
@@ -63,14 +101,21 @@ const AddTaskForm = ({ history }) => {
         <div className={styles.taskFormContainer}>
           <div className={styles.form}>
             <form className={styles.taskForm} onSubmit={handleSubmit}>
-              <Timer
-                time={time}
+              <ControlPanel
                 setTime={setTimeCallback}
+                time={time}
                 isActive={isActive}
                 setIsActive={setIsActive}
               >
                 <ProjectDropDown />
-              </Timer>
+                <Timer time={time} />
+                <div className={styles.tagsDropDown}>
+                  <Field name="tags" component="select" >
+                    {tags.map(tag => <option value={tag.id} key={tag.id}>{tag.name}</option>)}
+                  </Field>
+                </div>
+              </ControlPanel>
+
               <div className={styles.textArea}>
                 <Field
                   name="description"

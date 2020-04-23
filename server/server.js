@@ -84,6 +84,7 @@ app.post("/api/task", (req, res) => {
   m.description = req.body.WorkUnit[0].description;
   m.contractId = req.body.WorkUnit[0].contractId;
   m.time = req.body.WorkUnit[0].time;
+  m.tags = req.body.WorkUnit[0].tags;
 
   m.save((err, task) => {
     if (err) throw err;
