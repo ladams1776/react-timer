@@ -15,10 +15,9 @@ export const submitForm = (setSuccessFlashMessage, setErrorFlashMessage, setIsLo
         const tag = await result.json();
         const okStatus = tag.status !== 500;
 
-        //@TODO: Let's get these values from the returned tag
         okStatus
             ? setSuccessFlashMessage(`Added Tag: ${tag.name}`)
-            : setErrorFlashMessage(`Problem creating new tag: ${event.name}`);
+            : setErrorFlashMessage(`Problem creating new tag: ${event?.name || tag.name}`);
 
     } catch (err) {
         setErrorFlashMessage(`Problem creating new tag: ${event.name}. Error: ${err}`);
