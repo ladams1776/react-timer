@@ -1,6 +1,6 @@
 db.auth('admin-user', 'admin-password')
 
-db = db.getSiblingDB('tags')
+db = db.getSiblingDB('tasks')
 
 db.tags.insertOne({
     id: 1,
@@ -45,7 +45,6 @@ db.tags.insertOne({
 });
 
 // PROJECTS
-db = db.getSiblingDB('projects')
 db.projects.insertOne({
     id: 0,
     name: "React Timer App",
