@@ -6,7 +6,7 @@ const Task = require("./models/Task");
 const Tag = require("./models/Tag");
 
 //@TODO: Move the username and password out of here 
-const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017/project_tasks';
+const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
 
 const config = {
   db: `mongodb://${SERVER_AND_PORT}`,

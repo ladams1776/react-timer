@@ -1,7 +1,5 @@
 db.auth('admin-user', 'admin-password')
 
-db = db.getSiblingDB('project_tasks')
-
 db.tags.insertOne({
     id: 1,
     name: 'DDD',
