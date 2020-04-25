@@ -8,8 +8,7 @@ import style from './Task.module.css';
 
 const MAX_DESCRIPTION_LINE = 9;
 
-const Task = ({ task }) => {
-  const { _id, description = '', contractId, time, date } = task;
+const Task = ({ _id, description = '', contractId, time, date, tags }) => {
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
   const displayableDescription = description
     .split('\n')
@@ -26,6 +25,13 @@ const Task = ({ task }) => {
           <span className={style.block}>
             Hours: {displayMsInFractionalHourFormat(time)}
           </span>
+          <div className={style.block} >
+            {tags.map(tag => {
+              return <span className="tag" key={tag.key}>
+                {tag.name}
+              </span>
+            })}
+          </div>
         </div>
       </div>
       <DeleteTaskButton taskId={_id} />
@@ -34,7 +40,12 @@ const Task = ({ task }) => {
 };
 
 Task.PropType = {
-  task: PropType.object,
+  _id: PropType.string,
+  description: PropType.string,
+  contractId: PropType.number,
+  time: PropType.number,
+  date: PropType.string,
+  tags: PropType.arrayOf.object
 };
 
 export default Task;
