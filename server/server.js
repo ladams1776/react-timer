@@ -2,15 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
-const Task = require("./models/TaskSchema");
-const Tag = require("./models/TagSchema");
+const Task = require("./models/Task");
+const Tag = require("./models/Tag");
 
 //@TODO: Move the username and password out of here 
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
-
-const Tag = mongoose.model("tasks", TagSchema)
-const Task = mongoose.model("tasks", TaskSchema);
-
 
 const config = {
   db: `mongodb://${SERVER_AND_PORT}`,
