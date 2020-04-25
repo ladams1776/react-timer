@@ -6,13 +6,15 @@ const Task = require("./models/Task");
 const Tag = require("./models/Tag");
 
 //@TODO: Move the username and password out of here 
-const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
+const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017/project_tasks';
 
 const config = {
   db: `mongodb://${SERVER_AND_PORT}`,
   opts: {
     reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
     reconnectInterval: 500, // Reconnect every 500ms
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   }
 }
 
