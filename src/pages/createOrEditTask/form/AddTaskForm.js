@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import {
@@ -17,19 +17,19 @@ import styles from './TaskForm.module.css';
 //@TODO: Temp
 const tags = [
   {
-    id: 1,
+    _id: "1",
     name: 'tag 1 name'
   },
   {
-    id: 2,
+    _id: "2",
     name: 'tag 2 name'
   },
   {
-    id: 3,
+    _id: "3",
     name: 'tag 3 name'
   },
   {
-    id: 3,
+    _id: "4",
     name: 'tag 3 name'
   },
 ]
@@ -51,15 +51,14 @@ const AddTaskForm = ({ history }) => {
   const onSubmit = event => {
     const date = new Date();
     const dateFormatted = getFormattedDate(date);
-
-    const selectedTags = tags.filter(tag => tag.id == event.tags)
+    const tagIds = tags.map(tag => tag._id);
+    const selectedTags = tags.filter(tag => event.tags.includes(tag._id));
 
     const timeTask = {
       date: dateFormatted,
       WorkUnit: [
         {
           time,
-          ...event,
           contractId: event?.projects || 0,
           description: event?.description || '',
           tags: selectedTags
@@ -110,8 +109,12 @@ const AddTaskForm = ({ history }) => {
                 <ProjectDropDown />
                 <Timer time={time} />
                 <div className={styles.tagsDropDown}>
-                  <Field name="tags" component="select" >
-                    {tags.map(tag => <option value={tag.id} key={tag.id}>{tag.name}</option>)}
+                  <Field
+                    name="tags"
+                    component="Select"
+                    displayEmpty
+                    multiple>
+                    {tags.map(tag => <option value={tag._id} key={tag._id}>{tag.name}</option>)}
                   </Field>
                 </div>
               </ControlPanel>

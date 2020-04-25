@@ -26,8 +26,9 @@ const Task = ({ _id, description = '', contractId, time, date, tags }) => {
             Hours: {displayMsInFractionalHourFormat(time)}
           </span>
           <div className={style.block} >
+            {/* //@TODO: Could make tag colors customizeable 🤷‍♂️ */}
             {tags.map(tag => {
-              return <span className="tag" key={tag.key}>
+              return <span className={style.tag} key={tag.key}>
                 {tag.name}
               </span>
             })}

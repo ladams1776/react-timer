@@ -83,3 +83,10 @@ li {
   background-color: #f01c27;
   color: rgb(34, 33, 33);
 }
+
+.tag {
+  margin-right: .5em;
+  background-color: rgb(100, 100, 200);
+  padding: 4px;
+  color: white;
+}
