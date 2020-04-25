@@ -2,14 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
-const TaskSchema = require("./models/TaskSchema");
-const TagSchema = require("./models/TagSchema");
+const Task = require("./models/TaskSchema");
+const Tag = require("./models/TagSchema");
 
 //@TODO: Move the username and password out of here 
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
 
-const TAG_MODEL = mongoose.model("tags", TagSchema)
-const TASK_MODEL = mongoose.model("tasks", TaskSchema);
+const Tag = mongoose.model("tasks", TagSchema)
+const Task = mongoose.model("tasks", TaskSchema);
 
 
 const config = {
@@ -58,7 +58,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get("/api/tasks", function (req, res) {
-  TASK_MODEL.find({}, function (err, docs) {
+  Task.find({}, function (err, docs) {
     if (err) {
       //@todo: have not tested for this scenario yet.
       res.jsonp([{ isSuccess: 0 }]);
@@ -70,7 +70,7 @@ app.get("/api/tasks", function (req, res) {
 
 app.get("/api/task/:id", function (req, res) {
   const taskId = req.params.id;
-  TASK_MODEL.findById(taskId, function (err, docs) {
+  Task.findById(taskId, function (err, docs) {
     if (!err) {
       res.jsonp(docs);
     }
@@ -78,7 +78,7 @@ app.get("/api/task/:id", function (req, res) {
 });
 
 app.post("/api/task", (req, res) => {
-  const m = new TASK_MODEL();
+  const m = new Task();
   m.toObject();
   m.date = req.body.date;
   m.description = req.body.WorkUnit[0].description;
@@ -93,7 +93,7 @@ app.post("/api/task", (req, res) => {
 });
 
 app.put("/api/task", (req, res) => {
-  TASK_MODEL.findOneAndUpdate({ _id: req.body._id }, {
+  Task.findOneAndUpdate({ _id: req.body._id }, {
     $set: {
       date: req.body.date,
       description: req.body.WorkUnit[0].description,
@@ -109,21 +109,21 @@ app.put("/api/task", (req, res) => {
 app.delete("/api/task/:id", (req, res) => {
   const id = req.params.id;
 
-  TASK_MODEL.deleteOne({ _id: id }, function (e) {
+  Task.deleteOne({ _id: id }, function (e) {
     if (e) throw e;
     res.jsonp({ taskId: id, isSuccess: true });
   });
 });
 
 app.delete("/api/tasks", (req, res) => {
-  TASK_MODEL.deleteMany({}, function (e) {
+  Task.deleteMany({}, function (e) {
     if (e) throw e;
   });
 });
 
 // TAGS
 app.get("/api/tags", (req, res) => {
-  TAG_MODEL.find({}, (err, docs) => {
+  Tag.find({}, (err, docs) => {
     if (err) {
       //@todo: have not tested for this scenario yet.
       res.jsonp([{ isSuccess: 0 }]);
@@ -134,7 +134,7 @@ app.get("/api/tags", (req, res) => {
 });
 
 app.post('/api/tag', (req, res) => {
-  const tag = new TAG_MODEL();
+  const tag = new Tag();
   console.log('Hi', req);
   const tagDto = req.body;
   
