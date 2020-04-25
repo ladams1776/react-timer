@@ -36,7 +36,7 @@ const TaskListView = () => {
       <ul className="task-list">
         {tasks.map(task => (
           <li key={task._id} className="task">
-            <Task task={task} />
+            <Task {...task} />
           </li>
         ))}
       </ul>
