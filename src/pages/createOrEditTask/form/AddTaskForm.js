@@ -34,6 +34,11 @@ const tags = [
   },
 ]
 
+//@TODO:
+// 1. use useEffect to fetch the data
+// 2. make the endpoints / test it
+// 3. abstract fetching into a function
+
 
 const AddTaskForm = ({ history }) => {
   const { task } = useTaskEditContext();
@@ -48,11 +53,17 @@ const AddTaskForm = ({ history }) => {
    */
   const [isActive, setIsActive] = useState(false);
 
+
+  // useEffect(() => {
+  //   fetch('/api/tags');
+  // }, []);
+
+
+
   const onSubmit = event => {
     const date = new Date();
     const dateFormatted = getFormattedDate(date);
-    const tagIds = tags.map(tag => tag._id);
-    const selectedTags = tags.filter(tag => event.tags.includes(tag._id));
+    const selectedTags = tags.filter(tag => event?.tags?.includes(tag._id));
 
     const timeTask = {
       date: dateFormatted,
