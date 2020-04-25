@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TaskSchema = new mongoose.Schema({
+const TagSchema = new mongoose.Schema({
     id: { type: Number, index: true },
     name: {
         type: String
@@ -11,5 +11,6 @@ const TaskSchema = new mongoose.Schema({
     },
 });
 
+const Tag = mongoose.model("tags", TagSchema);
 
-module.exports = TaskSchema;
+module.exports = Tag;

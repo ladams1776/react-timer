@@ -17,5 +17,6 @@ const TaskSchema = new mongoose.Schema({
     tags: []
 });
 
+const Task = mongoose.model("tasks", TaskSchema);
 
-module.exports = TaskSchema;
+module.exports = Task;
