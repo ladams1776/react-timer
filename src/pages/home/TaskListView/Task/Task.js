@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import DeleteTaskButton from './DeleteTaskButton';
 import { useGetProjectOptionLabel } from 'hooks';
 import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
-import './Task.css';
+import style from './Task.module.css';
 
 const MAX_DESCRIPTION_LINE = 9;
 
@@ -17,13 +17,13 @@ const Task = ({ task }) => {
     .map((paragraph, index) => <p key={index}>{paragraph}</p>);
 
   return (
-    <NavLink to={'/task/' + _id} id={_id} className="task-item">
-      <div className="task-item__left">
-        <div className="task-item__description">{displayableDescription}</div>
-        <span className="task-item__customer">{projectOptionLabel}</span>
-        <div className="task-item__date-time">
-          <span className="block">Date: {getFormattedDate(date)}</span>
-          <span className="block">
+    <NavLink to={'/task/' + _id} id={_id} className={style.taskItem}>
+      <div className={style.taskItemLeft}>
+        <div className={style.taskItemDescription}>{displayableDescription}</div>
+        <span className={style.taskItemCustomer}>{projectOptionLabel}</span>
+        <div className={style.taskItemDateTime}>
+          <span className={style.block}>Date: {getFormattedDate(date)}</span>
+          <span className={style.block}>
             Hours: {displayMsInFractionalHourFormat(time)}
           </span>
         </div>

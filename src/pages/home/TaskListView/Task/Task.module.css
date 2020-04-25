@@ -6,8 +6,8 @@ li {
   display: block;
 }
 
-.task-item,
-.task-item:hover {
+.taskItem,
+.taskItem:hover {
   list-style: none;
   display: -webkit-flex;
   display: flex;
@@ -21,15 +21,15 @@ li {
   box-shadow: 1px 1px 4px 4px #ddd;
 }
 
-.task-item:hover {
+.taskItem:hover {
   background-color: #ffffff;
   color: #3b3b3b;
   box-shadow: 2px 2px 2px 2px #ddd;
 }
 
 @media only screen and (max-width: 600px) {
-  .task-item,
-  .task-item:hover {
+  .taskItem,
+  .taskItem:hover {
     width: 96vw;
     max-height: 300px;
     font-size: 12px;
@@ -38,13 +38,13 @@ li {
   }
 }
 
-.task-item__left,
-.task-item__left:hover {
+.taskItemLeft,
+.taskItemLeft:hover {
   flex: 5;
   overflow: hidden;
 }
 
-.task-item__description {
+.taskItemDescription {
   display: block;
   max-height: 230px;
   overflow: hidden;
@@ -55,18 +55,18 @@ li {
   overflow-wrap: break-word;
 }
 
-.task-item__customer {
+.taskItemCustomer {
   display: inline-block;
   font-style: italic;
   line-height: 1em;
 }
 
-.task-item__date-time {
+.taskItemDateTime {
   line-height: 1.25em;
 }
 
-.task-item__delete-btn,
-.task-item__delete-btn:hover {
+.taskItemDeleteBtn,
+.taskItemDeleteBtn:hover {
   background-color: #af111a;
   color: white;
   border-radius: 4px;
@@ -79,7 +79,7 @@ li {
   font-size: 16px;
 }
 
-.task-item__delete-btn:hover {
+.taskItemDeleteBtn:hover {
   background-color: #f01c27;
   color: rgb(34, 33, 33);
 }

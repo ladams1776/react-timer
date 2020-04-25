@@ -1,5 +1,7 @@
 import React from "react";
+import cn from 'classnames';
 import useTaskEditContext from 'hooks/useTaskEditContext';
+import style from './Task.module.css';
 
 const DeleteTaskButton = ({ taskId }) => {
   const { setMessage } = useTaskEditContext();
@@ -24,7 +26,7 @@ const DeleteTaskButton = ({ taskId }) => {
   return (
     <button
       onClick={_deleteClick}
-      className="task-item__delete-btn glyphicon glyphicon-remove"
+      className={cn(style.taskItemDeleteBtn, "glyphicon glyphicon-remove")}
       data-test-id="delete-task-button"
     />
   );
