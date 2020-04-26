@@ -1,8 +1,8 @@
 const TaskService = require('../../../domain/services/tasks/TaskService');
 
 module.exports = async (req, res) => {
-    console.log('getAllTasksAction.js');
-    const tasks = await TaskService.fetchAllTasks();
+    console.log('getTaskByIdAction.js');
+    const tasks = await TaskService.fetchTaskById(req.params.id);
     res.jsonp(tasks);
 };
 

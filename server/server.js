@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Task = require("./infrastructure/models/Task");
 const Tag = require("./infrastructure/models/Tag");
 const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
+const getTaskByIdAction = require('./application/requestHandlers/tasks/getTaskByIdAction');
 
 //@TODO: Move the username and password out of here 
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
@@ -59,14 +60,7 @@ app.use(bodyParser.json());
 
 app.get("/api/tasks", getAllTasksAction);
 
-app.get("/api/task/:id", function (req, res) {
-  const taskId = req.params.id;
-  Task.findById(taskId, function (err, docs) {
-    if (!err) {
-      res.jsonp(docs);
-    }
-  });
-});
+app.get("/api/task/:id", getTaskByIdAction);
 
 app.post("/api/task", (req, res) => {
   const m = new Task();
