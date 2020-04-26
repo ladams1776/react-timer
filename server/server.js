@@ -2,8 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
-const Task = require("./models/Task");
-const Tag = require("./models/Tag");
+const Task = require("./infrastructure/models/Task");
+const Tag = require("./infrastructure/models/Tag");
+const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
 
 //@TODO: Move the username and password out of here 
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
@@ -55,16 +56,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/api/tasks", function (req, res) {
-  Task.find({}, function (err, docs) {
-    if (err) {
-      //@todo: have not tested for this scenario yet.
-      res.jsonp([{ isSuccess: 0 }]);
-    } else {
-      res.jsonp(docs);
-    }
-  });
-});
+
+app.get("/api/tasks", getAllTasksAction);
 
 app.get("/api/task/:id", function (req, res) {
   const taskId = req.params.id;
@@ -135,11 +128,11 @@ app.post('/api/tag', (req, res) => {
   const tag = new Tag();
   console.log('Hi', req);
   const tagDto = req.body;
-  
+
   tag.toObject();
   tag.description = tagDto.description;
   tag.name = tagDto.name;
-  
+
   // res.jsonp({ status: 200, name: 'yup', description: 'what' });
   tag.save((err, tag) => {
     if (err) {
