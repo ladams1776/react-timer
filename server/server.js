@@ -6,6 +6,7 @@ const Task = require("./infrastructure/models/Task");
 const Tag = require("./infrastructure/models/Tag");
 const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
 const getTaskByIdAction = require('./application/requestHandlers/tasks/getTaskByIdAction');
+const getAllTagsAction = require('./application/requestHandlers/tags/getAllTagsAction');
 
 //@TODO: Move the username and password out of here 
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
@@ -107,16 +108,7 @@ app.delete("/api/tasks", (req, res) => {
 });
 
 // TAGS
-app.get("/api/tags", (req, res) => {
-  Tag.find({}, (err, docs) => {
-    if (err) {
-      //@todo: have not tested for this scenario yet.
-      res.jsonp([{ isSuccess: 0 }]);
-    } else {
-      res.jsonp(docs);
-    }
-  });
-});
+app.get("/api/tags", getAllTagsAction);
 
 app.post('/api/tag', (req, res) => {
   const tag = new Tag();
