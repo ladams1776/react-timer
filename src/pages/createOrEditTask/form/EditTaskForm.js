@@ -7,7 +7,7 @@ import {
   useFetchTaskById,
   useFlashMessageContext
 } from 'hooks';
-import getFormattedDate from 'utils/getFormattedDate';
+import { getFormattedDate } from 'utils';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import Timer from '../timer/Timer';
 import ControlPanel from '../timer/controlPanel/ControlPanel';
