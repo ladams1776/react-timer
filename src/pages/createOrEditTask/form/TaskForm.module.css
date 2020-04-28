@@ -44,7 +44,3 @@
 .submit:disabled {
     background-color: rgba(45, 115, 245, 0.45);
 }
-
-.tagsDropDown {
-    width: 100px;
-}

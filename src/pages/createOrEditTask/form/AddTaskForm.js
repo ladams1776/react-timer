@@ -10,35 +10,18 @@ import {
 import { getFormattedDate } from 'utils';
 import ControlPanel from '../timer/controlPanel/ControlPanel';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
+import TagDropdown from '../tagDropdown/TagDropdown';
 import Timer from '../timer/Timer';
 import styles from './TaskForm.module.css';
-
-
-//@TODO: Temp
-const tags = [
-  {
-    _id: "1",
-    name: 'tag 1 name'
-  },
-  {
-    _id: "2",
-    name: 'tag 2 name'
-  },
-  {
-    _id: "3",
-    name: 'tag 3 name'
-  },
-  {
-    _id: "4",
-    name: 'tag 3 name'
-  },
-]
 
 //@TODO:
 // 1. use useEffect to fetch the data
 // 2. make the endpoints / test it
 // 3. abstract fetching into a function
 
+const selectTags = (event) => {
+  return tags.filter(tag => event?.tags?.includes(tag._id))
+}
 
 const AddTaskForm = ({ history }) => {
   const { task } = useTaskEditContext();
@@ -119,15 +102,7 @@ const AddTaskForm = ({ history }) => {
               >
                 <ProjectDropDown />
                 <Timer time={time} />
-                <div className={styles.tagsDropDown}>
-                  <Field
-                    name="tags"
-                    component="Select"
-                    displayEmpty
-                    multiple>
-                    {tags.map(tag => <option value={tag._id} key={tag._id}>{tag.name}</option>)}
-                  </Field>
-                </div>
+                <TagDropdown />
               </ControlPanel>
 
               <div className={styles.textArea}>

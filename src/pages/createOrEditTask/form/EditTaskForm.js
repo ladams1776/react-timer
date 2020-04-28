@@ -9,6 +9,7 @@ import {
 } from 'hooks';
 import { getFormattedDate } from 'utils';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
+import TagDropdown from '../tagDropdown/TagDropdown';
 import Timer from '../timer/Timer';
 import ControlPanel from '../timer/controlPanel/ControlPanel';
 import styles from './TaskForm.module.css';
@@ -83,6 +84,7 @@ const EditTaskForm = ({ taskId, history }) => {
               >
                 <ProjectDropDown />
                 <Timer time={time} />
+                <TagDropdown />
               </ControlPanel>
 
               <div className={styles.textArea}>

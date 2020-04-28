@@ -46,6 +46,7 @@ const Main = () => {
             updateDropDown: useCallback(selectedProject => {
               setSelectedProject(selectedProject);
             }, []),
+            //@TODO: Replace all consumers of this.
             setMessage: useCallback(message => {
               setMessage(message);
             }, []),
