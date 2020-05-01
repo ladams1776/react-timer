@@ -1,6 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { Route, HashRouter } from 'react-router-dom';
-import { useFetchProjectOptions } from 'hooks';
 import { LoadinSpinner, FlashMessage } from 'components';
 import IndexPage from 'pages/home/IndexPage';
 import TagsPage from 'pages/tags/TagsPage';
