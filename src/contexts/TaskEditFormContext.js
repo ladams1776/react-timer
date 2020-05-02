@@ -14,7 +14,6 @@ const TaskEditFormContextProvider = ({ children }) => {
 
     // Get the data for the two drop downs
     const projects = useFetchProjectOptions();
-    // const tags = useFetchTagOptions();  
 
     const setTaskIdCallback = useCallback(taskId => setTaskId(taskId), [setTaskId]);
     const setTaskCallback = useCallback(task => setTask(task), [setTask]);
