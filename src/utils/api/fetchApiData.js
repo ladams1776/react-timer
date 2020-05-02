@@ -21,8 +21,8 @@ const fetchApiData = async (url, { body, ...settings }, dispatch) => {
 };
 
 fetchApiData.PropType = {
-    url: PropType.string,
-    dispatch: PropType.func
+    url: PropType.string.isRequired,
+    dispatch: PropType.func.isRequired
 };
 
 export default fetchApiData;
