@@ -8,7 +8,6 @@ import styles from './TagDropdown.module.css';
 const TagDropdown = () => {
     useFetchTagOptions();
     const { tags } = useTagContext();
-
     return tags && <div className={styles.dropDown}>
         <div className={styles.tagsDropDown}>
             <MultiSelectDropdown data={tags} data-test-id="tagDropdown" />

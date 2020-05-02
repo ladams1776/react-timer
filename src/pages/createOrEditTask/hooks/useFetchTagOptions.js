@@ -7,7 +7,7 @@ const useFetchTagOptions = () => {
 
     useEffect(() => {
         fetchApiData('tags', {}, setTags);
-    }, [setTags, fetchApiData]);
+    }, [setTags]);
 };
 
 export default useFetchTagOptions;
