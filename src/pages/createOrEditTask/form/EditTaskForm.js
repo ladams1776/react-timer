@@ -9,7 +9,7 @@ import {
 } from 'hooks';
 import { getFormattedDate } from 'utils';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
-import TagDropdown from '../tagDropdown/TagDropdown';
+import TagDropdown from '../TagDropdown/TagDropdown';
 import Timer from '../timer/Timer';
 import ControlPanel from '../timer/controlPanel/ControlPanel';
 import styles from './TaskForm.module.css';
