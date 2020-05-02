@@ -1,7 +1,6 @@
 import React, { createContext } from 'react';
 import useFlashMessage from './hooks/useFlashMessage';
 
-
 export const FlashMessageContext = createContext();
 export const FlashMessageActionsContext = createContext();
 

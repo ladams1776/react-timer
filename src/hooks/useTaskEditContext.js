@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import TaskEditFormContext from '../contexts/TaskEditFormContext';
+import { TaskEditFormContext } from '../contexts/TaskEditFormContext';
 
 const useTaskEditContext = () => useContext(TaskEditFormContext);
 
