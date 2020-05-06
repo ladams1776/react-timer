@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { fetchApiData } from 'utils';
-import useTagContext from '../hooks/useTagContext';
+import useTagContext from './useTagContext';
 
-const useFetchTagOptions = () => {
+const useFetchTags = () => {
     const { setTags } = useTagContext();
 
     useEffect(() => {
@@ -10,4 +10,4 @@ const useFetchTagOptions = () => {
     }, [setTags]);
 };
 
-export default useFetchTagOptions;
+export default useFetchTags;

@@ -1,14 +1,14 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import fetchApiData from 'utils/api/fetchApiData';
-import useTagContext from '../../hooks/useTagContext';
-import useFetchTagOptions from '../useFetchTagOptions';
+import useTagContext from '../useTagContext';
+import useFetchTags from '../useFetchTags';
 
 jest.mock('utils/api/fetchApiData');
 jest.mock('../../hooks/useTagContext');
 
-describe('src/pages/createOrEditTask/hooks/__test__/useFetchTagOptions.test.js', () => {
-    describe('useFetchTagOptions', () => {
+describe('src/pages/createOrEditTask/hooks/__test__/useFetchTags.test.js', () => {
+    describe('useFetchTags', () => {
         // Arrange
         const useTagContextStub = {
             setTags: jest.fn(),
@@ -20,7 +20,7 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFetchTagOptions.test.js',
             // Arrange
 
             // Act
-            renderHook(() => useFetchTagOptions());
+            renderHook(() => useFetchTags());
 
             // Assert
             expect(fetchApiData).toHaveBeenNthCalledWith(1, 'tags', {}, useTagContextStub.setTags);
