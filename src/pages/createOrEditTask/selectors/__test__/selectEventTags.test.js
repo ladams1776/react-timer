@@ -30,8 +30,8 @@ describe('src/pages/createOrEditTask/selectors/__test__/selectEventTags.test.js'
 
             const event = {
                 tags: [
-                    allTags[1]._id,
-                    allTags[2]._id
+                    { value: allTags[1]._id },
+                    { value: allTags[2]._id }
                 ]
             }
 
