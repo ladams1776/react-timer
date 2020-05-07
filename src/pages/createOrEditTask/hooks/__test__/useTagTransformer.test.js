@@ -1,29 +1,28 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import fetchApiData from 'utils/api/fetchApiData';
-import useTagContext from '../useTagContext';
-import useFetchTagOptions from '../useFetchTagOptions';
+import selectNormalizer from 'utils/normalizers/selectNormalizer';
+import useTagTransformer from '../useTagTransformer';
 
-jest.mock('utils/api/fetchApiData');
-jest.mock('../../hooks/useTagContext');
-
-describe('src/pages/createOrEditTask/hooks/__test__/useFetchTagOptions.test.js', () => {
-    describe('useFetchTagOptions', () => {
+jest.mock('utils/normalizers/selectNormalizer');
+describe('src/pages/createOrEditTask/hooks/__test__/useTagTransformer.test.js', () => {
+    describe('useTagTransformer', () => {
         // Arrange
-        const useTagContextStub = {
-            setTags: jest.fn(),
-        };
+        const tag = {
+            value: 1,
+            name: 2
+        }
 
-        useTagContext.mockReturnValue(useTagContextStub);
+        selectNormalizer.mockReturnValue(tag);
+        React.useMemo = jest.fn().mockImplementation(() => selectNormalizer(tag));
 
         it("should call fetchApiData with 'tags' and 'setTags' as a dispatch", () => {
             // Arrange
 
             // Act
-            renderHook(() => useFetchTagOptions());
+            renderHook(() => useTagTransformer());
 
             // Assert
-            expect(fetchApiData).toHaveBeenNthCalledWith(1, 'tags', {}, useTagContextStub.setTags);
+            expect(selectNormalizer).toHaveBeenNthCalledWith(1, tag);
         });
     });
 });
