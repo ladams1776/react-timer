@@ -1,7 +1,7 @@
 import React from 'react';
 import { fetchApiData } from 'utils';
 import { useTaskEditContext, useFlashMessageContext, useLoadinSpinnerContext } from 'hooks';
-import styles from './ControlButtons.module.css';
+import styles from './DeleteButton.module.css';
 
 const DeleteButton = () => {
     const { updateTasks, tasks } = useTaskEditContext();
