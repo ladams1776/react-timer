@@ -25,6 +25,10 @@
     flex: .75 .85;
 }
 
+.dropDown {
+    max-width: 350px;
+}
+
 .submit,
 .submit:hover {
     align-self: flex-end;
