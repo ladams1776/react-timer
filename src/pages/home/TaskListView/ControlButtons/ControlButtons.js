@@ -2,16 +2,17 @@
 // @TODO: Then we want to control when to display the other 2 buttons
 // @TODO: Based on if there are any tasks. So we might be pushing Tasks into the context as well and
 // @TODO: Creating a new context or adding to the existing one.
-import React from 'react';
+import React, { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { writeJsonFile } from './writeJsonFile';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 import useTaskEditContext from 'hooks/useTaskEditContext';
 import { getFormattedDate } from 'utils';
+import DeleteButton from './DeleteButton';
 import styles from './ControlButtons.module.css';
 
 const ControlButtons = () => {
-  const { setMessage, projects, tasks, updateTasks } = useTaskEditContext();
+  const { projects, tasks, updateTasks } = useTaskEditContext();
 
   const handleDownload = () => {
     const dateFormatted = getFormattedDate(new Date());
@@ -27,36 +28,9 @@ const ControlButtons = () => {
     writeJsonFile(timeTask);
   };
 
-  /**
-   * Setting a timeout when reloading, because I think the reloading is happening too fast.
-   */
-  const handleDelete = async e => {
-    e.preventDefault();
-    await fetch(`/api/tasks`, {
-      method: 'DELETE'
-    })
-      .then(response => response.json())
-      .then(
-        setTimeout(() => {
-          updateTasks([]);
-          setMessage('Successfully deleted all tasks');
-        }, 500)
-      );
-  };
-
   return (
     <>
-      {!tasks?.length || (
-        <button
-          type="a"
-          className={styles.buttonDelete}
-          onClick={handleDelete}
-          data-test-id="btn-delete"
-        >
-          <span className="glyphicon glyphicon-remove mr-5px"></span>
-          Delete
-        </button>
-      )}
+      <DeleteButton />
       {!tasks?.length || (
         <button
           type="a"

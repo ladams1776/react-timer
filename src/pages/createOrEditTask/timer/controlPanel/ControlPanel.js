@@ -1,24 +1,23 @@
 import React from 'react';
 import cn from 'classnames';
-    import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from 'components/Button';
-import { useUpdateCurrentTime } from '../hooks';
 import styles from './ControlPanel.module.css';
+import useUpdateCurrentTime from '../hooks/useUpdateCurrentTime'
 
 const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }) => {
+    useUpdateCurrentTime(time, isActive, setTime);
+
     const toggle = () => setIsActive(!isActive);
     /**
      * Haven't figured out why, but some reason this reset button is triggering the form's submission. Going to prevetDefault for now.
      * @param {Object} e 
      */
     const reset = e => {
-        e.preventDefault(); 
+        e.preventDefault();
         setIsActive(false);
         setTime(0);
     };
-
-    useUpdateCurrentTime(time, isActive, setTime);
-
 
     return <div className={cn("navbar navbar-default")}>
         <div className="container-fluid">
