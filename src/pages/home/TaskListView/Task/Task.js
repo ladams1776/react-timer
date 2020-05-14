@@ -27,8 +27,9 @@ const Task = ({ _id, description = '', contractId, time, date, tags }) => {
           </span>
           <div className={style.block} >
             {/* //@TODO: Could make tag colors customizeable 🤷‍♂️ */}
+            {/* //@TODO: Come back through and do something like taskID+_+tagID */}
             {tags.map(tag => {
-              return <span className={style.tag} key={Math.random()}> //@TODO: Temp solution
+              return <span className={style.tag} key={Math.random()}>
                 {tag.name}
               </span>
             })}
