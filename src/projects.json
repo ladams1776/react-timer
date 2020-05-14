@@ -18,5 +18,9 @@
     {
         "label": "Conference talks",
         "value": "4"
+    },
+    {
+        "label": "Reading",
+        "value": "5"
     }
 ]
