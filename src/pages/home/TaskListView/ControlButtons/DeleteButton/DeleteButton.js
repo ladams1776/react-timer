@@ -1,24 +1,19 @@
 import React from 'react';
 import { fetchApiData } from 'utils';
-import { useTaskEditContext, useFlashMessageContext, useLoadinSpinnerContext } from 'hooks';
+import { useLoadinSpinnerContext, useTaskEditContext } from 'hooks';
+import useDispatch from './useDispatch';
 import styles from './DeleteButton.module.css';
 
 const DeleteButton = () => {
-    const { updateTasks, tasks } = useTaskEditContext();
+    const { tasks } = useTaskEditContext();
     const { setIsLoadin } = useLoadinSpinnerContext();
-    const { setSuccessFlashMessage } = useFlashMessageContext();
+    const dispatch = useDispatch();
 
-    const handleDelete = e => {
+    const handleDelete = async e => {
         e.preventDefault();
         setIsLoadin(true);
 
-        const dispatch = () => {
-            setSuccessFlashMessage('Successfully deleted all tasks');
-            updateTasks([]);
-            setIsLoadin(false);
-        };
-
-        (async () => await fetchApiData('tasks', { method: 'DELETE' }, dispatch))();
+        await fetchApiData('tasks', { method: 'DELETE' }, dispatch);
     };
 
     return (
