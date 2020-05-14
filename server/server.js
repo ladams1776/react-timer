@@ -79,6 +79,7 @@ app.post("/api/task", (req, res) => {
 });
 
 app.put("/api/task", (req, res) => {
+  //@TODO: Might need to delete prior tags
   Task.findOneAndUpdate({ _id: req.body._id }, {
     $set: {
       date: req.body.date,
@@ -105,6 +106,7 @@ app.delete("/api/task/:id", (req, res) => {
 app.delete("/api/tasks", (req, res) => {
   Task.deleteMany({}, function (e) {
     if (e) throw e;
+    res.jsonp({ isSuccess: true });
   });
 });
 
