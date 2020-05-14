@@ -4,6 +4,7 @@ import selectNormalizer from 'utils/normalizers/selectNormalizer';
 import useTagTransformer from '../useTagTransformer';
 
 jest.mock('utils/normalizers/selectNormalizer');
+
 describe('src/pages/createOrEditTask/hooks/__test__/useTagTransformer.test.js', () => {
     describe('useTagTransformer', () => {
         // Arrange
