@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import { LoadinSpinner, FlashMessage } from 'components';
 import IndexPage from 'pages/home/IndexPage';
-import TagsPage from 'pages/tags/TagsPage';
+import { TagsPage, AddTagPage } from './pages/tags';
 import CreateOrEditTaskPage from 'pages/createOrEditTask/CreateOrEditTaskPage';
 import TaskEditFormContextProvider from './contexts/TaskEditFormContext';
 import LoadinSpinnerContextProvider from './contexts/LoadinSpinnerContext';
@@ -26,6 +26,7 @@ const Main = () => {
               />
               <Route exact path="/" render={props => <IndexPage {...props} />} />
               <Route exact path="/tags/" render={props => <TagsPage {...props} />} />
+              <Route exact path="/tags/:id" render={props => <AddTagPage {...props} />} />
               <LoadinSpinner />
             </div>
           </HashRouter>
