@@ -16,11 +16,8 @@ chai.use(SinonChai);
 //  * @param {Object} mockContext Context for the React Component for the test
 //  * @param {Object} sinonStub a Sinon stub wrapping the context
 //  */
-// const createWrapperWithContext = (component, mockContext = {}) => {
-//   if (mockContext !== {}) {
-//     stuber.returns(mockContext);
-//   }
-//   return shallow(component);
-// };
+const createWrapperWithContext = (component, mockContext = {}) => {
+    return shallow(component);
+};
 
-// export default createWrapperWithContext;
+export default createWrapperWithContext;
