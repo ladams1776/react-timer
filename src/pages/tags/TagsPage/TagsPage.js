@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AddTagPage from './AddTagPage';
+import { AddTagPage } from 'pages/tags';
 
 
 const TagsPage = () => {
@@ -22,9 +22,9 @@ const TagsPage = () => {
         <div>
             <ul className="testing">
                 <li className="testingLi">
-                {tags.map(tag => {
-                    return <div key={tag.name}>{tag.name}</div>
-                })}
+                    {tags.map(tag => {
+                        return <div key={tag.name}>{tag.name}</div>
+                    })}
                 </li>
             </ul>
             <AddTagPage />
