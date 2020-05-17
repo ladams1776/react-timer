@@ -10,7 +10,6 @@ import FlashMessageContextProvider from './contexts/FlashMessageContext';
 import './Main.css';
 
 const Main = () => {
-
   return (
     <FlashMessageContextProvider>
       <LoadinSpinnerContextProvider>
@@ -18,13 +17,12 @@ const Main = () => {
           <HashRouter>
             <div className="content">
               <FlashMessage />
-              {/* @TODO: Left off here https://www.telerik.com/blogs/how-to-use-context-api-with-hooks-efficiently-while-avoiding-performance-bottlenecks */}
+              <Route exact path="/" render={props => <IndexPage {...props} />} />
               <Route
                 exact
                 path="/task/:id"
                 render={props => <CreateOrEditTaskPage {...props} />}
               />
-              <Route exact path="/" render={props => <IndexPage {...props} />} />
               <Route exact path="/tags/" render={props => <TagsPage {...props} />} />
               <Route exact path="/tags/:id" render={props => <AddTagPage {...props} />} />
               <LoadinSpinner />
