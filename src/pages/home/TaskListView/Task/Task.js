@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import DeleteTaskButton from './DeleteTaskButton';
+import DeleteTaskButton from './DeleteTaskButton/DeleteTaskButton';
 import { useGetProjectOptionLabel } from 'hooks';
 import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
 import style from './Task.module.css';
@@ -27,8 +27,9 @@ const Task = ({ _id, description = '', contractId, time, date, tags }) => {
           </span>
           <div className={style.block} >
             {/* //@TODO: Could make tag colors customizeable 🤷‍♂️ */}
+            {/* //@TODO: Come back through and do something like taskID+_+tagID */}
             {tags.map(tag => {
-              return <span className={style.tag} key={tag.key}>
+              return <span className={style.tag} key={Math.random()}>
                 {tag.name}
               </span>
             })}

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTaskEditContext, useLoadinSpinnerContext, useFlashMessageContext } from 'hooks';
 import './TaskListView.css';
 import Task from './Task/Task';
-import ControlButtons from './ControlButtons';
+import ControlButtons from './ControlButtons/ControlButtons';
 
 //@TODO: Need test for this component. It is just so much in flush atm
 //@TODO: ### Clen up this useEffect: https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper
@@ -36,7 +36,7 @@ const TaskListView = () => {
       <ul className="task-list">
         {tasks.map(task => (
           <li key={task._id} className="task">
-            <Task {...task} />
+            <Task {...task} key={task._id} />
           </li>
         ))}
       </ul>

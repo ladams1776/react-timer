@@ -1,30 +1,53 @@
 import React, { useState, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
+import { fetchApiData } from 'utils';
 import {
   useTaskEditContext,
   useBackButtonListener,
-  useFetchTaskById,
   useFlashMessageContext
 } from 'hooks';
+import { MultiSelectAdapter } from "components";
 import { getFormattedDate } from 'utils';
+import { useFetchTaskById } from '../hooks'
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
-import TagDropdown from '../TagDropdown/TagDropdown';
 import Timer from '../timer/Timer';
 import ControlPanel from '../timer/controlPanel/ControlPanel';
 import styles from './TaskForm.module.css';
 
+
+import {
+  useTagTransformer,
+  useTagContext,
+  useFetchTags,
+  useFormDispatch
+} from '../hooks';
+import { selectEventTags } from '../selectors';
+import TextAreaAdapter from '../../../components/TextAreaAdapter';
+import taskIdDispatch from './taskIdDispatch'
+
 const EditTaskForm = ({ taskId, history }) => {
   useBackButtonListener(history);
-  const { task } = useTaskEditContext();
-  const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
+  const { setErrorFlashMessage } = useFlashMessageContext();
+  const { task, updateTask } = useTaskEditContext();
+  const { tags } = useTagContext();
   const [time, setTime] = useState(0);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
-  useFetchTaskById(taskId, setTimeCallback);
-
-  //@TODO: Use the new flashMessage, not this old one. It does not work
+  const dispatch = useFormDispatch(history);
 
 
+  const useFetchDispatch = useCallback(data =>
+    taskIdDispatch(setTime, updateTask, setErrorFlashMessage)(data),
+    [setTime, updateTask, setErrorFlashMessage]);
+
+  useFetchTaskById(taskId, useFetchDispatch);
+
+  useFetchTags();
+
+  const initialTags = useTagTransformer(task.tags);
+  const allTags = useTagTransformer(tags);
+
+  const selectTags = selectEventTags(tags);
   /**
    * These really can live in the Timer comp, but to be able to Unit test the Timer
    * and not try to figure out how to mock what useState returns... this seems to be
@@ -33,34 +56,28 @@ const EditTaskForm = ({ taskId, history }) => {
   const [isActive, setIsActive] = useState(false);
 
   const onSubmit = event => {
+    console.log('the event: ', event);
     const dateFormatted = getFormattedDate(new Date());
+    const selectedTags = selectTags(event);
 
+    //@TODO: We need to get this time from the useRef - perhaps.
     const timeTask = {
+      _id: event.id,
       date: dateFormatted,
       WorkUnit: [
         {
           time,
           contractId: event?.selectedProject || 0,
           description: event?.description || '',
+          tags: selectedTags
         },
       ],
     };
 
-    timeTask._id = task._id;
+    //@TODO: Need to test this
+    const method = event.id ? 'PUT' : 'POST';
 
-    fetch('/api/task', {
-      method: 'PUT',
-      body: JSON.stringify(timeTask),
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then(e => {
-        if (e.status === 200) {
-          setSuccessFlashMessage('Successfully updated a Task');
-        } else {
-          setErrorFlashMessage(`Problem saving task, status: ${e.status}`);
-        }
-      })
-      .catch(error => setErrorFlashMessage(`Problem saving task, status: ${error}`));
+    fetchApiData('task', { body: timeTask, method }, dispatch);
   };
 
   //@todo: how to auto save
@@ -69,30 +86,40 @@ const EditTaskForm = ({ taskId, history }) => {
       initialValues={{
         description: task.description,
         selectedProject: task.contractId,
+        tags: initialTags,
+        id: task._id
       }}
       onSubmit={onSubmit}
       render={({ handleSubmit, pristine }) => (
         <div className={styles.taskFormContainer}>
           <div className={styles.form}>
             <form className={styles.taskForm} onSubmit={handleSubmit}>
-
+              <Field
+                component="input"
+                type="hidden"
+                name="id"
+              />
               <ControlPanel
-                setTime={setTimeCallback}
                 time={time}
+                setTime={setTimeCallback}
                 isActive={isActive}
                 setIsActive={setIsActive}
+                history={history}
               >
                 <ProjectDropDown />
                 <Timer time={time} />
-                <TagDropdown />
+                <Field
+                  name="tags"
+                  className={styles.dropDown}
+                  component={MultiSelectAdapter}
+                  options={allTags}
+                />
               </ControlPanel>
 
               <div className={styles.textArea}>
                 <Field
                   name="description"
-                  component="textarea"
-                  cols="80"
-                  rows="10"
+                  component={TextAreaAdapter}
                 />
               </div>
 

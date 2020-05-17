@@ -7,8 +7,8 @@
 }
 
 .backButton { 
-    text-align: center;
     display: flex;
+    text-align: center;
     height: 50px;
     width: 50px;
     cursor: pointer;

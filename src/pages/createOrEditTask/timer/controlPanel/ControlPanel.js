@@ -1,31 +1,36 @@
 import React from 'react';
 import cn from 'classnames';
-    import { Link } from 'react-router-dom';
 import Button from 'components/Button';
-import { useUpdateCurrentTime } from '../hooks';
+import useUpdateCurrentTime from '../hooks/useUpdateCurrentTime'
 import styles from './ControlPanel.module.css';
 
-const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }) => {
+const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children, history }) => {
+    useUpdateCurrentTime(time, isActive, setTime);
+
     const toggle = () => setIsActive(!isActive);
     /**
      * Haven't figured out why, but some reason this reset button is triggering the form's submission. Going to prevetDefault for now.
      * @param {Object} e 
      */
     const reset = e => {
-        e.preventDefault(); 
+        e.preventDefault();
         setIsActive(false);
         setTime(0);
     };
 
-    useUpdateCurrentTime(time, isActive, setTime);
-
-
     return <div className={cn("navbar navbar-default")}>
         <div className="container-fluid">
             <div className={styles.navbarHeader}>
-                <Link className={cn(styles.backButton)} to="/">
-                    <span className={cn(styles.backButtonIcon, "glyphicon glyphicon-chevron-left")} />
-                </Link>
+                <div className={cn(styles.backButton)}>
+                    <span className={cn("glyphicon glyphicon-chevron-left", styles.backButtonIcon)}
+                        onClick={() => {
+                            const result = window.confirm("Do you really want to leave?");
+                            if (result === true) {
+                                history.push("/")
+                            }
+                        }}
+                    />
+                </div>
 
                 <Button
                     className={cn(styles.timerReset)}
