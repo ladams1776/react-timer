@@ -16,18 +16,25 @@ import ControlPanel from '../timer/controlPanel/ControlPanel';
 import styles from './TaskForm.module.css';
 
 
-import { useTagTransformer, useTagContext, useFetchTags } from '../hooks';
+import {
+  useTagTransformer,
+  useTagContext,
+  useFetchTags,
+  useFormDispatch
+} from '../hooks';
 import { selectEventTags } from '../selectors';
 import TextAreaAdapter from '../../../components/TextAreaAdapter';
 import taskIdDispatch from './taskIdDispatch'
 
 const EditTaskForm = ({ taskId, history }) => {
   useBackButtonListener(history);
-  const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
+  const { setErrorFlashMessage } = useFlashMessageContext();
   const { task, updateTask } = useTaskEditContext();
   const { tags } = useTagContext();
   const [time, setTime] = useState(0);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
+  const dispatch = useFormDispatch(history);
+
 
   const useFetchDispatch = useCallback(data =>
     taskIdDispatch(setTime, updateTask, setErrorFlashMessage)(data),
@@ -52,7 +59,7 @@ const EditTaskForm = ({ taskId, history }) => {
     console.log('the event: ', event);
     const dateFormatted = getFormattedDate(new Date());
     const selectedTags = selectTags(event);
-    
+
     //@TODO: We need to get this time from the useRef - perhaps.
     const timeTask = {
       _id: event.id,
@@ -69,18 +76,6 @@ const EditTaskForm = ({ taskId, history }) => {
 
     //@TODO: Need to test this
     const method = event.id ? 'PUT' : 'POST';
-
-    //@TODO: break this out? Probs could make this a helper function
-    const dispatch = data => {
-      if (data._id) {
-        setSuccessFlashMessage('Successfully Added/Edited a Task');
-      } else {
-        setErrorFlashMessage('Failed to Add/Edit a Task')
-      }
-
-      history.push(`/task/${data._id}`);
-      updateTask(data);
-    };
 
     fetchApiData('task', { body: timeTask, method }, dispatch);
   };
@@ -109,6 +104,7 @@ const EditTaskForm = ({ taskId, history }) => {
                 setTime={setTimeCallback}
                 isActive={isActive}
                 setIsActive={setIsActive}
+                history={history}
               >
                 <ProjectDropDown />
                 <Timer time={time} />
