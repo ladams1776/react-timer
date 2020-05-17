@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-
-const BACK_BUTTON_EVENT = 'POP';
+import useDispatch from './useDispatch';
 
 /**
  * We want to listen for the browser's back button event, and
@@ -9,14 +8,11 @@ const BACK_BUTTON_EVENT = 'POP';
  * 
  * @param {Object} history from react-router-dom 
  */
-const useBackButtonlistener = history => {
+const useBackButtonListener = (history) => {
+    const dispatch = useDispatch(history);
     return useEffect(() => {
-        return window.onpopstate = e => {
-            if (history.action === BACK_BUTTON_EVENT) {
-                history.replace('/');
-            }
-        }
+        return window.addEventListener('popstate', dispatch);
     }, [history]);
 };
 
-export default useBackButtonlistener;
+export default useBackButtonListener;
