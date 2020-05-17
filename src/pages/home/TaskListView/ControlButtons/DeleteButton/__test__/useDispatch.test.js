@@ -12,17 +12,17 @@ describe('src/pages/home/TaskListView/ControlButtons/DeleteButton/__test__/useDi
         // Arrange
         // task context
         const taskContextMock = {
-            updateTasks: jest.fn().mockImplementation(),
+            updateTasks: jest.fn(),
         };
 
         // flash message context
         const flashMessageContextMock = {
-            setSuccessFlashMessage: jest.fn().mockImplementation(),
+            setSuccessFlashMessage: jest.fn(),
         };
 
         // loadin Spinner context
         const loadinSpinnerContextMock = {
-            setIsLoadin: jest.fn().mockImplementation(),
+            setIsLoadin: jest.fn(),
         };
 
         beforeEach(() => {
