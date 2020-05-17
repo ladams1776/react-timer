@@ -12,7 +12,6 @@ const DeleteButton = () => {
     const handleDelete = async e => {
         e.preventDefault();
         setIsLoadin(true);
-
         await fetchApiData('tasks', { method: 'DELETE' }, dispatch);
     };
 
