@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import DeleteTaskButton from './DeleteTaskButton';
+import DeleteTaskButton from './DeleteTaskButton/DeleteTaskButton';
 import { useGetProjectOptionLabel } from 'hooks';
 import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
 import style from './Task.module.css';

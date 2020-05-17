@@ -1,6 +1,5 @@
 import React from 'react';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import useUpdateCurrentTime from '../hooks/useUpdateCurrentTime'
 import styles from './ControlPanel.module.css';
@@ -22,7 +21,6 @@ const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children, 
     return <div className={cn("navbar navbar-default")}>
         <div className="container-fluid">
             <div className={styles.navbarHeader}>
-                {/* <Link className={cn(styles.backButton)} to="/"> */}
                 <div className={cn(styles.backButton)}>
                     <span className={cn("glyphicon glyphicon-chevron-left", styles.backButtonIcon)}
                         onClick={() => {
@@ -33,7 +31,6 @@ const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children, 
                         }}
                     />
                 </div>
-                {/* </Link> */}
 
                 <Button
                     className={cn(styles.timerReset)}
