@@ -8,14 +8,19 @@ import useFormDispatch from '../useFormDispatch';
 jest.mock('hooks/useTaskEditContext');
 jest.mock('hooks/useFlashMessageContext');
 
-describe('src/pages/home/TaskListView/ControlButtons/DownloadButton/__test__/useFormDispatch.test.js', () => {
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts
+    useHistory: () => ({
+        push: jest.fn(),
+    }),
+}));
+
+describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', () => {
     describe('useFormDispatch', () => {
         // Arrange
-
         const taskContextMock = {
             updateTask: jest.fn(),
         };
-
 
         const flashMessageContext = {
             setSuccessFlashMessage: jest.fn(),
@@ -33,20 +38,15 @@ describe('src/pages/home/TaskListView/ControlButtons/DownloadButton/__test__/use
 
         it('should update task with data, with _id will set Success Flash Message', () => {
             // Arrange
-            const history = {
-                push: jest.fn()
-            };
-
             const expected = {
                 _id: 123
             };
 
             // Act
-            const { result } = renderHook(() => useFormDispatch(history));
+            const { result } = renderHook(() => useFormDispatch());
             result.current(expected);
 
             // Assert
-            expect(history.push).toHaveBeenNthCalledWith(1, `/task/${expected._id}`);
             expect(taskContextMock.updateTask).toHaveBeenNthCalledWith(1, expected);
             expect(flashMessageContext.setSuccessFlashMessage).toHaveBeenNthCalledWith(1, 'Successfully Added/Edited a Task');
         });
@@ -66,7 +66,6 @@ describe('src/pages/home/TaskListView/ControlButtons/DownloadButton/__test__/use
             result.current(expected);
 
             // Assert
-            expect(history.push).toHaveBeenNthCalledWith(1, `/task/${expected._id}`);
             expect(taskContextMock.updateTask).toHaveBeenNthCalledWith(1, expected);
             expect(flashMessageContext.setErrorFlashMessage).toHaveBeenNthCalledWith(1, 'Failed to Add/Edit a Task');
         });

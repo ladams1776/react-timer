@@ -1,13 +1,14 @@
+import { useHistory } from 'react-router-dom';
 import {
     useTaskEditContext,
     useFlashMessageContext
 } from 'hooks';
 
-const useFormDispatch = (history) => {
+const useFormDispatch = () => {
+    const history = useHistory();
     const { updateTask } = useTaskEditContext();
     const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
 
-    //@TODO: Left off here.
     return data => {
         if (data._id) {
             setSuccessFlashMessage('Successfully Added/Edited a Task');
@@ -15,8 +16,8 @@ const useFormDispatch = (history) => {
             setErrorFlashMessage('Failed to Add/Edit a Task')
         }
 
-        history.push(`/task/${data._id}`);
         updateTask(data);
+        history.push(`/task/${data._id}`);
     };
 };
 
