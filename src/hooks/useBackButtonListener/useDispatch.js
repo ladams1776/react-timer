@@ -1,9 +1,13 @@
-const useDispatch = history => {
-    return event => {
-        if (history.action === 'PUSH') {
-            history.push(null, document.title, window.location.href);
+import useBrowserHistoryPush from 'hooks/useBrowserHistoryPush';
+
+const useDispatch = () => {
+    const { action, push } = useBrowserHistoryPush();
+    return () => {
+        if (action === 'POP') {
+            push(null, document.title, window.location.href);
         }
     }
 }
+
 
 export default useDispatch;
