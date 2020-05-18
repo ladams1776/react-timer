@@ -22,17 +22,18 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', ()
             setErrorFlashMessage: jest.fn(),
         };
 
-        const pushSpy = jest.fn();
-
+        const historyMock = {
+            push: jest.fn(),
+        };
         beforeEach(() => {
             taskContextMock.updateTask.mockReset();
             flashMessageContext.setSuccessFlashMessage.mockReset();
             flashMessageContext.setErrorFlashMessage.mockReset();
-            pushSpy.mockReset();
+            historyMock.push.mockReset();
 
             useTaskEditContext.mockReturnValue(taskContextMock);
             useFlashMessageContext.mockReturnValue(flashMessageContext);
-            useBrowserHistoryPush.mockReturnValue(pushSpy);
+            useBrowserHistoryPush.mockReturnValue(historyMock);
         });
 
         it('should update task with data, with _id will set Success Flash Message', () => {
@@ -48,7 +49,7 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', ()
             // Assert
             expect(taskContextMock.updateTask).toHaveBeenNthCalledWith(1, expected);
             expect(flashMessageContext.setSuccessFlashMessage).toHaveBeenNthCalledWith(1, 'Successfully Added/Edited a Task');
-            expect(pushSpy).toHaveBeenNthCalledWith(1, `/task/${expected._id}`);
+            expect(historyMock.push).toHaveBeenNthCalledWith(1, `/task/${expected._id}`);
         });
 
         it('should update task with data, without _id will set Error Flash Message', () => {
@@ -64,7 +65,7 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', ()
             // Assert
             expect(taskContextMock.updateTask).toHaveBeenNthCalledWith(1, expected);
             expect(flashMessageContext.setErrorFlashMessage).toHaveBeenNthCalledWith(1, 'Failed to Add/Edit a Task');
-            expect(pushSpy).toHaveBeenNthCalledWith(1, `/task/${expected._id}`);
+            expect(historyMock.push).toHaveBeenNthCalledWith(1, `/task/${expected._id}`);
         });
     });
 });
