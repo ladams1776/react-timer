@@ -1,11 +1,11 @@
-import { useHistory } from 'react-router-dom';
+import useBrowserHistoryPush from 'hooks/useBrowserHistoryPush';
 import {
     useTaskEditContext,
     useFlashMessageContext
 } from 'hooks';
 
 const useFormDispatch = () => {
-    const history = useHistory();
+    const push = useBrowserHistoryPush();
     const { updateTask } = useTaskEditContext();
     const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
 
@@ -17,7 +17,7 @@ const useFormDispatch = () => {
         }
 
         updateTask(data);
-        history.push(`/task/${data._id}`);
+        push(`/task/${data._id}`);
     };
 };
 
