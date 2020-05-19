@@ -26,20 +26,7 @@ describe("src/components/ControlButtons/__test__/ControlButtons.test.js", () => 
       wrapper = shallow(<ControlButtons />);
 
       // Assert
-      expect(findByTestId(wrapper, "btn-new")).toHaveLength(1);
-    });
-
-    describe('onClick', () => {
-      it("should call 'push' function", () => {
-        // Arrange
-
-        // Act
-        wrapper = shallow(<ControlButtons />);
-        findByTestId(wrapper, "btn-new").props().onClick()
-
-        // Assert
-        expect(historyMock.push).toHaveBeenNthCalledWith(1, '/task/-1');
-      });
+      expect(findByTestId(wrapper, "control-buttons")).toHaveLength(1);
     });
   });
 });

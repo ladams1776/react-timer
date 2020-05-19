@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { fetchApiData } from 'utils';
 import {
@@ -26,18 +25,18 @@ import { selectEventTags } from '../selectors';
 import TextAreaAdapter from '../../../components/TextAreaAdapter';
 import taskIdDispatch from './taskIdDispatch'
 
-const EditTaskForm = ({ taskId, history }) => {
-  useBackButtonListener(history);
+const EditTaskForm = ({ taskId }) => {
+  useBackButtonListener();
   const { setErrorFlashMessage } = useFlashMessageContext();
   const { task, updateTask } = useTaskEditContext();
   const { tags } = useTagContext();
   const [time, setTime] = useState(0);
   const setTimeCallback = useCallback((time) => setTime(time), [setTime]);
-  const dispatch = useFormDispatch(history);
+  const dispatch = useFormDispatch();
 
 
   const useFetchDispatch = useCallback(data =>
-    taskIdDispatch(setTime, updateTask, setErrorFlashMessage)(data),
+    taskIdDispatch(setTime, updateTask)(data),
     [setTime, updateTask, setErrorFlashMessage]);
 
   useFetchTaskById(taskId, useFetchDispatch);
@@ -56,9 +55,8 @@ const EditTaskForm = ({ taskId, history }) => {
   const [isActive, setIsActive] = useState(false);
 
   const onSubmit = event => {
-    console.log('the event: ', event);
     const dateFormatted = getFormattedDate(new Date());
-    const selectedTags = selectTags(event);
+    const selectedTags = selectTags(event.tags);
 
     //@TODO: We need to get this time from the useRef - perhaps.
     const timeTask = {
@@ -104,7 +102,6 @@ const EditTaskForm = ({ taskId, history }) => {
                 setTime={setTimeCallback}
                 isActive={isActive}
                 setIsActive={setIsActive}
-                history={history}
               >
                 <ProjectDropDown />
                 <Timer time={time} />
@@ -134,5 +131,4 @@ const EditTaskForm = ({ taskId, history }) => {
   );
 };
 
-//@TODO: Replace this with the pipeline operator.
-export default withRouter(EditTaskForm);
+export default EditTaskForm;
