@@ -1,10 +1,12 @@
 import React from 'react';
 import cn from 'classnames';
+import { useHistory } from 'react-router-dom';
 import Button from 'components/Button';
 import useUpdateCurrentTime from '../hooks/useUpdateCurrentTime'
 import styles from './ControlPanel.module.css';
 
-const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children, history }) => {
+const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }) => {
+    const history = useHistory();
     useUpdateCurrentTime(time, isActive, setTime);
 
     const toggle = () => setIsActive(!isActive);
@@ -24,10 +26,7 @@ const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children, 
                 <div className={cn(styles.backButton)}>
                     <span className={cn("glyphicon glyphicon-chevron-left", styles.backButtonIcon)}
                         onClick={() => {
-                            const result = window.confirm("Do you really want to leave?");
-                            if (result === true) {
-                                history.push("/")
-                            }
+                            history.push("/")
                         }}
                     />
                 </div>

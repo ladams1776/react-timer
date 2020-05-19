@@ -1,18 +1,32 @@
-import { useEffect } from 'react';
-import useDispatch from './useDispatch';
+import { useEffect, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
+//@TODO: Probs clean this up later
 /**
- * We want to listen for the browser's back button event, and
- * if it fired, we want to make sure that we tell react router to 
- * redirect us over to the homepage.
- * 
- * @param {Object} history from react-router-dom 
+ * Prevent the user from hitting the back button.
  */
-const useBackButtonListener = (history) => {
-    const dispatch = useDispatch(history);
+const useBackButtonListener = () => {
+    const history = useHistory();
+    const action = history.action;
+
+    const dispatch = useCallback((event) => {
+        if (history.action === 'PUSH') {
+            history.block((location, action) => {
+                if (location.pathname === "/") {
+                    if (history.action === 'PUSH') {
+                        return 'Are you sure you want to leave this page?';
+                    }
+                }
+            });
+        }
+    }, [history, action]);
+
     return useEffect(() => {
-        return window.addEventListener('popstate', dispatch);
-    }, [history]);
+        window.addEventListener('popstate', dispatch);
+        return () => {
+            window.removeEventListener('popstate', dispatch);
+        }
+    }, [dispatch]);
 };
 
 export default useBackButtonListener;

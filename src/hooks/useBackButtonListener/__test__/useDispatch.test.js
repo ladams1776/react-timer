@@ -1,18 +1,25 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
+import useBrowserHistory from 'hooks/useBrowserHistory';
 import useDispatch from '../useDispatch';
 
 jest.mock('hooks/useFlashMessageContext');
+jest.mock('hooks/useBrowserHistory');
 
 describe('src/hooks/useBackButtonListener/__test__/useDispatch.test.js', () => {
     describe('useDispatch', () => {
-        it("should call 'history.push()', when 'acton' is set to 'PUSH'", () => {
+        document.title = 'Title';
+        
+        it("should call 'history.push()', when 'acton' is set to 'POP'", () => {
             // Arrange
-            const history = { action: 'PUSH', push: jest.fn() };
-            document.title = 'Title';
+            const history = {
+                action: 'POP',
+                push: jest.fn()
+            }
+            useBrowserHistory.mockReturnValue(history);
 
             // Act
-            const { result } = renderHook(() => useDispatch(history));
+            const { result } = renderHook(() => useDispatch());
             act(() => result.current());
 
             // Assert
@@ -21,8 +28,11 @@ describe('src/hooks/useBackButtonListener/__test__/useDispatch.test.js', () => {
 
         it("should call not 'history.push()', when 'acton' is set to anything other than 'PUSH'", () => {
             // Arrange
-            const history = { action: 'NOT_PUSH', push: jest.fn() };
-            document.title = 'Title';
+            const history = {
+                action: 'NOT_POP',
+                push: jest.fn()
+            }
+            useBrowserHistory.mockReturnValue(history);
 
             // Act
             const { result } = renderHook(() => useDispatch(history));

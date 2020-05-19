@@ -1,18 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import DeleteButton from './DeleteButton/DeleteButton';
 import DownloadButton from './DownloadButton/DownloadButton';
+import NewButton from './NewButton/NewButton';
 import styles from './ControlButtons.module.css';
 
-const ControlButtons = () => (
-    <>
+const ControlButtons = () => {
+  return (
+    <div className={styles.controlButtons} data-test-id="control-buttons">
       <DeleteButton />
       <DownloadButton />
-      <NavLink to={'/task/-1'} className={styles.buttonAdd} data-test-id="btn-new">
-        <span className="glyphicon glyphicon-plus mr-5px" />
-        New Task
-      </NavLink >
-    </>
-  );
+      <NewButton />
+    </div>
+  )
+};
 
 export default ControlButtons;
