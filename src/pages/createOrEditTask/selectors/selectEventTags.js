@@ -1,7 +1,7 @@
-const selectEventTags = allTags => event => {
+const selectEventTags = allTags => (selectedTags = []) => {
     const findTags = tag => tag.value;
 
-    return allTags.filter(tag => event.tags.map(findTags).includes(tag._id));
+    return allTags.filter(tag => selectedTags.map(findTags).includes(tag._id));
 };
 
 

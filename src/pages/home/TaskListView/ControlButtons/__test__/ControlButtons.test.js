@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from 'enzyme';
 import { findByTestId } from "testUtils";
-import useBrowserHistoryPush from 'hooks/useBrowserHistoryPush';
+import useBrowserHistory from 'hooks/useBrowserHistory';
 import ControlButtons from "../ControlButtons";
 
-jest.mock('hooks/useBrowserHistoryPush');
+jest.mock('hooks/useBrowserHistory');
 
 //@TODO: ‼️ Fill in this test's onClick ‼️
 describe("src/components/ControlButtons/__test__/ControlButtons.test.js", () => {
@@ -15,7 +15,7 @@ describe("src/components/ControlButtons/__test__/ControlButtons.test.js", () => 
   };
 
   beforeEach(() => {
-    useBrowserHistoryPush.mockReturnValue(historyMock);
+    useBrowserHistory.mockReturnValue(historyMock);
   });
 
   describe("ControlButtons", () => {

@@ -1,11 +1,11 @@
 import React from 'react';
-import useBrowserHistoryPush from 'hooks/useBrowserHistoryPush';
+import useBrowserHistory from 'hooks/useBrowserHistory';
 import DeleteButton from './DeleteButton/DeleteButton';
 import DownloadButton from './DownloadButton/DownloadButton';
 import styles from './ControlButtons.module.css';
 
 const ControlButtons = () => {
-  const { push } = useBrowserHistoryPush();
+  const { push } = useBrowserHistory();
 
   return (
     <>

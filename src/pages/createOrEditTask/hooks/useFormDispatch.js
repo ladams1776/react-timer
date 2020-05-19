@@ -1,11 +1,11 @@
-import useBrowserHistoryPush from 'hooks/useBrowserHistoryPush';
 import {
     useTaskEditContext,
-    useFlashMessageContext
+    useFlashMessageContext,
+    useBrowserHistory
 } from 'hooks';
 
 const useFormDispatch = () => {
-    const { push } = useBrowserHistoryPush();
+    const { push } = useBrowserHistory();
     const { updateTask } = useTaskEditContext();
     const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
 

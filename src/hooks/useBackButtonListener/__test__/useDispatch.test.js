@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
-import useBrowserHistoryPush from 'hooks/useBrowserHistoryPush';
+import useBrowserHistory from 'hooks/useBrowserHistory';
 import useDispatch from '../useDispatch';
 
 jest.mock('hooks/useFlashMessageContext');
-jest.mock('hooks/useBrowserHistoryPush');
+jest.mock('hooks/useBrowserHistory');
 
 describe('src/hooks/useBackButtonListener/__test__/useDispatch.test.js', () => {
     describe('useDispatch', () => {
@@ -16,7 +16,7 @@ describe('src/hooks/useBackButtonListener/__test__/useDispatch.test.js', () => {
                 action: 'POP',
                 push: jest.fn()
             }
-            useBrowserHistoryPush.mockReturnValue(history);
+            useBrowserHistory.mockReturnValue(history);
 
             // Act
             const { result } = renderHook(() => useDispatch());
@@ -32,7 +32,7 @@ describe('src/hooks/useBackButtonListener/__test__/useDispatch.test.js', () => {
                 action: 'NOT_POP',
                 push: jest.fn()
             }
-            useBrowserHistoryPush.mockReturnValue(history);
+            useBrowserHistory.mockReturnValue(history);
 
             // Act
             const { result } = renderHook(() => useDispatch(history));

@@ -1,7 +1,7 @@
-import useBrowserHistoryPush from 'hooks/useBrowserHistoryPush';
+import useBrowserHistory from 'hooks/useBrowserHistory';
 
 const useDispatch = () => {
-    const { action, push } = useBrowserHistoryPush();
+    const { action, push } = useBrowserHistory();
     return () => {
         if (action === 'POP') {
             push(null, document.title, window.location.href);

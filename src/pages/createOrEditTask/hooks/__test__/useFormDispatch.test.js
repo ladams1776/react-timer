@@ -4,11 +4,11 @@ import {
     useFlashMessageContext
 } from 'hooks';
 import useFormDispatch from '../useFormDispatch';
-import useBrowserHistoryPush from 'hooks/useBrowserHistoryPush';
+import useBrowserHistory from 'hooks/useBrowserHistory';
 
 jest.mock('hooks/useTaskEditContext');
 jest.mock('hooks/useFlashMessageContext');
-jest.mock('hooks/useBrowserHistoryPush');
+jest.mock('hooks/useBrowserHistory');
 
 describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', () => {
     describe('useFormDispatch', () => {
@@ -33,7 +33,7 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', ()
 
             useTaskEditContext.mockReturnValue(taskContextMock);
             useFlashMessageContext.mockReturnValue(flashMessageContext);
-            useBrowserHistoryPush.mockReturnValue(historyMock);
+            useBrowserHistory.mockReturnValue(historyMock);
         });
 
         it('should update task with data, with _id will set Success Flash Message', () => {
