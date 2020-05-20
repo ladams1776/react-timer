@@ -14,13 +14,11 @@ describe('src/hooks/__test__/useBackButtonListener.test.js', () => {
 
         it("should invoke 'window.addEventListener()' with 'popstate' and dispatch", () => {
                 // Arrange
-                const history = { go: jest.fn(), action: 'POP' };
-
                 const dispatchSpy = jest.fn();
                 useDispatch.mockReturnValue(dispatchSpy);
 
                 // Act
-                renderHook(() => useBackButtonListener(history));
+                renderHook(() => useBackButtonListener());
 
                 // Assert
                 expect(window.addEventListener).toHaveBeenCalledWith('popstate', dispatchSpy);
