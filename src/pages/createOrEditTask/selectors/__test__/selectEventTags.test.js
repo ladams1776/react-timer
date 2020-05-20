@@ -28,17 +28,15 @@ describe('src/pages/createOrEditTask/selectors/__test__/selectEventTags.test.js'
                 allTags[2]
             ]
 
-            const event = {
-                tags: [
-                    { value: allTags[1]._id },
-                    { value: allTags[2]._id }
-                ]
-            }
+            const tags = [
+                { value: allTags[1]._id },
+                { value: allTags[2]._id }
+            ];
 
             const target = selectEventTags(allTags);
 
             // Act
-            const actual = target(event);
+            const actual = target(tags);
 
             // Assert
             expect(actual).toEqual(expected);
