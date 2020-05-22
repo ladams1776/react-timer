@@ -1,12 +1,13 @@
+import { useCallback } from 'react';
 import useBrowserHistory from 'hooks/useBrowserHistory';
+import checkToMakeSureUserWantsToLeave from './checkToMakeSureUserWantsToLeave';
 
 const useDispatch = () => {
-    const { action, push } = useBrowserHistory();
-    return () => {
-        if (action === 'POP') {
-            push(null, document.title, window.location.href);
-        }
-    }
+    const history = useBrowserHistory();
+
+    return useCallback(event => {
+        history.block(checkToMakeSureUserWantsToLeave);
+    }, [history]);
 }
 
 
