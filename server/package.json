@@ -11,6 +11,16 @@
   },
   "proxy": "http://172.28.1.3:3001",
   "scripts": {
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "test": "yarn jest"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
