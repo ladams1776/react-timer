@@ -23,6 +23,7 @@ describe("server/application/requestHandlers/tasks/__test__/getAllTasksAction.te
             await getAllTasksAction({}, response);
 
             // Assert
+            expect(TaskService.fetchAllTasks).toHaveBeenCalledTimes(1);
             expect(response.jsonp).toHaveBeenNthCalledWith(1, tasks);
         });
     });
