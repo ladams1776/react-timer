@@ -26,7 +26,11 @@
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
         "ignoreRegExpLiterals": true
-      }
-    ]
+      },
+    ],
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "arrow-parens": ["error", "as-needed"],
+    "import/no-unresolved": 0
   }
 }
