@@ -1,11 +1,19 @@
+import selectEventTags from '../../selectors/selectEventTags';
 import hydrateTaskFromEvent from '../hydrateTaskFromEvent';
+
+jest.mock('../../selectors/selectEventTags');
 
 describe('src/pages/createOrEditTask/form/__test__/hydrateTaskFromEvent.test.js', () => {
   describe('hydrateTaskFromEvent', () => {
     // Arrange
     const dateFormatted = 'a-date';
     const time = 'a-time';
-    const selectedTags = 'some-tags';
+    const tags = 'some-tags';
+    const selectTags = jest.fn().mockImplementation(() => tags);
+    
+    beforeEach(() => {
+      selectEventTags.mockReturnValue(selectTags);
+    });
 
     it('should return a task in the right format, with all values', () => {
       // Arrange
@@ -13,7 +21,9 @@ describe('src/pages/createOrEditTask/form/__test__/hydrateTaskFromEvent.test.js'
         id: 'id',
         selectedProject: 'project',
         description: 'description',
+        tags,
       };
+
       const expected = {
         _id: event.id,
         date: dateFormatted,
@@ -22,18 +32,13 @@ describe('src/pages/createOrEditTask/form/__test__/hydrateTaskFromEvent.test.js'
             time,
             contractId: event.selectedProject,
             description: event.description,
-            tags: selectedTags,
+            tags,
           },
         ],
       };
 
       // Act
-      const actual = hydrateTaskFromEvent(
-        event,
-        dateFormatted,
-        time,
-        selectedTags,
-      );
+      const actual = hydrateTaskFromEvent(event, dateFormatted, time, tags);
 
       // Assert
       expect(actual).toEqual(expected);
@@ -60,7 +65,7 @@ describe('src/pages/createOrEditTask/form/__test__/hydrateTaskFromEvent.test.js'
           },
         ],
       };
-      
+
       // Act
       const workUnit = hydrateTaskFromEvent(
         event,
