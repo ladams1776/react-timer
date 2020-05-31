@@ -2,7 +2,6 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import useFetchTaskById from '../useFetchTaskById';
 import useLoadinSpinnerContext from 'hooks/useLoadinSpinnerContext';
 import fetchApiData from 'utils/api/fetchApiData';
-var taskIdDispatch = require('../../../form/taskIdDispatch');
 
 jest.mock('hooks/useLoadinSpinnerContext');
 jest.mock('utils/api/fetchApiData');

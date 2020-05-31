@@ -1,13 +1,13 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useTaskEditContext } from 'hooks';
-import { useTimeContext } from '../../hooks';
+import { useTimeContext } from '../..';
 import taskIdDispatch from '../taskIdDispatch';
-import useFetchDispatch from '../useFetchDispatch/useFetchDispatch';
+import useFetchDispatch from '../useFetchDispatch';
 
 jest.mock('hooks/useTaskEditContext');
-jest.mock('../../hooks/useTimeContext');
-jest.mock('./taskIdDispatch');
+jest.mock('../../useTimeContext');
+jest.mock('../taskIdDispatch');
 
 taskIdDispatch.mockImplementation(() => {
   return data => callback(data);
