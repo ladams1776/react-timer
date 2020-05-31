@@ -1,0 +1,46 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import { Form, Field } from 'react-final-form';
+import {
+  useTaskEditContext,
+  useBackButtonListener,
+  useBrowserHistory,
+} from 'hooks';
+import Temp from '../Temp';
+import EditTaskForm from '../EditTaskForm';
+
+import useFlashMessage from 'contexts/hooks/useFlashMessage';
+//@TODO: Left off here
+jest.mock('hooks/useBackButtonListener/useBackButtonListener');
+jest.mock('hooks/useTaskEditContext');
+jest.mock('hooks/useBrowserHistory');
+jest.mock('contexts/hooks/useFlashMessage');
+
+describe('src/pages/createOrEditTask/form/__test__/EditTaskForm.test.js', () => {
+  describe('EditTaskForm', () => {
+    const useTaskEditContextMock = {
+      task: { _id: 1 },
+    };
+    const useBrowserHistoryMock = {
+      push: jest.fn(),
+    };
+    const useFlashMessageContextMock = {
+      message: 'theMessage',
+      success: true,
+      info: false,
+      error: false,
+    };
+
+    beforeEach(() => {
+      useFlashMessage.mockReturnValue(useFlashMessageContextMock);
+      useTaskEditContext.mockReturnValue(useTaskEditContextMock);
+      useBrowserHistory.mockReturnValue(useBrowserHistoryMock);
+      useBackButtonListener.mockReturnValue({});
+    });
+
+    it('shopuld render', () => {
+      shallow(<Form onSubmit={jest.fn()} render={() => {}}/>);
+      const wrapper = shallow(<EditTaskForm taskId={1} />);
+    });
+  });
+});
