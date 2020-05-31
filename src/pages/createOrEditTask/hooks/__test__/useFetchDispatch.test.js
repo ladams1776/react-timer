@@ -7,7 +7,7 @@ import useFetchDispatch from '../useFetchDispatch/useFetchDispatch';
 
 jest.mock('hooks/useTaskEditContext');
 jest.mock('../../hooks/useTimeContext');
-jest.mock('../../form/taskIdDispatch');
+jest.mock('./taskIdDispatch');
 
 taskIdDispatch.mockImplementation(() => {
   return data => callback(data);
