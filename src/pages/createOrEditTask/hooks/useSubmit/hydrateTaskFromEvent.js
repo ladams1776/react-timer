@@ -1,4 +1,4 @@
-import { selectEventTags } from '../selectors';
+import { selectEventTags } from '../../selectors';
 
 const contractIdSelector = event => event?.selectedProject || 0;
 const descriptionSelector = event => event?.description || '';

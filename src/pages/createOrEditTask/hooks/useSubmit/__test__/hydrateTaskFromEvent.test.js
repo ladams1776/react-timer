@@ -1,7 +1,7 @@
-import selectEventTags from '../../selectors/selectEventTags';
+import selectEventTags from '../../../selectors/selectEventTags';
 import hydrateTaskFromEvent from '../hydrateTaskFromEvent';
 
-jest.mock('../../selectors/selectEventTags');
+jest.mock('../../../selectors/selectEventTags');
 
 describe('src/pages/createOrEditTask/form/__test__/hydrateTaskFromEvent.test.js', () => {
   describe('hydrateTaskFromEvent', () => {
