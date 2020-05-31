@@ -2,8 +2,8 @@ import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useTaskEditContext } from 'hooks';
 import { useTimeContext } from '../../hooks';
-import taskIdDispatch from '../../form/taskIdDispatch';
-import useFetchDispatch from '../useFetchDispatch';
+import taskIdDispatch from '../taskIdDispatch';
+import useFetchDispatch from '../useFetchDispatch/useFetchDispatch';
 
 jest.mock('hooks/useTaskEditContext');
 jest.mock('../../hooks/useTimeContext');
