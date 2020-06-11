@@ -9,7 +9,6 @@ import { useEffect } from 'react';
  */
 const useSetCurrentLocation = currentLocation => {
   return useEffect(() => {
-    console.log('sessionStorage', global.sessionStorage);
     global.sessionStorage.setItem('LOCATION', currentLocation);
   }, [currentLocation]);
 };
