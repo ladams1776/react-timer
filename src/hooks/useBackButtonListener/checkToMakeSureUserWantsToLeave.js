@@ -1,6 +1,13 @@
-const checkToMakeSureUserWantsToLeave = (location, a) => {
-    if (location.pathname === "/") {
-        return 'Are you sure you want to leave this page?';
+/**
+ *
+ * @param {String} currentLocation Location the user is currently in
+ */
+const checkToMakeSureUserWantsToLeave = () => destLocation => {
+  const notOnHomePageButHeadingThere =
+    (destLocation.pathname === '/') & (destLocation !== '/');
+
+    if (notOnHomePageButHeadingThere) {
+      return window.confirm('Are you sure you want to leave this page?');
     }
 };
 
