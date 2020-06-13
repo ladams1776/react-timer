@@ -1,8 +1,8 @@
-import { selectEventTags } from '../../selectors';
+import { selectTags } from '../../selectors';
 
 const hydrateTaskForm = (state, tags, payload) => {
-  const selectTags = selectEventTags(tags);
-  const selectedTags = selectTags(payload.tagSelectedOption);
+  const selectPayloadTags = selectTags(tags);
+  const selectedTags = selectPayloadTags(payload.tagSelectedOption);
 
   return {
     _id: state.id,

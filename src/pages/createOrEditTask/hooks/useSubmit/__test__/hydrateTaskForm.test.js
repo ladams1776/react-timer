@@ -1,7 +1,7 @@
 import hydrateTaskForm from '../hydrateTaskForm';
-import selectEventTags from '../../../selectors/selectEventTags';
+import selectTags from '../../../selectors/selectTags';
 
-jest.mock('../../../selectors/selectEventTags');
+jest.mock('../../../selectors/selectTags');
 
 describe('src/pages/createOrEditTask/form/__test__/hydrateTaskForm.test.js', () => {
   describe('hydrateTaskForm', () => {
@@ -19,7 +19,7 @@ describe('src/pages/createOrEditTask/form/__test__/hydrateTaskForm.test.js', () 
     };
 
     beforeEach(() => {
-      selectEventTags.mockReturnValue(() => tags);
+      selectTags.mockReturnValue(() => tags);
     });
 
     it('should return a task in the right format, with all values', () => {
