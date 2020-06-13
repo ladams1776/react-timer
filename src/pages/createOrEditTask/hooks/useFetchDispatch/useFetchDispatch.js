@@ -1,11 +1,9 @@
 import { useCallback } from 'react';
-import { useTaskEditContext } from 'hooks';
 import { useTimeContext } from '..';
 import taskIdDispatch from './taskIdDispatch';
 
-const useFetchDispatch = () => {
+const useFetchDispatch = updateTask => {
   const { setTime } = useTimeContext();
-  const { updateTask } = useTaskEditContext();
 
   const dispatch = useCallback(
     data => taskIdDispatch(setTime, updateTask)(data),
