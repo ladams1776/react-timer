@@ -5,9 +5,9 @@ const useTags = () => useContext(TagContext);
 const useSetTags = () => useContext(TagActionContext);
 
 const useTagContext = () => {
-    const tags = useTags();
-    const setTags = useSetTags();
-    return { tags, setTags };
+    const allTags = useTags();
+    const setAllTags = useSetTags();
+    return { allTags, setAllTags };
 };
 
 export default useTagContext;
