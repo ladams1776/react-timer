@@ -1,14 +1,15 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
-const mongoose = require("mongoose");
-const Task = require("./infrastructure/models/Task");
-const Tag = require("./infrastructure/models/Tag");
+const mongoose = require('mongoose');
+const Task = require('./infrastructure/models/Task');
+const Tag = require('./infrastructure/models/Tag');
 const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
 const getTaskByIdAction = require('./application/requestHandlers/tasks/getTaskByIdAction');
 const getAllTagsAction = require('./application/requestHandlers/tags/getAllTagsAction');
 
-//@TODO: Move the username and password out of here 
+// @TODO: Move the username and password out of here
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
 
 const config = {
@@ -17,40 +18,42 @@ const config = {
     reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
     reconnectInterval: 500, // Reconnect every 500ms
     useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-}
+    useUnifiedTopology: true,
+  },
+};
 
 const connectWithRetry = () => {
-  console.log('MongoDB connection with retry')
-  return mongoose.connect(config.db, config.opts)
-}
+  console.log('MongoDB connection with retry');
+  return mongoose.connect(config.db, config.opts);
+};
 
-mongoose.connect(config.db, config.opts)
-  .catch(error => setTimeout(connectWithRetry, 5000));
+mongoose
+  .connect(config.db, config.opts)
+  .catch(() => setTimeout(connectWithRetry, 5000));
 
 mongoose.Promise = global.Promise;
-//@TODO: Need to auto set data
+// @TODO: Need to auto set data
 mongoose.connection
-  .on("connected", () => {
-    console.log(`Mongoose connection open on mongodb://${SERVER_AND_PORT}/tasks`);
+  .on('connected', () => {
+    console.log(
+      `Mongoose connection open on mongodb://${SERVER_AND_PORT}/tasks`,
+    );
   })
-  .on("error", err => {
+  .on('error', err => {
     console.log(`Connection error: ${err.message}`);
   });
 
-app.listen(3001, function () {
-  console.log("Backend has started on port 3001");
+app.listen(3001, () => {
+  console.log('Backend has started on port 3001');
 });
 
-
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Origin', '*');
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
   );
-  res.header("Access-Control-Allow-Methods", "*");
+  res.header('Access-Control-Allow-Methods', '*');
 
   next();
 });
@@ -58,12 +61,11 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get('/api/tasks', getAllTasksAction);
 
-app.get("/api/tasks", getAllTasksAction);
+app.get('/api/task/:id', getTaskByIdAction);
 
-app.get("/api/task/:id", getTaskByIdAction);
-
-app.post("/api/task", (req, res) => {
+app.post('/api/task', (req, res) => {
   const m = new Task();
   m.toObject();
   m.date = req.body.date;
@@ -78,38 +80,44 @@ app.post("/api/task", (req, res) => {
   });
 });
 
-app.put("/api/task", (req, res) => {
-  Task.findOneAndUpdate({ _id: req.body._id }, {
-    $set: {
-      date: req.body.date,
-      description: req.body.WorkUnit[0].description,
-      contractId: req.body.WorkUnit[0].contractId,
-      time: req.body.WorkUnit[0].time,
-      tags: req.body.WorkUnit[0].tags
-    }
-  }, { new: true }, (err, task) => {
-    if (err) throw err;
-    res.jsonp(task);
-  });
+app.put('/api/task', (req, res) => {
+  Task.findOneAndUpdate(
+    // eslint-disable-next-line no-underscore-dangle
+    { _id: req.body._id },
+    {
+      $set: {
+        date: req.body.date,
+        description: req.body.WorkUnit[0].description,
+        contractId: req.body.WorkUnit[0].contractId,
+        time: req.body.WorkUnit[0].time,
+        tags: req.body.WorkUnit[0].tags,
+      },
+    },
+    { new: true },
+    (err, task) => {
+      if (err) console.log('ERROR! /api/task/', err);
+      res.jsonp(task);
+    },
+  );
 });
 
-app.delete("/api/task/:id", (req, res) => {
-  const id = req.params.id;
+app.delete('/api/task/:id', (req, res) => {
+  const { id } = req.params;
 
-  Task.deleteOne({ _id: id }, function (e) {
+  Task.deleteOne({ _id: id }, e => {
     if (e) throw e;
     res.jsonp({ taskId: id, isSuccess: true });
   });
 });
 
-app.delete("/api/tasks", (req, res) => {
-  Task.deleteMany({}, function (e) {
+app.delete('/api/tasks', () => {
+  Task.deleteMany({}, e => {
     if (e) throw e;
   });
 });
 
 // TAGS
-app.get("/api/tags", getAllTagsAction);
+app.get('/api/tags', getAllTagsAction);
 
 app.post('/api/tag', (req, res) => {
   const tag = new Tag();
@@ -121,11 +129,10 @@ app.post('/api/tag', (req, res) => {
   tag.name = tagDto.name;
 
   // res.jsonp({ status: 200, name: 'yup', description: 'what' });
-  tag.save((err, tag) => {
+  tag.save(err => {
     if (err) {
-      console.log(`error saving tag: ${tag}`);
       // throw err;
-      res.jsonp({ status: 500, ...err })
+      res.jsonp({ status: 500, ...err });
     }
     res.jsonp({ status: 200, ...tag });
   });
