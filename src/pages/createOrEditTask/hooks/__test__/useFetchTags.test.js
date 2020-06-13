@@ -11,19 +11,19 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFetchTags.test.js', () =>
     describe('useFetchTags', () => {
         // Arrange
         const useTagContextStub = {
-            setTags: jest.fn(),
+            setAllTags: jest.fn(),
         };
 
         useTagContext.mockReturnValue(useTagContextStub);
 
-        it("should call fetchApiData with 'tags' and 'setTags' as a dispatch", () => {
+        it("should call fetchApiData with 'tags' and 'setAllTags' as a dispatch", () => {
             // Arrange
 
             // Act
             renderHook(() => useFetchTags());
 
             // Assert
-            expect(fetchApiData).toHaveBeenNthCalledWith(1, 'tags', {}, useTagContextStub.setTags);
+            expect(fetchApiData).toHaveBeenNthCalledWith(1, 'tags', {}, useTagContextStub.setAllTags);
         });
     });
 });

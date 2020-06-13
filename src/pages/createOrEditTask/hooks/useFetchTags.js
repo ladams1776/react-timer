@@ -3,11 +3,11 @@ import { fetchApiData } from 'utils';
 import useTagContext from './useTagContext';
 
 const useFetchTags = () => {
-    const { setTags } = useTagContext();
+    const { setAllTags } = useTagContext();
 
     useEffect(() => {
-        fetchApiData('tags', {}, setTags);
-    }, [setTags]);
+        fetchApiData('tags', {}, setAllTags);
+    }, [setAllTags]);
 };
 
 export default useFetchTags;
