@@ -13,42 +13,39 @@ describe('src/pages/createOrEditTask/timer/__test__/Timer.test.js', () => {
   describe('Timer', () => {
     // Arrange
     let wrapper;
-    const setTimeSpy = jest.fn();
     const isActive = false;
     const timeContext = {
       time: 20000,
     };
 
+    const realUseState = React.useState;
+    const stubInitialState = [true];
+    jest
+      .spyOn(React, 'useState')
+      .mockImplementationOnce(() => realUseState(stubInitialState));
+
     beforeEach(() => {
       useTimeContext.mockReturnValue(timeContext);
-      setTimeSpy.mockReset();
     });
 
     it('should display the time in the right format', () => {
       // Arrange
-      const setIsActiveSpy = jest.fn();
 
       // Act
-      wrapper = createWrapperWithContext(
-        <Timer
-          setTime={setTimeSpy}
-          isActive={isActive}
-          setIsActive={setIsActiveSpy}
-        />,
-      );
+      wrapper = createWrapperWithContext(<Timer />);
 
       // Assert
       expect(useUpdateCurrentTime).toBeCalledWith(
         timeContext.time,
         isActive,
-        setTimeSpy,
+        expect.anything(),
       );
       expect(findByTestId(wrapper, 'fractionHour').text()).toEqual(
         `Hours: ${displayMsInFractionalHourFormat(timeContext.time)}`,
       );
-      expect(findByTestId(wrapper, 'secondDecimalDigitHour').props().value).toEqual(
-        `${ms(timeContext.time, { secondsDecimalDigits: 2 })}`,
-      );
+      expect(
+        findByTestId(wrapper, 'secondDecimalDigitHour').props().value,
+      ).toEqual(`${ms(timeContext.time, { secondsDecimalDigits: 2 })}`);
     });
   });
 });
