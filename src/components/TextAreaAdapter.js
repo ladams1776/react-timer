@@ -1,13 +1,7 @@
 import React from 'react';
-// import CKEditor from 'ckeditor4-react';
 import { Editor } from '@tinymce/tinymce-react';
-import { useTaskEditContext } from 'hooks';
-import EditTaskForm from '../pages/createOrEditTask/form/EditTaskForm';
 
 const TextAreaAdapter = ({ description, setDescription }) => {
-  // const { task } = useTaskEditContext();
-  // const description = task?.description;
-
   return (
     <Editor
       initialValue={description}
