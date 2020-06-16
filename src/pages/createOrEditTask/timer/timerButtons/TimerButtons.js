@@ -2,12 +2,10 @@ import React from 'react';
 import cn from 'classnames';
 import { useHistory } from 'react-router-dom';
 import Button from 'components/Button';
-import useUpdateCurrentTime from '../hooks/useUpdateCurrentTime'
-import styles from './ControlPanel.module.css';
+import styles from './TimerButtons.module.css';
 
-const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }) => {
+const TimerButtons = ({ time, setTime, isActive = false, setIsActive, children }) => {
     const history = useHistory();
-    useUpdateCurrentTime(time, isActive, setTime);
 
     const toggle = () => setIsActive(!isActive);
     /**
@@ -72,4 +70,4 @@ const ControlPanel = ({ time, setTime, isActive = false, setIsActive, children }
     </div>
 };
 
-export default ControlPanel;
+export default TimerButtons;

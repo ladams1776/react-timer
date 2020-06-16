@@ -25,11 +25,11 @@ describe('src/components/__test__/TextAreaAdapter.test.js', () => {
             'insertdatetime media table paste code help wordcount',
           ],
           toolbar:
-            'undo redo | formatselect | bold italic backcolor |         alignleft aligncenter alignright alignjustify |         bullist numlist outdent indent | removeformat | help',
+            'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
         },
         initialValue: description,
         name: 'description',
-        onEditorChange: expect.anything(),
+        onEditorChange: setDescriptionSpy,
       };
 
       // Act

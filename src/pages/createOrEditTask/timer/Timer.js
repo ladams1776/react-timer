@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import ms from 'pretty-ms';
 import { displayMsInFractionalHourFormat } from 'utils';
-import ControlPanel from './controlPanel/ControlPanel';
+import TimerButtons from './timerButtons/TimerButtons';
 import useUpdateCurrentTime from './hooks/useUpdateCurrentTime';
 import { useTimeContext } from '../hooks';
 
@@ -12,7 +12,7 @@ const Timer = () => {
   useUpdateCurrentTime(time, isActive, setTimeCallback);
 
   return (
-    <ControlPanel
+    <TimerButtons
       time={time}
       setTime={setTimeCallback}
       isActive={isActive}
@@ -28,7 +28,7 @@ const Timer = () => {
           readOnly
         />
       </div>
-    </ControlPanel>
+    </TimerButtons>
   );
 };
 

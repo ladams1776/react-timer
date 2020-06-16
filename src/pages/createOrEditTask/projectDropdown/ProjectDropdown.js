@@ -1,5 +1,4 @@
 import React from 'react';
-import { Field } from 'react-final-form';
 import { useFetchProjectOptions } from 'hooks';
 import styles from './ProjectDropdown.module.css';
 

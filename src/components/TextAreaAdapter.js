@@ -20,7 +20,7 @@ const TextAreaAdapter = ({ description, setDescription }) => {
         ],
         toolbar,
       }}
-      onEditorChange={content => setDescription(content)}
+      onEditorChange={setDescription}
     />
   );
 };
