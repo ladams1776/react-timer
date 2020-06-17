@@ -18,15 +18,9 @@
     flex-direction: column;
 }
 
-.textArea {
-    background-color:beige;
-    padding: 1em;
-    display: inline-flex;
-    flex: .75 .85;
-}
-
 .dropDown {
     max-width: 350px;
+    z-index: 2;
 }
 
 .submit,

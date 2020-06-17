@@ -1,22 +1,26 @@
 import { fetchApiData, getFormattedDate } from 'utils';
-import { useTagContext, useTimeContext, useFormDispatch } from '..';
-import hydrateTaskFromEvent from './hydrateTaskFromEvent';
+import { useTimeContext, useFormDispatch } from '..';
+import hydrateTaskForm from './hydrateTaskForm';
 
-const useSubmit = () => {
-  const dispatch = useFormDispatch();
-  const { tags } = useTagContext();
+const useSubmit = (state, allTags, dispatch) => {
+  const formDispatch = useFormDispatch(dispatch);
   const { time } = useTimeContext();
 
-  const onSubmit = event => {
+  const onSubmit = () => {
     const dateFormatted = getFormattedDate(new Date());
 
-    //@TODO: Left off here, abstracting this out
-    const timeTask = hydrateTaskFromEvent(event, dateFormatted, time, tags);
+    const payload = {
+      project: state.project,
+      dateFormatted,
+      time,
+      tagSelectedOption: state.tags,
+      description: state.description,
+    };
+    const timeTask = hydrateTaskForm(state, allTags, payload);
 
-    //@TODO: Need to test this
-    const method = event.id ? 'PUT' : 'POST';
+    const method = state.id ? 'PUT' : 'POST';
 
-    fetchApiData('task', { body: timeTask, method }, dispatch);
+    fetchApiData('task', { body: timeTask, method }, formDispatch);
   };
 
   return onSubmit;

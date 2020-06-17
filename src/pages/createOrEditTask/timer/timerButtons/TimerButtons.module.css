@@ -1,7 +1,7 @@
 
 .navbarHeader {
     display: flex;
-    background-color: beige;
+    /* background-color: beige; */
     margin-top: 2em;
     padding-top: 1em;
 }

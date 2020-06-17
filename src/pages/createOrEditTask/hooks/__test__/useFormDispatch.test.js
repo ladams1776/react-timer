@@ -13,10 +13,7 @@ jest.mock('hooks/useBrowserHistory');
 describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', () => {
     describe('useFormDispatch', () => {
         // Arrange
-        const taskContextMock = {
-            updateTask: jest.fn(),
-        };
-
+        const dispatchSpy = jest.fn();
         const flashMessageContext = {
             setSuccessFlashMessage: jest.fn(),
             setErrorFlashMessage: jest.fn(),
@@ -26,12 +23,12 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', ()
             push: jest.fn(),
         };
         beforeEach(() => {
-            taskContextMock.updateTask.mockReset();
+            dispatchSpy.mockReset();
+
             flashMessageContext.setSuccessFlashMessage.mockReset();
             flashMessageContext.setErrorFlashMessage.mockReset();
             historyMock.push.mockReset();
 
-            useTaskEditContext.mockReturnValue(taskContextMock);
             useFlashMessageContext.mockReturnValue(flashMessageContext);
             useBrowserHistory.mockReturnValue(historyMock);
         });
@@ -43,11 +40,11 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', ()
             };
 
             // Act
-            const { result } = renderHook(() => useFormDispatch());
+            const { result } = renderHook(() => useFormDispatch(dispatchSpy));
             result.current(expected);
 
             // Assert
-            expect(taskContextMock.updateTask).toHaveBeenNthCalledWith(1, expected);
+            expect(dispatchSpy).toHaveBeenNthCalledWith(1, expected);
             expect(flashMessageContext.setSuccessFlashMessage).toHaveBeenNthCalledWith(1, 'Successfully Added/Edited a Task');
             expect(historyMock.push).toHaveBeenNthCalledWith(1, `/task/${expected._id}`);
         });
@@ -59,11 +56,11 @@ describe('src/pages/createOrEditTask/hooks/__test__/useFormDispatch.test.js', ()
             };
 
             // Act
-            const { result } = renderHook(() => useFormDispatch());
+            const { result } = renderHook(() => useFormDispatch(dispatchSpy));
             result.current(expected);
 
             // Assert
-            expect(taskContextMock.updateTask).toHaveBeenNthCalledWith(1, expected);
+            expect(dispatchSpy).toHaveBeenNthCalledWith(1, expected);
             expect(flashMessageContext.setErrorFlashMessage).toHaveBeenNthCalledWith(1, 'Failed to Add/Edit a Task');
             expect(historyMock.push).toHaveBeenNthCalledWith(1, `/task/${expected._id}`);
         });

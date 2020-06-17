@@ -7,7 +7,7 @@ const useSetTime = () => useContext(TimeActionContext);
 const useTimeContext = () => {
   const time = useTime();
   const setTime = useSetTime();
-  return { time: time, setTime };
+  return { time, setTime };
 };
 
 export default useTimeContext;

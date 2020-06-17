@@ -5,3 +5,4 @@ export { default as useBackButtonListener } from './useBackButtonListener/useBac
 export { default as useLoadinSpinnerContext } from './useLoadinSpinnerContext';
 export { default as useFlashMessageContext } from './useFlashMessageContext';
 export { default as useBrowserHistory } from './useBrowserHistory';
+export { default as useSetCurrentLocation } from './useSetCurrentLocation';

@@ -1,1 +1,1 @@
-export { default as selectEventTags } from "./selectEventTags";
+export { default as selectTags } from "./selectTags";
