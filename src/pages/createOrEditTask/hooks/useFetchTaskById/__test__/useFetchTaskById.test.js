@@ -40,7 +40,6 @@ describe('src/hooks/__test__/useFetchTaskById.test.js', () => {
         time: 1,
       };
       fetchApiData.mockReturnValue((a, b, c) => {
-        console.log('what are you', a)
         return c(data);
       });
       // Act
