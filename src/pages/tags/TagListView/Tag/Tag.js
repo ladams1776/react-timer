@@ -7,7 +7,7 @@ import style from './Tag.module.css';
 const Tag = ({ _id, name, description = '' }) => {
   const { push } = useBrowserHistory();
   return (
-    <div className={style.tagItem}>
+    <div className={style.tagItem} data-test-id="tag">
       <div
         className={style.tagItemLeft}
         onClick={() => {

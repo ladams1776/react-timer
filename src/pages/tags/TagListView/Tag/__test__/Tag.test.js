@@ -1,30 +1,42 @@
 import React from 'react';
-import { createWrapperWithContext } from 'testUtils';
-import Task from '../Task';
+import { createWrapperWithContext, findByTestId } from 'testUtils';
+import { useBrowserHistory } from 'hooks';
+import Tag from '../Tag';
+import DeleteTagButton from '../DeleteTagButton/DeleteTagButton';
 
-describe('src/pages/home/TaskListView/Task/__test__/Task.test.js', () => {
+jest.mock('hooks/useBrowserHistory');
+
+describe('src/pages/home/TaskListView/Tag/__test__/Tag.test.js', () => {
+  // Arrange
   let wrapper;
 
-  describe('Task', () => {
-    it('should display Task when one is present', () => {
+  describe('Tag', () => {
+    it('should display Tag when one is present', () => {
+      // Arrange
       const context = {
         projects: [{ label: 'label of project' }],
       };
+      const history = { push: jest.fn() };
+      useBrowserHistory.mockReturnValue(history);
+      const expected = {
+        children:
+          [<div className="tagItemLeft" onClick={expect.anything()}>
+            <div>yeah</div>
+            <div className="tagItemDescription" dangerouslySetInnerHTML={{ "__html": "what" }} />
+          </div>,
+          <DeleteTagButton tagId={1} />],
+        className: "tagItem",
+        "data-test-id": "tag"
+      };
 
+      // Act
       wrapper = createWrapperWithContext(
-        <li key="Need to have a unique key">
-          <Task
-            task={{
-              _id: 'taskId',
-              contractId: 0,
-              description: 'this is a wonderful description',
-            }}
-          />
-        </li>,
+        <Tag _id={1} name={'yeah'} description={'what'} />,
         context,
       );
 
-      expect(wrapper).toBeTruthy();
+      // Assert
+      expect(findByTestId(wrapper, 'tag').props()).toEqual(expected);
     });
   });
 });
