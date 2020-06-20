@@ -5,7 +5,7 @@ import useDispatch from '../useDispatch';
 import { findByTestId } from "testUtils";
 import DeleteTagButton from "../DeleteTagButton";
 
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 jest.mock('../useDispatch');
 
 describe("src/pages/tags/TaskListView/Tag/DeleteTagButton/__test__/DeleteTagButton.test.js", () => {

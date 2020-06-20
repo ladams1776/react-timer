@@ -3,7 +3,7 @@ import { fetchApiData } from 'utils';
 import { useLoadinSpinnerContext } from 'hooks';
 import useFetchAllTasks from '../useFetchAllTasks';
 
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 jest.mock('hooks/useLoadinSpinnerContext');
 
 describe('src/pages/home/TaskListView/__test__/useFetchAllTasks.test.js', () => {

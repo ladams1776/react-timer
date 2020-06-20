@@ -4,7 +4,7 @@ import { useTagContext, useTimeContext, useFormDispatch } from '../..';
 import hydrateTaskForm from '../hydrateTaskForm';
 import useSubmit from '../useSubmit';
 
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 jest.mock('utils/formatters/getFormattedDate');
 jest.mock('../../useTimeContext');
 jest.mock('../../useTagContext');

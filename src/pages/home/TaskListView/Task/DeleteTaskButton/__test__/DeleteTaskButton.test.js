@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { findByTestId } from "testUtils";
 import DeleteTaskButton from "../DeleteTaskButton";
 
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 jest.mock('../useDispatch');
 
 describe("src/pages/home/TaskListView/Task/DeleteTaskButton/__test__/DeleteTaskButton.test.js", () => {

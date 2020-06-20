@@ -1,9 +1,9 @@
-import React from 'react';
+
 import { renderHook, act } from '@testing-library/react-hooks';
 import { fetchApiData } from 'utils';
 import useFetchAllTags from '../useFetchAllTags';
 
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 
 describe('src/pages/tags/TagsPage/__test__/useFetchAllTags.test.js', () => {
   describe('useFetchAllTags', () => {

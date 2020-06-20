@@ -6,7 +6,7 @@ import { useTaskEditContext, useLoadinSpinnerContext } from 'hooks';
 import useDispatch from '../useDispatch';
 import DeleteButton from '../DeleteButton';
 
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 jest.mock('hooks/useTaskEditContext');
 jest.mock('hooks/useLoadinSpinnerContext');
 jest.mock('../useDispatch');
