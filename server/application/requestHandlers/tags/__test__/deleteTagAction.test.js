@@ -22,6 +22,7 @@ describe('server/application/requestHandlers/tags/__test__/deleteTagAction.test.
 
       TagService.deleteTag = jest.fn();
       jest.spyOn(TagService, 'fetchAllTags');
+
       // Act
       deleteTagAction(request, response);
 
