@@ -18,7 +18,6 @@ describe('src/pages/createOrEditTask/timer/__test__/Timer.test.js', () => {
       time: 20000,
     };
 
-    const realUseState = React.useState;
     const stubInitialState = [true];
     jest
       .spyOn(React, 'useState')
