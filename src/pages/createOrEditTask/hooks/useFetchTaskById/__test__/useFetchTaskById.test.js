@@ -1,11 +1,11 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import useLoadinSpinnerContext from 'hooks/useLoadinSpinnerContext';
-import fetchApiData from 'utils/api/fetchApiData';
+import fetchApiData from 'utils/api/fetchApiData/fetchApiData';
 import useFetchTaskById from '../useFetchTaskById';
 import useTimeContext from '../../useTimeContext';
 
 jest.mock('hooks/useLoadinSpinnerContext');
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 jest.mock('../../useTimeContext');
 
 describe('src/hooks/__test__/useFetchTaskById.test.js', () => {
