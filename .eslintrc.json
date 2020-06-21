@@ -12,8 +12,18 @@
     "node": true
   },
   "rules": {
-    "jsx-a11y/href-no-hash": ["off"],
-    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "jsx-a11y/href-no-hash": [
+      "off"
+    ],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
     "max-len": [
       "warn",
       {
@@ -28,9 +38,19 @@
         "ignoreRegExpLiterals": true
       }
     ],
-    "semi": ["error", "always"],
-    "quotes": ["error", "single"],
-    "arrow-parens": ["error", "as-needed"],
+    "no-underscore-dangle": 0,
+    "semi": [
+      "error",
+      "always"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
     "import/no-unresolved": 0
   }
 }
