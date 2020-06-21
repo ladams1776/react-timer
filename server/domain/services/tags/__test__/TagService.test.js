@@ -4,7 +4,6 @@ const TagRepository = require('../../../../infrastructure/repositories/tags/TagR
 jest.mock('../../../../infrastructure/repositories/tags/TagRepository');
 
 describe('server/domain/services/tags/__test__/TagService.test.js', () => {
-
   describe('TagService', () => {
     describe('fetchAllTags', () => {
       it('should call TagRepository.fetchAllTags(), when TagService.fetchAllTags() is called.', () => {
@@ -25,15 +24,15 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
     describe('deleteTag', () => {
       it('should call TagRepository.deleteTag(), when TagService.deleteTag() is called.', () => {
         // Arrange
-        const tagId = 1;
+        const expected = 1;
         TagRepository.deleteTag = jest.fn();
         jest.spyOn(TagRepository, 'deleteTag');
 
         // Act
-        TagService.deleteTag(tagId);
+        TagService.deleteTag(expected);
 
         // Assert
-        expect(TagRepository.deleteTag).toHaveBeenNthCalledWith(1, tagId);
+        expect(TagRepository.deleteTag).toHaveBeenNthCalledWith(1, expected);
       });
     });
   });
