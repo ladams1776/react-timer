@@ -5,7 +5,7 @@ const TagRepository = require('../TagRepository');
 jest.mock('../../../models/Tag');
 jest.mock('../../../hydrators/hydrate');
 
-describe('infrastructure/repositories/tags/__test/TagRepository.test.js', () => {
+describe('infrastructure/repositories/tags/__test__/TagRepository.test.js', () => {
   describe('TagRepository', () => {
     describe('fetchAllTags', () => {
       it('should call Tag.find', () => {
