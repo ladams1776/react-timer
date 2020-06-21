@@ -14,6 +14,7 @@ describe("src/components/ControlPanel/NewButton/__test__/NewButton.test.js", () 
     };
 
     beforeEach(() => {
+        historyMock.push.mockReset();
         useBrowserHistory.mockReturnValue(historyMock);
     });
 
