@@ -1,27 +1,38 @@
-const TagRepository = require('../TagRepository');
 const Tag = require('../../../models/Tag');
 const hydrate = require('../../../hydrators/hydrate');
+const TagRepository = require('../TagRepository');
 
-describe('server/infrastructure/repositories/tags/__test__/TagRepository.test.js', () => {
+jest.mock('../../../models/Tag');
+jest.mock('../../../hydrators/hydrate');
+
+describe('infrastructure/repositories/tags/__test__/TagRepository.test.js', () => {
   describe('TagRepository', () => {
-    // Arrange
-    beforeEach(() => {
-      jest.mock('../../../models/Tag');
-      jest.mock('../../../hydrators/hydrate');
-    });
-
-    describe('#fetchAllTags', () => {
-      it('should call Tag.find(), with hydrate function', () => {
+    describe('fetchAllTags', () => {
+      it('should call Tag.find', () => {
         // Arrange
-        const tags = [{ _id: 1 }];
-        Tag.find = jest.fn().mockImplementation(() => tags);
+        const { fetchAllTags } = TagRepository;
 
         // Act
-        const actual = TagRepository.fetchAllTags();
+        fetchAllTags();
 
         // Assert
         expect(Tag.find).toHaveBeenNthCalledWith(1, {}, hydrate);
-        expect(actual).toEqual(tags);
+      });
+    });
+
+    describe('deleteTag', () => {
+      it('should call Tag.deleteOne', () => {
+        // Arrange
+        const expected = {
+          _id: 1,
+        };
+        const { deleteTag } = TagRepository;
+
+        // Act
+        deleteTag(expected._id);
+
+        // Assert
+        expect(Tag.deleteOne).toHaveBeenNthCalledWith(1, expected);
       });
     });
   });

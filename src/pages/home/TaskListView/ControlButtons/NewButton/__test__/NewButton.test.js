@@ -14,6 +14,7 @@ describe("src/components/ControlPanel/NewButton/__test__/NewButton.test.js", () 
     };
 
     beforeEach(() => {
+        historyMock.push.mockReset();
         useBrowserHistory.mockReturnValue(historyMock);
     });
 
@@ -28,4 +29,6 @@ describe("src/components/ControlPanel/NewButton/__test__/NewButton.test.js", () 
             expect(findByTestId(wrapper, "btn-new")).toHaveLength(1);
         });
     });
+
+    //@TODO: Test NewButton onClick - model it after DeleteTagButton.
 });

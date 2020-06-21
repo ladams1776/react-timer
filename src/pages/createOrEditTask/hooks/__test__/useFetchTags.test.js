@@ -1,10 +1,9 @@
-import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import fetchApiData from 'utils/api/fetchApiData';
+import { fetchApiData } from 'utils';
 import useTagContext from '../useTagContext';
 import useFetchTags from '../useFetchTags';
 
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 jest.mock('../../hooks/useTagContext');
 
 describe('src/pages/createOrEditTask/hooks/__test__/useFetchTags.test.js', () => {

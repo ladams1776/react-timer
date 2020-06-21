@@ -8,6 +8,7 @@ const Tag = require('./infrastructure/models/Tag');
 const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
 const getTaskByIdAction = require('./application/requestHandlers/tasks/getTaskByIdAction');
 const getAllTagsAction = require('./application/requestHandlers/tags/getAllTagsAction');
+const deleteTagAction = require('./application/requestHandlers/tags/deleteTagAction');
 
 // @TODO: Move the username and password out of here
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
@@ -137,3 +138,4 @@ app.post('/api/tag', (req, res) => {
     res.jsonp({ status: 200, ...tag });
   });
 });
+app.delete('/api/tag/:id', deleteTagAction);

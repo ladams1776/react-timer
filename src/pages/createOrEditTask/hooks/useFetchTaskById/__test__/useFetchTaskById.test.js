@@ -1,11 +1,11 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import useLoadinSpinnerContext from 'hooks/useLoadinSpinnerContext';
-import fetchApiData from 'utils/api/fetchApiData';
+import fetchApiData from 'utils/api/fetchApiData/fetchApiData';
 import useFetchTaskById from '../useFetchTaskById';
 import useTimeContext from '../../useTimeContext';
 
 jest.mock('hooks/useLoadinSpinnerContext');
-jest.mock('utils/api/fetchApiData');
+jest.mock('utils/api/fetchApiData/fetchApiData');
 jest.mock('../../useTimeContext');
 
 describe('src/hooks/__test__/useFetchTaskById.test.js', () => {
@@ -40,9 +40,9 @@ describe('src/hooks/__test__/useFetchTaskById.test.js', () => {
         time: 1,
       };
       fetchApiData.mockReturnValue((a, b, c) => {
-        console.log('what are you', a)
         return c(data);
       });
+      
       // Act
       const { result } = renderHook(() => useFetchTaskById(taskId, dispatch));
       await act(async () => result.current);

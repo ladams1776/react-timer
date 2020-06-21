@@ -4,6 +4,7 @@
         "commonjs": true,
         "es6": true
     },
+    "no-underscore-dangle": 0,
     "extends": [
         "airbnb-base"
     ],
@@ -15,8 +16,17 @@
         "ecmaVersion": 11
     },
     "rules": {
-        "semi": ["error", "always"],
-        "quotes": ["error", "single"],
-        "arrow-parens": ["error", "as-needed"]
+        "semi": [
+            "error",
+            "always"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ]
     }
 }

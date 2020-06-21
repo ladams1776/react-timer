@@ -1,6 +1,6 @@
 import fetchApiData from '../fetchApiData';
 
-describe('src/utils/api/__test__/fetchApiData.test.js', () => {
+describe('src/utils/api/fetchApiData/__test__/fetchApiData.test.js', () => {
   describe('fetchApiData', () => {
     // Arrange
     const url = 'some-route';
