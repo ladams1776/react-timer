@@ -18,7 +18,7 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
 
         // Assert
         expect(TagRepository.fetchAllTags).toHaveBeenCalledTimes(1);
-        expect(actual).toEqual(tasks);
+        expect(actual).toEqual(expected);
       });
     });
 
