@@ -10,7 +10,7 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
       it('should call TagRepository.fetchAllTags(), when TagService.fetchAllTags() is called.', () => {
         // Arrange
         const expected = [{ _id: 1 }];
-        TagRepository.fetchAllTags = jest.fn().mockImplementation(() => tasks);
+        TagRepository.fetchAllTags = jest.fn().mockImplementation(() => expected);
         jest.spyOn(TagRepository, 'fetchAllTags');
 
         // Act
