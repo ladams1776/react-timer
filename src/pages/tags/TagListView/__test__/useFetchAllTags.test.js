@@ -20,8 +20,8 @@ describe('src/pages/tags/TagsPage/__test__/useFetchAllTags.test.js', () => {
 
       // Act
       const { result } = renderHook(() => useFetchAllTags(setTags));
-      // console.log('result', result.current());
       act(() => result.current);
+
       // Assert
       expect(fetchApiData).toHaveBeenNthCalledWith(1, 'tags', {}, setTags);
     });
