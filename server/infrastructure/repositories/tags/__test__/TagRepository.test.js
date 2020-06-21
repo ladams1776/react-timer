@@ -23,14 +23,16 @@ describe('infrastructure/repositories/tags/__test__/TagRepository.test.js', () =
     describe('deleteTag', () => {
       it('should call Tag.deleteOne', () => {
         // Arrange
-        const id = 1;
+        const expected = {
+          _id: 1,
+        };
         const { deleteTag } = TagRepository;
 
         // Act
-        deleteTag(id);
+        deleteTag(expected._id);
 
         // Assert
-        expect(Tag.deleteOne).toHaveBeenNthCalledWith(1, { _id: id });
+        expect(Tag.deleteOne).toHaveBeenNthCalledWith(1, expected);
       });
     });
   });
