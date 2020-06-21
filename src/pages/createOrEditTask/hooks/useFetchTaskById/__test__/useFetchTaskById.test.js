@@ -42,6 +42,7 @@ describe('src/hooks/__test__/useFetchTaskById.test.js', () => {
       fetchApiData.mockReturnValue((a, b, c) => {
         return c(data);
       });
+      
       // Act
       const { result } = renderHook(() => useFetchTaskById(taskId, dispatch));
       await act(async () => result.current);
