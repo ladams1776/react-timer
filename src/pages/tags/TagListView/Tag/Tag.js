@@ -4,7 +4,7 @@ import { useBrowserHistory } from 'hooks';
 import DeleteTagButton from './DeleteTagButton/DeleteTagButton';
 import style from './Tag.module.css';
 
-const Tag = ({ _id, name, description = '' }) => {
+const Tag = ({ _id, name, description = '', setTags}) => {
   const { push } = useBrowserHistory();
   return (
     <div className={style.tagItem} data-test-id="tag">
@@ -23,7 +23,7 @@ const Tag = ({ _id, name, description = '' }) => {
           dangerouslySetInnerHTML={{ __html: description }}
         />
       </div>
-      <DeleteTagButton tagId={_id} />
+      <DeleteTagButton tagId={_id} setTags={setTags}/>
     </div>
   );
 };
