@@ -8,7 +8,7 @@ const NewButton = () => {
     return <div className={styles.buttonAdd} data-test-id="btn-new"
         onClick={() => { push("/tags/-1") }}>
         <span className="glyphicon glyphicon-plus mr-5px" />
-    New Task
+    New Tag
   </div>;
 };
 
