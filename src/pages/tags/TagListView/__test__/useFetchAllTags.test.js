@@ -1,21 +1,23 @@
 
 import { renderHook, act } from '@testing-library/react-hooks';
-import { fetchApiData } from 'utils';
+import { useFlashMessageFetchApiData } from 'utils';
 import useFetchAllTags from '../useFetchAllTags';
 
-jest.mock('utils/api/fetchApiData/fetchApiData');
+jest.mock('utils/api/useFlashMessageFetchApiData');
 
 describe('src/pages/tags/TagsPage/__test__/useFetchAllTags.test.js', () => {
   describe('useFetchAllTags', () => {
     // Arrange
     const setTags = jest.fn();
+    const fetchApiData = jest.fn();
 
     beforeEach(() => {
       setTags.mockReset();
       fetchApiData.mockReset();
+      useFlashMessageFetchApiData.mockReturnValue(fetchApiData);
     });
 
-    it('should call setTags', () => {
+    it('should call fetchApiData and pass expected values to useFlashMessageFetchApiData', () => {
       // Arrange
 
       // Act
@@ -23,7 +25,8 @@ describe('src/pages/tags/TagsPage/__test__/useFetchAllTags.test.js', () => {
       act(() => result.current);
 
       // Assert
-      expect(fetchApiData).toHaveBeenNthCalledWith(1, 'tags', {}, setTags);
+      expect(useFlashMessageFetchApiData).toHaveBeenNthCalledWith(1, 'tags', {}, setTags, '', 'Failed to get Tags');
+      expect(fetchApiData).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { fetchApiData } from 'utils';
+import { useFlashMessageFetchApiData } from 'utils';
 
-//@TODO: Look at the useFetchAllTasks - we want to get isLoadin to integrate in the fetch process naturally - not have to do this manually everytime.
 const useFetchAllTags = setTags => {
-  return useEffect(() => {
-    fetchApiData('tags', {}, setTags)
-  }, [setTags]);
+  const fetchApiData = useFlashMessageFetchApiData('tags', {}, setTags, '', 'Failed to get Tags');
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  return useEffect(() => fetchApiData(), []);
 };
 export default useFetchAllTags;
