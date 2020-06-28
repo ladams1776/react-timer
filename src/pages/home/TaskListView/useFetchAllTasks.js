@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { fetchApiData } from 'utils';
 import { useLoadinSpinnerContext } from 'hooks';
 
+//@TODO: Model this after useFetchAllTags
 const useFetchAllTasks = setTasks => {
   const { setIsLoadin } = useLoadinSpinnerContext();
 
-  //@TODO: We want to have the fetch handle the loadin I think.
   return useEffect(() => {
     setIsLoadin(true);
     fetchApiData('tasks', {}, setTasks);
