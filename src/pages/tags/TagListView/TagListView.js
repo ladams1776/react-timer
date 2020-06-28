@@ -16,7 +16,7 @@ const TagsListView = () => {
       <ul className="tag-list">
         {tags.map(tag => (
           <li key={tag._id} className="tag">
-            <Tag {...tag} key={tag._id} />
+            <Tag {...tag} key={tag._id} setTags={setTags}/>
           </li>
         ))}
       </ul>

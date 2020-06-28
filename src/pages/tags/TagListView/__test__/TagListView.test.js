@@ -1,15 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { findByTestId } from "testUtils";
-import TagsListView from '../TagListView';
+import useFetchAllTags from '../useFetchAllTags';
 import ControlButtons from '../ControlButtons/ControlButtons';
+import TagsListView from '../TagListView';
+
+jest.mock('../useFetchAllTags');
 
 describe('serc/pages/tags/__test__/TagListView.test.js', () => {
     describe('TagListView', () => {
         // Arrange
         let wrapper;
-
-        //@TODO: Probs abstract this out, if we do this often enough. 
+        
         const realUseState = React.useState;
         jest.spyOn(React, 'useState')
             .mockImplementationOnce(() => realUseState([]));
