@@ -3,7 +3,7 @@ import { fetchApiData } from 'utils';
 
 jest.mock('../../../utils/api/fetchApiData/fetchApiData');
 
-describe('src/utils/api/__test/reloadAndRefresh.test.js', () => {
+describe('src/utils/api/__test__/reloadAndRefresh.test.js', () => {
     describe('reloadAndRefresh', () => {
 
         it('should call fetchApiData that', () => {
