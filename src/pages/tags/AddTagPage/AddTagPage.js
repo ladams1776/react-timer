@@ -1,62 +1,54 @@
 import React from 'react';
 import cn from 'classnames';
-import { Form, Field } from 'react-final-form';
-import { useFlashMessageContext, useLoadinSpinnerContext } from 'hooks'
+import { useSetCurrentLocation } from 'hooks'
+import useFetchTagById from './useFetchTagById';
+import useFormSetup from './useFormSetup';
 import styles from './AddTagPage.module.css'
 
-export const submitForm = (setSuccessFlashMessage, setErrorFlashMessage, setIsLoadin) => async (event) => {
-    setIsLoadin(true);
-    try {
-        const result = await fetch('/api/tag', {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'POST',
-            body: JSON.stringify({ ...event })
-        });
-        const tag = await result.json();
-        const okStatus = tag.status !== 500;
+const AddTagePage = ({ match }) => {
+    const tagId = match.params.id || -1;
+    useSetCurrentLocation(`/tag/${tagId}`);
 
-        okStatus
-            ? setSuccessFlashMessage(`Added Tag: ${tag.name}`)
-            : setErrorFlashMessage(`Problem creating new tag: ${event.name}`);
-
-    } catch (err) {
-        setErrorFlashMessage(`Problem creating new tag: ${event.name}. Error: ${err}`);
-    }
-    setIsLoadin(false);
-};
-
-const AddTagePage = () => {
-    const { setSuccessFlashMessage, setErrorFlashMessage } = useFlashMessageContext();
-    const { setIsLoadin } = useLoadinSpinnerContext();
-
-    const onSubmitty = submitForm(setSuccessFlashMessage, setErrorFlashMessage, setIsLoadin);
+    const { tag, setTag, onSubmit, setName, setDescription, nameRef, descriptionRef, idRef } = useFormSetup(tagId);
+    useFetchTagById(tagId, setTag);
 
     return (
-        <Form onSubmit={onSubmitty}
-            render={({ handleSubmit, pristine }) =>
-                <form onSubmit={handleSubmit}>
-                    <div className={styles.addTagPageForm}>
-                        <h3>Add a New Tag</h3>
-                        <Field
-                            name="name"
-                            component="input"
-                            placeholder="Tag's Name"
-                            className={styles.name}
-                            autoFocus
-                        />
-                        <Field
-                            name="description"
-                            component="textarea"
-                            placeholder={"Tag's Description"}
-                            cols="80"
-                            rows="10"
-                            // disabled={pristine}
-                            className={styles.description}
-                        />
-                        <button type="submit" className={cn("btn", "btn-primary", styles.submit)} data-test-id="addTagPageSubmit">Submit</button>
-                    </div>
-                </form>
-            } />
+        <form
+            data-test-id="form"
+            method={tag._id === -1 ? 'POST' : 'PUT'}
+        >
+            <div className={styles.addTagPageForm}>
+                <h3>Add a New Tag</h3>
+                <input name="id" type="hidden" value={tag._id} ref={idRef} />
+                <input
+                    name="name"
+                    onChange={e => setName(e.target.value)}
+                    component="input"
+                    defaultValue={tag?.name}
+                    className={styles.name}
+                    autoFocus
+                    type="text"
+                    ref={nameRef}
+                />
+                <textarea
+                    name="description"
+                    placeholder={"Tag's Description"}
+                    onChange={e => setDescription(e.target.value)}
+                    cols="80"
+                    rows="10"
+                    defaultValue={tag?.description}
+                    className={styles.description}
+                    ref={descriptionRef}
+                />
+                <button type="submit"
+                    onClick={onSubmit}
+                    className={cn("btn", "btn-primary", styles.submit)}
+                    data-test-id="addTagPageSubmit"
+                >
+                    Submit
+                    </button>
+            </div>
+        </form >
     );
 }
 
