@@ -35,6 +35,11 @@ const Main = () => {
               />
               <Route
                 exact
+                path="/tag/:id"
+                render={props => <AddTagPage {...props} />}
+              />
+              <Route
+                exact
                 path="/tags/:id"
                 render={props => <AddTagPage {...props} />}
               />
