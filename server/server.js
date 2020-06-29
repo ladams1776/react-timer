@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path')
 const app = express();
 const mongoose = require('mongoose');
 const Task = require('./infrastructure/models/Task');
@@ -9,6 +11,9 @@ const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTas
 const getTaskByIdAction = require('./application/requestHandlers/tasks/getTaskByIdAction');
 const getAllTagsAction = require('./application/requestHandlers/tags/getAllTagsAction');
 const deleteTagAction = require('./application/requestHandlers/tags/deleteTagAction');
+const addTagAction = require('./application/requestHandlers/tags/addTagAction');
+const editTagAction = require('./application/requestHandlers/tags/editTagAction');
+const getTagByIdAction = require('./application/requestHandlers/tags/getTagByIdAction');
 
 // @TODO: Move the username and password out of here
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
@@ -44,9 +49,15 @@ mongoose.connection
     console.log(`Connection error: ${err.message}`);
   });
 
+
 app.listen(3001, () => {
-  console.log('Backend has started on port 3001');
+  console.debug('Backend has started on port 3001');
 });
+
+// log all requests to access.log
+app.use(morgan('common', {
+  stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+}));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -61,7 +72,6 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.get('/api/tasks', getAllTasksAction);
 
 app.get('/api/task/:id', getTaskByIdAction);
@@ -119,23 +129,10 @@ app.delete('/api/tasks', () => {
 
 // TAGS
 app.get('/api/tags', getAllTagsAction);
-
+app.get('/api/tag/:id', getTagByIdAction);
 app.post('/api/tag', (req, res) => {
-  const tag = new Tag();
-  console.log('Hi', req);
-  const tagDto = req.body;
-
-  tag.toObject();
-  tag.description = tagDto.description;
-  tag.name = tagDto.name;
-
-  // res.jsonp({ status: 200, name: 'yup', description: 'what' });
-  tag.save(err => {
-    if (err) {
-      // throw err;
-      res.jsonp({ status: 500, ...err });
-    }
-    res.jsonp({ status: 200, ...tag });
-  });
+  // Some reason, when I don't do this it fails.
+  addTagAction(req, res);
 });
+app.put('/api/tag', editTagAction);
 app.delete('/api/tag/:id', deleteTagAction);
