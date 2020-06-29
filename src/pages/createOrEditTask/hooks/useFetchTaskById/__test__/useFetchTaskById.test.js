@@ -15,7 +15,7 @@ describe('src/hooks/__test__/useFetchTaskById.test.js', () => {
       setTime: jest.fn(),
     };
     const useLoadinSpinnerContextStub = {
-      setIsLoadin: jest.fn().mockImplementation(),
+      setIsLoadin: jest.fn(),
     };
 
     const dispatch = jest.fn();
