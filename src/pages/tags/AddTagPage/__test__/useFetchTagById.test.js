@@ -36,7 +36,7 @@ describe('src/pages/tags/AddTagPage/__test__/useFetchTagById.test.js', () => {
             renderHook(() => useFetchTagById(tagId, setTag));
 
             // Assert
-            expect(dispatch).toHaveBeenCalled();
+            expect(fetchApiData).toHaveBeenCalled();
             expect(setTag).not.toHaveBeenCalled();
         });
     });
