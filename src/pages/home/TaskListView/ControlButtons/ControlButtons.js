@@ -4,11 +4,11 @@ import DownloadButton from './DownloadButton/DownloadButton';
 import NewButton from './NewButton/NewButton';
 import styles from './ControlButtons.module.css';
 
-const ControlButtons = () => {
+const ControlButtons = tasks => {
   return (
     <div className={styles.controlButtons} data-test-id="control-buttons">
       <DeleteButton />
-      <DownloadButton />
+      <DownloadButton tasks={tasks} />
       <NewButton />
     </div>
   )

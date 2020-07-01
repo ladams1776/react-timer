@@ -13,7 +13,7 @@ const TaskListView = () => {
   return (
     <div data-test-id="list-view">
       <div className="task-list__header">
-        <ControlButtons />
+        <ControlButtons tasks={tasks}/>
       </div>
       <ul className="task-list">
         {tasks.map(task => (

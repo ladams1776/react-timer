@@ -4,9 +4,8 @@ import { writeJsonFile } from './writeJsonFile';
 import useTaskAssembler from './useTaskAssembler';
 import styles from './DownloadButton.module.css';
 
-const DownloadButton = () => {
-    const assembleTask = useTaskAssembler();
-    const { tasks } = useTaskEditContext();
+const DownloadButton = tasks => {
+    const assembleTask = useTaskAssembler(tasks);
 
     const handleDownload = () => {
         writeJsonFile(assembleTask());
@@ -14,7 +13,7 @@ const DownloadButton = () => {
 
     return (
         <>
-            {!tasks?.length || (
+            {tasks.length || (
                 <button
                     type="a"
                     className={styles.buttonDownload}
