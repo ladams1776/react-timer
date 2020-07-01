@@ -1,27 +1,35 @@
 const TagService = require('../../../../domain/services/tags/TagService');
 const getAllTagsAction = require('../getAllTagsAction');
+const jsonResponse = require('../../jsonResponse');
 
 jest.mock('../../../../domain/services/tags/TagService');
+jest.mock('../../jsonResponse');
 
 describe('server/application/requestHandlers/tags/__test__/getAllTagsAction.test.js', () => {
   // Arrange
 
   describe('getAllTagsAction', () => {
-    it('should call TagService.fetchAllTags() and return in res.jsonp()', async () => {
+    it('should call TagService.fetchAllTags()', () => {
       // Arrange
-      const response = {
-        jsonp: jest.fn(),
-      };
-      const tags = [{ _id: 1 }];
+      const request = {
+        body: {
+          name: 'name',
+          description: 'description'
+        }
+      }
+      const response = jest.fn();
 
-      TagService.fetchAllTags = jest.fn().mockImplementation(() => tags);
+      jsonResponse.mockReturnValue(response);
+
+      TagService.fetchAllTags = jest.fn().mockImplementation(tag => tag);
       jest.spyOn(TagService, 'fetchAllTags');
 
       // Act
-      await getAllTagsAction({}, response);
+      getAllTagsAction(request, response);
 
       // Assert
-      expect(response.jsonp).toHaveBeenNthCalledWith(1, tags);
+      expect(jsonResponse).toHaveBeenNthCalledWith(1, response);
+      expect(TagService.fetchAllTags).toHaveBeenNthCalledWith(1, response);
     });
   });
 });

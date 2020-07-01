@@ -1,6 +1,7 @@
 const TagService = require('../../../domain/services/tags/TagService');
+const jsonResponse = require('../jsonResponse');
 
-module.exports = async (req, res) => {
-  const tags = await TagService.fetchAllTags();
-  res.jsonp(tags);
+module.exports = (req, res) => {
+  const responseHandler = jsonResponse(res);
+  TagService.fetchAllTags(responseHandler);
 };
