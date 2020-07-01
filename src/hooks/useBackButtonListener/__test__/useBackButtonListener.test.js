@@ -6,7 +6,7 @@ jest.mock('../useHistoryBlock');
 
 describe('src/hooks/__test__/useBackButtonListener.test.js', () => {
   describe('#useBackButtonListener', () => {
-    window.addEventListener = jest.fn().mockImplementation();
+    window.addEventListener = jest.fn();
 
     beforeEach(() => {
       window.addEventListener.mockReset();

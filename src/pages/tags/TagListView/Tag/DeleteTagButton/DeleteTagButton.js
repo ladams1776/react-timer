@@ -1,15 +1,15 @@
 import React from "react";
-import { fetchApiData } from 'utils';
-import useDispatch from './useDispatch';
+import { useFlashMessageFetchApiData, reloadAndRefresh } from 'utils';
 import cn from 'classnames';
 import style from './DeleteTagButton.module.css';
 
-const DeleteTagButton = ({ tagId }) => {
-  const dispatch = useDispatch(tagId);
+const DeleteTagButton = ({ tagId, setTags }) => {
+  const reload = reloadAndRefresh('tags', {}, setTags);  
+  const dispatch = useFlashMessageFetchApiData(`tag/${tagId}`, { method: 'DELETE' }, reload, 'Successfully deleted tag', 'Error deleting tag');
 
-  const _deleteClick = async e => {
-    e.preventDefault();
-    fetchApiData(`tag/${tagId}`, { method: 'DELETE' }, dispatch);
+  const _deleteClick = e => {
+    e.preventDefault(); // stops us from bubbling up to the Tag.
+    dispatch();
   };
 
   return (

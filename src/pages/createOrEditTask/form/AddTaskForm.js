@@ -28,7 +28,7 @@ const AddTaskForm = ({ taskId }) => {
 
   // Tag Stuff
   useFetchTags();
-  const { allTags } = useTagContext();
+  const { allTags} = useTagContext();
   const onSubmit = useSubmit(state, allTags, dispatch);
   const { description, tags, project } = state;
 

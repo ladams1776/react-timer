@@ -1,7 +1,9 @@
-const TagService = require('../../../../domain/services/tags/TagService');
 const deleteTagAction = require('../deleteTagAction');
+const TagService = require('../../../../domain/services/tags/TagService');
+const jsonResponse = require('../../jsonResponse');
 
 jest.mock('../../../../domain/services/tags/TagService');
+jest.mock('../../jsonResponse');
 
 describe('server/application/requestHandlers/tags/__test__/deleteTagAction.test.js', () => {
   // Arrange
@@ -9,25 +11,23 @@ describe('server/application/requestHandlers/tags/__test__/deleteTagAction.test.
   describe('deleteTagAction', () => {
     it('should call TagService.deleteTag()', () => {
       // Arrange
-      const response = {
-        jsonp: jest.fn(),
-      };
+      jest.spyOn(TagService, 'deleteTag');
+      const response = {};
       const id = 1;
       const request = {
         params: {
           id,
         },
       };
-      const expected = { isSuccess: true, tagId: id };
-
-      TagService.deleteTag = jest.fn();
-      jest.spyOn(TagService, 'fetchAllTags');
+      const responseHandler = jest.fn();
+      jsonResponse.mockReturnValue(responseHandler);
 
       // Act
       deleteTagAction(request, response);
 
       // Assert
-      expect(response.jsonp).toHaveBeenNthCalledWith(1, expected);
+      expect(jsonResponse).toHaveBeenNthCalledWith(1, response);
+      expect(TagService.deleteTag).toHaveBeenNthCalledWith(1, id, responseHandler);
     });
   });
 });

@@ -3,5 +3,5 @@ const jsonResponse = require('../jsonResponse');
 
 module.exports = (req, res) => {
   const responseHandler = jsonResponse(res);
-  TagService.fetchAllTags(responseHandler);
+  TagService.fetchTagById(req.params.id, responseHandler);
 };

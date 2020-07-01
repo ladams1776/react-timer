@@ -1,15 +1,15 @@
 const TagService = require('../../../../domain/services/tags/TagService');
-const getAllTagsAction = require('../getAllTagsAction');
+const addTagAction = require('../addTagAction');
 const jsonResponse = require('../../jsonResponse');
 
 jest.mock('../../../../domain/services/tags/TagService');
 jest.mock('../../jsonResponse');
 
-describe('server/application/requestHandlers/tags/__test__/getAllTagsAction.test.js', () => {
+describe('server/application/requestHandlers/tags/__test__/addTagAction.test.js', () => {
   // Arrange
 
-  describe('getAllTagsAction', () => {
-    it('should call TagService.fetchAllTags()', () => {
+  describe('addTagAction', () => {
+    it('should call TagService.addTag()', () => {
       // Arrange
       const request = {
         body: {
@@ -21,15 +21,15 @@ describe('server/application/requestHandlers/tags/__test__/getAllTagsAction.test
 
       jsonResponse.mockReturnValue(response);
 
-      TagService.fetchAllTags = jest.fn().mockImplementation(tag => tag);
-      jest.spyOn(TagService, 'fetchAllTags');
+      TagService.addTag = jest.fn().mockImplementation(tag => tag);
+      jest.spyOn(TagService, 'addTag');
 
       // Act
-      getAllTagsAction(request, response);
+      addTagAction(request, response);
 
       // Assert
       expect(jsonResponse).toHaveBeenNthCalledWith(1, response);
-      expect(TagService.fetchAllTags).toHaveBeenNthCalledWith(1, response);
+      expect(TagService.addTag).toHaveBeenNthCalledWith(1, request.body, response);
     });
   });
 });

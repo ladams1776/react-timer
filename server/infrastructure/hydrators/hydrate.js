@@ -1,4 +1,6 @@
+const logger = require('../logger');
+
 module.exports = (err, docs) => {
-    if (err) return `There was an issue! ${err}`;
+    err && logger.error(`Error hydrating: ${err}`);
     return docs;
 };
