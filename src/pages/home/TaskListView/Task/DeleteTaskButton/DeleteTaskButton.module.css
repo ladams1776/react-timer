@@ -1,16 +1,14 @@
-
 .deleteBtn,
 .deleteBtn:hover {
   background-color: #af111a;
   color: white;
-  border-radius: 4px;
-  width: 30px;
-  height: 30px;
+  background-color: #d51923;
+  color: white;
+  width: 10px;
+  height: 20px;
   border: none;
-  text-align: center;
   text-decoration: none;
-  margin-left: 0.25em;
-  font-size: 16px;
+  font-size: 10px;
 }
 
 .deleteBtn:hover {
