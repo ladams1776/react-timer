@@ -16,24 +16,11 @@
 }
 
 .task-list__header {
-  display: block;
-  margin: 4em auto;
-  width: 600px;
-  height: 1em;
   display: flex;
-  justify-content: space-between;
 }
 
-@media only screen and (max-width: 600px) {
-  .task-list__header,
-  .task-list__header:hover {
-    width: 100vw;
-    padding: 0;
-  }
-
-  .task-list,
-  .task-list:hover {
-    margin: 0;
-    padding: 0;
-  }
+.task-list,
+.task-list:hover {
+  margin: 0;
+  padding: 0;
 }
