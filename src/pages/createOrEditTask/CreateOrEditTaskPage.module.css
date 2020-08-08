@@ -1,0 +1,12 @@
+.container {
+  height: 800px;
+  display: flex;
+}
+
+.listView {
+  overflow-y: scroll;
+  flex: 1;
+}
+
+.form {
+}
