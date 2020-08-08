@@ -1,48 +1,40 @@
 import React from 'react';
+import cn from 'classnames';
 import PropType from 'prop-types';
 import { useBrowserHistory, useGetProjectOptionLabel } from 'hooks';
 import DeleteTaskButton from './DeleteTaskButton/DeleteTaskButton';
 import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
-import style from './Task.module.css';
+import styles from './Task.module.css';
 
-const Task = ({ _id, description = '', contractId, time, date, tags }) => {
+const Task = ({ _id, description = '', contractId, time, date, tags, selectedId }) => {
   const { push } = useBrowserHistory();
+  const title = description.split("\n")[0];
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
+  const isSelected = selectedId === _id;
+  console.log('---------------v')
+  console.log('_id: ', _id);
+  console.log('selected: ', selectedId);
+  console.log('---------------^')
+
+
   return (
-    <div className={style.taskItem}>
+    <div className={cn(styles.taskItem, { [styles.selected]: isSelected })}>
       <div
-        className={style.taskItemLeft}
+        className={styles.taskItemLeft}
         onClick={() => {
-          sessionStorage.setItem('LOCATION', `/task/${_id}`);
-          push(`/task/${_id}`);
+          sessionStorage.setItem('LOCATION', `/${_id}`);
+          push(`/${_id}`);
+          window.location.reload();
         }}
       >
         <div
-          className={style.taskItemDescription}
-          dangerouslySetInnerHTML={{ __html: description }}
+          className={styles.taskItemDescription, { [styles.selected]: selectedId == _id }}
+          dangerouslySetInnerHTML={{ __html: title }}
         />
 
-        <span className={style.taskItemCustomer}>{projectOptionLabel}</span>
-        <div className={style.taskItemDateTime}>
-          <span className={style.block}>Date: {getFormattedDate(date)}</span>
-          <span className={style.block}>
-            Hours: {displayMsInFractionalHourFormat(time)}
-          </span>
-          <div className={style.block}>
-            {/* //@TODO: Could make tag colors customizeable 🤷‍♂️ */}
-            {/* //@TODO: Come back through and do something like taskID+_+tagID */}
-            {tags.map(tag => {
-              return (
-                <span className={style.tag} key={`${_id}_${tag._id}`}>
-                  {tag.name}
-                </span>
-              );
-            })}
-          </div>
-        </div>
       </div>
       <DeleteTaskButton taskId={_id} />
-    </div>
+    </div >
   );
 };
 

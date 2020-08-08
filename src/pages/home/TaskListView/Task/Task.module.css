@@ -8,17 +8,14 @@ li {
 
 .taskItem,
 .taskItem:hover {
+  margin-top: 2px;
+  height: 75px;
   list-style: none;
   display: -webkit-flex;
   display: flex;
-  width: 600px;
-  line-height: 2em;
   text-decoration: none;
-  margin: 2em auto;
   background-color: #f6f6f6;
   color: #3b3b3b;
-  padding: 2em;
-  box-shadow: 1px 1px 4px 4px #ddd;
 }
 
 .taskItem:hover {
@@ -66,8 +63,12 @@ li {
 }
 
 .tag {
-  margin-right: .5em;
+  margin-right: 0.5em;
   background-color: rgb(100, 100, 200);
   padding: 4px;
   color: white;
+}
+
+.selected {
+  background-color: green;
 }
