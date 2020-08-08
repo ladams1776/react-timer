@@ -20,8 +20,8 @@ const Main = () => {
               <FlashMessage />
               <Route
                 exact
-                path="/"
-                render={props => <IndexPage {...props} />}
+                path="/:id"
+                render={props => <CreateOrEditTaskPage {...props} />}
               />
               <Route
                 exact
