@@ -1,17 +1,19 @@
-.deleteBtn,
-.deleteBtn:hover {
-  background-color: #af111a;
-  color: white;
-  background-color: #d51923;
-  color: white;
+.deleteBtn {
+  color: black;
+  background-color: white;
+  margin-top: 10px;
+  margin-right: 10px;
   width: 10px;
   height: 20px;
   border: none;
   text-decoration: none;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .deleteBtn:hover {
-  background-color: #f01c27;
-  color: rgb(34, 33, 33);
+  color: rgb(100, 100, 100);
+}
+
+.selected {
+  background-color: rgb(200, 200, 200);
 }
