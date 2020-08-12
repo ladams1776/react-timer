@@ -20,7 +20,6 @@ const DownloadButton = tasks => {
                     onClick={handleDownload}
                     data-test-id="btn-download">
                     <span className="glyphicon glyphicon-download-alt mr-5px"></span>
-                    Download
                 </button>)
             }
         </>);

@@ -1,17 +1,14 @@
-
 .buttonDownload,
 .buttonDownload:hover {
-  display: flex;
   background-color: #3e80ed;
   color: white;
-  border-radius: 4px;
-  width: 90px;
-  height: 1.5em;
   border: none;
-  padding: 1em;
-  text-align: center;
   text-decoration: none;
-  margin-left: 0.5em;
+  text-align: center;
+  width: 45px;
+  height: 40px;
+  margin: 4px 5px;
+  border-radius: 4px;
 }
 
 .buttonDownload:hover {
