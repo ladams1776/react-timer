@@ -1,3 +1,4 @@
 .controlButtons {
   display: flex;
+  height: 100%;
 }
