@@ -4,15 +4,14 @@
   flex-direction: column;
 }
 
-.navBar {
+.navBarInnerContainer {
   height: 50px;
   background-color: rgb(100, 100, 100);
 }
 
-.rightInnerContainer {
+.mainInnerContainer {
   display: flex;
   flex-direction: row;
-  margin: 1em;
 }
 
 .listView {
@@ -20,5 +19,12 @@
   flex: 1;
 }
 
+@media only screen and (max-width: 900px) {
+  .listView {
+    flex: 0;
+  }
+}
+
 .form {
+  flex: 4;
 }

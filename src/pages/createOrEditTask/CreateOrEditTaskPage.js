@@ -17,10 +17,10 @@ const CreateOrEditTaskPage = ({ match }) => {
       <TimeContextProvider>
         <div className={styles.container}>
           {/* Need to make a leftInnerContainer */}
-          <div className={styles.navBar}>
+          <div className={styles.navBarInnerContainer}>
             <ControlButtons tasks={tasks} />
           </div>
-          <div className={styles.rightInnerContainer}>
+          <div className={styles.mainInnerContainer}>
             <TaskListView className={styles.listView} taskId={taskId} tasks={tasks} />
             <AddTaskForm taskId={taskId} className={styles.form} />
           </div>

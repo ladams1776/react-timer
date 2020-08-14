@@ -7,10 +7,6 @@
     Info: #3e80ed;
 **/
 
-.taskFormContainer {
-  flex: 4;
-}
-
 .taskForm {
   display: flex;
   flex-direction: column;
