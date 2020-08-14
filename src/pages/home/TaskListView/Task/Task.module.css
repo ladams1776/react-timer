@@ -65,7 +65,7 @@ li {
 }
 
 .taskItemCustomer {
-  display: inline-block;
+  /* display: inline-block; */
   font-style: italic;
   line-height: 1em;
   padding-left: 10px;
