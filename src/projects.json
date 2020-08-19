@@ -1,26 +1,34 @@
 [
-    {
-        "label": "React Timer App",
-        "value": "0"
-    },
-    {
-        "label": "Apache Spark",
-        "value": "1"
-    },
-    {
-        "label": "shell script course",
-        "value": "2"
-    },
-    {
-        "label": "vim course",
-        "value": "3"
-    },
-    {
-        "label": "Conference talks",
-        "value": "4"
-    },
-    {
-        "label": "Reading",
-        "value": "5"
-    }
+  {
+    "label": "React Timer App",
+    "value": "0"
+  },
+  {
+    "label": "Apache Spark",
+    "value": "1"
+  },
+  {
+    "label": "shell script course",
+    "value": "2"
+  },
+  {
+    "label": "vim course",
+    "value": "3"
+  },
+  {
+    "label": "Conference talks",
+    "value": "4"
+  },
+  {
+    "label": "Reading",
+    "value": "5"
+  },
+  {
+    "label": "Disney Reservation",
+    "value": "6"
+  },
+  {
+    "label": "Bills",
+    "value": "7"
+  }
 ]
