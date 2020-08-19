@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import TagContextProvider from './contexts/TagContext';
-import TimeContextProvider from './contexts/TimeContext';
-import AddTaskForm from './form/AddTaskForm';
-import TaskListView from '../home/TaskListView/TaskListView';
-import ControlButtons from '../home/TaskListView/ControlButtons/ControlButtons';
-import useFetchAllTasks from '../home/TaskListView/useFetchAllTasks';
+import TagContextProvider from './TaskForm/contexts/TagContext';
+import TimeContextProvider from './TaskForm/contexts/TimeContext';
+import AddTaskForm from './TaskForm/form/AddTaskForm';
+import TaskListView from './TaskListView/TaskListView';
+import ControlButtons from './TaskListView/ControlButtons/ControlButtons';
+import useFetchAllTasks from './TaskListView/useFetchAllTasks';
 import styles from './CreateOrEditTaskPage.module.css';
 
 const CreateOrEditTaskPage = ({ match }) => {

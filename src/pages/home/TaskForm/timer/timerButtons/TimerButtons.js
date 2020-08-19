@@ -1,11 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
-import { useHistory } from 'react-router-dom';
 import Button from 'components/Button';
 import styles from './TimerButtons.module.css';
 
 const TimerButtons = ({ time, setTime, isActive = false, setIsActive, children }) => {
-    const history = useHistory();
 
     const toggle = () => setIsActive(!isActive);
     /**

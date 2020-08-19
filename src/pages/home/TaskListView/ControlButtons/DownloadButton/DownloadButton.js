@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTaskEditContext } from 'hooks';
 import { writeJsonFile } from './writeJsonFile';
 import useTaskAssembler from './useTaskAssembler';
 import styles from './DownloadButton.module.css';
