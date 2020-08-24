@@ -2,9 +2,9 @@ import React from "react";
 import { fetchApiData } from 'utils';
 import useDispatch from './useDispatch';
 import cn from 'classnames';
-import style from './DeleteTaskButton.module.css';
+import styles from './DeleteTaskButton.module.css';
 
-const DeleteTaskButton = ({ taskId }) => {
+const DeleteTaskButton = ({ taskId, isSelected }) => {
   const dispatch = useDispatch(taskId);
 
   const _deleteClick = async e => {
@@ -15,7 +15,7 @@ const DeleteTaskButton = ({ taskId }) => {
   return (
     <button
       onClick={_deleteClick}
-      className={cn(style.deleteBtn, "glyphicon glyphicon-remove")}
+      className={cn(styles.deleteBtn, "glyphicon glyphicon-trash", { [styles.selected]: isSelected })}
       data-test-id="delete-task-button"
     />
   );

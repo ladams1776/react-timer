@@ -13,7 +13,7 @@ import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import TagMultiSelect from '../tagMultiSelect/TagMultiSelect';
 import styles from './TaskForm.module.css';
 
-const AddTaskForm = ({ taskId }) => {
+const AddTaskForm = ({ taskId, className }) => {
   useSetCurrentLocation(`/task/${taskId}`);
   useBackButtonListener();
   const [
@@ -28,37 +28,35 @@ const AddTaskForm = ({ taskId }) => {
 
   // Tag Stuff
   useFetchTags();
-  const { allTags} = useTagContext();
+  const { allTags } = useTagContext();
   const onSubmit = useSubmit(state, allTags, dispatch);
   const { description, tags, project } = state;
 
   return (
-    <div className={styles.taskFormContainer}>
-      <div className={styles.form}>
-        <form
-          className={styles.taskForm}
-          method={taskId === -1 ? 'POST' : 'PUT'}
-          data-test-id="form"
+    <div className={className}>
+      <form
+        className={styles.taskForm}
+        method={taskId === -1 ? 'POST' : 'PUT'}
+        data-test-id="form"
+      >
+        <Timer />
+        <ProjectDropDown value={project} onChange={onProjectChange} />
+        <TagMultiSelect tags={tags} onChange={onTagChange} />
+
+        <TextAreaAdapter
+          description={description}
+          setDescription={onTextChange}
+        />
+
+        <button
+          type="submit"
+          className={styles.submit}
+          onClick={onSubmit}
+          data-test-id="submit"
         >
-          <Timer />
-          <ProjectDropDown value={project} onChange={onProjectChange} />
-          <TagMultiSelect tags={tags} onChange={onTagChange} />
-
-          <TextAreaAdapter
-            description={description}
-            setDescription={onTextChange}
-          />
-
-          <button
-            type="submit"
-            className={styles.submit}
-            onClick={onSubmit}
-            data-test-id="submit"
-          >
-            Submit
+          Submit
           </button>
-        </form>
-      </div>
+      </form>
     </div>
   );
 };

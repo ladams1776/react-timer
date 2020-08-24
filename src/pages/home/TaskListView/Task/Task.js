@@ -1,48 +1,37 @@
 import React from 'react';
+import cn from 'classnames';
 import PropType from 'prop-types';
 import { useBrowserHistory, useGetProjectOptionLabel } from 'hooks';
 import DeleteTaskButton from './DeleteTaskButton/DeleteTaskButton';
-import { getFormattedDate, displayMsInFractionalHourFormat } from 'utils';
-import style from './Task.module.css';
+import styles from './Task.module.css';
 
-const Task = ({ _id, description = '', contractId, time, date, tags }) => {
+const Task = ({ _id, description = '', contractId, selectedId }) => {
   const { push } = useBrowserHistory();
+  const title = description?.split("\n")[0];
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
-  return (
-    <div className={style.taskItem}>
-      <div
-        className={style.taskItemLeft}
-        onClick={() => {
-          sessionStorage.setItem('LOCATION', `/task/${_id}`);
-          push(`/task/${_id}`);
-        }}
-      >
-        <div
-          className={style.taskItemDescription}
-          dangerouslySetInnerHTML={{ __html: description }}
-        />
+  const isSelected = selectedId === _id;
 
-        <span className={style.taskItemCustomer}>{projectOptionLabel}</span>
-        <div className={style.taskItemDateTime}>
-          <span className={style.block}>Date: {getFormattedDate(date)}</span>
-          <span className={style.block}>
-            Hours: {displayMsInFractionalHourFormat(time)}
-          </span>
-          <div className={style.block}>
-            {/* //@TODO: Could make tag colors customizeable 🤷‍♂️ */}
-            {/* //@TODO: Come back through and do something like taskID+_+tagID */}
-            {tags.map(tag => {
-              return (
-                <span className={style.tag} key={`${_id}_${tag._id}`}>
-                  {tag.name}
-                </span>
-              );
-            })}
-          </div>
+  return (
+    <div className={styles.taskContainer}>
+      <div className={cn(styles.taskItem, { [styles.selected]: isSelected })}>
+        <div
+          className={styles.taskItemLeft}
+          onClick={() => {
+            sessionStorage.setItem('LOCATION', `/${_id}`);
+            push(`/${_id}`);
+            window.location.reload();
+          }}
+        >
+          <div
+            className={styles.taskItemDescription}
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
+          <span className={styles.taskItemCustomer}>{projectOptionLabel}</span>
         </div>
+        <DeleteTaskButton taskId={_id} isSelected={isSelected} />
       </div>
-      <DeleteTaskButton taskId={_id} />
-    </div>
+      <div className={cn(styles.underBorder, { [styles.underBorderSelected]: isSelected })} />
+    </div >
   );
 };
 

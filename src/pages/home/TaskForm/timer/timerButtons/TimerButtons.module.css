@@ -1,0 +1,96 @@
+.navbarHeader {
+  display: flex;
+}
+
+.backButton {
+  display: flex;
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.backButtonIcon {
+  margin: auto;
+}
+
+.timerButtons {
+  display: flex;
+  background: #d8d8d8b3;
+  padding: 1em;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.timerReset,
+.timerReset:hover {
+  background-color: #d51923;
+  color: white;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  width: 45px;
+  height: 40px;
+  margin: 4px 5px;
+  border-radius: 4px;
+}
+
+.timerReset:hover {
+  background-color: #971118;
+}
+
+.timerReset:disabled {
+  background-color: rgba(199, 82, 82, 0.58);
+}
+
+.resetIcon {
+  margin-right: 4px;
+}
+
+.timerResume,
+.timerResume:hover {
+  background-color: #5ec232;
+  color: white;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  width: 45px;
+  height: 40px;
+  margin: 4px 5px;
+  border-radius: 4px;
+}
+
+.timerResume:hover {
+  background-color: #458f26;
+}
+
+.resumeIcon {
+  margin-right: 4px;
+}
+
+.timerStop,
+.timerStop:hover {
+  background-color: #fdce3e;
+  color: white;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  width: 45px;
+  height: 40px;
+  margin: 4px 5px;
+  border-radius: 4px;
+}
+
+.timerStop:hover {
+  background-color: #dcb231;
+}
+
+.stopIcon {
+  margin-right: 4px;
+}
+
+.children {
+  display: inline-flex;
+  flex-direction: column;
+  margin: auto 10px;
+}

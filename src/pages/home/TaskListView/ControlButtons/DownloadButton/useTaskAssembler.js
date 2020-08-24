@@ -1,6 +1,7 @@
 import { getFormattedDate } from 'utils';
-import { useTaskEditContext } from 'hooks';
+import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
+
 //@TODO: Write a test for this
 const useTaskAssembler = (...tasks) => {
     const { projects } = useTaskEditContext();
