@@ -14,6 +14,7 @@ const deleteTagAction = require('./application/requestHandlers/tags/deleteTagAct
 const addTagAction = require('./application/requestHandlers/tags/addTagAction');
 const editTagAction = require('./application/requestHandlers/tags/editTagAction');
 const getTagByIdAction = require('./application/requestHandlers/tags/getTagByIdAction');
+const addTaskAction = require('./application/requestHandlers/tasks/addTaskAction');
 
 // @TODO: Move the username and password out of here
 const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
@@ -76,20 +77,7 @@ app.get('/api/tasks', getAllTasksAction);
 
 app.get('/api/task/:id', getTaskByIdAction);
 
-app.post('/api/task', (req, res) => {
-  const m = new Task();
-  m.toObject();
-  m.date = req.body.date;
-  m.description = req.body.WorkUnit[0].description;
-  m.contractId = req.body.WorkUnit[0].contractId;
-  m.time = req.body.WorkUnit[0].time;
-  m.tags = req.body.WorkUnit[0].tags;
-
-  m.save((err, task) => {
-    if (err) throw err;
-    res.jsonp(task);
-  });
-});
+app.post('/api/task', addTaskAction);
 
 app.put('/api/task', (req, res) => {
   Task.findOneAndUpdate(
