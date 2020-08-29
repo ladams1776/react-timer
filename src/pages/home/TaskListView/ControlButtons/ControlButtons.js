@@ -9,7 +9,7 @@ const ControlButtons = tasks => {
 
   return (
     <div className={styles.controlButtons} data-test-id="control-buttons">
-      <button className="glyphicon glyphicon-home" onClick={() => { push("/tag") }} />
+      <button className="glyphicon glyphicon-home" onClick={() => { push("/tag/-1") }} />
       <DownloadButton tasks={tasks} />
       <NewButton />
     </div>
