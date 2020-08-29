@@ -6,15 +6,11 @@ import styles from './ControlButtons.module.css';
 import HomeButton from './HomeButton/HomeButton';
 
 const ControlButtons = tasks => {
-  const { push } = useBrowserHistory();
-
-  return (
-    <div className={styles.controlButtons} data-test-id="control-buttons">
-      <HomeButton />
-      <DownloadButton tasks={tasks} />
-      <NewButton />
-    </div>
-  )
+  return <div className={styles.controlButtons} data-test-id="control-buttons">
+    <HomeButton />
+    <DownloadButton tasks={tasks} />
+    <NewButton />
+  </div>
 };
 
 export default ControlButtons;

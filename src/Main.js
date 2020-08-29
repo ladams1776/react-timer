@@ -16,32 +16,12 @@ const Main = () => {
           <HashRouter>
             <div className="content">
               <FlashMessage />
-              <Route
-                exact
-                path="/"
-                render={props => <CreateOrEditTaskPage {...props} />}
-              />
-              <Route
-                exact
-                path="/task/:id"
-                render={props => <CreateOrEditTaskPage {...props} />}
-              />
+              <Route exact path="/" render={props => <CreateOrEditTaskPage {...props} />} />
+              <Route exact path="/task/:id" render={props => <CreateOrEditTaskPage {...props} />} />
 
-              <Route
-                exact
-                path="/tag"
-                render={props => <TagPage {...props} />}
-              />
-              <Route
-                exact
-                path="/tag/:id"
-                render={props => <TagPage {...props} />}
-              />
-              <Route
-                exact
-                path="/tags"
-                render={props => <TagPage {...props} />}
-              />
+              <Route exact path="/tag" render={props => <TagPage {...props} />} />
+              <Route exact path="/tag/:id" render={props => <TagPage {...props} />} />
+              <Route exact path="/tags" render={props => <TagPage {...props} />} />
               <LoadinSpinner />
             </div>
           </HashRouter>
