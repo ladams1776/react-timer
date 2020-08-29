@@ -2,72 +2,49 @@ li {
   list-style: none;
 }
 
-.block {
-  display: block;
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  color: #3b3b3b;
+  margin-top: -1px; /* Need to make the task top overlap underBorder (of previous task). This allows us to blend it into the selected task. */
 }
 
-.tagItem,
-.tagItem:hover {
+.item,
+.item {
+  height: 75px;
   list-style: none;
   display: -webkit-flex;
   display: flex;
-  width: 600px;
-  line-height: 2em;
   text-decoration: none;
-  margin: 2em auto;
-  background-color: #f6f6f6;
-  color: #3b3b3b;
-  padding: 2em;
-  box-shadow: 1px 1px 4px 4px #ddd;
+  font-size: 12px;
 }
 
-.tagItem:hover {
-  background-color: #ffffff;
-  color: #3b3b3b;
-  box-shadow: 2px 2px 2px 2px #ddd;
+.selected {
+  background-color: rgb(200, 200, 200);
 }
 
-@media only screen and (max-width: 600px) {
-  .tagItem,
-  .tagItem:hover {
-    width: 96vw;
-    max-height: 300px;
-    font-size: 12px;
-    margin: 4em auto;
-    padding: 0;
-  }
-}
-
-.tagItemLeft,
-.tagItemLeft:hover {
+.itemLeft,
+.itemLeft:hover {
   flex: 5;
   overflow: hidden;
 }
 
-.tagItemDescription {
+.name {
   display: block;
-  max-height: 230px;
   overflow: hidden;
   font-size: 0.95rem;
-  line-height: 0.85;
-  margin-bottom: 0.5em;
-  padding-bottom: 0.5em;
   overflow-wrap: break-word;
+  padding-left: 10px;
 }
 
-.tagItemCustomer {
-  display: inline-block;
-  font-style: italic;
-  line-height: 1em;
+.underBorder {
+  width: 80%;
+  background-color: rgb(200, 200, 200);
+  height: 1px;
+  margin: 0 auto;
 }
 
-.tagItemDateTime {
-  line-height: 1.25em;
-}
-
-.tag {
-  margin-right: .5em;
-  background-color: rgb(100, 100, 200);
-  padding: 4px;
-  color: white;
+.underBorderSelected {
+  visibility: hidden;
 }

@@ -12,7 +12,7 @@ const TaskSchema = new mongoose.Schema({
     contractId: {
         type: Number,
     },
-    time: [{ date: { type: Date }, time: { type: String } }],
+    time: [{ date: { type: Date }, time: { type: Number } }],
     tags: []
 });
 

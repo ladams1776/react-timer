@@ -9,15 +9,19 @@ const Task = require('./infrastructure/models/Task');
 const Tag = require('./infrastructure/models/Tag');
 const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
 const getTaskByIdAction = require('./application/requestHandlers/tasks/getTaskByIdAction');
+const updateTaskAction = require('./application/requestHandlers/tasks/updateTaskAction');
 const getAllTagsAction = require('./application/requestHandlers/tags/getAllTagsAction');
 const deleteTagAction = require('./application/requestHandlers/tags/deleteTagAction');
 const addTagAction = require('./application/requestHandlers/tags/addTagAction');
 const editTagAction = require('./application/requestHandlers/tags/editTagAction');
 const getTagByIdAction = require('./application/requestHandlers/tags/getTagByIdAction');
 const addTaskAction = require('./application/requestHandlers/tasks/addTaskAction');
+const { time } = require('console');
+const deleteTaskByIdAction = require('./application/requestHandlers/tasks/deleteTaskByIdAction');
+const deleteAllTaskAction = require('./application/requestHandlers/tasks/deleteAllTaskAction');
 
 // @TODO: Move the username and password out of here
-const SERVER_AND_PORT = 'admin-user:admin-password@172.28.1.4:27017';
+const SERVER_AND_PORT = 'admin-user:admin-password@localhost:27017';
 
 const config = {
   db: `mongodb://${SERVER_AND_PORT}`,
@@ -73,54 +77,18 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// TASKS
 app.get('/api/tasks', getAllTasksAction);
-
 app.get('/api/task/:id', getTaskByIdAction);
-
-app.post('/api/task', addTaskAction);
-
-app.put('/api/task', (req, res) => {
-  Task.findOneAndUpdate(
-    // eslint-disable-next-line no-underscore-dangle
-    { _id: req.body._id },
-    {
-      $set: {
-        date: req.body.date,
-        description: req.body.WorkUnit[0].description,
-        contractId: req.body.WorkUnit[0].contractId,
-        time: req.body.WorkUnit[0].time,
-        tags: req.body.WorkUnit[0].tags,
-      },
-    },
-    { new: true },
-    (err, task) => {
-      if (err) console.log('ERROR! /api/task/', err);
-      res.jsonp(task);
-    },
-  );
-});
-
-app.delete('/api/task/:id', (req, res) => {
-  const { id } = req.params;
-
-  Task.deleteOne({ _id: id }, e => {
-    if (e) throw e;
-    res.jsonp({ taskId: id, isSuccess: true });
-  });
-});
-
-app.delete('/api/tasks', () => {
-  Task.deleteMany({}, e => {
-    if (e) throw e;
-  });
-});
+app.post('/api/task/', addTaskAction);
+app.put('/api/task', updateTaskAction);
+app.delete('/api/task/:id', deleteTaskByIdAction);
+app.delete('/api/tasks', deleteAllTaskAction);
 
 // TAGS
 app.get('/api/tags', getAllTagsAction);
 app.get('/api/tag/:id', getTagByIdAction);
-app.post('/api/tag', (req, res) => {
-  // Some reason, when I don't do this it fails.
-  addTagAction(req, res);
-});
+app.post('/api/tag', addTagAction);
 app.put('/api/tag', editTagAction);
 app.delete('/api/tag/:id', deleteTagAction);

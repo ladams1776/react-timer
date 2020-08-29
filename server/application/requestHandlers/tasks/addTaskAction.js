@@ -2,7 +2,7 @@
 // const jsonResponse = require('../jsonResponse');
 const Task = require('../../../infrastructure/models/Task');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     const m = new Task();
     m.toObject();
     m.date = req.body.date;
@@ -15,10 +15,10 @@ module.exports = (req, res) => {
     }];
     m.tags = req.body.WorkUnit[0].tags;
 
-    m.save((err, task) => {
+    const t = await m.save((err, task) => {
         if (err) throw err;
-        res.jsonp(task);
     });
+    res.jsonp(t);
 };
 
 // /**

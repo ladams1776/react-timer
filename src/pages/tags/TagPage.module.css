@@ -1,0 +1,31 @@
+.container {
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+.navBarInnerContainer {
+  height: 50px;
+  background-color: rgb(100, 100, 100);
+}
+
+.mainInnerContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.listView {
+  overflow-y: scroll;
+  flex: 1;
+  max-width: 200px;
+}
+
+@media only screen and (max-width: 900px) {
+  .listView {
+    flex: 0;
+  }
+}
+
+.form {
+  flex: 4;
+}

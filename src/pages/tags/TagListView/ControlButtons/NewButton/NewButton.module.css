@@ -1,14 +1,14 @@
 .buttonAdd,
 .buttonAdd:hover {
-  background-color: #ff6358;
+  background-color: rgb(150, 150, 150);
   color: white;
-  border-radius: 4px;
-  height: 1.5em;
   border: none;
-  padding: 1em;
   text-decoration: none;
   text-align: center;
-  width: 95px;
+  width: 45px;
+  height: 40px;
+  margin: 4px 5px;
+  border-radius: 4px;
 }
 
 .buttonAdd:hover {

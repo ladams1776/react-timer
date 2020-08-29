@@ -22,7 +22,10 @@ const CreateOrEditTaskPage = ({ match }) => {
           </div>
           <div className={styles.mainInnerContainer}>
             <TaskListView className={styles.listView} taskId={taskId} tasks={tasks} />
-            <AddTaskForm taskId={taskId} className={styles.form} />
+            {taskId !== undefined
+              ? <AddTaskForm taskId={taskId} className={styles.form} />
+              : <div className={styles.form}></div>}
+
           </div>
         </div>
       </TimeContextProvider>
