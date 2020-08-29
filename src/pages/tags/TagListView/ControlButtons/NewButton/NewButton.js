@@ -5,13 +5,13 @@ import styles from './NewButton.module.css';
 const NewButton = () => {
   const { push } = useBrowserHistory();
 
-  return <div className={styles.buttonAdd} data-test-id="btn-new"
+  return <button className={styles.buttonAdd} data-test-id="btn-new"
     onClick={() => {
       push("/tag/-1");
       window.location.reload();
     }}>
     <span className="glyphicon glyphicon-edit" />
-  </div>;
+  </button>;
 };
 
 export default NewButton;

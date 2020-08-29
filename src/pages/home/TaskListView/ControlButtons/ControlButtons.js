@@ -3,13 +3,14 @@ import { useBrowserHistory } from 'hooks';
 import DownloadButton from './DownloadButton/DownloadButton';
 import NewButton from './NewButton/NewButton';
 import styles from './ControlButtons.module.css';
+import HomeButton from './HomeButton/HomeButton';
 
 const ControlButtons = tasks => {
   const { push } = useBrowserHistory();
 
   return (
     <div className={styles.controlButtons} data-test-id="control-buttons">
-      <button className="glyphicon glyphicon-home" onClick={() => { push("/tag/-1") }} />
+      <HomeButton />
       <DownloadButton tasks={tasks} />
       <NewButton />
     </div>

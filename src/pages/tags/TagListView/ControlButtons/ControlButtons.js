@@ -1,13 +1,12 @@
 import React from 'react';
-import { useBrowserHistory } from 'hooks';
 import NewButton from './NewButton/NewButton';
+import HomeButton from './HomeButton/HomeButton';
 import styles from './ControlButtons.module.css';
 
 const ControlButtons = () => {
-  const { push } = useBrowserHistory();
   return (
     <div className={styles.controlButtons} data-test-id="control-buttons">
-      <button className="glyphicon glyphicon-home" onClick={() => { push("/") }} />
+      <HomeButton />
       <NewButton />
     </div>
   );
