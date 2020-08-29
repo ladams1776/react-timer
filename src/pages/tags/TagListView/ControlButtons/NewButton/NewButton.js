@@ -3,13 +3,15 @@ import { useBrowserHistory } from 'hooks';
 import styles from './NewButton.module.css';
 
 const NewButton = () => {
-    const { push } = useBrowserHistory();
+  const { push } = useBrowserHistory();
 
-    return <div className={styles.buttonAdd} data-test-id="btn-new"
-        onClick={() => { push("/tags/-1") }}>
-        <span className="glyphicon glyphicon-plus mr-5px" />
-    New Tag
-  </div>;
+  return <button className={styles.buttonAdd} data-test-id="btn-new"
+    onClick={() => {
+      push("/tag/-1");
+      window.location.reload();
+    }}>
+    <span className="glyphicon glyphicon-edit" />
+  </button>;
 };
 
 export default NewButton;

@@ -22,7 +22,7 @@ const useFetchTaskById = (taskId, dispatch) => {
       setTime(data.time);
       return dispatch(formData);
     },
-    [setIsLoadin, setTime, dispatch   ],
+    [setIsLoadin, setTime, dispatch],
   );
 
   return useEffect(() => {

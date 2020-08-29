@@ -1,29 +1,32 @@
 import React from 'react';
 import PropType from 'prop-types';
+import cn from 'classnames';
 import { useBrowserHistory } from 'hooks';
 import DeleteTagButton from './DeleteTagButton/DeleteTagButton';
-import style from './Tag.module.css';
+import styles from './Tag.module.css';
 
-const Tag = ({ _id, name, description = '', setTags}) => {
+
+const Tag = ({ _id, name, description = '', setTags, selectedId }) => {
   const { push } = useBrowserHistory();
+  const isSelected = selectedId === _id;
+
   return (
-    <div className={style.tagItem} data-test-id="tag">
-      <div
-        className={style.tagItemLeft}
-        onClick={() => {
-          sessionStorage.setItem('LOCATION', `/tag/${_id}`);
-          push(`/tag/${_id}`);
-        }}
-      >
-        <div>
-          {name}
+    <div className={styles.container}>
+      <div className={cn(styles.item, { [styles.selected]: isSelected })}>
+        <div className={styles.itemLeft}
+          onClick={() => {
+            sessionStorage.setItem('LOCATION', `/tag/${_id}`);
+            push(`/tag/${_id}`);
+            window.location.reload();
+          }}
+        >
+          <div className={styles.name}>
+            {name}
+          </div>
         </div>
-        <div
-          className={style.tagItemDescription}
-          dangerouslySetInnerHTML={{ __html: description }}
-        />
+        <DeleteTagButton tagId={_id} setTags={setTags} isSelected={isSelected} />
       </div>
-      <DeleteTagButton tagId={_id} setTags={setTags}/>
+      <div className={cn(styles.underBorder, { [styles.underBorderSelected]: isSelected })} />
     </div>
   );
 };

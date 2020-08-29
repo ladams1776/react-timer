@@ -2,8 +2,7 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
 const TextAreaAdapter = ({ description, setDescription }) => {
-  const toolbar =
-    'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help';
+  const toolbar = 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help';
   return (
     <Editor
       initialValue={description}

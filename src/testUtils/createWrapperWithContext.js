@@ -17,7 +17,7 @@ chai.use(SinonChai);
 //  * @param {Object} sinonStub a Sinon stub wrapping the context
 //  */
 const createWrapperWithContext = (component, mockContext = {}) => {
-    return shallow(component);
+  return shallow(component);
 };
 
 export default createWrapperWithContext;

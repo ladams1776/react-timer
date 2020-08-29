@@ -3,21 +3,20 @@ import cn from 'classnames';
 import { useSetCurrentLocation } from 'hooks'
 import useFetchTagById from './useFetchTagById';
 import useFormSetup from './useFormSetup';
-import styles from './AddTagPage.module.css'
+import styles from './AddTagForm.module.css';
 
-const AddTagePage = ({ match }) => {
-    const tagId = match.params.id || -1;
+const AddTagePage = ({ tagId, className }) => {
     useSetCurrentLocation(`/tag/${tagId}`);
 
     const { tag, setTag, onSubmit, setName, setDescription, nameRef, descriptionRef, idRef } = useFormSetup(tagId);
     useFetchTagById(tagId, setTag);
 
     return (
-        <form
-            data-test-id="form"
-            method={tag._id === -1 ? 'POST' : 'PUT'}
-        >
-            <div className={styles.addTagPageForm}>
+        <div className={styles.container}>
+            <form
+                data-test-id="form"
+                method={tag._id === -1 ? 'POST' : 'PUT'}
+                className={styles.form}>
                 <h3>Add a New Tag</h3>
                 <input name="id" type="hidden" value={tag._id} ref={idRef} />
                 <input
@@ -47,8 +46,8 @@ const AddTagePage = ({ match }) => {
                 >
                     Submit
                     </button>
-            </div>
-        </form >
+            </form>
+        </div>
     );
 }
 

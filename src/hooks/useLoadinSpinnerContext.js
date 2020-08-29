@@ -5,10 +5,10 @@ const useIsLoadinContext = () => useContext(LoadinSpinnerContext);
 const useSetIsLoadinContext = () => useContext(LoadinSpinnerActionsContext);
 
 const useLoadinSpinnerContext = () => {
-    const isLoadin = useIsLoadinContext();
-    const setIsLoadin = useSetIsLoadinContext();
+  const isLoadin = useIsLoadinContext();
+  const setIsLoadin = useSetIsLoadinContext();
 
-    return { isLoadin, setIsLoadin };
+  return { isLoadin, setIsLoadin };
 };
 
 export default useLoadinSpinnerContext;

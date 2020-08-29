@@ -17,8 +17,8 @@ const Task = ({ _id, description = '', contractId, selectedId }) => {
         <div
           className={styles.taskItemLeft}
           onClick={() => {
-            sessionStorage.setItem('LOCATION', `/${_id}`);
-            push(`/${_id}`);
+            sessionStorage.setItem('LOCATION', `/task/${_id}`);
+            push(`/task/${_id}`);
             window.location.reload();
           }}
         >

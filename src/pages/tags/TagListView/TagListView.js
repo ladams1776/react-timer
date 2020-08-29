@@ -1,26 +1,18 @@
-import React, { useState } from 'react';
-import useFetchAllTags from './useFetchAllTags';
+import React from 'react';
 import Tag from './Tag/Tag';
-import ControlButtons from './ControlButtons/ControlButtons';
-import './TagListView.css';
+import styles from './TagListView.module.css';
 
-const TagsListView = () => {
-  const [tags, setTags] = useState([]);
-  useFetchAllTags(setTags);
-
+const TagsListView = ({ className, tagId, tags }) => {
   return (
-    <div data-test-id="list-view">
-      <div className="tag-list__header">
-        <ControlButtons />
-      </div>
-      <ul className="tag-list">
+    <div className={className} data-test-id="list-view">
+      <ul className={styles.tagList}>
         {tags.map(tag => (
-          <li key={tag._id} className="tag">
-            <Tag {...tag} key={tag._id} setTags={setTags}/>
+          <li key={tag._id} className="task">
+            <Tag {...tag} key={tag._id} selectedId={tagId} />
           </li>
         ))}
       </ul>
-    </div>
+    </div >
   );
 };
 

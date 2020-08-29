@@ -39,17 +39,6 @@ li {
   visibility: hidden;
 }
 
-@media only screen and (max-width: 600px) {
-  .taskItem,
-  .taskItem:hover {
-    width: 96vw;
-    max-height: 300px;
-    font-size: 12px;
-    margin: 4em auto;
-    padding: 0;
-  }
-}
-
 .taskItemLeft,
 .taskItemLeft:hover {
   flex: 5;
