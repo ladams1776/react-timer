@@ -1,5 +1,4 @@
 import React from 'react';
-import { useBrowserHistory } from 'hooks';
 import DownloadButton from './DownloadButton/DownloadButton';
 import NewButton from './NewButton/NewButton';
 import styles from './ControlButtons.module.css';
