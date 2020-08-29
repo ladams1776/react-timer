@@ -16,15 +16,15 @@
 
 .listView {
   overflow-y: scroll;
-  flex: 1;
+  min-width: 200px;
 }
-
 @media only screen and (max-width: 900px) {
-  .listView {
+  .listViewAndTask {
     flex: 0;
+    min-width: 0px;
   }
 }
-
 .form {
   flex: 4;
+  margin-right: 2em;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cn from 'classnames';
 import TagContextProvider from './TaskForm/contexts/TagContext';
 import TimeContextProvider from './TaskForm/contexts/TimeContext';
 import AddTaskForm from './TaskForm/form/AddTaskForm';
@@ -21,7 +22,8 @@ const CreateOrEditTaskPage = ({ match }) => {
             <ControlButtons tasks={tasks} />
           </div>
           <div className={styles.mainInnerContainer}>
-            <TaskListView className={styles.listView} taskId={taskId} tasks={tasks} />
+            <TaskListView taskId={taskId} tasks={tasks}
+              className={cn(styles.listView, { [styles.listViewAndTask]: taskId })} />
             {taskId !== undefined
               ? <AddTaskForm taskId={taskId} className={styles.form} />
               : <div className={styles.form}></div>}
