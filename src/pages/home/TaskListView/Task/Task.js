@@ -5,7 +5,7 @@ import { useBrowserHistory, useGetProjectOptionLabel } from 'hooks';
 import DeleteTaskButton from './DeleteTaskButton/DeleteTaskButton';
 import styles from './Task.module.css';
 
-const Task = ({ _id, description = '', contractId, selectedId }) => {
+const Task = ({ _id, description, contractId, selectedId }) => {
   const { push } = useBrowserHistory();
   const title = description?.split("\n")[0];
   const projectOptionLabel = useGetProjectOptionLabel(contractId);

@@ -1,3 +1,4 @@
+const Task = require('../../../infrastructure/models/Task');
 
 module.exports = (req, res) => {
     console.log('Updating a task with: ', req.body);
