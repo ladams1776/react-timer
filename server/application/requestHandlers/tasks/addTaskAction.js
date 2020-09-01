@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     const t = await m.save((err, task) => {
         if (err) throw err;
     });
-    res.jsonp(t);
+    res.jsonp(m);
 };
 
 // /**
