@@ -30,7 +30,9 @@ const Task = ({ _id, description, contractId, selectedId }) => {
         </div>
         <DeleteTaskButton taskId={_id} isSelected={isSelected} />
       </div>
-      <div className={cn(styles.underBorder, { [styles.underBorderSelected]: isSelected })} />
+      <div className={styles.borderContainer}>
+        <div className={cn(styles.underBorder, { [styles.underBorderSelected]: isSelected })} />
+      </div>
     </div >
   );
 };
