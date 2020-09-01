@@ -18,12 +18,14 @@
   overflow-y: scroll;
   min-width: 200px;
 }
+
 @media only screen and (max-width: 900px) {
   .listViewAndTask {
     flex: 0;
     min-width: 0px;
   }
 }
+
 .form {
   flex: 4;
   margin-right: 2em;
