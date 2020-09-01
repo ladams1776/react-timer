@@ -1,6 +1,6 @@
 import React from 'react';
 import { useBackButtonListener, useSetCurrentLocation } from 'hooks';
-import { TextAreaAdapter } from 'components';
+import { TextAreaAdapter, Button } from 'components';
 import {
   useFetchTaskById,
   useTagContext,
@@ -48,14 +48,14 @@ const AddTaskForm = ({ taskId, className }) => {
           setDescription={onTextChange}
         />
 
-        <button
+        <Button
           type="submit"
           className={styles.submit}
           onClick={onSubmit}
           data-test-id="submit"
         >
           Submit
-          </button>
+        </Button>
       </form>
     </div>
   );
