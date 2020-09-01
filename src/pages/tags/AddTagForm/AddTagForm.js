@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import { Button } from 'components';
 import { useSetCurrentLocation } from 'hooks'
 import useFetchTagById from './useFetchTagById';
 import useFormSetup from './useFormSetup';
@@ -39,13 +40,13 @@ const AddTagePage = ({ tagId, className }) => {
                     className={styles.description}
                     ref={descriptionRef}
                 />
-                <button type="submit"
+                <Button type="submit"
                     onClick={onSubmit}
                     className={cn("btn", "btn-primary", styles.submit)}
                     data-test-id="addTagPageSubmit"
                 >
                     Submit
-                    </button>
+                    </Button>
             </form>
         </div>
     );

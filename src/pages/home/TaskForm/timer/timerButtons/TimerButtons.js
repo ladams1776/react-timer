@@ -1,15 +1,11 @@
 import React from 'react';
 import cn from 'classnames';
-import Button from 'components/Button';
+import { Button } from 'components';
 import styles from './TimerButtons.module.css';
 
 const TimerButtons = ({ time, setTime, isActive = false, setIsActive, children }) => {
-
     const toggle = () => setIsActive(!isActive);
-    /**
-     * Haven't figured out why, but some reason this reset button is triggering the form's submission. Going to prevetDefault for now.
-     * @param {Object} e 
-     */
+
     const reset = e => {
         e.preventDefault();
         setIsActive(false);

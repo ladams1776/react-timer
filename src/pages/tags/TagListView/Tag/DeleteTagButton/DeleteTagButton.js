@@ -1,6 +1,7 @@
 import React from "react";
-import { useFlashMessageFetchApiData, reloadAndRefresh } from 'utils';
 import cn from 'classnames';
+import { Button } from "components";
+import { useFlashMessageFetchApiData, reloadAndRefresh } from 'utils';
 import styles from './DeleteTagButton.module.css';
 
 const DeleteTagButton = ({ tagId, setTags, isSelected }) => {
@@ -13,7 +14,7 @@ const DeleteTagButton = ({ tagId, setTags, isSelected }) => {
   };
 
   return (
-    <button
+    <Button
       onClick={_deleteClick}
       className={cn(styles.deleteBtn, "glyphicon glyphicon-trash", { [styles.selected]: isSelected })}
       data-test-id="delete-tag-button"
