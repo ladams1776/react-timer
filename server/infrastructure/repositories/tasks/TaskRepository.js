@@ -14,8 +14,7 @@ const TaskRepository = {
       task.description = doc.description;
       task.tags = doc.tags;
       task.date = doc.date;
-
-      console.log('doc we are pulling out:', doc.time)
+      task.contractId = doc.contractId;
 
       task.time = doc.time
         .map(a => parseInt(a.time))
