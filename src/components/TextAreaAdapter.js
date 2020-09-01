@@ -10,7 +10,7 @@ const TextAreaAdapter = ({ description, setDescription }) => {
       name="description"
       data-test-id="text-area-adapter"
       init={{
-        height: 500,
+        height: 400,
         menubar: true,
         plugins: [
           'advlist autolink lists link image charmap print preview anchor',
