@@ -2,10 +2,6 @@ li {
   list-style: none;
 }
 
-.block {
-  display: block;
-}
-
 .taskContainer {
   display: flex;
   flex-direction: column;
