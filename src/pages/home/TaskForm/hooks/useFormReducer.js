@@ -29,7 +29,6 @@ const useFormReducer = () => {
   };
 
   const [state, dispatch] = useReducer(formReducer, initialState);
-  // Could abstract some of these onClick listeneners 
   return [
     state,
     dispatch,

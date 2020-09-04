@@ -1,10 +1,10 @@
 import { getFormattedDate } from 'utils';
-import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
+import { useFetchProjectOptions } from 'hooks';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 
 //@TODO: Write a test for this
 const useTaskAssembler = (...tasks) => {
-    const { projects } = useTaskEditContext();
+    const projects = useFetchProjectOptions();
 
     const dateFormatted = getFormattedDate(new Date());
 

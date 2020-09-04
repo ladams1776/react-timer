@@ -14,17 +14,18 @@ import TagMultiSelect from '../tagMultiSelect/TagMultiSelect';
 import styles from './TaskForm.module.css';
 import useDispatchWhenLeave from '../hooks/useDispatchWhenLeave';
 import useUpdateWhenLeave from '../hooks/useSubmit/useUpdateWhenLeave';
+import useTaskEditContext from '../../hooks/useTaskEditContext';
 
 const AddTaskForm = ({ taskId, className }) => {
   useSetCurrentLocation(`/task/${taskId}`);
   useBackButtonListener();
-  const [
+  const {
     state,
     dispatch,
-    onProjectChange,
-    onTextChange,
+    onProjectDropDownChange,
+    onTextAreaChange,
     onTagChange,
-  ] = useFormReducer();
+  } = useTaskEditContext();
 
   useFetchTaskById(taskId, dispatch);
 
@@ -43,12 +44,12 @@ const AddTaskForm = ({ taskId, className }) => {
         data-test-id="form"
       >
         <Timer />
-        <ProjectDropDown value={project} onChange={onProjectChange} />
+        <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
         <TagMultiSelect tags={tags} onChange={onTagChange} />
 
         <TextAreaAdapter
           description={description}
-          setDescription={onTextChange}
+          setDescription={onTextAreaChange}
         />
 
         <Button

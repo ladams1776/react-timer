@@ -5,23 +5,19 @@ const useTaskContext = () => useContext(TaskEditFormContext);
 
 const useTaskEditContext = () => {
     const {
-        taskId, updateTaskId: setTaskIdCallback,
-        task, updateTask: setTaskCallback,
-        tasks, updateTasks: setTasksCallback,
-        description, updateDescription: setDescriptionCallback,
-        selectedProject, updateDropDown: setSelectedProjectCallback, //@TODO: Change this key `updateDropdown`
-        // tags,
-        projects
+        state,
+        dispatch,
+        onProjectDropDownChange,
+        onTextAreaChange,
+        onTagChange,
     } = useTaskContext();
 
     return {
-        taskId, updateTaskId: setTaskIdCallback,
-        task, updateTask: setTaskCallback,
-        tasks, updateTasks: setTasksCallback,
-        description, updateDescription: setDescriptionCallback,
-        selectedProject, updateDropDown: setSelectedProjectCallback, //@TODO: Change this key `updateDropdown`
-        // tags,
-        projects
+        state,
+        dispatch,
+        onProjectDropDownChange,
+        onTextAreaChange,
+        onTagChange,
     };
 };
 
