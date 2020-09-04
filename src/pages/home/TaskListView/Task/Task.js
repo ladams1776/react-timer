@@ -4,12 +4,14 @@ import PropType from 'prop-types';
 import { useBrowserHistory, useGetProjectOptionLabel } from 'hooks';
 import DeleteTaskButton from './DeleteTaskButton/DeleteTaskButton';
 import styles from './Task.module.css';
+import useUpdateWhenLeave from '../../TaskForm/hooks/useSubmit/useUpdateWhenLeave';
 
 const Task = ({ _id, description, contractId, selectedId }) => {
   const { push } = useBrowserHistory();
   const title = description?.split("\n")[0];
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
   const isSelected = selectedId === _id;
+  const onDispatchWhenLeave = useUpdateWhenLeave();
 
   return (
     <div className={styles.taskContainer}>
@@ -17,6 +19,7 @@ const Task = ({ _id, description, contractId, selectedId }) => {
         <div
           className={styles.taskItemLeft}
           onClick={() => {
+            onDispatchWhenLeave();
             sessionStorage.setItem('LOCATION', `/task/${_id}`);
             push(`/task/${_id}`);
             window.location.reload();

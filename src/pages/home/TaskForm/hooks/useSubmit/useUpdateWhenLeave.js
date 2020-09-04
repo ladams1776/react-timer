@@ -2,13 +2,17 @@ import { useCallback } from 'react';
 import { fetchApiData, getFormattedDate } from 'utils';
 import { useTimeContext } from '..';
 import hydrateTaskForm from './hydrateTaskForm';
+import { useTagContext } from '../'
+import useTaskEditContext from '../../../hooks/useTaskEditContext';
 
-const useUpdateWhenLeave = (state, allTags, dispatch) => {
+const useUpdateWhenLeave = () => {
     const { time } = useTimeContext();
+    const { state } = useTaskEditContext();
+    const { allTags } = useTagContext();
 
     const onSubmit = useCallback(() => {
         const dateFormatted = getFormattedDate(new Date());
-
+        const dispatch = () => { };
         const payload = {
             project: state.project,
             dateFormatted,
@@ -20,12 +24,14 @@ const useUpdateWhenLeave = (state, allTags, dispatch) => {
 
         const method = state.id ? 'PUT' : 'POST';
 
-        fetchApiData('task', { body: timeTask, method }, dispatch);
-    }, [allTags, dispatch, state, time]);
+        if (state.id !== -1) {
+            fetchApiData('task', { body: timeTask, method }, dispatch);
+        }
+    }, [allTags, state, time]);
 
 
 
-    return onSubmit;
+    return onSubmit
 };
 
 export default useUpdateWhenLeave;
