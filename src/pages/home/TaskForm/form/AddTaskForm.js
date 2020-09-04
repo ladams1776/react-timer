@@ -12,6 +12,8 @@ import Timer from '../timer/Timer';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import TagMultiSelect from '../tagMultiSelect/TagMultiSelect';
 import styles from './TaskForm.module.css';
+import useDispatchWhenLeave from '../hooks/useDispatchWhenLeave';
+import useUpdateWhenLeave from '../hooks/useSubmit/useUpdateWhenLeave';
 
 const AddTaskForm = ({ taskId, className }) => {
   useSetCurrentLocation(`/task/${taskId}`);
@@ -30,8 +32,9 @@ const AddTaskForm = ({ taskId, className }) => {
   useFetchTags();
   const { allTags } = useTagContext();
   const onSubmit = useSubmit(state, allTags, dispatch);
+  const onSubmit2 = useUpdateWhenLeave(state, allTags, () => { });
   const { description, tags, project } = state;
-
+  useDispatchWhenLeave(onSubmit2);
   return (
     <div className={className}>
       <form
