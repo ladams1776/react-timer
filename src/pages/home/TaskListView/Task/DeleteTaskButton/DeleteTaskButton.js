@@ -9,8 +9,12 @@ const DeleteTaskButton = ({ taskId, isSelected }) => {
   const dispatch = useDispatch(taskId);
 
   const _deleteClick = async e => {
-    e.preventDefault();
-    fetchApiData(`task/${taskId}`, { method: 'DELETE' }, dispatch);
+    const isDeleting = window.confirm("Are you sure you want to delete task?");
+
+    if (isDeleting) {
+      e.preventDefault();
+      fetchApiData(`task/${taskId}`, { method: 'DELETE' }, dispatch);
+    }
   };
 
   return (
