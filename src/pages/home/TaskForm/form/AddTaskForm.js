@@ -6,20 +6,16 @@ import {
   useTagContext,
   useFetchTags,
   useSubmit,
-  useFormReducer,
 } from '../hooks';
 import Timer from '../timer/Timer';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import TagMultiSelect from '../tagMultiSelect/TagMultiSelect';
 import styles from './TaskForm.module.css';
-import useDispatchWhenLeave from '../hooks/useDispatchWhenLeave';
-import useUpdateWhenLeave from '../hooks/useSubmit/useUpdateWhenLeave';
 import useTaskEditContext from '../../hooks/useTaskEditContext';
-import taskIdDispatch from '../hooks/useFetchDispatch/taskIdDispatch';
 
 const AddTaskForm = ({ taskId, className }) => {
   useSetCurrentLocation(`/task/${taskId}`);
-  useBackButtonListener();
+  // useBackButtonListener(); - do we want this anymore?
   const {
     state,
     dispatch,
