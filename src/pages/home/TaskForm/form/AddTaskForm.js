@@ -15,6 +15,7 @@ import styles from './TaskForm.module.css';
 import useDispatchWhenLeave from '../hooks/useDispatchWhenLeave';
 import useUpdateWhenLeave from '../hooks/useSubmit/useUpdateWhenLeave';
 import useTaskEditContext from '../../hooks/useTaskEditContext';
+import taskIdDispatch from '../hooks/useFetchDispatch/taskIdDispatch';
 
 const AddTaskForm = ({ taskId, className }) => {
   useSetCurrentLocation(`/task/${taskId}`);
@@ -33,9 +34,7 @@ const AddTaskForm = ({ taskId, className }) => {
   useFetchTags();
   const { allTags } = useTagContext();
   const onSubmit = useSubmit(state, allTags, dispatch);
-  const onSubmitWhenLeave = useUpdateWhenLeave();
   const { description, tags, project } = state;
-  // useDispatchWhenLeave(onSubmitWhenLeave);
   return (
     <div className={className}>
       <form
@@ -50,6 +49,7 @@ const AddTaskForm = ({ taskId, className }) => {
         <TextAreaAdapter
           description={description}
           setDescription={onTextAreaChange}
+          id={taskId}
         />
 
         <Button

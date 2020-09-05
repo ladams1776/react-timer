@@ -22,7 +22,7 @@ const Task = ({ _id, description, contractId, selectedId }) => {
             onDispatchWhenLeave();
             sessionStorage.setItem('LOCATION', `/task/${_id}`);
             push(`/task/${_id}`);
-            window.location.reload();
+            // window.location.reload(); // need to reload, cuz of TextArea.
           }}
         >
           <div

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-const TextAreaAdapter = ({ description, setDescription }) => {
+const TextAreaAdapter = ({ description, setDescription, id }) => {
   const toolbar = 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help';
   return (
     <Editor
+      key={id}
       initialValue={description}
       id="description"
       name="description"
