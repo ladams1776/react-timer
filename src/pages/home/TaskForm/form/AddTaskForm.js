@@ -1,5 +1,4 @@
 import React from 'react';
-import { useBackButtonListener, useSetCurrentLocation } from 'hooks';
 import { TextAreaAdapter, Button } from 'components';
 import {
   useFetchTaskById,
@@ -14,8 +13,6 @@ import styles from './TaskForm.module.css';
 import useTaskEditContext from '../../hooks/useTaskEditContext';
 
 const AddTaskForm = ({ taskId, className }) => {
-  useSetCurrentLocation(`/task/${taskId}`);
-  // useBackButtonListener(); - do we want this anymore?
   const {
     state,
     dispatch,

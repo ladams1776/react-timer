@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
+import { useSetCurrentLocation } from 'hooks';
 import TagContextProvider from './TaskForm/contexts/TagContext';
 import TimeContextProvider from './TaskForm/contexts/TimeContext';
 import AddTaskForm from './TaskForm/form/AddTaskForm';
@@ -10,6 +11,7 @@ import styles from './CreateOrEditTaskPage.module.css';
 
 const CreateOrEditTaskPage = ({ match }) => {
   const taskId = match?.params?.id;
+  useSetCurrentLocation(`/task/${taskId}`);
   const [tasks, setTasks] = useState([]);
   useFetchAllTasks(setTasks);
 
@@ -17,7 +19,6 @@ const CreateOrEditTaskPage = ({ match }) => {
     <TagContextProvider>
       <TimeContextProvider>
         <div className={styles.container}>
-          {/* Need to make a leftInnerContainer */}
           <div className={styles.navBarInnerContainer}>
             <ControlButtons tasks={tasks} />
           </div>
