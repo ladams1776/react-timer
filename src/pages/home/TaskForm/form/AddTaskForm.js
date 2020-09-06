@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { TextAreaAdapter, Button } from 'components';
 import {
   useFetchTaskById,
@@ -9,8 +10,8 @@ import {
 import Timer from '../timer/Timer';
 import ProjectDropDown from '../projectDropdown/ProjectDropdown';
 import TagMultiSelect from '../tagMultiSelect/TagMultiSelect';
+import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
 import styles from './TaskForm.module.css';
-import useTaskEditContext from '../../hooks/useTaskEditContext';
 
 const AddTaskForm = ({ taskId, className }) => {
   const {
@@ -57,5 +58,10 @@ const AddTaskForm = ({ taskId, className }) => {
     </div>
   );
 };
+
+AddTaskForm.propTypes = {
+  taskId: PropTypes.string,
+  className: PropTypes.string
+}
 
 export default AddTaskForm;
