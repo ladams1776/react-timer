@@ -6,11 +6,11 @@ import {
   useTagContext,
   useFetchTags,
   useSubmit,
-} from '../hooks';
-import Timer from '../timer/Timer';
-import ProjectDropDown from '../projectDropdown/ProjectDropdown';
-import TagMultiSelect from '../tagMultiSelect/TagMultiSelect';
+} from 'pages/home/TaskForm/hooks';
 import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
+import ProjectDropDown from 'pages/home/TaskForm/projectDropdown/ProjectDropdown';
+import TagMultiSelect from 'pages/home/TaskForm/tagMultiSelect/TagMultiSelect';
+import Timer from 'pages/home/TaskForm/timer/Timer';
 import styles from './TaskForm.module.css';
 
 const AddTaskForm = ({ taskId, className }) => {
