@@ -1,12 +1,13 @@
 import React from 'react';
-import cn from 'classnames';
 import PropType from 'prop-types';
+import cn from 'classnames';
+import { fetchApiData } from 'utils';
 import { useBrowserHistory, useGetProjectOptionLabel } from 'hooks';
 import DeleteTaskButton from './DeleteTaskButton/DeleteTaskButton';
-import styles from './Task.module.css';
 import useUpdateWhenLeave from '../../TaskForm/hooks/useSubmit/useUpdateWhenLeave';
+import styles from './Task.module.css';
 
-const Task = ({ _id, description, contractId, selectedId }) => {
+const Task = ({ _id, description, contractId, selectedId, setTasks }) => {
   const { push } = useBrowserHistory();
   const title = description?.split("\n")[0];
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
@@ -22,7 +23,7 @@ const Task = ({ _id, description, contractId, selectedId }) => {
             onDispatchWhenLeave();
             sessionStorage.setItem('LOCATION', `/task/${_id}`);
             push(`/task/${_id}`);
-            // window.location.reload(); // need to reload, cuz of TextArea.
+            fetchApiData('tasks', {}, setTasks);
           }}
         >
           <div
