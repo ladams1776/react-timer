@@ -23,7 +23,7 @@ const CreateOrEditTaskPage = ({ match }) => {
             <ControlButtons tasks={tasks} />
           </div>
           <div className={styles.mainInnerContainer}>
-            <TaskListView taskId={taskId} tasks={tasks}
+            <TaskListView taskId={taskId} tasks={tasks} setTasks={setTasks}
               className={cn(styles.listView, { [styles.listViewAndTask]: taskId })} />
             {taskId !== undefined
               ? <AddTaskForm taskId={taskId} className={styles.form} />
