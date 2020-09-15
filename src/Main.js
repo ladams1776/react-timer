@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, HashRouter } from 'react-router-dom';
+import LoadinSpinnerContextProvider from 'contexts/LoadinSpinnerContext';
+import FlashMessageContextProvider from 'contexts/FlashMessageContext';
+import TaskEditFormContextProvider from 'pages/home/contexts/TaskEditFormContext';
 import { LoadinSpinner, FlashMessage } from 'components';
-import TagPage from './pages/tags/TagPage';
+import TagPage from 'pages/tags/TagPage';
 import CreateOrEditTaskPage from 'pages/home/CreateOrEditTaskPage';
-import TaskEditFormContextProvider from './pages/home/hooks/TaskEditFormContext';
-import LoadinSpinnerContextProvider from './contexts/LoadinSpinnerContext';
-import FlashMessageContextProvider from './contexts/FlashMessageContext';
 import './Main.css';
 
 const Main = () => {

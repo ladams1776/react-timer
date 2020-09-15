@@ -1,28 +1,26 @@
 import React from 'react';
-import { useBackButtonListener, useSetCurrentLocation } from 'hooks';
-import { TextAreaAdapter } from 'components';
+import PropTypes from "prop-types";
+import { TextAreaAdapter, Button } from 'components';
 import {
   useFetchTaskById,
   useTagContext,
   useFetchTags,
   useSubmit,
-  useFormReducer,
-} from '../hooks';
-import Timer from '../timer/Timer';
-import ProjectDropDown from '../projectDropdown/ProjectDropdown';
-import TagMultiSelect from '../tagMultiSelect/TagMultiSelect';
+} from 'pages/home/TaskForm/hooks';
+import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
+import ProjectDropDown from 'pages/home/TaskForm/projectDropdown/ProjectDropdown';
+import TagMultiSelect from 'pages/home/TaskForm/tagMultiSelect/TagMultiSelect';
+import Timer from 'pages/home/TaskForm/timer/Timer';
 import styles from './TaskForm.module.css';
 
 const AddTaskForm = ({ taskId, className }) => {
-  useSetCurrentLocation(`/task/${taskId}`);
-  useBackButtonListener();
-  const [
+  const {
     state,
     dispatch,
-    onProjectChange,
-    onTextChange,
+    onProjectDropDownChange,
+    onTextAreaChange,
     onTagChange,
-  ] = useFormReducer();
+  } = useTaskEditContext();
 
   useFetchTaskById(taskId, dispatch);
 
@@ -31,7 +29,6 @@ const AddTaskForm = ({ taskId, className }) => {
   const { allTags } = useTagContext();
   const onSubmit = useSubmit(state, allTags, dispatch);
   const { description, tags, project } = state;
-
   return (
     <div className={className}>
       <form
@@ -40,25 +37,31 @@ const AddTaskForm = ({ taskId, className }) => {
         data-test-id="form"
       >
         <Timer />
-        <ProjectDropDown value={project} onChange={onProjectChange} />
+        <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
         <TagMultiSelect tags={tags} onChange={onTagChange} />
 
         <TextAreaAdapter
           description={description}
-          setDescription={onTextChange}
+          setDescription={onTextAreaChange}
+          id={taskId}
         />
 
-        <button
+        <Button
           type="submit"
           className={styles.submit}
           onClick={onSubmit}
           data-test-id="submit"
         >
           Submit
-          </button>
+        </Button>
       </form>
     </div>
   );
 };
+
+AddTaskForm.propTypes = {
+  taskId: PropTypes.string,
+  className: PropTypes.string
+}
 
 export default AddTaskForm;

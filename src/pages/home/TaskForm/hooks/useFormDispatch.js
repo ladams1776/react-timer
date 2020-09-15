@@ -16,7 +16,6 @@ const useFormDispatch = dispatch => {
 
     dispatch(data);
     push(`/task/${data._id}`);
-    window.location.reload();
   };
 };
 

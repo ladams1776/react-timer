@@ -2,13 +2,9 @@
 .buttonAdd:hover {
   background-color: rgb(237, 160, 62);
   color: white;
-  border: none;
-  text-decoration: none;
-  text-align: center;
   width: 45px;
   height: 40px;
   margin: 4px 5px;
-  border-radius: 4px;
 }
 
 .buttonAdd:hover {

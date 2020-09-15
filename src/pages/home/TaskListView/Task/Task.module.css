@@ -2,10 +2,6 @@ li {
   list-style: none;
 }
 
-.block {
-  display: block;
-}
-
 .taskContainer {
   display: flex;
   flex-direction: column;
@@ -18,7 +14,6 @@ li {
 .taskItem {
   height: 75px;
   list-style: none;
-  display: -webkit-flex;
   display: flex;
   text-decoration: none;
   font-size: 12px;
@@ -28,11 +23,15 @@ li {
   background-color: rgb(200, 200, 200);
 }
 
+.borderContainer {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .underBorder {
   width: 80%;
   background-color: rgb(200, 200, 200);
   height: 1px;
-  margin: 0 auto;
 }
 
 .underBorderSelected {

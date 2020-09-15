@@ -1,15 +1,18 @@
 import React from 'react';
-import cn from 'classnames';
 import PropType from 'prop-types';
+import cn from 'classnames';
+import { fetchApiData } from 'utils';
 import { useBrowserHistory, useGetProjectOptionLabel } from 'hooks';
 import DeleteTaskButton from './DeleteTaskButton/DeleteTaskButton';
+import useUpdateWhenLeave from '../../TaskForm/hooks/useSubmit/useUpdateWhenLeave';
 import styles from './Task.module.css';
 
-const Task = ({ _id, description = '', contractId, selectedId }) => {
+const Task = ({ _id, description, contractId, selectedId, setTasks }) => {
   const { push } = useBrowserHistory();
   const title = description?.split("\n")[0];
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
   const isSelected = selectedId === _id;
+  const onDispatchWhenLeave = useUpdateWhenLeave();
 
   return (
     <div className={styles.taskContainer}>
@@ -17,9 +20,10 @@ const Task = ({ _id, description = '', contractId, selectedId }) => {
         <div
           className={styles.taskItemLeft}
           onClick={() => {
+            onDispatchWhenLeave();
             sessionStorage.setItem('LOCATION', `/task/${_id}`);
             push(`/task/${_id}`);
-            window.location.reload();
+            fetchApiData('tasks', {}, setTasks);
           }}
         >
           <div
@@ -30,7 +34,9 @@ const Task = ({ _id, description = '', contractId, selectedId }) => {
         </div>
         <DeleteTaskButton taskId={_id} isSelected={isSelected} />
       </div>
-      <div className={cn(styles.underBorder, { [styles.underBorderSelected]: isSelected })} />
+      <div className={styles.borderContainer}>
+        <div className={cn(styles.underBorder, { [styles.underBorderSelected]: isSelected })} />
+      </div>
     </div >
   );
 };
