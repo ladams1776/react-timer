@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
+const fileupload = require("express-fileupload");
 const Task = require('./infrastructure/models/Task');
 const Tag = require('./infrastructure/models/Tag');
 const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
@@ -16,6 +17,7 @@ const addTagAction = require('./application/requestHandlers/tags/addTagAction');
 const editTagAction = require('./application/requestHandlers/tags/editTagAction');
 const getTagByIdAction = require('./application/requestHandlers/tags/getTagByIdAction');
 const addTaskAction = require('./application/requestHandlers/tasks/addTaskAction');
+const importAction = require('./application/requestHandlers/tasks/importAction');
 const { time } = require('console');
 const deleteTaskByIdAction = require('./application/requestHandlers/tasks/deleteTaskByIdAction');
 const deleteAllTaskAction = require('./application/requestHandlers/tasks/deleteAllTaskAction');
@@ -75,9 +77,18 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.json({
+  extended: true,
+  inflate: true,
+  limit: '100kb',
+  parameterLimit: 1000,
+  type: 'application/x-www-form-urlencoded',
+  verify: undefined
+}));
+
+app.use(fileupload());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 // TASKS
 app.get('/api/tasks', getAllTasksAction);
 app.get('/api/task/:id', getTaskByIdAction);
@@ -85,6 +96,9 @@ app.post('/api/task/', addTaskAction);
 app.put('/api/task', updateTaskAction);
 app.delete('/api/task/:id', deleteTaskByIdAction);
 app.delete('/api/tasks', deleteAllTaskAction);
+
+// IMPORT
+app.post('/api/import', importAction);
 
 // TAGS
 app.get('/api/tags', getAllTagsAction);
