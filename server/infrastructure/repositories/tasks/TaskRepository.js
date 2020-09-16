@@ -4,7 +4,6 @@ const hydrate = require('../../hydrators/hydrate');
 const TaskRepository = {
   fetchAllTask: () => Task.find({}, hydrate),
   fetchTaskById: async (taskId, callback) => {
-    console.log('the id: ', taskId)
     if (taskId == undefined) {
       callback('');
     } else {
@@ -20,8 +19,6 @@ const TaskRepository = {
         .map(a => parseInt(a.time))
         .reduce((a, b) => a + b);
 
-
-      console.log('task we are sending back: ', task);
       callback(task);
     }
   },
