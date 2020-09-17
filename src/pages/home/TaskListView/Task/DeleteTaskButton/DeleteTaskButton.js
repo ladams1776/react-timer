@@ -15,6 +15,7 @@ const DeleteTaskButton = ({ taskId, isSelected }) => {
     const reload = data => {
       dispatch(data);
       push(`task/-1`);
+      window.location.reload();
     };
 
     if (isDeleting) {
