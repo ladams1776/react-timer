@@ -12,11 +12,13 @@
 .mainInnerContainer {
   display: flex;
   flex-direction: row;
+  height: 565px;
 }
 
 .listView {
   overflow-y: scroll;
   min-width: 200px;
+  height: 100%;
 }
 
 @media only screen and (max-width: 900px) {
