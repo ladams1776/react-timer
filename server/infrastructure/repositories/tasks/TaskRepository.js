@@ -13,7 +13,7 @@ const TaskRepository = {
       task.description = doc.description;
       task.tags = doc.tags;
       task.date = doc.date;
-      task.contractId = doc.contractId;
+      task.contractId = doc.contractId || '';
 
       task.time = doc.time
         .map(a => parseInt(a.time))
