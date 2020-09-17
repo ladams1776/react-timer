@@ -6,8 +6,8 @@ const TextAreaAdapter = ({ description, setDescription, id }) => {
   return (
     <Editor
       key={id}
-      initialValue={description}
-      id="description"
+      value={description}
+      id={id}
       name="description"
       data-test-id="text-area-adapter"
       init={{
