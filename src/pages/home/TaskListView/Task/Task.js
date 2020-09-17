@@ -24,6 +24,7 @@ const Task = ({ _id, description, contractId, selectedId, setTasks }) => {
             sessionStorage.setItem('LOCATION', `/task/${_id}`);
             push(`/task/${_id}`);
             fetchApiData('tasks', {}, setTasks);
+            // window.location.reload();
           }}
         >
           <div
