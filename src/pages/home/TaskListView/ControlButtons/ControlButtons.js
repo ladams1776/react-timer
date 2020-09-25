@@ -4,13 +4,17 @@ import NewButton from './NewButton/NewButton';
 import styles from './ControlButtons.module.css';
 import HomeButton from './HomeButton/HomeButton';
 import ImportButton from './ImportButton/ImportButton';
+import DropZone from './DropZone/DropZone';
+import UploadButton from './UploadButton/UploadButton';
 
 const ControlButtons = tasks => {
   return <div className={styles.controlButtons} data-test-id="control-buttons">
     <HomeButton />
     <DownloadButton tasks={tasks} />
-    <ImportButton />
+    <UploadButton />
+    {/* <ImportButton /> */}
     <NewButton />
+    {/* <DropZone /> */}
   </div>
 };
 
