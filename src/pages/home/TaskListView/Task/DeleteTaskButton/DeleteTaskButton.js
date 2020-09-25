@@ -14,8 +14,7 @@ const DeleteTaskButton = ({ taskId, isSelected }) => {
     const isDeleting = window.confirm("Are you sure you want to delete task?");
     const reload = data => {
       dispatch(data);
-      push(`task/-1`);
-      window.location.reload();
+      push('task/-1');
     };
 
     if (isDeleting) {
