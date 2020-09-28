@@ -9,6 +9,7 @@ const NewButton = () => {
   const { push } = useBrowserHistory();
 
   return <Button className={styles.buttonAdd} data-test-id="btn-new"
+    title="New Task"
     onClick={() => {
       const initialTask = {
         id: -1,
