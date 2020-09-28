@@ -16,6 +16,7 @@ const TimerButtons = ({ time, setTime, isActive = false, setIsActive, children }
         <div className="container-fluid">
             <div className={styles.navbarHeader}>
                 <Button
+                    title="Reset"
                     className={cn(styles.timerReset)}
                     data-test-id="timerReset"
                     onClick={reset}
@@ -25,6 +26,7 @@ const TimerButtons = ({ time, setTime, isActive = false, setIsActive, children }
 
                 {isActive && (
                     <Button className={styles.timerStop}
+                        title="Stop"
                         data-test-id="timerStop"
                         onClick={toggle}>
                         <span className={cn(styles.stopIcon, "glyphicon glyphicon-pause")} />
@@ -33,6 +35,7 @@ const TimerButtons = ({ time, setTime, isActive = false, setIsActive, children }
 
                 {time !== 0 && !isActive && (
                     <Button className={styles.timerResume}
+                        title="Resume"
                         onClick={toggle}>
                         <span className={cn(styles.stopIcon, "glyphicon glyphicon-play")} />
                     </Button>
@@ -40,6 +43,7 @@ const TimerButtons = ({ time, setTime, isActive = false, setIsActive, children }
 
                 {time === 0 && !isActive && (
                     <Button className={styles.timerResume}
+                        title="Start"
                         onClick={toggle}>
                         <span className={cn(styles.stopIcon, "glyphicon glyphicon-play")} />
                     </Button>
