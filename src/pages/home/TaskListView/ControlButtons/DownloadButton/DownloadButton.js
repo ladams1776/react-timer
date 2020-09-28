@@ -15,6 +15,7 @@ const DownloadButton = tasks => {
         <>
             {tasks.length || (
                 <Button
+                    title="Download Tasks"
                     type="a"
                     className={styles.buttonDownload}
                     onClick={handleDownload}
