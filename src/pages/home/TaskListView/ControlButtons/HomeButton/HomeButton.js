@@ -7,6 +7,7 @@ import styles from './HomeButton.module.css';
 const HomeButton = () => {
     const { push } = useBrowserHistory();
     return <Button className={cn(styles.buttonAdd, "glyphicon glyphicon-home")}
+    title="Tags"
         onClick={() => {
             sessionStorage.setItem('LOCATION', '/tag/-1');
             push("/tag/-1");
