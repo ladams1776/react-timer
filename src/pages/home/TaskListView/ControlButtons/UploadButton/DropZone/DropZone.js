@@ -7,7 +7,7 @@ import styles from './DropZone.module.css'
 
 const DropZone = ({ className, onClick }) => {
     const { setSuccessFlashMessage } = useFlashMessageContext();
-    const { push} = useBrowserHistory();
+    const { push } = useBrowserHistory();
     const onDrop = useCallback(acceptedFiles => {
         const reader = new FileReader()
 
@@ -16,8 +16,8 @@ const DropZone = ({ className, onClick }) => {
         reader.onerror = () => console.log('file reading has failed')
         reader.onload = () => {
             const binaryStr = JSON.parse(reader.result);
-            fetchApiData('import', { body: binaryStr, method: 'POST' }, () => { 
-                onClick(); 
+            fetchApiData('import', { body: binaryStr, method: 'POST' }, () => {
+                onClick();
                 setSuccessFlashMessage('Successfully Saved');
                 push("/task/-1");
             });
@@ -27,7 +27,9 @@ const DropZone = ({ className, onClick }) => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return (<div className={className}>
-        <button onClick={() => onClick()} className={styles.exitButton}>X</button>
+        <div className={styles.deleteContainer}>
+            <button onClick={() => onClick()} title="close" className={styles.exitButton}>X</button>
+        </div>
         <div {...getRootProps()} className={styles.container}>
             <input {...getInputProps()} className={styles.innerContainer} />
             {

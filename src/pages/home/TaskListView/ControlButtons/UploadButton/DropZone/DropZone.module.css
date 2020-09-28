@@ -1,5 +1,4 @@
 .dropText {
-  
   margin: auto;
   text-align: center;
 }
@@ -8,6 +7,12 @@
   width: 20px;
   background-color: rgba(200, 200, 200, 0.1);
   border: none;
+}
+
+.deleteContainer {
+  display: flex;
+  justify-content: end;
+  height: 30px;
 }
 
 .innerContainer {
