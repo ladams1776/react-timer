@@ -7,7 +7,7 @@ const UploadButton = () => {
     const [isModalShowing, setIsModalShowing] = useState(false);
 
     return (<>
-        <button className={cn(styles.uploadButton, "glyphicon glyphicon-arrow-up mr-5px")} onClick={setIsModalShowing} />
+        <button className={cn(styles.uploadButton, "glyphicon glyphicon-arrow-up mr-5px")} onClick={setIsModalShowing}  title="Upload File"/>
         <UploadModal isShowing={isModalShowing} setIsShowing={setIsModalShowing} />
     </>);
 };
