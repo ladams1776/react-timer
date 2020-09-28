@@ -51,6 +51,7 @@ const AddTaskForm = ({ taskId, className }) => {
           className={styles.submit}
           onClick={onSubmit}
           data-test-id="submit"
+          title="Submit"
         >
           Submit
         </Button>
