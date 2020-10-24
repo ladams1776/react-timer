@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import cn from 'classnames';
 import { TextAreaAdapter, Button } from 'components';
 import {
   useFetchTaskById,
@@ -12,12 +11,8 @@ import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
 import ProjectDropDown from 'pages/home/TaskForm/projectDropdown/ProjectDropdown';
 import TagMultiSelect from 'pages/home/TaskForm/tagMultiSelect/TagMultiSelect';
 import Timer from 'pages/home/TaskForm/timer/Timer';
+import DateTimeButton from 'pages/home/TaskForm/dateTimeDetail/DateTimeButton';
 import styles from './TaskForm.module.css';
-
-
-const onClickTimer = e => {
-
-};
 
 const AddTaskForm = ({ taskId, className }) => {
   const {
@@ -29,12 +24,11 @@ const AddTaskForm = ({ taskId, className }) => {
   } = useTaskEditContext();
 
   useFetchTaskById(taskId, dispatch);
-
-  // Tag Stuff
   useFetchTags();
   const { allTags } = useTagContext();
   const onSubmit = useSubmit(state, allTags, dispatch);
   const { description, tags, project, dateTime } = state;
+
   return (
     <div className={className}>
       <form
@@ -45,16 +39,7 @@ const AddTaskForm = ({ taskId, className }) => {
         <Timer />
         <div className={"timeInfoContainer"}>
           <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
-          <div className={cn("timeInfo", "glyphicon glyphicon-time")} onClick={onClickTimer}>
-            
-          </div>
-          {dateTime.map(dT => {
-            return (
-              <>
-                <div>{dT.date}</div>
-                <div>{dT.time}</div>
-              </>);
-          })}
+          <DateTimeButton dateTime={dateTime}/>
         </div>
         <TagMultiSelect tags={tags} onChange={onTagChange} />
         <TextAreaAdapter
