@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import cn from 'classnames';
 import { TextAreaAdapter, Button } from 'components';
 import {
   useFetchTaskById,
@@ -37,9 +38,11 @@ const AddTaskForm = ({ taskId, className }) => {
         data-test-id="form"
       >
         <Timer />
-        <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
+        <div className={"timeInfoContainer"}>
+          <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
+          <div className={cn("timeInfo", "glyphicon glyphicon-time")}></div>
+        </div>
         <TagMultiSelect tags={tags} onChange={onTagChange} />
-
         <TextAreaAdapter
           description={description}
           setDescription={onTextAreaChange}
