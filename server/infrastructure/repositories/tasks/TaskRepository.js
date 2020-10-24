@@ -35,12 +35,11 @@ const TaskRepository = {
 };
 
 const millisToMinutesAndSeconds = (millis) => {
-  const hours = Math.floor((millis / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor(millis / 60000);
   const seconds = ((millis % 60000) / 1000).toFixed(0);
   //ES6 interpolated literals/template literals 
   //If seconds is less than 10 put a zero in front.
-  return `${hours}:${minutes}:${(seconds < 10 ? "0" : "")}${seconds}`;
+  return `${minutes}:${(seconds < 10 ? "0" : "")}${seconds}`;
 }
 
 module.exports = TaskRepository;
