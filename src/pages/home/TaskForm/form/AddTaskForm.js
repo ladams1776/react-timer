@@ -14,6 +14,11 @@ import TagMultiSelect from 'pages/home/TaskForm/tagMultiSelect/TagMultiSelect';
 import Timer from 'pages/home/TaskForm/timer/Timer';
 import styles from './TaskForm.module.css';
 
+
+const onClickTimer = e => {
+
+};
+
 const AddTaskForm = ({ taskId, className }) => {
   const {
     state,
@@ -29,7 +34,7 @@ const AddTaskForm = ({ taskId, className }) => {
   useFetchTags();
   const { allTags } = useTagContext();
   const onSubmit = useSubmit(state, allTags, dispatch);
-  const { description, tags, project } = state;
+  const { description, tags, project, dateTime } = state;
   return (
     <div className={className}>
       <form
@@ -40,7 +45,16 @@ const AddTaskForm = ({ taskId, className }) => {
         <Timer />
         <div className={"timeInfoContainer"}>
           <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
-          <div className={cn("timeInfo", "glyphicon glyphicon-time")}></div>
+          <div className={cn("timeInfo", "glyphicon glyphicon-time")} onClick={onClickTimer}>
+            
+          </div>
+          {dateTime.map(dT => {
+            return (
+              <>
+                <div>{dT.date}</div>
+                <div>{dT.time}</div>
+              </>);
+          })}
         </div>
         <TagMultiSelect tags={tags} onChange={onTagChange} />
         <TextAreaAdapter

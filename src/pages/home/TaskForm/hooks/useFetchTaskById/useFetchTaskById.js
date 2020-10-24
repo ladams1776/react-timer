@@ -17,6 +17,7 @@ const useFetchTaskById = (taskId, dispatch) => {
         tags: data.tags,
         description: data.description,
         time: data.time,
+        dateTime: data.dateTime,
       };
       setIsLoadin(false);
       setTime(data.time);
