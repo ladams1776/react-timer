@@ -2,18 +2,6 @@
   display: flex;
 }
 
-.backButton {
-  display: flex;
-  text-align: center;
-  height: 50px;
-  width: 50px;
-  cursor: pointer;
-}
-
-.backButtonIcon {
-  margin: auto;
-}
-
 .timerButtons {
   display: flex;
   background: #d8d8d8b3;
