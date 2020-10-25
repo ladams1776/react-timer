@@ -2,4 +2,9 @@
   font-size: 25px;
   margin-left: 20px;
   vertical-align: middle;
+  color: rgb(150, 150, 150);
+}
+
+.dateTimeButton:hover {
+  color:rgb(0,0,0);
 }
