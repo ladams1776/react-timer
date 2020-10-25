@@ -1,3 +1,7 @@
 .dropDown {
-    display:inline
+  display: inline;
+}
+
+.dropDown > select {
+  height: 35px;
 }

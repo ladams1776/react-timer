@@ -37,11 +37,17 @@ const AddTaskForm = ({ taskId, className }) => {
         data-test-id="form"
       >
         <Timer />
-        <div className={"timeInfoContainer"}>
-          <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
-          <DateTimeButton dateTime={dateTime}/>
+
+        <div className={styles.timeInfoContainer}>
+          <div className={styles.innerLeft}>
+            <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
+            <DateTimeButton dateTime={dateTime} />
+          </div>
+          <div className={styles.innerRight}>
+            <TagMultiSelect tags={tags} onChange={onTagChange} />
+          </div>
         </div>
-        <TagMultiSelect tags={tags} onChange={onTagChange} />
+
         <TextAreaAdapter
           description={description}
           setDescription={onTextAreaChange}
