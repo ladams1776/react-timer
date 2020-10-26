@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import cn from 'classnames';
 import { useSetCurrentLocation } from 'hooks';
 import TagContextProvider from './TaskForm/contexts/TagContext';
@@ -15,6 +15,14 @@ const CreateOrEditTaskPage = ({ match }) => {
   const [tasks, setTasks] = useState([]);
   useFetchAllTasks(setTasks);
 
+  const refs = useMemo(() => tasks.reduce((acc, value) => {
+    console.log('task', value);
+    acc[value._id] = React.createRef();
+    return acc;
+  }, {}), [tasks]);
+
+// const refs = [];
+
   return (
     <TagContextProvider>
       <TimeContextProvider>
@@ -23,12 +31,11 @@ const CreateOrEditTaskPage = ({ match }) => {
             <ControlButtons tasks={tasks} />
           </div>
           <div className={styles.mainInnerContainer}>
-            <TaskListView taskId={taskId} tasks={tasks} setTasks={setTasks}
+            <TaskListView taskId={taskId} tasks={tasks} setTasks={setTasks} refs={refs}
               className={cn(styles.listView, { [styles.listViewAndTask]: taskId })} />
             {taskId !== undefined
               ? <AddTaskForm taskId={taskId} className={styles.form} />
               : <div className={styles.form}></div>}
-
           </div>
         </div>
       </TimeContextProvider>
