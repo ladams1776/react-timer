@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect } from 'react';
 import cn from 'classnames';
 import Task from './Task/Task';
 import PropTypes from 'prop-types';
