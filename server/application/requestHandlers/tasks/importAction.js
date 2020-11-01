@@ -1,29 +1,42 @@
 const Task = require("../../../infrastructure/models/Task");
 const TagService = require("../../../domain/services/tags/TagService");
+const hydrateAndResponse = require("../../../infrastructure/hydrators/hydrateAndResponse");
 
-//@TODO: Clean this up
+
+const doesTagExist = (tag) => {
+    const getTag = (items) => items.items;
+    if (TagService.fetchTagById(tag._id, getTag).error) {
+        return false;
+    }
+
+    return true;
+};
+
+
+const assembleTask = (task) => {
+    const saveableTask = new Task();
+
+    saveableTask.toObject();
+    saveableTask.time = task.time;
+    saveableTask.contractId = task.contractId;
+    saveableTask.description = task.description;
+    saveableTask.date = task.date;
+    saveableTask.tags = task.tags;
+
+    return saveableTask;
+};
+
+
 module.exports = (req, res) => {
-    console.log('yum yum');
-    [...req.body.WorkUnit[0].tasks.tasks].map(task => {
-        console.log('task is: ', task?.tags);
-
-        
-        task?.tags.map(tag => {
-            const getTag = (items) => items.items;
-            const storedTag = TagService.fetchTagById(tag._id, getTag);
-            if (storedTag.error) TagService.addTag(tag, getTag);
+    [...req.body.WorkUnit[0].tasks.tasks].map(taskDto => {
+        taskDto?.tags.map(tag => {
+            if (!doesTagExist(tag)) {
+                TagService.addTag(tag, getTag);
+            }
         });
 
-        let saveableTask = new Task();
-        saveableTask.toObject();
-        saveableTask.time = task.time;
-        saveableTask.contractId = task.contractId;
-        saveableTask.description = task.description;
-        saveableTask.date = task.date;
-        saveableTask.tags = task.tags;
-        return saveableTask.save((err, task) => {
-            if (err) throw err;
-        });
+        const saveableTask = assembleTask(taskDto);
+        return saveableTask.save(hydrateAndResponse);
     });
 
     res.jsonp({ ok: true });
