@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { fetchApiData, getFormattedDate } from 'utils';
+import { fetchApiData } from 'utils';
 import { useTimeContext } from '..';
 import hydrateTaskForm from './hydrateTaskForm';
 import { useTagContext } from '../'
@@ -16,11 +16,11 @@ const useUpdateWhenLeave = () => {
 
     const onSubmit = useCallback(() => {
         const location = sessionStorage.getItem('LOCATION');
-        const dateFormatted = getFormattedDate(new Date());
+
         const dispatch = () => { };
         const payload = {
             project: state.project,
-            dateFormatted,
+            dateFormatted: new Date(),
             time,
             tagSelectedOption: state.tags,
             description: state.description,
@@ -40,8 +40,6 @@ const useUpdateWhenLeave = () => {
         }
 
     }, [allTags, state, time]);
-
-
 
     return onSubmit
 };
