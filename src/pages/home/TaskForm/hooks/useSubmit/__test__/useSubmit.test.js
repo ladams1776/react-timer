@@ -1,11 +1,11 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { fetchApiData, getFormattedDate } from 'utils';
+import { fetchApiData } from 'utils';
 import { useTagContext, useTimeContext, useFormDispatch } from '../..';
 import hydrateTaskForm from '../hydrateTaskForm';
 import useSubmit from '../useSubmit';
 
 jest.mock('utils/api/fetchApiData/fetchApiData');
-jest.mock('utils/formatters/getFormattedDate');
+jest.mock('utils/formatters/getCurrentDateTimeEstFormat');
 jest.mock('../../useTimeContext');
 jest.mock('../../useTagContext');
 jest.mock('../../useFormDispatch');
@@ -32,7 +32,7 @@ describe('src/pages/createOrEditTask/hooks/__test__/useSubmit.test.js', () => {
     };
     const expected = {
       project: state.project,
-      dateFormatted: getFormattedDate(new Date()),
+      dateFormatted: new Date(),
       time: timeContextMock.time,
       tagSelectedOption: state.tags,
       description: state.description,
@@ -54,14 +54,15 @@ describe('src/pages/createOrEditTask/hooks/__test__/useSubmit.test.js', () => {
     it('should fetchApiData with all the necessary pieces, and a method with PUT, when event has an id.', () => {
       // Arrange
       const expectedMethod = 'PUT';
-
+      
       // Act
       const { result } = renderHook(() =>
-        useSubmit(state, state.tags, dispatchSpy),
+      useSubmit(state, state.tags, dispatchSpy),
       );
       result.current();
-
+      
       // Assert
+      expected.dateFormatted = new Date();
       expect(hydrateTaskForm).toHaveBeenNthCalledWith(
         1,
         state,
@@ -89,6 +90,7 @@ describe('src/pages/createOrEditTask/hooks/__test__/useSubmit.test.js', () => {
       result.current();
 
       // Assert
+      expected.dateFormatted = new Date();
       expect(hydrateTaskForm).toHaveBeenNthCalledWith(
         1,
         state,
