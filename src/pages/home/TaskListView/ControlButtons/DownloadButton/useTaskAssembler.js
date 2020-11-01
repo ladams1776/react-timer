@@ -1,4 +1,4 @@
-import { getFormattedDate } from 'utils';
+import { getCurrentDateTimeEstFormat } from 'utils';
 import { useFetchProjectOptions } from 'hooks';
 import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 
@@ -6,7 +6,7 @@ import formatTimeContractAndCustomer from './formatTimeContractAndCustomer';
 const useTaskAssembler = (...tasks) => {
     const projects = useFetchProjectOptions();
 
-    const dateFormatted = getFormattedDate(new Date());
+    const dateFormatted = getCurrentDateTimeEstFormat();
 
     const timeTask = {
         date: dateFormatted
