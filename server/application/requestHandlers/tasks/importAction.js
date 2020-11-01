@@ -4,13 +4,14 @@ const hydrateAndResponse = require("../../../infrastructure/hydrators/hydrateAnd
 
 
 const doesTagExist = (tag) => {
-    const getTag = (items) => items.items;
     if (TagService.fetchTagById(tag._id, getTag).error) {
         return false;
     }
 
     return true;
 };
+
+const getTag = (items) => items.items;
 
 
 const assembleTask = (task) => {
