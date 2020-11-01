@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { fetchApiData, getFormattedDate } from 'utils';
+import { fetchApiData, getCurrentDateTimeEstFormat } from 'utils';
 import { useTimeContext, useFormDispatch } from '..';
 import hydrateTaskForm from './hydrateTaskForm';
 
@@ -8,11 +8,11 @@ const useSubmit = (state, allTags, dispatch) => {
   const { time } = useTimeContext();
 
   const onSubmit = useCallback(() => {
-    const dateFormatted = getFormattedDate(new Date());
+    // const dateFormatted = getCurrentDateTimeEstFormat();
 
     const payload = {
       project: state.project,
-      dateFormatted,
+      dateFormatted: new Date(),
       time,
       tagSelectedOption: state.tags,
       description: state.description,
