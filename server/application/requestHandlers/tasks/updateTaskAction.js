@@ -17,7 +17,7 @@ module.exports = (req, res) => {
         if (timeOffset > 0) {
             doc.time = [
                 ...doc.time,
-                { date: new Date(), time: timeOffset }
+                { date: req.body.date, time: timeOffset }
             ];
         }
 
