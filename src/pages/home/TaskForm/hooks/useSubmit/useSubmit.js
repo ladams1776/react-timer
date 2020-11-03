@@ -8,11 +8,11 @@ const useSubmit = (state, allTags, dispatch) => {
   const { time } = useTimeContext();
 
   const onSubmit = useCallback(() => {
-    // const dateFormatted = getCurrentDateTimeEstFormat();
+    const dateFormatted = getCurrentDateTimeEstFormat();
 
     const payload = {
       project: state.project,
-      dateFormatted: new Date(),
+      dateFormatted: dateFormatted,
       time,
       tagSelectedOption: state.tags,
       description: state.description,

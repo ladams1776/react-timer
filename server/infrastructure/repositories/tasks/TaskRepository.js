@@ -21,9 +21,7 @@ const TaskRepository = {
 
       task.dateTime = doc.time
         .map(dateTime => {
-          const date = dateTime.date?.toISOString()
-            .replace(/T/, ' ')
-            .replace(/\..+/, '');
+          const date = dateTime.date;
 
           const time = millisToMinutesAndSeconds(dateTime.time);
           return { date, time };
