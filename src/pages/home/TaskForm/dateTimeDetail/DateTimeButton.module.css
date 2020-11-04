@@ -3,6 +3,7 @@
   margin-left: 20px;
   vertical-align: middle;
   color: rgb(150, 150, 150);
+  border-radius: 6px;
 }
 
 .dateTimeButton:hover {
