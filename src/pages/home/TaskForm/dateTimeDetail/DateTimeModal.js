@@ -6,7 +6,7 @@ import styles from './DateTimeModal.module.css'
 const DateTimeModal = ({ dateTime, setIsShowing }) => {
 
     const myTimezone = "America/New_York";
-    const myDatetimeFormat = "YYYY-MM-DD hh:mm:ss";
+    const myDatetimeFormat = "YYYY-MM-DD hh:mm:ss a";
 
     return <div className={styles.modal}>
         <div className={styles.modalContent}>
@@ -29,6 +29,5 @@ DateTimeModal.prototype = {
     dateTime: PropTypes.arrayOf(Object),
     setIsShowing: PropTypes.func,
 }
-
 
 export default DateTimeModal;
