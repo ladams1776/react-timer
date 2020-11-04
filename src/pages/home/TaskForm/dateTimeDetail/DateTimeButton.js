@@ -8,8 +8,9 @@ const DateTimeButton = ({ dateTime }) => {
     const [isShowing, setIsShowing] = useState(false);
 
     return <>
-        <div className={cn(styles.dateTimeButton, "glyphicon glyphicon-time")}
-            onClick={() => setIsShowing(!isShowing)}></div>
+        <button className={cn(styles.dateTimeButton, "glyphicon glyphicon-time")}
+            onClick={() => setIsShowing(!isShowing)}></button>
+
 
         {isShowing
             ? (<DateTimeModal dateTime={dateTime} setIsShowing={setIsShowing} />)
