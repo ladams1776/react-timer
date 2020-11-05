@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, renderHook } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import DateTimeButton from '../DateTimeButton';
 import DateTimeModal from '../DateTimeModal';
@@ -9,27 +9,29 @@ describe('src/pages/home/TaskForm/dateTimeDetail/__test__/DateTimeButton.test.js
         // Arrange
 
         // Act
-        render(<DateTimeButton dateTime={[{ date: '2020-10-29T03:25:30.167+00:00', time: '100' }]} />);
+        const target = render(<DateTimeButton dateTime={[{ date: '2020-10-29T03:25:30.167+00:00', time: '100' }]} />);
 
         // Assert
         expect(screen.getByRole("button")).toBeTruthy();
-        expect(screen.getByRole("DateTimeModal")).toBeFalsy();
+        expect(target.container.querySelector('.modalContent')).toBeFalsy();
     });
 
     describe("onClick", () => {
-        it('should, call setIsShowing and show DateTimeModal', () => {
+        // Arrange
+        const realUseState = React.useState;
+        jest.spyOn(React, 'useState')
+            .mockImplementationOnce(() => realUseState([]));
+
+        it('should show DateTimeModal', async () => {
             // Arrange
-            const setIsShowing = jest.fn();
-            jest.fn().mockImplementation('React', () => ({
-                useState: isShowing => [isShowing, setIsShowing]
-            }));
+            const expected = 'Date: 2020-10-28 11:25:30 pmMinutes: 100Close';
 
             // Act
-            render(<DateTimeButton dateTime={[{ date: '2020-10-29T03:25:30.167+00:00', time: '100' }]} />);
+            const target = render(<DateTimeButton dateTime={[{ date: '2020-10-29T03:25:30.167+00:00', time: '100' }]} />);
             fireEvent.click(screen.getByRole('button'));
 
             // Assert
-            expect(setIsShowing).toBeCalledWith(true);
+            expect(target.container.querySelector('.modalContent')).toHaveTextContent(expected)
         });
     });
 });
