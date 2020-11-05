@@ -3,15 +3,14 @@ import { Editor } from '@tinymce/tinymce-react';
 
 const TextAreaAdapter = ({ description, setDescription, id }) => {
   const toolbar = 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help';
-  return (
-    <Editor
+  return <Editor
       key={id}
       value={description}
       id={id}
       name="description"
       data-test-id="text-area-adapter"
       init={{
-        height: 400,
+        height: '60vh',
         menubar: true,
         plugins: [
           'advlist autolink lists link image charmap print preview anchor',
@@ -22,7 +21,6 @@ const TextAreaAdapter = ({ description, setDescription, id }) => {
       }}
       onEditorChange={setDescription}
     />
-  );
 };
 
 export default TextAreaAdapter;
