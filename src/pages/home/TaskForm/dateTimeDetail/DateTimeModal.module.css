@@ -29,6 +29,10 @@
   flex-direction: column;
 }
 
+.time {
+  width: 100%;
+}
+
 .closeButton {
   color: #aaa;
   float: right;

@@ -15,10 +15,14 @@ const DateTimeModal = ({ dateTimes, setIsShowing }) => {
                     .tz(myTimezone)
                     .format(myDatetimeFormat);
 
-                return (<div className={styles.content} key={dT.id}>
-                    <div className={styles.date}>Date: {myDatetimeString}</div>
-                    <div className={styles.time}>Minutes: {dT.time}</div>
-                </div>)
+                return (<form
+                    className={styles.taskForm}
+                    method='PUT'>
+                    <div className={styles.content} key={dT.id}>
+                        <div className={styles.date}>Date: {myDatetimeString}</div>
+                        <div className={styles.time}>Minutes: <input onChange={e => {}} value={dT.time} className={styles.time}/></div>
+                    </div>
+                </form>)
             })}
             <button className={styles.closeButton} onClick={() => setIsShowing(false)}>Close</button>
         </div>
