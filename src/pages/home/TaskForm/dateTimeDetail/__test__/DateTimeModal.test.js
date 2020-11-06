@@ -11,7 +11,7 @@ describe('src/pages/home/TaskForm/dateTimeDetail/__test__/DateTimeModal.test.js'
             const expected = 'Date: 2020-10-28 11:25:30 pmMinutes: 100Close';
 
             // Act
-            const target = render(<DateTimeModal dateTime={[{ date: '2020-10-29T03:25:30.167+00:00', time: '100' }]} setIsShowing={setIsShowingSpy} />);
+            const target = render(<DateTimeModal dateTimes={[{ date: '2020-10-29T03:25:30.167+00:00', time: '100', id: 'uniqueKey' }]} setIsShowing={setIsShowingSpy} />);
 
             // Assert
             expect(screen.getByRole('button')).toHaveTextContent('Close');
@@ -24,7 +24,7 @@ describe('src/pages/home/TaskForm/dateTimeDetail/__test__/DateTimeModal.test.js'
                 const setIsShowingSpy = jest.fn();
 
                 // Act
-                render(<DateTimeModal dateTime={[{ date: '2020-10-29T03:25:30.167+00:00', time: '100' }]} setIsShowing={setIsShowingSpy} />);
+                render(<DateTimeModal dateTimes={[{ date: '2020-10-29T03:25:30.167+00:00', time: '100', id: 'uniqueKey' }]} setIsShowing={setIsShowingSpy} />);
 
                 fireEvent.click(screen.getByText('Close'));
 
