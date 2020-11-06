@@ -27,7 +27,7 @@ const AddTaskForm = ({ taskId, className }) => {
   useFetchTags();
   const { allTags } = useTagContext();
   const onSubmit = useSubmit(state, allTags, dispatch);
-  const { description, tags, project, dateTime } = state;
+  const { description, tags, project, dateTimes} = state;
 
   return (
     <div className={className}>
@@ -41,7 +41,7 @@ const AddTaskForm = ({ taskId, className }) => {
         <div className={styles.timeInfoContainer}>
           <div className={styles.innerLeft}>
             <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
-            <DateTimeButton dateTime={dateTime} />
+            <DateTimeButton dateTimes={dateTimes} />
           </div>
           <div className={styles.innerRight}>
             <TagMultiSelect tags={tags} onChange={onTagChange} />
@@ -59,8 +59,7 @@ const AddTaskForm = ({ taskId, className }) => {
           className={styles.submit}
           onClick={onSubmit}
           data-test-id="submit"
-          title="Submit"
-        >
+          title="Submit">
           Submit
         </Button>
       </form>
