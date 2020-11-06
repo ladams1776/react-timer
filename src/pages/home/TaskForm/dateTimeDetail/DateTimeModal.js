@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import styles from './DateTimeModal.module.css'
 
-const DateTimeModal = ({ dateTime, setIsShowing }) => {
+const DateTimeModal = ({ dateTimes, setIsShowing }) => {
 
     const myTimezone = "America/New_York";
     const myDatetimeFormat = "YYYY-MM-DD hh:mm:ss a";
 
     return <div className={styles.modal}>
         <div className={styles.modalContent}>
-            {dateTime.map(dT => {
+            {dateTimes.map(dT => {
                 const myDatetimeString = moment(dT.date)
                     .tz(myTimezone)
                     .format(myDatetimeFormat);
 
-                return (<div className={styles.content} key={dT.date + dT.time}>
+                return (<div className={styles.content} key={dT.id}>
                     <div className={styles.date}>Date: {myDatetimeString}</div>
                     <div className={styles.time}>Minutes: {dT.time}</div>
                 </div>)
@@ -26,7 +26,7 @@ const DateTimeModal = ({ dateTime, setIsShowing }) => {
 };
 
 DateTimeModal.prototype = {
-    dateTime: PropTypes.arrayOf(Object),
+    dateTimes: PropTypes.arrayOf(Object),
     setIsShowing: PropTypes.func,
 }
 
