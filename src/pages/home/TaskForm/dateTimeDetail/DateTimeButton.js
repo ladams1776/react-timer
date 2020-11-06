@@ -4,7 +4,7 @@ import cn from 'classnames';
 import DateTimeModal from './DateTimeModal';
 import styles from './DateTimeButton.module.css';
 
-const DateTimeButton = ({ dateTime }) => {
+const DateTimeButton = ({ dateTimes }) => {
     const [isShowing, setIsShowing] = useState(false);
 
     return <>
@@ -13,14 +13,14 @@ const DateTimeButton = ({ dateTime }) => {
 
 
         {isShowing
-            ? (<DateTimeModal dateTime={dateTime} setIsShowing={setIsShowing} />)
+            ? (<DateTimeModal dateTimes={dateTimes} setIsShowing={setIsShowing} />)
             : []
         }
     </>
 };
 
 DateTimeButton.propTypes = {
-    dateTime: PropTypes.arrayOf(Object),
+    dateTimes: PropTypes.arrayOf(Object),
 }
 
 export default DateTimeButton;
