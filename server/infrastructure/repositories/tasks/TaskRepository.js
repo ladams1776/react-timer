@@ -19,12 +19,12 @@ const TaskRepository = {
         .map(a => parseInt(a.time))
         .reduce((a, b) => a + b);
 
-      task.dateTime = doc.time
+      task.dateTimes = doc.time
         .map(dateTime => {
           const date = dateTime.date;
-
+          const id = dateTime._id;
           const time = millisToMinutesAndSeconds(dateTime.time);
-          return { date, time };
+          return { id, date, time };
         });
 
       callback(task);
