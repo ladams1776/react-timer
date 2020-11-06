@@ -7,7 +7,7 @@ const initialState = {
   tags: [],
   project: 0,
   time: 0,
-  dateTime: []
+  dateTimes: []
 };
 
 const formReducer = (state, newState) => {
@@ -30,8 +30,8 @@ const useFormReducer = () => {
     dispatch({ tags: e });
   };
 
-  const onDateTime = e => {
-    dispatch({ dateTime: e })
+  const onDateTimes = e => {
+    dispatch({ dateTimes: e })
   }
 
   const [state, dispatch] = useReducer(formReducer, initialState);
@@ -41,7 +41,7 @@ const useFormReducer = () => {
     onProjectDropDownChange,
     onTextAreaChange,
     onTagChange,
-    onDateTime
+    onDateTimes
   ];
 };
 
