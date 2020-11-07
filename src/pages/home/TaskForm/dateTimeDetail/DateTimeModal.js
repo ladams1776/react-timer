@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import styles from './DateTimeModal.module.css';
-import EditDateTime from './EditDateTime/EditDateTime';
+import EditDateTimeForm from './EditDateTimeForm/EditDateTimeForm';
 
 //@TODO: Probs do the fetching for the DateTimes, when the Modal is pulled up.
 const DateTimeModal = ({ dateTimes, setIsShowing }) => {
@@ -32,7 +32,7 @@ const DateTimeModal = ({ dateTimes, setIsShowing }) => {
                         <div className={styles.time}>Minutes: {dT.time}</div>
                     </div>
                 }))
-                || (<EditDateTime setEditDateTime={setEditDateTime} id={editDateTime.id} date={editDateTime.date} minutes={editDateTime.minutes} />)
+                || (<EditDateTimeForm setEditDateTime={setEditDateTime} editDateTime={editDateTime} />)
             }
 
             <button className={styles.closeButton} onClick={() => setIsShowing(false)}>Close</button>
