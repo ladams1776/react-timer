@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, renderHook } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import DateTimeButton from '../DateTimeButton';
 
