@@ -6,18 +6,23 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const fileupload = require("express-fileupload");
+
+// TASK ACTION imports
 const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
 const getTaskByIdAction = require('./application/requestHandlers/tasks/getTaskByIdAction');
 const updateTaskAction = require('./application/requestHandlers/tasks/updateTaskAction');
 const getAllTagsAction = require('./application/requestHandlers/tags/getAllTagsAction');
+const addTaskAction = require('./application/requestHandlers/tasks/addTaskAction');
+const deleteTaskByIdAction = require('./application/requestHandlers/tasks/deleteTaskByIdAction');
+const deleteAllTaskAction = require('./application/requestHandlers/tasks/deleteAllTaskAction');
+// TASK > IMPORT ACTION imports
+const importAction = require('./application/requestHandlers/tasks/importAction');
+const updateDateTimeAction = require('./application/requestHandlers/tasks/updateDateTimeAction');
+// TAG ACTION imports
 const deleteTagAction = require('./application/requestHandlers/tags/deleteTagAction');
 const addTagAction = require('./application/requestHandlers/tags/addTagAction');
 const editTagAction = require('./application/requestHandlers/tags/editTagAction');
 const getTagByIdAction = require('./application/requestHandlers/tags/getTagByIdAction');
-const addTaskAction = require('./application/requestHandlers/tasks/addTaskAction');
-const importAction = require('./application/requestHandlers/tasks/importAction');
-const deleteTaskByIdAction = require('./application/requestHandlers/tasks/deleteTaskByIdAction');
-const deleteAllTaskAction = require('./application/requestHandlers/tasks/deleteAllTaskAction');
 
 // @TODO: Move the username and password out of here
 const SERVER_AND_PORT = 'admin-user:admin-password@localhost:27017';
@@ -86,6 +91,7 @@ app.use(express.json({
 app.use(fileupload());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 // TASKS
 app.get('/api/tasks', getAllTasksAction);
 app.get('/api/task/:id', getTaskByIdAction);
@@ -94,8 +100,11 @@ app.put('/api/task', updateTaskAction);
 app.delete('/api/task/:id', deleteTaskByIdAction);
 app.delete('/api/tasks', deleteAllTaskAction);
 
-// IMPORT
+// TASKS > IMPORT
 app.post('/api/import', importAction);
+
+// TASKS > DATE TIME
+app.put('/api/dateTime/:id', updateDateTimeAction)
 
 // TAGS
 app.get('/api/tags', getAllTagsAction);
