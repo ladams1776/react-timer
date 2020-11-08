@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
 import styles from './EditDateTimeForm.module.css';
 import useForm from './useForm';
@@ -16,10 +16,10 @@ const EditDateTimeForm = ({ editDateTime }) => {
     </div>
 };
 
-EditDateTimeForm.prototype = {
+EditDateTimeForm.prototype = PropTypes.exact({
     id: PropTypes.string,
     date: PropTypes.string,
     minutes: PropTypes.number
-};
+});
 
 export default EditDateTimeForm;
