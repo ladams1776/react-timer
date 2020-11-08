@@ -16,7 +16,6 @@ const editTagAction = require('./application/requestHandlers/tags/editTagAction'
 const getTagByIdAction = require('./application/requestHandlers/tags/getTagByIdAction');
 const addTaskAction = require('./application/requestHandlers/tasks/addTaskAction');
 const importAction = require('./application/requestHandlers/tasks/importAction');
-const { time } = require('console');
 const deleteTaskByIdAction = require('./application/requestHandlers/tasks/deleteTaskByIdAction');
 const deleteAllTaskAction = require('./application/requestHandlers/tasks/deleteAllTaskAction');
 
