@@ -14,7 +14,7 @@ const DateTimeModal = ({ dateTimes, setIsShowing }) => {
     return <div className={styles.modal}>
         <div className={styles.modalContent}>
             {!editDateTime?.id
-                && (dateTimes.map(dT => {
+                ? (dateTimes.map(dT => {
 
                     //@TODO: abstract this stuff out
                     const myDatetimeString = moment(dT.date)
@@ -32,7 +32,7 @@ const DateTimeModal = ({ dateTimes, setIsShowing }) => {
                         <div className={styles.time}>Minutes: {dT.time}</div>
                     </div>
                 }))
-                || (<EditDateTimeForm setEditDateTime={setEditDateTime} editDateTime={editDateTime} />)
+                : (<EditDateTimeForm setEditDateTime={setEditDateTime} editDateTime={editDateTime} />)
             }
 
             <button className={styles.closeButton} onClick={() => setIsShowing(false)}>Close</button>
