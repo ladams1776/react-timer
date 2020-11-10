@@ -5,7 +5,7 @@ import styles from './DateTimeModal.module.css';
 import EditDateTimeForm from './EditDateTimeForm/EditDateTimeForm';
 
 //@TODO: Probs do the fetching for the DateTimes, when the Modal is pulled up.
-const DateTimeModal = ({ dateTimes, setIsShowing }) => {
+const DateTimeModal = ({ dateTimes, taskId, setIsShowing }) => {
     const [editDateTime, setEditDateTime] = useState({});
 
     const myTimezone = "America/New_York";
@@ -32,7 +32,7 @@ const DateTimeModal = ({ dateTimes, setIsShowing }) => {
                         <div className={styles.time}>Minutes: {dT.time}</div>
                     </div>
                 }))
-                : (<EditDateTimeForm setEditDateTime={setEditDateTime} editDateTime={editDateTime} />)
+                : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} />)
             }
 
             <button className={styles.closeButton} onClick={() => setIsShowing(false)}>Close</button>
@@ -41,7 +41,11 @@ const DateTimeModal = ({ dateTimes, setIsShowing }) => {
 };
 
 DateTimeModal.prototype = {
-    dateTimes: PropTypes.arrayOf(Object),
+    dateTimes: PropTypes.exact([{
+        id: PropTypes.string,
+        date: PropTypes.string,
+        minutes: PropTypes.number
+    }]),
     setIsShowing: PropTypes.func,
 }
 
