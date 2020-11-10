@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import styles from './EditDateTimeForm.module.css';
 import useForm from './useForm';
 
-const EditDateTimeForm = ({ editDateTime }) => {
-    const { onSubmit, dateTime, setDateTime } = useForm(editDateTime);
+const EditDateTimeForm = ({ editDateTime, taskId }) => {
+    const { onSubmit, dateTime, setDateTime } = useForm(editDateTime, taskId);
 
     return <div className={styles.form}>
         <form data-testid="editDateTimeForm">
@@ -16,10 +16,13 @@ const EditDateTimeForm = ({ editDateTime }) => {
     </div>
 };
 
-EditDateTimeForm.prototype = PropTypes.exact({
-    id: PropTypes.string,
-    date: PropTypes.string,
-    minutes: PropTypes.number
-});
+EditDateTimeForm.prototype = {
+    taskId: PropTypes.string,
+    editDateTime: PropTypes.exact({
+        id: PropTypes.string,
+        date: PropTypes.string,
+        minutes: PropTypes.number
+    })
+};
 
 export default EditDateTimeForm;
