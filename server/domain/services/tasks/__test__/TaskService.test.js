@@ -2,7 +2,6 @@ const TaskService = require('../TaskService');
 const TaskRepository = require('../../../../infrastructure/repositories/tasks/TaskRepository');
 const FetchAllTasksRepository = require('../../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
 
-// jest.mock('../../../../infrastructure/repositories/tasks/TaskRepository');
 jest.mock('../../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
 
 describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
@@ -10,13 +9,10 @@ describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
     // Arrange
     const tasks = [{ _id: 1 }];
 
-    beforeEach(() => {
-    });
-
     it('should call TaskRepository.fetchAllTask(), when TaskService.fetchAllTask() is called.', () => {
       // Arrange
       FetchAllTasksRepository.mockImplementation(() => tasks);
-      // jest.spyOn(TaskRepository, 'fetchAllTask');
+
       // Act
       const actual = FetchAllTasksRepository();
 
