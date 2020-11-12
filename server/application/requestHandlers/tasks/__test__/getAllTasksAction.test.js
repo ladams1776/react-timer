@@ -4,8 +4,6 @@ const getAllTasksAction = require('../getAllTasksAction');
 jest.mock('../../../../domain/services/tasks/TaskService');
 
 describe('server/application/requestHandlers/tasks/__test__/getAllTasksAction.test.js', () => {
-  // Arrange
-
   describe('getAllTasksAction', () => {
     it('should call TaskService.fetchAllTasks() and return in res.jsonp()', async () => {
       // Arrange
