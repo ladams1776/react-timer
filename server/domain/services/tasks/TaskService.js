@@ -3,11 +3,7 @@ const FetchTaskByIdRepository = require('../../../infrastructure/repositories/ta
 
 const TaskService = {
   fetchAllTasks: () => FetchAllTasksRepository(),
-  /**
-   * @param {String} taskId
-   * @param {Function} callback
-   */
-  fetchTaskById: (taskId, callback) => FetchTaskByIdRepository(taskId, callback),
+  fetchTaskById: (taskId) => FetchTaskByIdRepository(taskId),
 };
 
 module.exports = TaskService;

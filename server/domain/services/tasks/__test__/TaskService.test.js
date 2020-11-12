@@ -1,15 +1,16 @@
 const TaskService = require('../TaskService');
-const TaskRepository = require('../../../../infrastructure/repositories/tasks/TaskRepository');
 const FetchAllTasksRepository = require('../../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
+const FetchTaskByIdRepository = require('../../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository');
 
 jest.mock('../../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
+jest.mock('../../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository');
 
 describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
   describe('TaskService', () => {
     // Arrange
     const tasks = [{ _id: 1 }];
 
-    it('should call TaskRepository.fetchAllTask(), when TaskService.fetchAllTask() is called.', () => {
+    it('should call FetchAllTasksRepository(), when TaskService.fetchAllTask() is called.', () => {
       // Arrange
       FetchAllTasksRepository.mockImplementation(() => tasks);
 
@@ -21,19 +22,18 @@ describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
       expect(actual).toEqual(tasks);
     });
 
-    it('should call TaskRepository.fetchTaskById(), when TaskService.fetchAllTask() is called.', async () => {
+    it('should call FetchTaskByIdRepository(), when TaskService.fetchTaskById() is called.', async () => {
       // Arrange
-      const taskId = 1;
+      const task = { _id: 1 }
 
-      TaskRepository.fetchTaskById = jest.fn().mockImplementation(() => tasks);
-      jest.spyOn(TaskRepository, 'fetchTaskById');
+      FetchTaskByIdRepository.mockImplementation(() => task);
 
       // Act
-      const actual = await TaskService.fetchTaskById(taskId);
+      const actual = await TaskService.fetchTaskById(task._id);
 
       // Assert
-      expect(TaskRepository.fetchTaskById).toHaveBeenCalledTimes(1);
-      expect(actual).toEqual(tasks);
+      expect(FetchTaskByIdRepository).toHaveBeenCalledWith(task._id);
+      expect(actual).toEqual(task);
     });
   });
 });
