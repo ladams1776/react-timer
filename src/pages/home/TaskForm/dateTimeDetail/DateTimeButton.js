@@ -11,7 +11,6 @@ const DateTimeButton = ({ dateTimes, taskId }) => {
         <button className={cn(styles.dateTimeButton, "glyphicon glyphicon-time")}
             onClick={() => setIsShowing(!isShowing)}></button>
 
-
         {isShowing
             ? (<DateTimeModal dateTimes={dateTimes} taskId={taskId} setIsShowing={setIsShowing} />)
             : []
@@ -23,7 +22,7 @@ DateTimeButton.propTypes = {
     dateTimes: PropTypes.arrayOf(PropTypes.exact({
         id: PropTypes.string,
         date: PropTypes.string,
-        time: PropTypes.number
+        time: PropTypes.string
     })),
     taskId: PropTypes.string
 }
