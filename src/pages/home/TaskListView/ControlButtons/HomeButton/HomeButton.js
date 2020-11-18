@@ -1,17 +1,15 @@
 import React from 'react';
 import cn from 'classnames';
-import { useBrowserHistory } from 'hooks';
 import { Button } from 'components';
+import useHomeOnClick from './useHomeOnClick';
 import styles from './HomeButton.module.css';
 
 const HomeButton = () => {
-    const { push } = useBrowserHistory();
+    const onClick = useHomeOnClick();
     return <Button className={cn(styles.buttonAdd, "glyphicon glyphicon-home")}
-    title="Tags"
-        onClick={() => {
-            sessionStorage.setItem('LOCATION', '/tag/-1');
-            push("/tag/-1");
-        }} />
+        title="Tags"
+        onClick={onClick} 
+        data-testid="homeButton"/>
 };
 
 export default HomeButton;
