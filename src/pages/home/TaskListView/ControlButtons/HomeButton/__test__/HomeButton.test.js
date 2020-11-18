@@ -4,15 +4,14 @@ import '@testing-library/jest-dom/extend-expect'
 import HomeButton from '../HomeButton';
 import useHomeOnClick from "../useHomeOnClick";
 
-jest.mock('../useHomeOnClick', () => {
-    return jest.fn();
-});
+jest.mock('../useHomeOnClick');
+
 describe('src/pages/home/TaskListView/ControlButtons/HomeButton/__test__/HomeButton.test.js', () => {
     describe('HomeButton', () => { 
         it('should render', () => {
             // Arrange
             const onClick = jest.fn();
-            useHomeOnClick.mockImplementation(() => { onClick });
+            useHomeOnClick.mockImplementation(onClick);
 
             // Act
             const target = render(<HomeButton />);
