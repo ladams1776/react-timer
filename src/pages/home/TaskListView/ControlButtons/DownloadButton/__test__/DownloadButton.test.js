@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { findByTestId } from 'testUtils';
-import { useTaskEditContext } from 'hooks';
+import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
 import useTaskAssembler from '../useTaskAssembler';
 import * as writeJsonFile from "../writeJsonFile";
 import DownloadButton from '../DownloadButton';
 
-jest.mock('hooks/useTaskEditContext');
+jest.mock('pages/home/hooks/useTaskEditContext');
 jest.mock('../useTaskAssembler');
 
 describe('src/pages/home/TaskListView/__test__/DownloadButton.test.js', () => {
@@ -23,7 +23,6 @@ describe('src/pages/home/TaskListView/__test__/DownloadButton.test.js', () => {
 
         it('should render the button when tasks are available', () => {
             // Arrange
-            // task context
             const taskContextMock = {
                 updateTasks: jest.fn().mockImplementation(),
                 tasks: [{ _id: '1', }, { _id: 'yup' }],
@@ -40,16 +39,14 @@ describe('src/pages/home/TaskListView/__test__/DownloadButton.test.js', () => {
 
         it('should not render the button when tasks are not available', () => {
             // Arrange
-            // task context
             const taskContextMock = {
                 updateTasks: jest.fn().mockImplementation(),
                 tasks: []
             };
             useTaskEditContext.mockReturnValue(taskContextMock);
-
-            wrapper = shallow(<DownloadButton />);
-
+            
             // Act
+            wrapper = shallow(<DownloadButton />);
 
             // Assert
             expect(findByTestId(wrapper, 'btn-delete')).toHaveLength(0);
