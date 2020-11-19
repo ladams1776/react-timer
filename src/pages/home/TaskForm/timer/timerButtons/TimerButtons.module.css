@@ -36,7 +36,9 @@
 }
 
 .timerResume,
-.timerResume:hover {
+.timerResume:hover,
+.timerStart,
+.timerStart:hover {
   background-color: #5ec232;
   color: white;
   border: none;
@@ -46,10 +48,6 @@
   height: 40px;
   margin: 10px 5px;
   border-radius: 4px;
-}
-
-.timerResume:hover {
-  background-color: #458f26;
 }
 
 .resumeIcon {
@@ -67,10 +65,6 @@
   height: 40px;
   margin: 10px 5px;
   border-radius: 4px;
-}
-
-.timerStop:hover {
-  background-color: #dcb231;
 }
 
 .stopIcon {
