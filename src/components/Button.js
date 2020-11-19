@@ -25,7 +25,7 @@ const createRipple = event => {
   button.appendChild(circle);
 };
 
-const Button = ({ className, onClick, disabled, value, children, title }) => {
+const Button = ({ className, onClick, disabled, value, children, title, testid }) => {
 
   useEffect(() => {
     const buttons = document.getElementsByTagName("button");
@@ -42,6 +42,7 @@ const Button = ({ className, onClick, disabled, value, children, title }) => {
 
   return (
     <button className={cn('btn', 'btn-default', 'navbar-btn', styles.baseBtn, className)}
+      data-testid={testid}
       onClick={event => {
         setTimeout(() => onClick(event), BUTTON_DELAY_FOR_MATERIAL_EFFECT);
       }}
