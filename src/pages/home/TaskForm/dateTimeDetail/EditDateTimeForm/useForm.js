@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { fetchApiData } from 'utils';
 
-
 export const onFormSubmit = (dateTime, setDateTime, taskId) => e => {
     e.preventDefault();
     const config = { body: { id: dateTime.id, date: dateTime.date, minutes: dateTime.minutes }, method: 'PUT' };

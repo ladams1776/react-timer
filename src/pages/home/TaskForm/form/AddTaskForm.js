@@ -29,6 +29,7 @@ const AddTaskForm = ({ taskId, className }) => {
   const onSubmit = useSubmit(state, allTags, dispatch);
   const { description, tags, project, dateTimes } = state;
 
+  console.log('  ', dateTimes);
   return (
     <div className={className}>
       <form
