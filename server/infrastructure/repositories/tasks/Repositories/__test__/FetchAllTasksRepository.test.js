@@ -1,25 +1,25 @@
-const FetchAllTasksRepository = require('../FetchAllTasksRepository');
-const Task = require('../../../../models/Task');
-const hydrate = require('../../../../hydrators/hydrate');
+const FetchAllTasksRepository = require('../../FetchAllTasksRepository');
+const Task = require('../../../../../models/Task');
+const hydrate = require('../../../../../hydrators/hydrate');
 
 describe('server/infrastructure/repositories/tasks/Repositories/__test__/FetchAllTasksRepository.test.js', () => {
     describe('FetchAllTasksRepository', () => {
         // Arrange
         beforeEach(() => {
-            jest.mock('../../../../models/Task');
-            jest.mock('../../../../hydrators/hydrate');
+            jest.mock('../../../../../models/Task');
+            jest.mock('../../../../../hydrators/hydrate');
         });
 
-        it('', () => {
+        it('should return expected task and invoke Task.find with hydrate', () => {
             // Arrange
             const tasks = [{ _id: 1 }];
             Task.find = jest.fn().mockImplementation(() => tasks);
 
             // Act
-            const target = FetchAllTasksRepository();
+            const actual = FetchAllTasksRepository();
 
             // Assert
-            expect(target).toEqual(tasks);
+            expect(actual).toEqual(tasks);
             expect(Task.find).toBeCalledWith({}, hydrate);
         });
     });
