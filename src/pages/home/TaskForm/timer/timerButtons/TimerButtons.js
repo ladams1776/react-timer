@@ -14,6 +14,7 @@ const TimerButtons = ({ time, isActive = false, setIsActive, children }) => {
                 {isActive && (<Button
                     className={cn(styles.timerStop, styles.stopIcon, "glyphicon glyphicon-pause")}
                     title="Stop"
+                    testid="stop"
                     onClick={toggle} />
                 )}
 
@@ -27,6 +28,7 @@ const TimerButtons = ({ time, isActive = false, setIsActive, children }) => {
                 {time === 0 && !isActive && (<Button
                     className={cn(styles.timerStart, styles.stopIcon, "glyphicon glyphicon-play")}
                     title="Start"
+                    testid="start"
                     onClick={toggle} />
                 )}
 
