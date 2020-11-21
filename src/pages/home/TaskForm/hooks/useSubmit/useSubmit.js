@@ -1,9 +1,11 @@
 import { useCallback } from 'react';
 import { fetchApiData, getCurrentDateTimeEstFormat } from 'utils';
 import { useTimeContext, useFormDispatch } from '..';
+import useTaskEditContext from '../../../hooks/useTaskEditContext';
 import hydrateTaskForm from './hydrateTaskForm';
 
-const useSubmit = (state, allTags, dispatch) => {
+const useSubmit = (allTags) => {
+  const { state, dispatch } = useTaskEditContext();
   const formDispatch = useFormDispatch(dispatch);
   const { time } = useTimeContext();
 
