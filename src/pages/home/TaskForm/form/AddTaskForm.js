@@ -13,6 +13,7 @@ import TagMultiSelect from 'pages/home/TaskForm/tagMultiSelect/TagMultiSelect';
 import Timer from 'pages/home/TaskForm/timer/Timer';
 import DateTimeButton from 'pages/home/TaskForm/dateTimeDetail/DateTimeButton';
 import styles from './TaskForm.module.css';
+import SubmitButton from './SubmitButton';
 
 const AddTaskForm = ({ taskId, className }) => {
   const {
@@ -25,23 +26,21 @@ const AddTaskForm = ({ taskId, className }) => {
 
   useFetchTaskById(taskId, dispatch);
   useFetchTags();
-  const { allTags } = useTagContext();
-  const onSubmit = useSubmit(allTags);
-  const { description, tags, project, dateTimes } = state;
+  const { description, tags, project } = state;
 
+  console.log('id ', taskId);
   return (
     <div className={className}>
+      <DateTimeButton taskId={taskId} />
+      <Timer />
       <form
         className={styles.taskForm}
         method={taskId === -1 ? 'POST' : 'PUT'}
         data-test-id="form"
       >
-        <Timer />
-
         <div className={styles.timeInfoContainer}>
           <div className={styles.innerLeft}>
             <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
-            <DateTimeButton taskId={taskId} />
           </div>
           <div className={styles.innerRight}>
             <TagMultiSelect tags={tags} onChange={onTagChange} />
@@ -54,14 +53,7 @@ const AddTaskForm = ({ taskId, className }) => {
           id={taskId}
         />
 
-        <Button
-          type="submit"
-          className={styles.submit}
-          onClick={onSubmit}
-          data-test-id="submit"
-          title="Submit">
-          Submit
-        </Button>
+      <SubmitButton className={styles.submit}/>
       </form>
     </div>
   );

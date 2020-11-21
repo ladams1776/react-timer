@@ -5,7 +5,7 @@ import useTaskEditContext from '../../hooks/useTaskEditContext';
 import EditDateTimeForm from './EditDateTimeForm/EditDateTimeForm';
 import styles from './DateTimeModal.module.css';
 
-const DateTimeModal = ({ setIsShowing }) => {
+const DateTimeModal = ({ taskId, setIsShowing }) => {
     const { state } = useTaskEditContext();
     const dateTimes = state.dateTimes;
     const [editDateTime, setEditDateTime] = useState({});
@@ -34,7 +34,8 @@ const DateTimeModal = ({ setIsShowing }) => {
                         <div className={styles.time}>Minutes: {dT.time}</div>
                     </div>
                 }))
-                : []
+                : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} />)
+
             }
 
             <button className={styles.closeButton} onClick={() => setIsShowing(false)}>Close</button>
