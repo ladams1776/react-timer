@@ -5,10 +5,11 @@ module.exports = (req, res) => {
     // eslint-disable-next-line no-underscore-dangle
     Task.findOne({ _id: req.body._id }, (err, doc) => {
 
-        const existingTime = doc.time
+        const existingTime = doc?.time
             .map(time => parseInt(time.time))
             .reduce((a, b) => a + b);
 
+            
         console.log('existing time');
         const timeOffset = parseInt(req.body.WorkUnit[0].time) - existingTime;
 
@@ -21,12 +22,10 @@ module.exports = (req, res) => {
             ];
         }
 
-        console.log('Doc Time: ', doc.time);
-
-        doc.description = req.body.WorkUnit[0].description;
+        doc.description = req.body.WorkUnit[0]?.description;
         doc.date = req.body.date;
-        doc.contractId = req.body.WorkUnit[0].contractId;
-        doc.tags = req.body.WorkUnit[0].tags;
+        doc.contractId = req.body.WorkUnit[0]?.contractId;
+        doc.tags = req.body.WorkUnit[0]?.tags;
 
         doc.save(err => {
             if (err) console.log('shit, an error: ', err);
