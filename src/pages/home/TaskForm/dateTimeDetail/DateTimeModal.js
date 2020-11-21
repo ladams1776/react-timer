@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
-import styles from './DateTimeModal.module.css';
+import useTaskEditContext from '../../hooks/useTaskEditContext';
 import EditDateTimeForm from './EditDateTimeForm/EditDateTimeForm';
+import styles from './DateTimeModal.module.css';
 
-//@TODO: Probs do the fetching for the DateTimes, when the Modal is pulled up.
-const DateTimeModal = ({ dateTimes, taskId, setIsShowing }) => {
+const DateTimeModal = ({ setIsShowing }) => {
+    const { state } = useTaskEditContext();
+    const dateTimes = state.dateTimes;
     const [editDateTime, setEditDateTime] = useState({});
 
     const myTimezone = "America/New_York";
@@ -26,13 +28,13 @@ const DateTimeModal = ({ dateTimes, taskId, setIsShowing }) => {
                     };
 
 
-                    return <div className={styles.content} key={dT.id} onClick={onClick}>
+                    return <div className={styles.content} key={dT.id + dT.time} onClick={onClick}>
                         <input type="hidden" value={dT.id} name="id" />
                         <div className={styles.date}>Date: {myDatetimeString}</div>
                         <div className={styles.time}>Minutes: {dT.time}</div>
                     </div>
                 }))
-                : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} />)
+                : []
             }
 
             <button className={styles.closeButton} onClick={() => setIsShowing(false)}>Close</button>

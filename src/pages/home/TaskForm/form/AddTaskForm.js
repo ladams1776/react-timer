@@ -29,7 +29,6 @@ const AddTaskForm = ({ taskId, className }) => {
   const onSubmit = useSubmit(allTags);
   const { description, tags, project, dateTimes } = state;
 
-  console.log('  ', dateTimes);
   return (
     <div className={className}>
       <form
@@ -42,7 +41,7 @@ const AddTaskForm = ({ taskId, className }) => {
         <div className={styles.timeInfoContainer}>
           <div className={styles.innerLeft}>
             <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
-            <DateTimeButton />
+            <DateTimeButton taskId={taskId} />
           </div>
           <div className={styles.innerRight}>
             <TagMultiSelect tags={tags} onChange={onTagChange} />

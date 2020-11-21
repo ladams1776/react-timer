@@ -4,7 +4,7 @@ import cn from 'classnames';
 import DateTimeModal from './DateTimeModal';
 import styles from './DateTimeButton.module.css';
 
-const DateTimeButton = ({ dateTimes, taskId }) => {
+const DateTimeButton = ({ taskId }) => {
     const [isShowing, setIsShowing] = useState(false);
 
     return <>
@@ -12,7 +12,7 @@ const DateTimeButton = ({ dateTimes, taskId }) => {
             onClick={() => setIsShowing(!isShowing)}></button>
 
         {isShowing
-            ? (<DateTimeModal dateTimes={dateTimes} taskId={taskId} setIsShowing={setIsShowing} />)
+            ? (<DateTimeModal taskId={taskId} setIsShowing={setIsShowing} />)
             : []
         }
     </>
