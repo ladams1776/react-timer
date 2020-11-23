@@ -7,7 +7,6 @@ module.exports = async (taskId, dateTime) => {
 
     const dateTimes = task.time.map(dT => {
         if (dT._id == dateTime.id) {
-            console.log('the same')
             return {
                 _id: dT._id,
                 date: dateTime.date,
