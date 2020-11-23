@@ -1,23 +1,26 @@
+//@TODO: Need to UT these conditionals
 module.exports = (doc) => {
     const task = {};
     task._id = doc._id;
-    task.description = doc.description;
-    task.tags = doc.tags;
-    task.date = doc.date;
+    task.description = doc?.description || '';
+    task.tags = doc?.tags || [];
+    task.date = doc?.date || '';
     task.contractId = doc.contractId || '';
 
-    task.time = doc.time
+    task.time = doc?.time
         .map(a => parseInt(a.time))
-        .reduce((a, b) => a + b);
+        .reduce((a, b) => a + b, 0)
+        || 0;
 
-    task.dateTimes = doc.time
+    task.dateTimes = doc?.time
         .map(dateTime => {
             const date = dateTime.date;
             const id = dateTime._id;
             const time = millisToMinutesAndSeconds(dateTime.time);
             return { id, date, time };
-        });
-        
+        })
+        || [];
+
     return task;
 }
 
