@@ -1,16 +1,11 @@
-// const TagService = require('../../../domain/services/tags/TagService');
-// const jsonResponse = require('../jsonResponse');
 const Task = require('../../../infrastructure/models/Task');
-
+const hydrate = require('../../../infrastructure/hydrators/hydrate');
+ 
+//@TODO: Make a Service and Repository
 module.exports = async (req, res) => {
     const m = new Task();
     m.toObject();
-    m.date = '';
-    m.description = '';
-    m.contractId = '';
+    const t = await m.save(hydrate);
 
-    const t = await m.save((err, task) => {
-        if (err) throw err;
-    });
-    res.jsonp(m);
+    res.jsonp(t);
 };
