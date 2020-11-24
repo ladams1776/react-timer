@@ -1,6 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import { useSetCurrentLocation } from 'hooks';
+import useTaskRefs from './hooks/useTaskRefs';
 import TagContextProvider from './TaskForm/contexts/TagContext';
 import TimeContextProvider from './TaskForm/contexts/TimeContext';
 import AddTaskForm from './TaskForm/form/AddTaskForm';
@@ -11,30 +12,24 @@ import styles from './CreateOrEditTaskPage.module.css';
 
 const CreateOrEditTaskPage = ({ match }) => {
   const taskId = match?.params?.id;
+
   useSetCurrentLocation(`/task/${taskId}`);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = React.useState([]);
   useFetchAllTasks(setTasks);
-
-  const refs = useMemo(() => tasks.reduce((acc, value) => {
-    console.log('task', value);
-    acc[value._id] = React.createRef();
-    return acc;
-  }, {}), [tasks]);
-
-// const refs = [];
+  const refs = useTaskRefs(tasks);
 
   return (
     <TagContextProvider>
       <TimeContextProvider>
-        <div className={styles.container}>
+        <div className={styles.container} data-testid="container">
           <div className={styles.navBarInnerContainer}>
             <ControlButtons tasks={tasks} />
           </div>
           <div className={styles.mainInnerContainer}>
-            <TaskListView taskId={taskId} tasks={tasks} setTasks={setTasks} refs={refs}
+            <TaskListView tasks={tasks} setTasks={setTasks} refs={refs}
               className={cn(styles.listView, { [styles.listViewAndTask]: taskId })} />
             {taskId !== undefined
-              ? <AddTaskForm taskId={taskId} className={styles.form} />
+              ? <AddTaskForm taskId={taskId} className={styles.form} data-testid="addTaskForm"/>
               : <div className={styles.form}></div>}
           </div>
         </div>
