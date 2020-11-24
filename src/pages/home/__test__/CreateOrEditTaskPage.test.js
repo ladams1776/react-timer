@@ -56,11 +56,7 @@ describe('src/pages/home/__test__/CreateOrEditTaskPage.test.js', () => {
         .spyOn(React, 'useState')
         .mockImplementationOnce(() => stubInitialState);
 
-      const match = {
-        params: {
-          id: undefined
-        }
-      };
+      const match = {};
 
       // Act
       const { getByTestId } = render(<CreateOrEditTaskPage match={match} />);
