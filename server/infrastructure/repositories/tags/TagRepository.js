@@ -1,6 +1,6 @@
 const Tag = require('../../models/Tag');
 const hydrateAndResponse = require('../../hydrators/hydrateAndResponse');
-const assembleTag = require('./assembleTag');
+const DtoToTag = require('./hydrators/DtoToTag');
 
 const TagRepository = {
   fetchAllTags: (res) => Tag.find({}, hydrateAndResponse(res)),
@@ -9,7 +9,10 @@ const TagRepository = {
     hydrateAndResponse(res)
   ),
   addTag: (tagDto, res) => {
-    const tag = assembleTag(tagDto);
+    const tag = new Tag();
+    tag.toObject();
+    tag.description = tagDto.description;
+    tag.name = tagDto.name;
     tag.save(hydrateAndResponse(res));
   },
   fetchTagById: (id, res) =>
