@@ -1,6 +1,5 @@
 import { useReducer } from 'react';
 
-//@TODO: Need to unit test this.
 const initialState = {
   id: -1,
   description: '',
@@ -18,6 +17,8 @@ const formReducer = (state, newState) => {
 };
 
 const useFormReducer = () => {
+  const [state, dispatch] = useReducer(formReducer, initialState);
+
   const onProjectDropDownChange = e => {
     dispatch({ project: e.target.value });
   };
@@ -34,14 +35,25 @@ const useFormReducer = () => {
     dispatch({ dateTimes: e })
   }
 
-  const [state, dispatch] = useReducer(formReducer, initialState);
+  const dispatchTask = data => {
+    dispatch({
+      id: data._id,
+      time: data.time,
+      dateTimes: data.dateTimes,
+      description: data.description,
+      tags: data.tags,
+      project: data.contractId,
+    });
+  }
+
   return [
     state,
-    dispatch,
     onProjectDropDownChange,
     onTextAreaChange,
     onTagChange,
-    onDateTimes
+    
+    onDateTimes,
+    dispatchTask
   ];
 };
 
