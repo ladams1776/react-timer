@@ -7,8 +7,7 @@ const TagService = {
     TagRepository.fetchAllTags(res),
   deleteTag: (tagId, res) =>
     TagRepository.deleteTag(tagId, res),
-  addTag: (tagDto, res) =>
-    TagRepository.addTag(tagDto, res),
+  addTag: (dto, res) => TagRepository.addTag(dto, res),
   updateTag: (tagDto, res) =>
     TagRepository.updateTag(tagDto, res)
 };

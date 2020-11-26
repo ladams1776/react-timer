@@ -11,10 +11,24 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
       res.mockReset();
     });
 
+    describe('fetchTagById', () => {
+      it('should call TagRepository.fetchAllTags(), when TagService.fetchAllTags() is called.', () => {
+        // Arrange
+        const tagId = 1;
+        TagRepository.fetchTagById = jest.fn();
+
+        // Act
+        TagService.fetchTagById(tagId, res);
+
+        // Assert
+        expect(TagRepository.fetchTagById).toHaveBeenCalledTimes(tagId, res);
+      });
+    });
+
     describe('fetchAllTags', () => {
       it('should call TagRepository.fetchAllTags(), when TagService.fetchAllTags() is called.', () => {
         // Arrange
-        jest.spyOn(TagRepository, 'fetchAllTags');
+        TagRepository.fetchAllTags = jest.fn();
 
         // Act
         TagService.fetchAllTags(res);
@@ -28,7 +42,7 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
       it('should call TagRepository.deleteTag(), when TagService.deleteTag() is called.', () => {
         // Arrange
         const tagId = 1;
-        jest.spyOn(TagRepository, 'deleteTag');
+        TagRepository.deleteTag = jest.fn();
 
         // Act
         TagService.deleteTag(tagId, res);
@@ -45,7 +59,7 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
           name: 'name',
           description: 'description',
         };
-        jest.spyOn(TagRepository, 'addTag');
+        TagRepository.addTag = jest.fn();
 
         // Act
         TagService.addTag(expected, res);
@@ -62,7 +76,7 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
           name: 'name',
           description: 'description',
         };
-        jest.spyOn(TagRepository, 'updateTag');
+        TagRepository.updateTag = jest.fn();
 
         // Act
         TagService.updateTag(expected, res);
