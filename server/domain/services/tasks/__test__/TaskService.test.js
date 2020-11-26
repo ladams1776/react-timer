@@ -1,19 +1,19 @@
 const TaskService = require('../TaskService');
 const FetchAllTasksRepository = require('../../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
-const FetchTaskByIdRepository = require('../../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository/FetchTaskByIdRepository');
 const UpdateDateTimeRepository = require('../../../../infrastructure/repositories/tasks/Repositories/UpdateDateTimeRepository');
+const FetchTaskByIdRepository = require('../../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository/FetchTaskByIdRepository');
+const UpdateTaskByIdRepository = require('../../../../infrastructure/repositories/tasks/Repositories/UpdateTaskByIdRepository/UpdateTaskByIdRepository');
 
 jest.mock('../../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
-jest.mock('../../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository');
+jest.mock('../../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository/FetchTaskByIdRepository');
 jest.mock('../../../../infrastructure/repositories/tasks/Repositories/UpdateDateTimeRepository');
+jest.mock('../../../../infrastructure/repositories/tasks/Repositories/UpdateTaskByIdRepository/UpdateTaskByIdRepository');
 
 describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
-  describe('TaskService', () => {
-    // Arrange
-    const tasks = [{ _id: 1 }];
-
-    it('should call FetchAllTasksRepository(), when TaskService.fetchAllTask() is called.', () => {
+  describe('TaskService', () => {    
+    it('should call FetchAllTasksRepository(), when TaskService.fetchAllTask() is invoked.', () => {
       // Arrange
+      const tasks = [{ _id: 1 }];
       FetchAllTasksRepository.mockImplementation(() => tasks);
 
       // Act
@@ -24,10 +24,9 @@ describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
       expect(actual).toEqual(tasks);
     });
 
-    it('should call FetchTaskByIdRepository(), when TaskService.fetchTaskById() is called.', async () => {
+    it('should call FetchTaskByIdRepository(), when TaskService.fetchTaskById() is invoked.', async () => {
       // Arrange
       const task = { _id: 1 }
-
       FetchTaskByIdRepository.mockImplementation(() => task);
 
       // Act
@@ -38,17 +37,35 @@ describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
       expect(actual).toEqual(task);
     });
 
-    it('should call UpdateDateTimeRepository', () => {
+    it('should call UpdateDateTimeRepository, when updateDateTimeOfTask() is invoked', () => {
       // Arrange
       const taskId = 'taskId';
       const dateTime = { _id: 'dateTimeID' };
-      UpdateDateTimeRepository.mockImplementation();
+      const expected = { id: 'expectedID' };
+      UpdateDateTimeRepository.mockImplementation(() => expected);
 
       // Act
-      TaskService.updateDateTimeOfTask(taskId, dateTime);
+      const actual = TaskService.updateDateTimeOfTask(taskId, dateTime);
       
       // Assert
       expect(UpdateDateTimeRepository).toBeCalledWith(taskId, dateTime); 
+      expect(actual).toEqual(expected);
+    });
+
+
+    it('should call UpdateTaskByIdRepository, when updateTask() is invoked', () => {
+      // Arrange
+      const dto = {id: 'dtoID'};
+      const resStub = jest.fn();
+      const expected = {id: 'expectedID'};
+      UpdateTaskByIdRepository.mockImplementation(() => expected);
+
+      // Act
+      const actual = TaskService.updateTask(dto, resStub);
+
+      // Assert
+      expect(UpdateTaskByIdRepository).toBeCalledWith(dto, resStub);
+      expect(actual).toEqual(expected);
     });
   });
 
