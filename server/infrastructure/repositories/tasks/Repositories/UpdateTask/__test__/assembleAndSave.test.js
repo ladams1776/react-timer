@@ -3,7 +3,7 @@ const sumExistingTime = require("../sumExistingTime");
 
 jest.mock("../sumExistingTime");
 
-describe('hydrateAndSave', () => {
+describe('assembleAndSave', () => {
     it('should assemble doc and invoke save', () => {
         // Arrange
         const dto = {
@@ -20,7 +20,7 @@ describe('hydrateAndSave', () => {
         const doc = {};
         doc.time = [1];
         doc.save = jest.fn();
-        
+
         const expected = {
             ...dto,
             save: doc.save,
