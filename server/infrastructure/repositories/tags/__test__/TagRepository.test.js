@@ -1,11 +1,9 @@
 const Tag = require('../../../models/Tag');
 const hydrateAndResponse = require('../../../hydrators/hydrateAndResponse');
-const assembleTag = require('../assembleTag');
 const TagRepository = require('../TagRepository');
 
 jest.mock('../../../models/Tag');
 jest.mock('../../../hydrators/hydrateAndResponse');
-jest.mock('../assembleTag');
 
 describe('server/infrastructure/repositories/tags/__test__/TagRepository.test.js', () => {
   describe('TagRepository', () => {
@@ -17,20 +15,6 @@ describe('server/infrastructure/repositories/tags/__test__/TagRepository.test.js
       res.mockReset();
       hydrate.mockReset();
       hydrateAndResponse.mockReturnValue(hydrate);
-    });
-
-    describe('fetchAllTags', () => {
-      it('should call Tag.find', () => {
-        // Arrange
-        const { fetchAllTags } = TagRepository;
-
-        // Act
-        fetchAllTags(res);
-
-        // Assert
-        expect(hydrateAndResponse).toHaveBeenNthCalledWith(1, res);
-        expect(Tag.find).toHaveBeenNthCalledWith(1, {}, hydrate);
-      });
     });
 
     describe('deleteTag', () => {
@@ -47,34 +31,6 @@ describe('server/infrastructure/repositories/tags/__test__/TagRepository.test.js
         // Assert
         expect(hydrateAndResponse).toHaveBeenNthCalledWith(1, res);
         expect(Tag.deleteOne).toHaveBeenNthCalledWith(1, tag, hydrate);
-      });
-    });
-
-    describe('addTag', () => {
-      it('should call assembleTag, and have tag.save(), then returned', () => {
-        // Arrange
-        const expected = {
-          name: 'name',
-          description: 'description',
-        };
-
-        const tag = {
-          name: 'name',
-          description: 'description',
-          save: jest.fn().mockImplementation(() => expected),
-        };
-
-        assembleTag.mockReturnValue(tag);
-
-        const { addTag } = TagRepository;
-
-        // Act
-        addTag(tag, res);
-
-        // Assert
-        expect(assembleTag).toHaveBeenNthCalledWith(1, tag);
-        expect(hydrateAndResponse).toHaveBeenNthCalledWith(1, res);
-        expect(tag.save).toHaveBeenNthCalledWith(1, hydrate);
       });
     });
 

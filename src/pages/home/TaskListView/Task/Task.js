@@ -13,7 +13,7 @@ const Task = ({ _id, description, contractId, selectedId, setTasks }) => {
   const projectOptionLabel = useGetProjectOptionLabel(contractId);
   const isSelected = selectedId === _id;
   const onDispatchWhenLeave = useUpdateWhenLeave();
-
+ 
   return (
     <div className={styles.taskContainer}>
       <div className={cn(styles.taskItem, { [styles.selected]: isSelected })}>

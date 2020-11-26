@@ -1,7 +1,9 @@
 const TagService = require('../TagService');
 const TagRepository = require('../../../../infrastructure/repositories/tags/TagRepository');
+const fetchAllTags = require('../../../../infrastructure/repositories/tags/fetchAllTags');
 
 jest.mock('../../../../infrastructure/repositories/tags/TagRepository');
+jest.mock('../../../../infrastructure/repositories/tags/fetchAllTags');
 
 describe('server/domain/services/tags/__test__/TagService.test.js', () => {
   describe('TagService', () => {
@@ -28,13 +30,13 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
     describe('fetchAllTags', () => {
       it('should call TagRepository.fetchAllTags(), when TagService.fetchAllTags() is called.', () => {
         // Arrange
-        TagRepository.fetchAllTags = jest.fn();
+        fetchAllTags.mockImplementation();
 
         // Act
         TagService.fetchAllTags(res);
 
         // Assert
-        expect(TagRepository.fetchAllTags).toHaveBeenCalledTimes(1, res);
+        expect(fetchAllTags).toHaveBeenCalledTimes(1, res);
       });
     });
 
@@ -76,6 +78,7 @@ describe('server/domain/services/tags/__test__/TagService.test.js', () => {
           name: 'name',
           description: 'description',
         };
+        
         TagRepository.updateTag = jest.fn();
 
         // Act

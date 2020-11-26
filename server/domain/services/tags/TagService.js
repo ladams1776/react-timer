@@ -1,13 +1,14 @@
+const fetchAllTags = require('../../../infrastructure/repositories/tags/fetchAllTags');
 const TagRepository = require('../../../infrastructure/repositories/tags/TagRepository');
+const addTag = require('../../../infrastructure/repositories/tags/addTag');
 
 const TagService = {
   fetchTagById: (tagId, res) =>
     TagRepository.fetchTagById(tagId, res),
-  fetchAllTags: (res) =>
-    TagRepository.fetchAllTags(res),
+  fetchAllTags: (res) => fetchAllTags(res),
   deleteTag: (tagId, res) =>
     TagRepository.deleteTag(tagId, res),
-  addTag: (dto, res) => TagRepository.addTag(dto, res),
+  addTag: (dto, res) => addTag(dto, res),
   updateTag: (tagDto, res) =>
     TagRepository.updateTag(tagDto, res)
 };
