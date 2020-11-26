@@ -2,12 +2,12 @@ const TaskService = require('../TaskService');
 const FetchAllTasksRepository = require('../../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
 const UpdateDateTimeRepository = require('../../../../infrastructure/repositories/tasks/Repositories/UpdateDateTimeRepository');
 const FetchTaskByIdRepository = require('../../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository/FetchTaskByIdRepository');
-const UpdateTaskByIdRepository = require('../../../../infrastructure/repositories/tasks/Repositories/UpdateTaskByIdRepository/UpdateTaskByIdRepository');
+const UpdateTaskRepository = require('../../../../infrastructure/repositories/tasks/Repositories/UpdateTaskRepository/UpdateTaskRepository');
 
 jest.mock('../../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
 jest.mock('../../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository/FetchTaskByIdRepository');
 jest.mock('../../../../infrastructure/repositories/tasks/Repositories/UpdateDateTimeRepository');
-jest.mock('../../../../infrastructure/repositories/tasks/Repositories/UpdateTaskByIdRepository/UpdateTaskByIdRepository');
+jest.mock('../../../../infrastructure/repositories/tasks/Repositories/UpdateTaskRepository/UpdateTaskRepository');
 
 describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
   describe('TaskService', () => {    
@@ -53,20 +53,19 @@ describe('server/domain/services/tasks/__test__/TaskService.test.js', () => {
     });
 
 
-    it('should call UpdateTaskByIdRepository, when updateTask() is invoked', () => {
+    it('should call UpdateTaskRepository, when updateTask() is invoked', () => {
       // Arrange
       const dto = {id: 'dtoID'};
       const resStub = jest.fn();
       const expected = {id: 'expectedID'};
-      UpdateTaskByIdRepository.mockImplementation(() => expected);
+      UpdateTaskRepository.mockImplementation(() => expected);
 
       // Act
       const actual = TaskService.updateTask(dto, resStub);
 
       // Assert
-      expect(UpdateTaskByIdRepository).toBeCalledWith(dto, resStub);
+      expect(UpdateTaskRepository).toBeCalledWith(dto, resStub);
       expect(actual).toEqual(expected);
     });
   });
-
 });

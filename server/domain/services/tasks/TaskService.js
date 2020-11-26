@@ -1,7 +1,7 @@
 const FetchAllTasksRepository = require('../../../infrastructure/repositories/tasks/Repositories/FetchAllTasksRepository');
 const FetchTaskByIdRepository = require('../../../infrastructure/repositories/tasks/Repositories/FetchTaskByIdRepository/FetchTaskByIdRepository');
 const UpdateDateTimeRepository = require('../../../infrastructure/repositories/tasks/Repositories/UpdateDateTimeRepository');
-const UpdateTaskByIdRepository = require('../../../infrastructure/repositories/tasks/Repositories/UpdateTaskByIdRepository/UpdateTaskByIdRepository');
+const UpdateTaskByIdRepository = require('../../../infrastructure/repositories/tasks/Repositories/UpdateTaskRepository/UpdateTaskRepository');
  
 const TaskService = {
   fetchAllTasks: () => FetchAllTasksRepository(),
