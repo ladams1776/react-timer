@@ -1,17 +1,15 @@
 import React from 'react';
 import { Button } from 'components';
-import { useSubmit, useTagContext } from '../hooks';
+import { useSubmit } from '../hooks';
+import styles from './SubmitButton.module.css';
 
-
-const SubmitButton = ({className}) => {
-    const { allTags } = useTagContext();
-    const onSubmit = useSubmit(allTags);
-
+const SubmitButton = () => {
+    const onSubmit = useSubmit();
     return (<Button
         type="submit"
-        className={className}
+        className={styles.submit}
         onClick={onSubmit}
-        data-test-id="submit"
+        testid="submit"
         title="Submit">
         Submit
     </Button>);
