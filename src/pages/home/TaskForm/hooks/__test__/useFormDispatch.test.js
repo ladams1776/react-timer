@@ -1,12 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks';
 import {
-    useTaskEditContext,
     useFlashMessageContext
 } from 'hooks';
 import useFormDispatch from '../useFormDispatch';
 import useBrowserHistory from 'hooks/useBrowserHistory';
 
-jest.mock('hooks/useTaskEditContext');
 jest.mock('hooks/useFlashMessageContext');
 jest.mock('hooks/useBrowserHistory');
 
