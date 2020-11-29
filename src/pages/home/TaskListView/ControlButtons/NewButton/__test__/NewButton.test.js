@@ -1,34 +1,21 @@
 import React from "react";
-import { shallow } from 'enzyme';
-import { findByTestId } from "testUtils";
-import useBrowserHistory from 'hooks/useBrowserHistory';
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import useOnClick from '../useOnClick';
 import NewButton from "../NewButton";
 
-jest.mock('hooks/useBrowserHistory');
+jest.mock('../useOnClick');
 
-describe("src/components/ControlPanel/NewButton/__test__/NewButton.test.js", () => {
-    // Arrange 
-    let wrapper;
-    const historyMock = {
-        push: jest.fn()
-    };
+describe("NewButton", () => {
+    it("should display NewButton", () => {
+        // Arrange
+        const addNewTask = jest.fn();
+        useOnClick.mockImplementationOnce(addNewTask);
 
-    beforeEach(() => {
-        historyMock.push.mockReset();
-        useBrowserHistory.mockReturnValue(historyMock);
+        // Act
+        const { getByTestId } = render(<NewButton />);
+
+        // Assert
+        expect(getByTestId("btn-new")).toBeTruthy();
     });
-
-    describe("NewButton", () => {
-        it("should display NewButton", () => {
-            // Arrange
-
-            // Act
-            wrapper = shallow(<NewButton />);
-
-            // Assert
-            expect(findByTestId(wrapper, "btn-new")).toHaveLength(1);
-        });
-    });
-
-    //@TODO: Test NewButton onClick - model it after DeleteTagButton.
 });
