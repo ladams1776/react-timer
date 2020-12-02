@@ -1,6 +1,6 @@
-import useBrowserHistory from 'hooks/useBrowserHistory';
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
+import useBrowserHistory from 'hooks/useBrowserHistory';
 import useHomeOnClick, { URL } from '../useHomeOnClick';
 
 jest.mock('hooks/useBrowserHistory');
