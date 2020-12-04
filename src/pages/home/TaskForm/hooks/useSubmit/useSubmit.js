@@ -1,34 +1,21 @@
-import { useCallback } from 'react';
 import { fetchApiData, getCurrentDateTimeEstFormat } from 'utils';
-import { useTimeContext, useFormDispatch } from '..';
+import { useTimeContext, useFormDispatch, useTagContext } from '..';
 import useTaskEditContext from '../../../hooks/useTaskEditContext';
 import hydrateTaskForm from './hydrateTaskForm';
 
-const useSubmit = (allTags) => {
-  const { state, dispatch } = useTaskEditContext();
-  const formDispatch = useFormDispatch(dispatch);
+const useSubmit = () => {
+  const { allTags } = useTagContext();
+  const { state, dispatchTask } = useTaskEditContext();
+  const formDispatch = useFormDispatch(dispatchTask);
   const { time } = useTimeContext();
 
-  const onSubmit = useCallback(() => {
+  return () => {
     const dateFormatted = getCurrentDateTimeEstFormat();
-
-    const payload = {
-      project: state.project,
-      dateFormatted: dateFormatted,
-      time,
-      tagSelectedOption: state.tags,
-      description: state.description,
-    };
-    const timeTask = hydrateTaskForm(state, allTags, payload);
-
-    const method = state.id ? 'PUT' : 'POST';
-
+    const { id, project, tags, description } = state;
+    const timeTask = hydrateTaskForm(id, allTags, project, description, dateFormatted, time, tags);
+    const method = id ? 'PUT' : 'POST';
     fetchApiData('task', { body: timeTask, method }, formDispatch);
-  }, [allTags, formDispatch, state, time]);
-
-
-
-  return onSubmit;
+  };
 };
 
 export default useSubmit;
