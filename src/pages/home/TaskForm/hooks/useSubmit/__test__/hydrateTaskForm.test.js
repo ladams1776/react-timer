@@ -3,45 +3,37 @@ import selectTags from '../../../selectors/selectTags';
 
 jest.mock('../../../selectors/selectTags');
 
-describe('src/pages/createOrEditTask/form/__test__/hydrateTaskForm.test.js', () => {
-  describe('hydrateTaskForm', () => {
+describe('hydrateTaskForm', () => {
+  it('should return a task in the right format, with all values', () => {
     // Arrange
-    const state = {
-      id: 1,
-    };
-    const tags = [{ _id: 1 }];
-    const payload = {
-      dateFormatted: 'a-date',
-      time: 'a-time',
-      project: 1,
-      selectedTags: [{ _id: 1 }],
-      description: 'description',
-    };
+    const id = 1;
+    const tags = [{ id: 'tagID' }];
+    const project = { id: 'projectId' };
+    const description = 'description';
+    const dateFormatted = 'dateFormatted';
+    const time = 'time';
+    const tagSelectedOption = 1;
+    const selectedTags = jest.fn().mockImplementation(() => tagSelectedOption);
 
-    beforeEach(() => {
-      selectTags.mockReturnValue(() => tags);
-    });
+    const selectTagSpy = jest.fn().mockImplementation(() => selectedTags);
+    selectTags.mockImplementation(selectTagSpy);
 
-    it('should return a task in the right format, with all values', () => {
-      // Arrange
-      const expected = {
-        _id: state.id,
-        date: payload.dateFormatted,
-        WorkUnit: [
-          {
-            time: payload.time,
-            contractId: payload.project,
-            description: payload.description,
-            tags,
-          },
-        ],
-      };
+    // Act
+    const actual = hydrateTaskForm(id, tags, project,
+      description, dateFormatted, time, tagSelectedOption);
 
-      // Act
-      const actual = hydrateTaskForm(state, tags, payload);
-
-      // Assert
-      expect(actual).toEqual(expected);
+    // Assert
+    expect(actual).toEqual({
+      _id: id,
+      date: dateFormatted,
+      WorkUnit: [
+        {
+          time,
+          contractId: project,
+          description,
+          tags: tagSelectedOption
+        }
+      ]
     });
   });
 });

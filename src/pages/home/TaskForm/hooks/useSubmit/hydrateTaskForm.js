@@ -1,17 +1,16 @@
 import { selectTags } from '../../selectors';
 
-const hydrateTaskForm = (state, tags, payload) => {
-  const selectPayloadTags = selectTags(tags);
-  const selectedTags = selectPayloadTags(payload.tagSelectedOption);
+const hydrateTaskForm = (id, tags, project, description, dateFormatted, time, tagSelectedOption) => {
+  const selectedTags = selectTags(tags)(tagSelectedOption);
 
   return {
-    _id: state.id,
-    date: payload.dateFormatted,
+    _id: id,
+    date: dateFormatted,
     WorkUnit: [
       {
-        time: payload.time,
-        contractId: payload.project,
-        description: payload.description,
+        time,
+        contractId: project,
+        description,
         tags: selectedTags,
       },
     ],
