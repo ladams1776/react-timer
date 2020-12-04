@@ -73,7 +73,7 @@ describe('src/utils/api/fetchApiData/__test__/fetchApiData.test.js', () => {
     });
 
 
-    it("should successfully call fetch with a GET method type, but will return an empty array, when not an 'ok' status", async () => {
+    it("should successfully call fetch with a GET method type, but won't call dispatch", async () => {
       // Arrange
       const responsePromise = Promise.resolve({
         ok: false,
@@ -87,15 +87,12 @@ describe('src/utils/api/fetchApiData/__test__/fetchApiData.test.js', () => {
         }
       };
 
-      const expected = [];
-
       // Act
       await fetchApiData(url, settings, dispatchSpy);
 
       // Assert
       expect(global.fetch).toHaveBeenNthCalledWith(1, `/api/${url}`, { "body": "{\"id\":\"objectId\"}", "headers": { "Content-Type": "application/json" }, "method": "POST" });
-      expect(dispatchSpy).toHaveBeenNthCalledWith(1, expected);
-
+      expect(dispatchSpy).not.toHaveBeenCalled();
     });
   });
 });

@@ -1,6 +1,5 @@
 import PropType from 'prop-types';
 
-//@TODO: Setup FlashMessage
 const fetchApiData = async (url, { body, ...settings }, dispatch) => {
     const headers = { 'Content-Type': 'application/json' };
     const config = {
@@ -16,9 +15,7 @@ const fetchApiData = async (url, { body, ...settings }, dispatch) => {
 
     const response = await fetch(`/api/${url}`, config);
     const data = await response.json();
-    if (response.ok) dispatch(data);
-    else dispatch([]);
-    //@TODO: Probs should handle errors.
+    if (data && response.ok) dispatch(data);
 };
 
 fetchApiData.PropType = {
