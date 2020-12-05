@@ -1,96 +1,59 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { createWrapperWithContext, findByTestId } from 'testUtils';
+import React from "react";
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import AddTaskForm from '../AddTaskForm';
-import { TextAreaAdapter } from 'components';
-import { useBackButtonListener, useSetCurrentLocation } from 'hooks';
-import {
-  useFetchTaskById,
-  useTagContext,
-  useFetchTags,
-  useSubmit,
-  useFormReducer,
-} from '../../hooks';
-import Timer from '../../timer/Timer';
-import ProjectDropDown from '../../projectDropdown/ProjectDropdown';
-import TagMultiSelect from '../../tagMultiSelect/TagMultiSelect';
 
-jest.mock('hooks/useBackButtonListener/useBackButtonListener');
-jest.mock('hooks/useSetCurrentLocation');
+// import essentials for target
+import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
+import useFetchTags from 'pages/home/TaskForm/hooks/useFetchTags';
+import useFetchTaskById from '../../hooks/useFetchTaskById/useFetchTaskById';
+
+// mock hooks
+jest.mock('pages/home/hooks/useTaskEditContext');
+jest.mock('pages/home/TaskForm/hooks/useFetchTags');
 jest.mock('../../hooks/useFetchTaskById/useFetchTaskById');
-jest.mock('../../hooks/useTagContext');
-jest.mock('../../hooks/useFetchTags');
-jest.mock('../../hooks/useSubmit/useSubmit');
-jest.mock('../../hooks/useFormReducer');
 
-describe('src/pages/createOrEditTask/form/__test__/AddTaskForm.test.js', () => {
-  describe('AddTaskForm', () => {
+// mock components
+jest.mock('pages/home/TaskForm/timer/Timer', () => {
+  return jest.fn(() => <></>)
+});
+jest.mock('../SubmitButton', () => {
+  return jest.fn(() => <></>)
+});
+jest.mock('pages/home/TaskForm/dateTimeDetail/DateTimeButton', () => {
+  return jest.fn(() => <></>);
+});
+jest.mock('pages/home/TaskForm/projectDropdown/ProjectDropdown', () => {
+  return jest.fn(() => <></>);
+});
+jest.mock('pages/home/TaskForm/tagMultiSelect/TagMultiSelect', () => {
+  return jest.fn(({ tags, onChange }) => <></>);
+});
+
+describe('AddTaskForm', () => {
+  it('should render', () => {
     // Arrange
-    let wrapper;
+    const dispatchSpy = jest.fn();
+    const onProjectDropDownChangeSpy = jest.fn();
+    const onTextAreaChangeSpy = jest.fn();
+    const onTagChangeSpy = jest.fn();
 
-    const taskId = 1;
-    const state = {
-      description: 'describe',
-      tags: [{ id: 1 }],
-      project: 1,
-    };
-    const dispatch = jest.fn();
-    const onProjectChange = jest.fn();
-    const onTextChange = jest.fn();
-    const onTagChange = jest.fn();
-
-    const allTags = [{ id: 1 }];
-
-    const onSubmit = jest.fn();
-
-    beforeEach(() => {
-      useFormReducer.mockReturnValue([
-        state,
-        dispatch,
-        onProjectChange,
-        onTextChange,
-        onTagChange,
-      ]);
-      useTagContext.mockReturnValue(allTags);
-      useSubmit.mockReturnValue(onSubmit);
+    useTaskEditContext.mockImplementation(() => {
+      return {
+        state: { tags: {} },
+        dispatchTask: dispatchSpy,
+        onProjectDropDownChange: onProjectDropDownChangeSpy,
+        onTextAreaChange: onTextAreaChangeSpy,
+        onTagChange: onTagChangeSpy,
+      }
     });
+    useFetchTags.mockImplementation();
+    useFetchTaskById.mockImplementation();
 
-    it('should display', () => {
-      // Arrange
-      const expected = {
-        children: [
-          <Timer />,
-          <ProjectDropDown onChange={onProjectChange} value={1} />,
-          <TagMultiSelect onChange={onTagChange} tags={allTags} />,
-          <TextAreaAdapter description="describe" setDescription={onTextChange} />,
-          <button className="submit" onClick={onSubmit} type="submit" data-test-id="submit">
-            Submit
-          </button>,
-        ],
-        className: 'taskForm',
-        'data-test-id': 'form',
-        method: 'PUT',
-      };
+    // Act
+    const { getByTestId } = render(<AddTaskForm taskId={"1"} />);
 
-      // Act
-      wrapper = createWrapperWithContext(<AddTaskForm taskId={taskId} />);
-
-      // Assert
-      expect(findByTestId(wrapper, 'form').props()).toEqual(expected);
-    });
-
-    describe('#onSubmit', () => {
-      it('should invoke onSubmit mock', () => {
-        // Arrange
-
-        // Act
-        wrapper = shallow(<AddTaskForm taskId={taskId} />);
-        wrapper.find('form').simulate('submit');
-        findByTestId(wrapper, 'submit').props().onClick();
-        
-        // Assert
-        expect(onSubmit).toHaveBeenCalledTimes(1);
-      });
-    });
+    // Assert
+    expect(getByTestId('addTaskForm')).toBeInTheDocument();
   });
 });
