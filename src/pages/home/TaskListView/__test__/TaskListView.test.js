@@ -1,47 +1,35 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { createWrapperWithContext, findByTestId } from 'testUtils';
-import { useSetCurrentLocation } from 'hooks';
-import ControlButtons from '../ControlButtons/ControlButtons';
-import useFetchAllTasks from '../useFetchAllTasks';
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
 import TaskListView from '../TaskListView';
 
-jest.mock('hooks/useSetCurrentLocation');
-jest.mock('../useFetchAllTasks');
+import useTaskEditContext from '../../hooks/useTaskEditContext';
 
-describe('src/pages/home/__test__/TaskListView.test.js', () => {
-  describe('TaskListView', () => {
+// mock essentials for target
+jest.mock('../../hooks/useTaskEditContext');
+
+// mock components
+jest.mock('../Task/Task', () => {
+  return jest.fn(() => <></>)
+});
+
+describe('TaskListView', () => {
+  it('should render', () => {
     // Arrange
-    let wrapper;
-    jest.spyOn(React, 'useState').mockImplementationOnce(() => [[], jest.fn()]);
+    const className = 'className';
+    const tasks = [{ _id: 'taskId' }];
+    const setTasksSpy = jest.fn();
+    const refs = tasks;
+    const state = {
+      id: 'taskId',
+      description: 'description'
+    };
+    useTaskEditContext.mockReturnValue({ state });
 
-    beforeEach(() => {
-      useSetCurrentLocation.mockReturnValue();
-      useFetchAllTasks.mockReturnValue();
-    });
+    // Act
+    const { getByTestId } = render(<TaskListView className={className} tasks={tasks} setTasks={setTasksSpy} refs={refs} />);
 
-    //@TODO: Side stepping, making sure we got the taks or the useFetchAllTasks (stubbing was not working for the moment.)
-    it('should render the TaskListView', () => {
-      // Arrange
-      const expected = {
-        children: [
-          <div className="task-list__header">
-            <ControlButtons />
-          </div>,
-          <ul className="task-list" />,
-        ],
-        'data-test-id': 'list-view',
-      }.toString();
-      
-      // Act
-      wrapper = createWrapperWithContext(<TaskListView />);
-      const actual = findByTestId(wrapper, 'list-view')
-        .props()
-        .toString();
-
-      // Assert
-      expect(useSetCurrentLocation).toBeCalledWith('/');
-      expect(actual).toEqual(expected);
-    });
+    // Assert
+    expect(getByTestId('list-view')).toBeInTheDocument();
   });
 });

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import Task from './Task/Task';
-import PropTypes from 'prop-types';
 import useTaskEditContext from '../hooks/useTaskEditContext';
-import styles from './TaskListView.module.css';
 import useSmoothScrolling from './hooks/useSmoothScrolling';
+import styles from './TaskListView.module.css';
 
 const TaskListView = ({ className, tasks, setTasks, refs }) => {
   const { state } = useTaskEditContext();
-  const {id, description} = state; 
+  const { id, description } = state;
 
   useSmoothScrolling(refs, id, description);
 
@@ -16,7 +16,7 @@ const TaskListView = ({ className, tasks, setTasks, refs }) => {
     className,
     styles.task,
     { [styles.listViewAndTask]: id })}
-    data-test-id="list-view">
+    data-testid="list-view">
     <ul className={styles.taskList}>
       {tasks.map(task => {
         const desc = (task._id === id) ? description : task.description;
@@ -39,7 +39,7 @@ TaskListView.PropType = {
   className: PropTypes.string,
   tasks: PropTypes.arrayOf(Object),
   setTasks: PropTypes.func,
-  references: PropTypes.arrayOf(Object),
+  refs: PropTypes.arrayOf(Object),
 }
 
 export default TaskListView;
