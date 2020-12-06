@@ -4,9 +4,11 @@ import '@testing-library/jest-dom/extend-expect'
 import TaskListView from '../TaskListView';
 
 import useTaskEditContext from '../../hooks/useTaskEditContext';
+import useSmoothScrolling from '../hooks/useSmoothScrolling';
 
 // mock essentials for target
 jest.mock('../../hooks/useTaskEditContext');
+jest.mock('../hooks/useSmoothScrolling');
 
 // mock components
 jest.mock('../Task/Task', () => {
@@ -30,6 +32,7 @@ describe('TaskListView', () => {
     const { getByTestId } = render(<TaskListView className={className} tasks={tasks} setTasks={setTasksSpy} refs={refs} />);
 
     // Assert
+    expect(useSmoothScrolling).toBeCalledWith(refs, state.id, state.description);
     expect(getByTestId('list-view')).toBeInTheDocument();
   });
 });
