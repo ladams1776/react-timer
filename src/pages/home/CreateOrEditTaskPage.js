@@ -7,7 +7,7 @@ import TimeContextProvider from './TaskForm/contexts/TimeContext';
 import AddTaskForm from './TaskForm/form/AddTaskForm';
 import TaskListView from './TaskListView/TaskListView';
 import ControlButtons from './TaskListView/ControlButtons/ControlButtons';
-import useFetchAllTasks from './TaskListView/useFetchAllTasks';
+import useFetchAllTasks from 'pages/home/hooks/useFetchAllTasks';
 import styles from './CreateOrEditTaskPage.module.css';
 
 const CreateOrEditTaskPage = ({ match }) => {
