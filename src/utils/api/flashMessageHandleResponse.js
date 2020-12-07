@@ -12,13 +12,15 @@ import PropType from 'prop-types';
  * @param {String} message for success message
  * @param {String} failedMessage for dailed message
  */
-const flashMessageHandleResponse = (dispatch, setErrorFlashMessage, setSuccessFlashMessage, setIsLoadin, message, failedMessage) =>
-    ({ error, items }) => {
+const flashMessageHandleResponse = (dispatch, setErrorFlashMessage, setSuccessFlashMessage, setIsLoadin, message, failedMessage) => {
+    return ({ error, items }) => {
         setIsLoadin(false);
         dispatch(items);
         (error) && failedMessage && setErrorFlashMessage(`${failedMessage}: ${error.name}`);
         !error && message && setSuccessFlashMessage(message);
     }
+}
+
 
 flashMessageHandleResponse.PropType = {
     dispatcxh: PropType.func,
