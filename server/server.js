@@ -104,7 +104,7 @@ app.delete('/api/tasks', deleteAllTaskAction);
 app.post('/api/import', importAction);
 
 // TASKS > DATE TIME
-app.put('/api/task/:taskId/dateTime/:id', UpdateDateTimeAction)
+app.put('/api/task/:taskId/dateTime/:id', UpdateDateTimeAction);
 
 // TAGS
 app.get('/api/tags', getAllTagsAction);
