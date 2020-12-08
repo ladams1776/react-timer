@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { fetchApiData } from 'utils';
 import { useTimeContext } from '..';
 import hydrateTaskForm from './hydrateTaskForm';
@@ -14,19 +13,12 @@ const useUpdateWhenLeave = () => {
     const { state } = useTaskEditContext();
     const { allTags } = useTagContext();
 
-    const onSubmit = useCallback(() => {
+    const onSubmit = () => {
         const location = sessionStorage.getItem('LOCATION');
-
         const dispatch = () => { };
-        const payload = {
-            project: state.project,
-            dateFormatted: new Date(),
-            time,
-            tagSelectedOption: state.tags,
-            description: state.description,
-        };
-        const timeTask = hydrateTaskForm(state, allTags, payload);
-
+        const dateFormatted = new Date();
+        const { id, project, tags, description } = state;
+        const timeTask = hydrateTaskForm(id, allTags, project, description, dateFormatted, time, tags);
         const method = state.id ? 'PUT' : 'POST';
 
         /* We do not want to save the task if the task is a "new task."
@@ -38,8 +30,7 @@ const useUpdateWhenLeave = () => {
         if (state.id !== -1 && isNotFromNewNote) {
             fetchApiData('task', { body: timeTask, method }, dispatch);
         }
-
-    }, [allTags, state, time]);
+    };
 
     return onSubmit
 };
