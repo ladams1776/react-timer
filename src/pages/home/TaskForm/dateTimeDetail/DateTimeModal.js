@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
-import useTaskEditContext from '../../hooks/useTaskEditContext';
+import useFetchTaskById from './useFetchTaskById'
 import EditDateTimeForm from './EditDateTimeForm/EditDateTimeForm';
 import styles from './DateTimeModal.module.css';
 
 const DateTimeModal = ({ taskId, setIsShowing }) => {
-    const { state } = useTaskEditContext();
-    const dateTimes = state.dateTimes;
+    const [dateTimes, setDateTimes] = useState([]);
     const [editDateTime, setEditDateTime] = useState({});
+    useFetchTaskById(taskId, setDateTimes);
 
     const myTimezone = "America/New_York";
     const myDatetimeFormat = "YYYY-MM-DD hh:mm:ss a";
@@ -16,7 +16,7 @@ const DateTimeModal = ({ taskId, setIsShowing }) => {
     return <div className={styles.modal}>
         <div className={styles.modalContent}>
             {!editDateTime?.id
-                ? (dateTimes.map(dT => {
+                ? (dateTimes?.map(dT => {
 
                     //@TODO: abstract this stuff out
                     const myDatetimeString = moment(dT.date)
