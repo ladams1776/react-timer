@@ -1,45 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment-timezone';
 import useFetchTaskById from './useFetchTaskById'
+import DateTimeListView from './DateTimeListView';
 import EditDateTimeForm from './EditDateTimeForm/EditDateTimeForm';
 import styles from './DateTimeModal.module.css';
-
 const DateTimeModal = ({ taskId, setIsShowing }) => {
     const [dateTimes, setDateTimes] = useState([]);
     const [editDateTime, setEditDateTime] = useState({});
     useFetchTaskById(taskId, setDateTimes);
 
-    const myTimezone = "America/New_York";
-    const myDatetimeFormat = "YYYY-MM-DD hh:mm:ss a";
-
     return <div className={styles.modal}>
-        <div className={styles.modalContent}>
-            {!editDateTime?.id
-                ? (dateTimes?.map(dT => {
-
-                    //@TODO: abstract this stuff out
-                    const myDatetimeString = moment(dT.date)
-                        .tz(myTimezone)
-                        .format(myDatetimeFormat);
-
-                    const onClick = () => {
-                        setEditDateTime({ id: dT.id, date: dT.date, minutes: dT.time })
-                    };
-
-
-                    return <div className={styles.content} key={dT.id + dT.time} onClick={onClick}>
-                        <input type="hidden" value={dT.id} name="id" />
-                        <div className={styles.date}>Date: {myDatetimeString}</div>
-                        <div className={styles.time}>Minutes: {dT.time}</div>
-                    </div>
-                }))
+        {
+            !editDateTime?.id
+                ? (<DateTimeListView dateTimes={dateTimes} setEditDateTime={setEditDateTime} setIsShowing={setIsShowing} />)
                 : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} />)
-
-            }
-
-            <button className={styles.closeButton} onClick={() => setIsShowing(false)}>Close</button>
-        </div>
+        }
+        <button className={styles.closeButton} onClick={() => setIsShowing(false)}>X</button>
     </div>
 };
 

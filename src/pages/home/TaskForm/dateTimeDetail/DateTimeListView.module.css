@@ -1,11 +1,12 @@
-
 .modalContent {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+}
 
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   /* This is better for small screens, once min() is better supported */
@@ -18,19 +19,6 @@
   flex-direction: column;
 }
 
-.form {
-    width: 100%;
-}
-
-.date {
-    width: 100%;
-}
-
-.minutes {
-    width: 100%;
-}
-
-.submit {
-    width: 50px;
-    height: 50px;
+.time {
+  width: 100%;
 }
