@@ -6,8 +6,7 @@ import useForm from './useForm';
 const EditDateTimeForm = ({ editDateTime, taskId }) => {
     const { onSubmit, dateTime, setDateTime } = useForm(editDateTime, taskId);
 
-    return <div className={styles.modalContent}>
-        <div className={styles.form}>
+    return <div className={styles.form}>
             <form data-testid="editDateTimeForm">
                 <input type="hidden" name="id" value={dateTime.id} />
                 <div className={styles.date}>Date: <input value={dateTime.date} name="date" onChange={e => setDateTime({ ...dateTime, date: e.target.value })} /></div>
@@ -15,7 +14,6 @@ const EditDateTimeForm = ({ editDateTime, taskId }) => {
                 <button type="submit" className={styles.submit} onClick={onSubmit}>Submit</button>
             </form>
         </div>
-    </div>
 };
 
 EditDateTimeForm.prototype = {

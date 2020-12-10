@@ -5,7 +5,7 @@ import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
 import ProjectDropDown from 'pages/home/TaskForm/projectDropdown/ProjectDropdown';
 import TagMultiSelect from 'pages/home/TaskForm/tagMultiSelect/TagMultiSelect';
 import Timer from 'pages/home/TaskForm/timer/Timer';
-import DateTimeButton from 'pages/home/TaskForm/dateTimeDetail/DateTimeButton';
+import DateTimeButton from './dateTimePage/DateTimeButton';
 import SubmitButton from './SubmitButton';
 import styles from './TaskForm.module.css';
 import { useFetchTags, useFetchTaskById } from '../hooks';

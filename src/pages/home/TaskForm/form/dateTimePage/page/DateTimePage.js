@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useFetchTaskById from './useFetchTaskById'
-import DateTimeListView from './DateTimeListView';
-import EditDateTimeForm from './EditDateTimeForm/EditDateTimeForm';
-import styles from './DateTimeModal.module.css';
-const DateTimeModal = ({ taskId, setIsShowing }) => {
+import DateTimeListView from '../dateTimeListView/DateTimeListView';
+import EditDateTimeForm from '../EditDateTimeForm/EditDateTimeForm';
+
+//@TODO: Make this a generic component
+const DateTimePage = ({ taskId, setIsShowing }) => {
     const [dateTimes, setDateTimes] = useState([]);
     const [editDateTime, setEditDateTime] = useState({});
     useFetchTaskById(taskId, setDateTimes);
 
-    return <div className={styles.modal}>
+    return <div className="childrenContent">
         {
             !editDateTime?.id
                 ? (<DateTimeListView dateTimes={dateTimes} setEditDateTime={setEditDateTime} setIsShowing={setIsShowing} />)
                 : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} />)
         }
-        <button className={styles.closeButton} onClick={() => setIsShowing(false)}>X</button>
     </div>
 };
 
-DateTimeModal.prototype = {
+DateTimePage.prototype = {
     dateTimes: PropTypes.exact([{
         id: PropTypes.string,
         date: PropTypes.string,
@@ -28,4 +28,4 @@ DateTimeModal.prototype = {
     setIsShowing: PropTypes.func,
 }
 
-export default DateTimeModal;
+export default DateTimePage;

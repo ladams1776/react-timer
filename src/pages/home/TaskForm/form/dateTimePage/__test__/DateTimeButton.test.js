@@ -10,7 +10,7 @@ describe('src/pages/home/TaskForm/dateTimeDetail/__test__/DateTimeButton.test.js
         { date: '2020-10-29T03:25:30.167+00:00', time: '100', id: 'uniqueKey' }
     ];
 
-    it('render button, but no DateTimeModal', () => {
+    it('render button, but no DateTimePage', () => {
         // Arrange
 
         // Act
@@ -22,7 +22,7 @@ describe('src/pages/home/TaskForm/dateTimeDetail/__test__/DateTimeButton.test.js
     });
 
     describe("onClick", () => {
-        it('should show DateTimeModal', async () => {
+        it('should show DateTimePage', async () => {
             // Arrange
             const realUseState = React.useState;
             jest.spyOn(React, 'useState')

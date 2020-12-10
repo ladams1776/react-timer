@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import cn from 'classnames';
-import DateTimeModal from './DateTimeModal';
+import { Modal } from 'components';
+import DateTimePage from './page/DateTimePage';
 import styles from './DateTimeButton.module.css';
 
 const DateTimeButton = ({ taskId }) => {
@@ -12,7 +13,9 @@ const DateTimeButton = ({ taskId }) => {
             onClick={() => setIsShowing(!isShowing)}></button>
 
         {isShowing
-            ? (<DateTimeModal taskId={taskId} setIsShowing={setIsShowing} />)
+            ? (<Modal setIsShowing={setIsShowing}>
+                <DateTimePage taskId={taskId} setIsShowing={setIsShowing} />
+            </Modal>)
             : []
         }
     </>
