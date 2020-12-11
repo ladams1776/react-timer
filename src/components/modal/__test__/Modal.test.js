@@ -9,7 +9,7 @@ jest.mock('components/Button', () => {
 })
 
 describe('Modal.test.js', () => {
-    it('should render', () => {
+    it('should render, with children, when children', () => {
         // Arrange
         const setIsShowingSpy = jest.fn();
 
@@ -19,5 +19,17 @@ describe('Modal.test.js', () => {
         // Assert
         expect(getByTestId("Button")).toBeInTheDocument();
         expect(getByTestId("children")).toBeInTheDocument();
+    });
+
+    it('should render, without children, when no children', () => {
+        // Arrange
+        const setIsShowingSpy = jest.fn();
+
+        // Act
+        const { getByTestId, queryByTestId } = render(<Modal setIsShowingSpy={setIsShowingSpy} />);
+
+        // Assert
+        expect(getByTestId("Button")).toBeInTheDocument();
+        expect(queryByTestId("children")).not.toBeInTheDocument();
     });
 });
