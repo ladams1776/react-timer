@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { Button } from 'components';
 import styles from './Modal.module.css';
 
@@ -12,5 +13,10 @@ const Modal = ({ children, setIsShowing }) => {
         </div>
     );
 };
+
+Modal.propTypes = {
+    children: PropTypes.children,
+    setIsShowing: PropTypes.func
+}
 
 export default Modal;
