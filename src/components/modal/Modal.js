@@ -8,14 +8,14 @@ const Modal = ({ children, setIsShowing }) => {
         <div className={styles.modal}>
             <div className={styles.modalContent}>
                 <Button className={styles.closeButton} onClick={() => setIsShowing(false)}>X</Button>
-                {children}
+                {children && children}
             </div>
         </div>
     );
 };
 
 Modal.propTypes = {
-    children: PropTypes.children,
+    children: PropTypes.object,
     setIsShowing: PropTypes.func
 }
 
