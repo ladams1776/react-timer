@@ -14,7 +14,7 @@ const DateTimeItem = ({ dateTime, setEditDateTime}) => {
         setEditDateTime({ id: dateTime.id, date: dateTime.date, minutes: dateTime.time })
     };
 
-    return <div className={styles.content} key={dateTime.id + dateTime.time} onClick={onClick}>
+    return <div className={styles.content} key={dateTime.id + dateTime.time} onClick={onClick} data-testid="DateTimeItem">
         <input type="hidden" value={dateTime.id} name="id" />
         <div className={styles.date}>Date: {myDatetimeString}</div>
         <div className={styles.time}>Minutes: {dateTime.time}</div>
