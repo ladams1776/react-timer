@@ -14,11 +14,11 @@ describe('Modal.test.js', () => {
         const setIsShowingSpy = jest.fn();
 
         // Act
-        const { getByTestId } = render(<Modal setIsShowingSpy={setIsShowingSpy}><div data-testid="children">{"children"}</div></Modal>);
+        const { queryByTestId } = render(<Modal setIsShowingSpy={setIsShowingSpy}><div data-testid="children">{"children"}</div></Modal>);
 
         // Assert
-        expect(getByTestId("Button")).toBeInTheDocument();
-        expect(getByTestId("children")).toBeInTheDocument();
+        expect(queryByTestId("Button")).toBeInTheDocument();
+        expect(queryByTestId("children")).toBeInTheDocument();
     });
 
     it('should render, without children, when no children', () => {
@@ -26,10 +26,10 @@ describe('Modal.test.js', () => {
         const setIsShowingSpy = jest.fn();
 
         // Act
-        const { getByTestId, queryByTestId } = render(<Modal setIsShowingSpy={setIsShowingSpy} />);
+        const { queryByTestId } = render(<Modal setIsShowingSpy={setIsShowingSpy} />);
 
         // Assert
-        expect(getByTestId("Button")).toBeInTheDocument();
-        expect(queryByTestId("children")).not.toBeInTheDocument();
+        expect(queryByTestId("Button")).toBeInTheDocument();
+        expect(queryByTestId("children")).toBeNull();
     });
 });
