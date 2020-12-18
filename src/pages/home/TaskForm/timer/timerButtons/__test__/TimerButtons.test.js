@@ -31,7 +31,7 @@ describe('src/pages/home/TaskForm/timer/timerButtons/__test__/TimerButtons.test.
 
                 // Act
                 render(<TimerButtons time={time} isActive={isActive} setIsActive={setIsActive} />);
-                fireEvent.click(screen.getByTestId("resume"));
+                fireEvent.click(screen.queryByTestId("resume"));
 
                 // Assert
                 expect(setTimeout).toBeCalled();
@@ -62,7 +62,7 @@ describe('src/pages/home/TaskForm/timer/timerButtons/__test__/TimerButtons.test.
 
                 // Act
                 render(<TimerButtons time={time} isActive={isActive} setIsActive={setIsActive} />);
-                fireEvent.click(screen.getByTestId("stop"));
+                fireEvent.click(screen.queryByTestId("stop"));
 
                 // Assert
                 expect(setTimeout).toBeCalled();
@@ -93,7 +93,7 @@ describe('src/pages/home/TaskForm/timer/timerButtons/__test__/TimerButtons.test.
 
                 // Act
                 render(<TimerButtons time={time} isActive={isActive} setIsActive={setIsActive} />);
-                fireEvent.click(screen.getByTestId("start"));
+                fireEvent.click(screen.queryByTestId("start"));
 
                 // Assert
                 expect(setTimeout).toBeCalled();

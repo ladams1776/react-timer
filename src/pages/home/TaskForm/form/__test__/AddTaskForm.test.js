@@ -1,6 +1,8 @@
 import React from "react";
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+
+// import target
 import AddTaskForm from '../AddTaskForm';
 
 // import essentials for target
@@ -20,7 +22,7 @@ jest.mock('pages/home/TaskForm/timer/Timer', () => {
 jest.mock('../SubmitButton', () => {
   return jest.fn(() => <></>)
 });
-jest.mock('pages/home/TaskForm/dateTimeDetail/DateTimeButton', () => {
+jest.mock('../dateTimePage/DateTimeButton', () => {
   return jest.fn(() => <></>);
 });
 jest.mock('pages/home/TaskForm/projectDropdown/ProjectDropdown', () => {
@@ -51,9 +53,9 @@ describe('AddTaskForm', () => {
     useFetchTaskById.mockImplementation();
 
     // Act
-    const { getByTestId } = render(<AddTaskForm taskId={"1"} />);
+    const { queryByTestId } = render(<AddTaskForm taskId={"1"} />);
 
     // Assert
-    expect(getByTestId('addTaskForm')).toBeInTheDocument();
+    expect(queryByTestId('addTaskForm')).toBeInTheDocument();
   });
 });

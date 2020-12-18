@@ -13,9 +13,9 @@ describe("NewButton", () => {
         useOnClick.mockImplementationOnce(addNewTask);
 
         // Act
-        const { getByTestId } = render(<NewButton />);
+        const { queryByTestId } = render(<NewButton />);
 
         // Assert
-        expect(getByTestId("btn-new")).toBeTruthy();
+        expect(queryByTestId("btn-new")).toBeTruthy();
     });
 });

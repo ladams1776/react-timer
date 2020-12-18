@@ -14,10 +14,10 @@ describe('DateTimeItem.test.js', () => {
         };
 
         // Act
-        const { getByTestId } = render(<DateTimeItem dateTime={dateTime} setEditDateTime={setEditDateTimeSpy} />);
+        const { queryByTestId } = render(<DateTimeItem dateTime={dateTime} setEditDateTime={setEditDateTimeSpy} />);
 
         // Assert
-        expect(getByTestId('DateTimeItem')).toBeInTheDocument();
+        expect(queryByTestId('DateTimeItem')).toBeInTheDocument();
     });
 
     it('should call setEditDateTimeSpy on click', () => {
@@ -35,11 +35,11 @@ describe('DateTimeItem.test.js', () => {
         };
 
         // Act
-        const { getByTestId } = render(<DateTimeItem dateTime={dateTime} setEditDateTime={setEditDateTimeSpy} />);
-        fireEvent.click(getByTestId("DateTimeItem"));
+        const { queryByTestId } = render(<DateTimeItem dateTime={dateTime} setEditDateTime={setEditDateTimeSpy} />);
+        fireEvent.click(queryByTestId("DateTimeItem"));
 
         // Assert
-        expect(getByTestId('DateTimeItem')).toBeInTheDocument();
+        expect(queryByTestId('DateTimeItem')).toBeInTheDocument();
         expect(setEditDateTimeSpy).toBeCalledWith(expected);
     });
 });

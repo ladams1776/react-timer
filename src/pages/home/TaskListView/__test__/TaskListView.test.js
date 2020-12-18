@@ -30,10 +30,10 @@ describe('TaskListView', () => {
     useTaskEditContext.mockReturnValue({ state });
 
     // Act
-    const { getByTestId } = render(<TaskListView className={className} tasks={tasks} setTasks={setTasksSpy} refs={refs} />);
+    const { queryByTestId } = render(<TaskListView className={className} tasks={tasks} setTasks={setTasksSpy} refs={refs} />);
 
     // Assert
     expect(useSmoothScrolling).toBeCalledWith(refs, state.id, state.description);
-    expect(getByTestId('list-view')).toBeInTheDocument();
+    expect(queryByTestId('list-view')).toBeInTheDocument();
   });
 });

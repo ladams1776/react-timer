@@ -23,7 +23,7 @@ describe('src/pages/home/TaskForm/dateTimeDetail/EditDateTimeForm/__test__/EditD
             render(<EditDateTimeForm id={'id'} date={'date'} minutes={123} />);
 
             // Assert
-            expect(screen.getByTestId('editDateTimeForm')).toHaveTextContent(expected);
+            expect(screen.queryByTestId('editDateTimeForm')).toHaveTextContent(expected);
         })
     });
 });

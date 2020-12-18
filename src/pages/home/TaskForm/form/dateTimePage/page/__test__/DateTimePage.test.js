@@ -1,12 +1,13 @@
 import React from "react";
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+
+// import target
 import DateTimePage from '../DateTimePage';
 
-// import essentials for target
+// import target dependencies
 import useFetchTaskById from '../useFetchTaskById';
 import useDateTimeState from '../useDateTimeState';
-import DateTimeListView from "../../dateTimeListView/DateTimeListView";
 
 // mock hooks
 jest.mock('../useFetchTaskById');
@@ -33,11 +34,11 @@ describe('DateTimePage.test.js', () => {
         });
 
         // Act
-        const { getByTestId, queryByTestId } = render(<DateTimePage taskId={taskId} setIsShowing={setIsShowingSpy} />);
+        const { queryByTestId } = render(<DateTimePage taskId={taskId} setIsShowing={setIsShowingSpy} />);
 
         // Assert
         expect(useFetchTaskById).toBeCalledWith(taskId, 'setDateTimes');
-        expect(getByTestId('DateTimeListView')).toBeInTheDocument();
+        expect(queryByTestId('DateTimeListView')).toBeInTheDocument();
         expect(queryByTestId('EditDateTimeForm')).toBeNull();
     });
 
@@ -53,11 +54,11 @@ describe('DateTimePage.test.js', () => {
         });
 
         // Act
-        const { getByTestId, queryByTestId } = render(<DateTimePage taskId={taskId} setIsShowing={setIsShowingSpy} />);
+        const { queryByTestId } = render(<DateTimePage taskId={taskId} setIsShowing={setIsShowingSpy} />);
 
         // Assert
         expect(useFetchTaskById).toBeCalledWith(taskId, 'setDateTimes');
-        expect(getByTestId('EditDateTimeForm')).toBeInTheDocument();
+        expect(queryByTestId('EditDateTimeForm')).toBeInTheDocument();
         expect(queryByTestId('DateTimeListView')).toBeNull();
     });
 });

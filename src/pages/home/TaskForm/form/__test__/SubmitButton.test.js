@@ -13,10 +13,10 @@ describe('SubmitButton', () => {
         useSubmit.mockImplementationOnce(() => onSubmit);
 
         // Act
-        const { getByTestId } = render(<SubmitButton />);
+        const { queryByTestId } = render(<SubmitButton />);
 
         // Assert
-        expect(getByTestId('submit')).toHaveTextContent('Submit');
+        expect(queryByTestId('submit')).toHaveTextContent('Submit');
     });
 
     describe('onClick', () => {
@@ -26,11 +26,11 @@ describe('SubmitButton', () => {
             useSubmit.mockImplementationOnce(onSubmit);
 
             // Act
-            const { getByTestId } = render(<SubmitButton />);
-            fireEvent.click(getByTestId("submit"));
+            const { queryByTestId } = render(<SubmitButton />);
+            fireEvent.click(queryByTestId("submit"));
 
             // Assert
-            expect(getByTestId('submit')).toHaveTextContent('Submit');
+            expect(queryByTestId('submit')).toHaveTextContent('Submit');
             expect(onSubmit).toBeCalled();
         });
     })
