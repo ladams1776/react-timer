@@ -5,7 +5,7 @@ import { fetchApiData } from "utils";
 import styles from './DropZone.module.css'
 
 
-const DropZone = ({ className, onClick }) => {
+const DropZone = ({ onClick }) => {
     const { setSuccessFlashMessage } = useFlashMessageContext();
     const { push } = useBrowserHistory();
     const onDrop = useCallback(acceptedFiles => {
@@ -26,19 +26,15 @@ const DropZone = ({ className, onClick }) => {
     });
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    return (<div className={className}>
-        <div className={styles.deleteContainer}>
-            <button onClick={() => onClick()} title="close" className={styles.exitButton}>X</button>
-        </div>
-        <div {...getRootProps()} className={styles.container}>
+    return (
+        <div {...getRootProps()} className={styles.innerModalContent}>
             <input {...getInputProps()} className={styles.innerContainer} />
             {
                 isDragActive
                     ? <p className={styles.dropText}>Drop the files here...</p>
                     : <p className={styles.dropText}>Drag 'n' drop files here, or click to select file</p>
             }
-        </div>
-    </div>);
+        </div>);
 };
 
 export default DropZone;

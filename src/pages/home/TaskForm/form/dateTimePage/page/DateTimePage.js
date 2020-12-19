@@ -4,8 +4,6 @@ import useDateTimeState from './useDateTimeState';
 import useFetchTaskById from './useFetchTaskById'
 import DateTimeListView from '../dateTimeListView/DateTimeListView';
 import EditDateTimeForm from '../EditDateTimeForm/EditDateTimeForm';
-
-//@TODO: Make this a generic component
 const DateTimePage = ({ taskId, setIsShowing }) => {
     const { dateTimes, setDateTimes, editDateTime, setEditDateTime } = useDateTimeState();
     useFetchTaskById(taskId, setDateTimes);
