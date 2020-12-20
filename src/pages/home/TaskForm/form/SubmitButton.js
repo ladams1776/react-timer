@@ -10,9 +10,7 @@ const SubmitButton = () => {
         className={styles.submit}
         onClick={onSubmit}
         testid="submit"
-        title="Submit">
-        Submit
-    </Button>);
+        value="Submit" />);
 };
 
 export default SubmitButton;
