@@ -6,3 +6,4 @@ export { default as useFlashMessageContext } from './useFlashMessageContext';
 export { default as useBrowserHistory } from './useBrowserHistory';
 export { default as useSetCurrentLocation } from './useSetCurrentLocation';
 export { default as useRippleEffect } from './useRippleEffect/useRippleEffect';
+export { default as useRippleEffectById } from './useRippleEffect/useRippleEffectById';

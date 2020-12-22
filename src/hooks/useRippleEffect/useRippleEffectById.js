@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import './ripple-style.css';
 
-const useRippleEffect = (tagName, onClick) => {
+const useRippleEffectById = (id, onClick) => {
     const BUTTON_DELAY_FOR_MATERIAL_EFFECT = 250;
 
     const createRipple = event => {
@@ -25,21 +25,19 @@ const useRippleEffect = (tagName, onClick) => {
     };
 
     useEffect(() => {
-        const tagNames = document.getElementsByTagName(tagName);
-        for (const t of tagNames) {
-            t.addEventListener("click", createRipple);
+        if(id) {
+            const element = document.getElementById(id);
+            element.addEventListener("click", createRipple);
+    
+            return () => {
+                element.removeEventListener("click", createRipple);
+            };
         }
-
-        return () => {
-            for (const t of tagNames) {
-                t.removeEventListener("click", createRipple);
-            }
-        };
-    }, [tagName, onClick]);
+    }, []);
 
     return event => {
         setTimeout(() => onClick(event), BUTTON_DELAY_FOR_MATERIAL_EFFECT);
     }
 };
 
-export default useRippleEffect;
+export default useRippleEffectById;
