@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import './ripple-style.css';
 
+//@TODO: This does not have the complete effect I am looking for.
+//@TODO: When we scroll and click on a button in the content that is being scrolled...
+//@TODO: There is an issue where the ripple effect is in the location where the element
+//@TODO: Originally existed at. Haven't been able to find an easy solution. Will have to circle back.
 const useRippleEffectById = (id, onClick) => {
     const BUTTON_DELAY_FOR_MATERIAL_EFFECT = 250;
 
