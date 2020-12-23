@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import cn from 'classnames';
-import { Modal } from 'components';
+import { Modal, Button } from 'components';
 import DateTimePage from './page/DateTimePage';
 import styles from './DateTimeButton.module.css';
 
@@ -9,8 +9,8 @@ const DateTimeButton = ({ taskId }) => {
     const [isShowing, setIsShowing] = useState(false);
 
     return <>
-        <button className={cn(styles.dateTimeButton, "glyphicon glyphicon-time")}
-            onClick={() => setIsShowing(!isShowing)}></button>
+        <Button className={cn(styles.dateTimeButton, "glyphicon glyphicon-time")}
+            onClick={() => setIsShowing(!isShowing)}></Button>
 
         {isShowing
             ? (<Modal setIsShowing={setIsShowing}>
