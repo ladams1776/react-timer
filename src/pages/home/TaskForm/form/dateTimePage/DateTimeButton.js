@@ -9,8 +9,9 @@ const DateTimeButton = ({ taskId }) => {
     const [isShowing, setIsShowing] = useState(false);
 
     return <>
-        <Button className={cn(styles.dateTimeButton, "glyphicon glyphicon-time")}
-            onClick={() => setIsShowing(!isShowing)}></Button>
+        <Button
+            className={cn(styles.dateTimeButton, "glyphicon glyphicon-time")}
+            onClick={() => setIsShowing(!isShowing)} />
 
         {isShowing
             ? (<Modal setIsShowing={setIsShowing}>
