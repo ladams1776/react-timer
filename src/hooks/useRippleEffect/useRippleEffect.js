@@ -35,7 +35,7 @@ const useRippleEffect = (tagName, onClick) => {
                 t.removeEventListener("click", createRipple);
             }
         };
-    }, [tagName, onClick]);
+    }, []);
 
     return event => {
         setTimeout(() => onClick(event), BUTTON_DELAY_FOR_MATERIAL_EFFECT);
