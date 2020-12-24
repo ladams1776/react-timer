@@ -4,6 +4,7 @@ import useDateTimeState from './useDateTimeState';
 import useFetchTaskById from './useFetchTaskById'
 import DateTimeListView from '../dateTimeListView/DateTimeListView';
 import EditDateTimeForm from '../EditDateTimeForm/EditDateTimeForm';
+
 const DateTimePage = ({ taskId, setIsShowing }) => {
     const { dateTimes, setDateTimes, editDateTime, setEditDateTime } = useDateTimeState();
     useFetchTaskById(taskId, setDateTimes);
@@ -12,7 +13,7 @@ const DateTimePage = ({ taskId, setIsShowing }) => {
         {
             !editDateTime?.id
                 ? (<DateTimeListView dateTimes={dateTimes} setEditDateTime={setEditDateTime} setIsShowing={setIsShowing} />)
-                : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} />)
+                : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} setIsShowing={setIsShowing}/>)
         }
     </div>
 };
