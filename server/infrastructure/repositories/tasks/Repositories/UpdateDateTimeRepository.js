@@ -18,5 +18,6 @@ module.exports = async (taskId, dateTime) => {
     });
 
     task.time = dateTimes;
-    return await task.save(hydrate)
+    const updatedTask = await task.save(hydrate);
+    return updatedTask;
 };
