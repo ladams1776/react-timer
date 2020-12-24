@@ -1,19 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import SubmitButton from './SubmitButton';
 import styles from './EditDateTimeForm.module.css';
-import useForm from './useForm';
-
-const EditDateTimeForm = ({ editDateTime, taskId }) => {
-    const { onSubmit, dateTime, setDateTime } = useForm(editDateTime, taskId);
-
+const EditDateTimeForm = ({ setEditDateTime, editDateTime, taskId, setIsShowing }) => {
     return <div className={styles.form}>
-            <form data-testid="editDateTimeForm">
-                <input type="hidden" name="id" value={dateTime.id} />
-                <div className={styles.date}>Date: <input value={dateTime.date} name="date" onChange={e => setDateTime({ ...dateTime, date: e.target.value })} /></div>
-                <div className={styles.minutes}>Minutes: <input value={dateTime.minutes} name="minutes" onChange={e => setDateTime({ ...dateTime, minutes: e.target.value })} /></div>
-                <button type="submit" className={styles.submit} onClick={onSubmit}>Submit</button>
-            </form>
-        </div>
+        <form method="put" data-testid="editDateTimeForm">
+            <input type="hidden" name="id" value={editDateTime.id} />
+
+            <div className={styles.date}>
+                Date:
+                <input value={editDateTime.date}
+                    name="date"
+                    onChange={e => setEditDateTime({ ...editDateTime, date: e.target.value })} />
+            </div>
+
+            <div
+                className={styles.minutes}>
+                Minutes:
+                <input value={editDateTime.minutes}
+                    name="minutes"
+                    onChange={e => setEditDateTime({ ...editDateTime, minutes: e.target.value })} />
+            </div>
+            <SubmitButton setEditDateTime={setEditDateTime} editDateTime={editDateTime} taskId={taskId} setIsShowing={setIsShowing}/>
+        </form>
+    </div>
 };
 
 EditDateTimeForm.prototype = {
