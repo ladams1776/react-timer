@@ -1,0 +1,15 @@
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { apiMiddleware } from './apiMiddleware';
+import rootReducer from './reducers/rootReducer'; 
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // So we can use Firefox's Redux devtools
+
+const configureStore = () =>  {
+    return createStore(
+        rootReducer,
+        composeEnhancer(applyMiddleware(thunk, apiMiddleware)),
+    );
+};
+
+export default configureStore;
