@@ -3,6 +3,6 @@
  * on the front end. 
  * @param {Function} res express response callback
  */
-module.exports = res => data => {
-    res.jsonp({ items: data });
+module.exports = (res, type) => data => {
+    res.jsonp({ items: data, type });
 }
