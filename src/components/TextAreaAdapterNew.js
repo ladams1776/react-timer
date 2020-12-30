@@ -3,6 +3,33 @@ import { Editor } from '@tinymce/tinymce-react';
 import { Field } from 'react-final-form';
 // import { fieldSubscriptionItems } from 'final-form';
 
+
+const toolbar = 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help';
+
+const Adapter = ({ ...rest }) => {
+  const { onChange } = rest.input;
+  const { value } = rest.input;
+
+  return <Editor
+    name="description"
+    data-test-id="text-area-adapter"
+    value={value}
+    init={{
+      height: '60vh',
+      menubar: true,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount',
+      ],
+      toolbar,
+    }}
+    onEditorChange={onChange}
+    {...rest}
+  />
+};
+
+
 const TextAreaAdapterNew = ({
   name,
   subscription,
@@ -12,32 +39,6 @@ const TextAreaAdapterNew = ({
   ...rest
 }) => {
 
-  const toolbar = 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help';
-
-
-
-  const Adapter = ({ ...rest }) => {
-    const { onChange } = rest.input;
-    const { value } = rest.input;
-
-    return <Editor
-      name="description"
-      data-test-id="text-area-adapter"
-      value={value}
-      init={{
-        height: '60vh',
-        menubar: true,
-        plugins: [
-          'advlist autolink lists link image charmap print preview anchor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table paste code help wordcount',
-        ],
-        toolbar,
-      }}
-      onEditorChange={onChange}
-      {...rest}
-    />
-  };
 
   // const textarea = <textarea
   //   rows="15"
@@ -51,8 +52,7 @@ const TextAreaAdapterNew = ({
   // const comp = navigator.onLine ?
   return <Field
     name="description"
-    subscription={subscription}
-    {...rest}>
+    subscription={subscription}>
 
     {({ ...rest }) => (
       <Adapter {...rest} />
