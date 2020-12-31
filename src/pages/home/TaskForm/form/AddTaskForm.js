@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { useSubmit } from '../hooks';
 import { Form, Field } from 'react-final-form'
+import { useSubmit } from '../hooks';
+import { useFetchProjectOptions } from 'hooks';
 import useTaskEditContext from 'pages/home/hooks/useTaskEditContext';
-import ProjectDropDown from 'pages/home/TaskForm/projectDropdown/ProjectDropdown';
 import TagMultiSelect from 'pages/home/TaskForm/tagMultiSelect/TagMultiSelect';
 import Timer from 'pages/home/TaskForm/timer/Timer';
 import DateTimeButton from './dateTimePage/DateTimeButton';
@@ -17,7 +17,6 @@ import styles from './TaskForm.module.css';
 const AddTaskForm = ({ taskId, className }) => {
   const {
     dispatchTask,
-    onProjectDropDownChange,
     onTagChange,
   } = useTaskEditContext();
 
@@ -27,7 +26,8 @@ const AddTaskForm = ({ taskId, className }) => {
   const onSubmit = useSubmit();
 
   const task = useTaskSelector();
-  const { tags, project } = task;
+  const { tags } = task;
+  const projectOptions = useFetchProjectOptions();
 
   return (<div className={className} data-testid="addTaskForm">
     <DateTimeButton taskId={taskId} />
@@ -45,7 +45,15 @@ const AddTaskForm = ({ taskId, className }) => {
 
             <div className={styles.timeInfoContainer}>
               <div className={styles.innerLeft}>
-                <ProjectDropDown value={project} onChange={onProjectDropDownChange} />
+                
+              <Field name="project" component="select">
+                  {projectOptions.map(project => (
+                    <option value={project.value} key={project.value}>
+                      {project.label}
+                    </option>
+                  ))}
+              </Field>
+
               </div>
               <div className={styles.innerRight}>
                 <TagMultiSelect tags={tags} onChange={onTagChange} />
