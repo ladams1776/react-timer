@@ -8,15 +8,14 @@ const TagMultiSelect = ({ tags, ...rest }) => {
   const { allTags } = useTagContext();
   const transformedTags = useTagTransformer(allTags);
   const initialTags = useTagTransformer(tags);
-
   return (
     <MultiSelectAdapter
       className={styles.select}
       data-test-id="tag-multi-select"
-      {...rest}
       name="tags"
       options={transformedTags}
       value={initialTags}
+      {...rest}
     />
   );
 };
