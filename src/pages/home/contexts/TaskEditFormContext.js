@@ -6,10 +6,6 @@ export const TaskEditFormContext = createContext({});
 const TaskEditFormContextProvider = ({ children }) => {
     const [
         state,
-        onProjectDropDownChange,
-        onTextAreaChange,
-        onTagChange,
-        
         onDateTimes,
         dispatchTask
     ] = useFormReducer();
@@ -17,10 +13,6 @@ const TaskEditFormContextProvider = ({ children }) => {
 
     return <TaskEditFormContext.Provider value={{
         state,
-        onProjectDropDownChange,
-        onTextAreaChange,
-        onTagChange,
-
         onDateTimes,
         dispatchTask
     }}>
