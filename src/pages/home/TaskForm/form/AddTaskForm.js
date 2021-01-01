@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import MultiSelect from 'react-multi-select-component';
 import { Form, Field } from 'react-final-form'
 import { useSubmit } from '../hooks';
 import { useFetchProjectOptions } from 'hooks';
@@ -15,11 +16,7 @@ import TextAreaAdapterNew from '../../../../components/TextAreaAdapterNew';
 import styles from './TaskForm.module.css';
 
 const AddTaskForm = ({ taskId, className }) => {
-  const {
-    dispatchTask,
-    onTagChange,
-  } = useTaskEditContext();
-
+  const { dispatchTask } = useTaskEditContext();
   useFetchTaskById(taskId, dispatchTask);
   useFetchTags();
   useFetchTaskByIdTransition(taskId);
@@ -45,22 +42,23 @@ const AddTaskForm = ({ taskId, className }) => {
 
             <div className={styles.timeInfoContainer}>
               <div className={styles.innerLeft}>
-                
-              <Field name="project" component="select">
+                <Field name="project" component="select">
                   {projectOptions.map(project => (
                     <option value={project.value} key={project.value}>
                       {project.label}
                     </option>
                   ))}
-              </Field>
-
+                </Field>
               </div>
               <div className={styles.innerRight}>
-                <TagMultiSelect tags={tags} onChange={onTagChange} />
+                <Field name="tags" tags={tags} component={TagMultiSelect} />
               </div>
             </div>
+
             <Field name="description" component={TextAreaAdapterNew} />
+            
             <button type="submit">Submit</button>
+
           </form>)
       }} />
   </div>);
