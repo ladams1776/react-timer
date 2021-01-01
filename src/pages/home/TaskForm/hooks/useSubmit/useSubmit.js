@@ -9,7 +9,7 @@ const useSubmit = () => {
   const formDispatch = useFormDispatch(dispatchTask);
   const { time } = useTimeContext();
 
-  return ({ _id, dateTimes, description, project, tags }) => {
+  return ({ _id,  description, project, tags }) => {
     const dateFormatted = getCurrentDateTimeEstFormat();
     const timeTask = hydrateTaskForm(_id, allTags, project, description, dateFormatted, time, tags);
     const method = _id ? 'PUT' : 'POST';
