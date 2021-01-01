@@ -7,9 +7,6 @@ const useTaskEditContext = () => {
     const {
         state,
         dispatch,
-        onProjectDropDownChange,
-        onTextAreaChange,
-        onTagChange,
         onDateTimes,
         onIdChange,
         dispatchTask
@@ -18,9 +15,6 @@ const useTaskEditContext = () => {
     return {
         state,
         dispatch,
-        onProjectDropDownChange,
-        onTextAreaChange,
-        onTagChange,
         onDateTimes,
         onIdChange,
         dispatchTask
