@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
 // import target
-import CreateOrEditTaskPage from '../CreateOrEditTaskPage';
+import TaskPage from '../TaskPage';
 
 // import target dependencies
 import { useSetCurrentLocation } from 'hooks';
@@ -20,7 +20,7 @@ jest.mock('../TaskListView/TaskListView', () => () => <div>TaskListView</div>);
 jest.mock('../TaskListView/ControlButtons/ControlButtons', () => () => (<div>ControlButtons</div>));
 jest.mock('../TaskForm/form/AddTaskForm', () => () => (<div>AddTaskForm</div>));
 
-  describe('CreateOrEditTaskPage', () => {
+  describe('TaskPage', () => {
     it('should render Add Task Form if there is a taskId', () => {
       // Arrange
       useSetCurrentLocation.mockImplementation();
@@ -40,7 +40,7 @@ jest.mock('../TaskForm/form/AddTaskForm', () => () => (<div>AddTaskForm</div>));
       };
 
       // Act
-      const { queryByTestId } = render(<CreateOrEditTaskPage match={match} />);
+      const { queryByTestId } = render(<TaskPage match={match} />);
 
       // Assert
       expect(useSetCurrentLocation).toBeCalledWith(`/task/${match.params.id}`);
@@ -64,7 +64,7 @@ jest.mock('../TaskForm/form/AddTaskForm', () => () => (<div>AddTaskForm</div>));
       const match = {};
 
       // Act
-      const { queryByTestId } = render(<CreateOrEditTaskPage match={match} />);
+      const { queryByTestId } = render(<TaskPage match={match} />);
 
       // Assert
       expect(useSetCurrentLocation).toBeCalledWith('/task/undefined');
