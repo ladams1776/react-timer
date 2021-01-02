@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useDateTimeState from './useDateTimeState';
-import useFetchTaskById from './useFetchTaskById'
 import DateTimeListView from '../dateTimeListView/DateTimeListView';
 import EditDateTimeForm from '../EditDateTimeForm/EditDateTimeForm';
+import useFetchTaskByIdTransition from '../../../hooks/useFetchTaskById/useFetchTaskByIdTransition';
+import useTaskByIdSelector from '../../../../../../redux/selectors/useTaskByIdSelector';
 
 const DateTimePage = ({ taskId, setIsShowing }) => {
-    const { dateTimes, setDateTimes, editDateTime, setEditDateTime } = useDateTimeState();
-    useFetchTaskById(taskId, setDateTimes);
-
+    const { editDateTime, setEditDateTime } = useDateTimeState();
+    useFetchTaskByIdTransition(taskId);
+    const task = useTaskByIdSelector();
+    const { dateTimes } = task;
     return <div className="childrenContent">
         {
             !editDateTime?.id
