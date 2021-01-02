@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { useFlashMessageFetchApiData } from 'utils';
 
+/**
+ * @deprecated in favor of the hook with redux
+ * @param {String} taskId 
+ * @param {function} dispatch 
+ */
 const useFetchTaskById = (taskId, dispatch) => {
   const dateTimeDispatch = task => {
     return dispatch(task.dateTimes);
