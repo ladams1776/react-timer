@@ -1,28 +1,24 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import MultiSelect from 'react-multi-select-component';
 import { Form, Field } from 'react-final-form'
 import { useSubmit } from '../hooks';
 import { useFetchProjectOptions } from 'hooks';
-import useTaskEditContext from 'pages/tasks/hooks/useTaskEditContext';
 import TagMultiSelect from 'pages/tasks/TaskForm/tagMultiSelect/TagMultiSelect';
 import Timer from 'pages/tasks/TaskForm/timer/Timer';
 import DateTimeButton from './dateTimePage/DateTimeButton';
-import { useFetchTags, useFetchTaskById } from '../hooks';
+import { useFetchTags } from '../hooks';
 import useFetchTaskByIdTransition from '../hooks/useFetchTaskById/useFetchTaskByIdTransition';
-import useTaskSelector from 'redux/selectors/useTaskSelector';
+import useTaskByIdSelector from 'redux/selectors/useTaskByIdSelector';
 import TextAreaAdapterNew from '../../../../components/TextAreaAdapterNew';
 
 import styles from './TaskForm.module.css';
 
 const EditTaskForm = ({ taskId, className }) => {
-  const { dispatchTask } = useTaskEditContext();
-  useFetchTaskById(taskId, dispatchTask);
   useFetchTags();
   useFetchTaskByIdTransition(taskId);
   const onSubmit = useSubmit();
 
-  const task = useTaskSelector();
+  const task = useTaskByIdSelector();
   const { tags } = task;
   const projectOptions = useFetchProjectOptions();
 
@@ -37,7 +33,7 @@ const EditTaskForm = ({ taskId, className }) => {
           <form
             onSubmit={handleSubmit}
             className={styles.taskForm}
-            method={taskId === -1 ? 'POST' : 'PUT'}
+            method="PUT"
             data-test-id="form">
 
             <div className={styles.timeInfoContainer}>
