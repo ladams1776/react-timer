@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
 import {
     FETCH_TASK_BY_ID,
-    FETCH_TASK_BY_ID_RESPONSE
+    FETCH_TASK_BY_ID_RESPONSE,
+    PUT_TASK_BY_ID,
+    PUT_TASK_BY_ID_RESPONSE
 } from "../types";
 
 export const fetchTaskByIdReducer = (state = null, action) => {
@@ -31,8 +33,19 @@ export const responseTimeByTaskIdReducer = (state = null, action) => {
     }
 }
 
+
+export const putTaskByIdReducer = (state = null, action) => {
+    switch (action.type) {
+        case PUT_TASK_BY_ID:
+            return action.data;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     fetchTaskByIdReducer: fetchTaskByIdReducer,
     taskById: responseTaskByIdReducer,
-    time: responseTimeByTaskIdReducer,
+    time: responseTimeByTaskIdReducer, 
+    putTaskByIdReducer: putTaskByIdReducer,
 });
