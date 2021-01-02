@@ -10,7 +10,7 @@ const fileupload = require("express-fileupload");
 // TASK ACTION imports
 const getAllTasksAction = require('./application/requestHandlers/tasks/getAllTasksAction');
 const fetchTaskByIdAction = require('./application/requestHandlers/tasks/fetchTaskByIdAction');
-const updateTaskAction = require('./application/requestHandlers/tasks/updateTaskAction');
+const putTaskAction = require('./application/requestHandlers/tasks/putTaskAction');
 const getAllTagsAction = require('./application/requestHandlers/tags/getAllTagsAction');
 const addTaskAction = require('./application/requestHandlers/tasks/addTaskAction');
 const deleteTaskByIdAction = require('./application/requestHandlers/tasks/deleteTaskByIdAction');
@@ -96,7 +96,7 @@ app.use(bodyParser.json({ limit: '50mb', extended: true }));
 app.get('/api/tasks', getAllTasksAction);
 app.get('/api/task/:id', fetchTaskByIdAction);
 app.post('/api/task/', addTaskAction);
-app.put('/api/task', updateTaskAction);
+app.put('/api/task', putTaskAction);
 app.delete('/api/task/:id', deleteTaskByIdAction);
 app.delete('/api/tasks', deleteAllTaskAction);
 
