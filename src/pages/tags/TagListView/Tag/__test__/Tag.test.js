@@ -6,7 +6,7 @@ import DeleteTagButton from '../DeleteTagButton/DeleteTagButton';
 
 jest.mock('hooks/useBrowserHistory');
 
-describe('src/pages/home/TaskListView/Tag/__test__/Tag.test.js', () => {
+describe('src/pages/tasks/TaskListView/Tag/__test__/Tag.test.js', () => {
   // Arrange
   let wrapper;
 

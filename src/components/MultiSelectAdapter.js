@@ -1,6 +1,6 @@
 import React from 'react';
 import MultiSelect from 'react-multi-select-component';
-import { useTagTransformer } from '../pages/home/TaskForm/hooks';
+import { useTagTransformer } from '../pages/tasks/TaskForm/hooks';
 
 const MultiSelectAdapter = ({ ...rest }) => {
     const { onChange, value } = rest.input;
