@@ -7,14 +7,12 @@ const TaskEditFormContextProvider = ({ children }) => {
     const [
         state,
         onDateTimes,
-        dispatchTask
     ] = useFormReducer();
 
 
     return <TaskEditFormContext.Provider value={{
         state,
         onDateTimes,
-        dispatchTask
     }}>
         {children}
     </TaskEditFormContext.Provider>

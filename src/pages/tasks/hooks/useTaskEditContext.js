@@ -6,18 +6,14 @@ const useTaskContext = () => useContext(TaskEditFormContext);
 const useTaskEditContext = () => {
     const {
         state,
-        dispatch,
         onDateTimes,
         onIdChange,
-        dispatchTask
     } = useTaskContext();
 
     return {
         state,
-        dispatch,
         onDateTimes,
         onIdChange,
-        dispatchTask
     };
 };
 

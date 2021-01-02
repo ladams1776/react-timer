@@ -20,21 +20,9 @@ const useFormReducer = () => {
     dispatch({ dateTimes: e })
   }
 
-  const dispatchTask = data => {
-    dispatch({
-      id: data._id,
-      time: data.time,
-      dateTimes: data.dateTimes,
-      description: data.description,
-      tags: data.tags,
-      project: data.contractId,
-    });
-  }
-
   return [
     state,
     onDateTimes,
-    dispatchTask
   ];
 };
 
