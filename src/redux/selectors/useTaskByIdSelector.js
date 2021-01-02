@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-const useTaskSelector = () => {
+const useTaskByIdSelector = () => {
     return useSelector(state => {
         return {
             ...state.tasks.taskById,
@@ -9,4 +9,4 @@ const useTaskSelector = () => {
     });
 };
 
-export default useTaskSelector;
+export default useTaskByIdSelector;
