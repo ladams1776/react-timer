@@ -41,7 +41,7 @@ const TimerButtons = ({ time, isActive = false, setIsActive, children }) => {
 };
 
 TimerButtons.propTypes = {
-    time: PropTypes.number.isRequired,
+    time: PropTypes.number,
     isActive: PropTypes.bool.isRequired,
     setIsActive: PropTypes.func.isRequired,
     children: PropTypes.element,

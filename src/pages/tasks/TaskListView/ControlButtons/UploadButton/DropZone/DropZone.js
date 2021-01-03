@@ -8,6 +8,7 @@ import styles from './DropZone.module.css'
 const DropZone = ({ onClick }) => {
     const { setSuccessFlashMessage } = useFlashMessageContext();
     const { push } = useBrowserHistory();
+
     const onDrop = useCallback(acceptedFiles => {
         const reader = new FileReader()
 
@@ -23,7 +24,9 @@ const DropZone = ({ onClick }) => {
             });
         }
         reader.readAsBinaryString(acceptedFiles[0]);
-    });
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    }, []);
+
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return (

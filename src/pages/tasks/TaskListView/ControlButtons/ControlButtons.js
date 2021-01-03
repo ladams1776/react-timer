@@ -10,9 +10,7 @@ const ControlButtons = tasks => {
     <HomeButton />
     <DownloadButton tasks={tasks} />
     <UploadButton />
-    {/* <ImportButton /> */}
     <NewButton />
-    {/* <DropZone /> */}
   </div>
 };
 
