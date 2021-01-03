@@ -35,6 +35,7 @@ const useRippleEffect = (tagName, onClick) => {
                 t.removeEventListener("click", createRipple);
             }
         };
+        /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, []);
 
     return event => {

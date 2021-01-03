@@ -29,14 +29,15 @@ const useRippleEffectById = (id, onClick) => {
     };
 
     useEffect(() => {
-        if(id) {
+        if (id) {
             const element = document.getElementById(id);
             element.addEventListener("click", createRipple);
-    
+
             return () => {
                 element.removeEventListener("click", createRipple);
             };
         }
+        /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, []);
 
     return event => {
