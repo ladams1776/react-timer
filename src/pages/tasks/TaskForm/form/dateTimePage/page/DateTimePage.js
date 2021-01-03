@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useDateTimeState from './useDateTimeState';
+import useTaskByIdSelector from 'redux/selectors/useTaskByIdSelector';
 import DateTimeListView from '../dateTimeListView/DateTimeListView';
 import EditDateTimeForm from '../EditDateTimeForm/EditDateTimeForm';
 import useFetchTaskByIdDispatch from '../../../hooks/useFetchTaskById/useFetchTaskByIdDispatch';
-import useTaskByIdSelector from '../../../../../../redux/selectors/useTaskByIdSelector';
 
+import styles from './DateTimePage.module.css';
 const DateTimePage = ({ taskId, setIsShowing }) => {
-    const { editDateTime, setEditDateTime } = useDateTimeState();
+    const [editDateTime, setEditDateTime] = React.useState({}); 
     useFetchTaskByIdDispatch(taskId);
-    const task = useTaskByIdSelector();
-    const { dateTimes } = task;
-    return <div className="childrenContent">
+    const { dateTimes }  = useTaskByIdSelector();
+    return <div className={styles.childrenContent}>
         {
             !editDateTime?.id
                 ? (<DateTimeListView dateTimes={dateTimes} setEditDateTime={setEditDateTime} setIsShowing={setIsShowing} />)
@@ -21,12 +20,13 @@ const DateTimePage = ({ taskId, setIsShowing }) => {
 };
 
 DateTimePage.prototype = {
-    dateTimes: PropTypes.exact([{
-        id: PropTypes.string,
-        date: PropTypes.string,
-        minutes: PropTypes.number
-    }]),
-    setIsShowing: PropTypes.func,
+    // dateTimes: PropTypes.exact([{
+    //     id: PropTypes.string,
+    //     date: PropTypes.string,
+    //     minutes: PropTypes.number
+    // }]),
+    taskId: PropTypes.string.isRequired,
+    setIsShowing: PropTypes.func.isRequired,
 }
 
 export default DateTimePage;
