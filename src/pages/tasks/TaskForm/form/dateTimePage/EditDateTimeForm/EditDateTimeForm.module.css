@@ -1,40 +1,34 @@
-
-.modalContent {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  /* This is better for small screens, once min() is better supported */
-  /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
-  grid-gap: 10px;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-}
-
 .form {
-    width: 100%;
+width: 300px;
+height: 300px;
+margin: auto;
+justify-self: right;
+background-color: rgb(200, 200, 200);
+padding: 2em;
+border-radius: 10px;
+display: flex;
+flex-direction: column;
 }
 
-.date {
-    width: 100%;
+.field {
+  display: flex;
 }
 
-.minutes {
-    width: 100%;
+.field > input {
+  flex: 3 1;
+
+}
+
+label {
+flex: 1 1;
+}
+
+.submitContainer {
+  display: flex;
+  height: 100%;
+  flex-direction: row-reverse;
 }
 
 .submit {
-  border: none;
-  background-color: #2d73f5;
-  border-radius: 4px;
-  height: 50px;
-  width: 75px;
-  margin-top: 1em;
+  font-size: .95rem;
 }
