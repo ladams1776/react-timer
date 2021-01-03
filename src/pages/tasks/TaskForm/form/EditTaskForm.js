@@ -14,13 +14,14 @@ import TextAreaAdapterNew from '../../../../components/TextAreaAdapterNew';
 import styles from './TaskForm.module.css';
 
 const EditTaskForm = ({ taskId, className }) => {
-  useFetchTags();
   useFetchTaskByIdDispatch(taskId);
-  const onSubmit = useSubmit();
-
   const task = useTaskByIdSelector();
   const { tags } = task;
+
+  useFetchTags();
   const projectOptions = useFetchProjectOptions();
+  
+  const onSubmit = useSubmit();
 
   return (<div className={className} data-testid="addTaskForm">
     <DateTimeButton taskId={taskId} />
@@ -31,10 +32,10 @@ const EditTaskForm = ({ taskId, className }) => {
       render={({ handleSubmit }) => {
         return (
           <form
+            data-testid="form"
             onSubmit={handleSubmit}
             className={styles.taskForm}
-            method="PUT"
-            data-test-id="form">
+            method="PUT">
 
             <div className={styles.timeInfoContainer}>
               <div className={styles.innerLeft}>
