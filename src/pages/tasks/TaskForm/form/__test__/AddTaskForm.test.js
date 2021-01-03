@@ -8,7 +8,7 @@ import AddTaskForm from '../AddTaskForm';
 // import essentials for target
 import useTaskEditContext from 'pages/tasks/hooks/useTaskEditContext';
 import useFetchTags from 'pages/tasks/TaskForm/hooks/useFetchTags';
-import useFetchTaskById from '../../hooks/useFetchTaskById/useFetchTaskById';
+import useFetchTaskById from '../../hooks/useFetchTaskById/LEGACY___useFetchTaskById';
 
 // mock hooks
 jest.mock('pages/tasks/hooks/useTaskEditContext');
