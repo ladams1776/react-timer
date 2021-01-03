@@ -1,29 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SubmitButton from './SubmitButton';
+import { Field, Form } from 'react-final-form';
+import { Button } from 'components';
+import useSubmit from './useSubmit';
 import styles from './EditDateTimeForm.module.css';
 const EditDateTimeForm = ({ setEditDateTime, editDateTime, taskId, setIsShowing }) => {
-    return <div className={styles.form}>
-        <form method="put" data-testid="editDateTimeForm">
-            <input type="hidden" name="id" value={editDateTime.id} />
+    const onSubmit = useSubmit(editDateTime, setEditDateTime, taskId, setIsShowing);
 
-            <div className={styles.date}>
-                Date:
-                <input value={editDateTime.date}
-                    name="date"
-                    onChange={e => setEditDateTime({ ...editDateTime, date: e.target.value })} />
-            </div>
+    return <Form
+        onSubmit={onSubmit}
+        initialValues={editDateTime}
+        render={({ handleSubmit }) => {
+            return (
+                <form
+                    className={styles.form}
+                    data-testid="form"
+                    onSubmit={handleSubmit}
+                    method="PUT">
 
-            <div
-                className={styles.minutes}>
-                Minutes:
-                <input value={editDateTime.minutes}
-                    name="minutes"
-                    onChange={e => setEditDateTime({ ...editDateTime, minutes: e.target.value })} />
-            </div>
-            <SubmitButton setEditDateTime={setEditDateTime} editDateTime={editDateTime} taskId={taskId} setIsShowing={setIsShowing}/>
-        </form>
-    </div>
+                    <Field type="hidden" name="id" value={editDateTime.id} component="input" />
+                    <div className={styles.field}><label htmlFor="date">Date:</label> <Field type="text" name="date" id="date" value={editDateTime.date} component="input" /></div>
+                    <div className={styles.field}><label htmlFor="minutes">Minutes:</label><Field type="text" name="minutes" id="minutes" value={editDateTime.minutes} component="input" /></div>
+                    <div className={styles.submitContainer}><Button type="submit" className={styles.submit} value="Submit" /></div>
+
+                </form>)
+        }}
+    />
 };
 
 EditDateTimeForm.prototype = {
