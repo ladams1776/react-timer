@@ -7,7 +7,7 @@ import TagMultiSelect from 'pages/tasks/TaskForm/tagMultiSelect/TagMultiSelect';
 import Timer from 'pages/tasks/TaskForm/timer/Timer';
 import DateTimeButton from './dateTimePage/DateTimeButton';
 import { useFetchTags } from '../hooks';
-import useFetchTaskByIdTransition from '../hooks/useFetchTaskById/useFetchTaskByIdTransition';
+import useFetchTaskByIdDispatch from '../hooks/useFetchTaskById/useFetchTaskByIdDispatch';
 import useTaskByIdSelector from 'redux/selectors/useTaskByIdSelector';
 import TextAreaAdapterNew from '../../../../components/TextAreaAdapterNew';
 
@@ -15,7 +15,7 @@ import styles from './TaskForm.module.css';
 
 const EditTaskForm = ({ taskId, className }) => {
   useFetchTags();
-  useFetchTaskByIdTransition(taskId);
+  useFetchTaskByIdDispatch(taskId);
   const onSubmit = useSubmit();
 
   const task = useTaskByIdSelector();
@@ -52,7 +52,7 @@ const EditTaskForm = ({ taskId, className }) => {
             </div>
 
             <Field name="description" component={TextAreaAdapterNew} />
-            
+
             <button type="submit">Submit</button>
 
           </form>)
