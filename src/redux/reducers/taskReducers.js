@@ -3,7 +3,6 @@ import {
     FETCH_TASK_BY_ID,
     FETCH_TASK_BY_ID_RESPONSE,
     PUT_TASK_BY_ID,
-    PUT_TASK_BY_ID_RESPONSE
 } from "../types";
 
 export const fetchTaskByIdReducer = (state = null, action) => {
