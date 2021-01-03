@@ -6,7 +6,7 @@ import styles from './Button.module.css';
 
 
 const Button = ({ className, onClick, value, children, testid, ...rest }) => {
-  const clickCallback = useRippleEffect('button', onClick);
+  const clickCallback = useRippleEffect('button', onClick || (() => {}));
   return (<button className={cn('btn', 'btn-default', 'navbar-btn', styles.baseBtn, className)}
     onClick={clickCallback}
     data-testid={testid}
