@@ -1,10 +1,10 @@
 import fetchApiDataFlashMessage from '../utils/api/fetchApiData/fetchApiDataFlashMessage';
 import fetchApiDataTest from '../utils/api/fetchApiData/fetchApiDataTest';
 
-export const apiMiddleware = reduxStore => {
+const apiMiddleware = (reduxStore:any):Function => {
     const { dispatch } = reduxStore;
 
-    return next => action => {
+    return (next:Function) => (action:action) => {
         const { type, url, method, requestApi, isFlash, body } = action;
 
         if (type && requestApi && isFlash) {
@@ -17,3 +17,14 @@ export const apiMiddleware = reduxStore => {
         }
     }
 }
+
+interface action {
+    type: string;
+    url: string;
+    method: string;
+    requestApi: boolean;
+    isFlash: boolean;
+    body: Object;
+}
+
+export default apiMiddleware;
