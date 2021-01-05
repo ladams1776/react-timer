@@ -5,7 +5,14 @@ import {
     PUT_TASK_BY_ID,
 } from "../types";
 
-export const fetchTaskByIdReducer = (state = null, action) => {
+interface Action {
+    type: string;
+    data: {
+        time: string;
+    }
+};
+
+export const fetchTaskByIdReducer = (state = null, action:Action) => {
     switch (action.type) {
         case FETCH_TASK_BY_ID:
             return state;
@@ -14,7 +21,7 @@ export const fetchTaskByIdReducer = (state = null, action) => {
     }
 };
 
-export const responseTaskByIdReducer = (state = null, action) => {
+export const responseTaskByIdReducer = (state = null, action:Action) => {
     switch (action.type) {
         case FETCH_TASK_BY_ID_RESPONSE:
             return action.data;
@@ -23,7 +30,7 @@ export const responseTaskByIdReducer = (state = null, action) => {
     }
 }
 
-export const responseTimeByTaskIdReducer = (state = null, action) => {
+export const responseTimeByTaskIdReducer = (state = null, action:Action) => {
     switch (action.type) {
         case FETCH_TASK_BY_ID_RESPONSE:
             return action.data.time;
@@ -33,7 +40,7 @@ export const responseTimeByTaskIdReducer = (state = null, action) => {
 }
 
 
-export const putTaskByIdReducer = (state = null, action) => {
+export const putTaskByIdReducer = (state = null, action:Action) => {
     switch (action.type) {
         case PUT_TASK_BY_ID:
             return action.data;
