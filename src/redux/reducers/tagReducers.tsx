@@ -3,8 +3,9 @@ import {
     FETCH_ALL_TAGS,
     FETCB_ALL_TAGS_RESPONSE
 } from "../types";
+import { Tag, ResponseAction } from 'interfaces/redux/reducers';
 
-export const fetchTagsReducer = (state = null, action) => {
+export const fetchTagsReducer = (state = null, action: ResponseAction<'FETCH_ALL_TAGS', Tag>) => {
     switch (action.type) {
         case FETCH_ALL_TAGS:
             return state;
@@ -13,7 +14,7 @@ export const fetchTagsReducer = (state = null, action) => {
     }
 };
 
-export const responseAllTagsReducer = (state = null, action) => {
+export const responseAllTagsReducer = (state = null, action:ResponseAction<'FETCB_ALL_TAGS_RESPONSE', Tag>) => {
     switch (action.type) {
         case FETCB_ALL_TAGS_RESPONSE:
             return action.data;
