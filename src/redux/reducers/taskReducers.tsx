@@ -4,15 +4,25 @@ import {
     FETCH_TASK_BY_ID_RESPONSE,
     PUT_TASK_BY_ID,
 } from "../types";
-
-interface Action {
-    type: string;
-    data: {
-        time: string;
-    }
+import { ResponseAction, Tag } from 'interfaces/redux/reducers';
+interface DateTime {
+    id: string;
+    time: string;
+    date: string;
 };
 
-export const fetchTaskByIdReducer = (state = null, action:Action) => {
+interface TaskAction {
+    _id: string;
+    contractId: number;
+    description:string;
+    date:string;
+    tags: Tag[];
+    time?: number;
+    dateTimes: DateTime[]
+}
+
+
+export const fetchTaskByIdReducer = (state = null, action: ResponseAction<'FETCH_TASK_BY_ID', TaskAction>) => {
     switch (action.type) {
         case FETCH_TASK_BY_ID:
             return state;
@@ -21,7 +31,7 @@ export const fetchTaskByIdReducer = (state = null, action:Action) => {
     }
 };
 
-export const responseTaskByIdReducer = (state = null, action:Action) => {
+export const responseTaskByIdReducer = (state = null, action:ResponseAction<'FETCH_TASK_BY_ID_RESPONSE', TaskAction>) => {
     switch (action.type) {
         case FETCH_TASK_BY_ID_RESPONSE:
             return action.data;
@@ -30,7 +40,7 @@ export const responseTaskByIdReducer = (state = null, action:Action) => {
     }
 }
 
-export const responseTimeByTaskIdReducer = (state = null, action:Action) => {
+export const responseTimeByTaskIdReducer = (state = null, action:ResponseAction<'FETCH_TASK_BY_ID_RESPONSE', TaskAction>) => {
     switch (action.type) {
         case FETCH_TASK_BY_ID_RESPONSE:
             return action.data.time;
@@ -40,7 +50,7 @@ export const responseTimeByTaskIdReducer = (state = null, action:Action) => {
 }
 
 
-export const putTaskByIdReducer = (state = null, action:Action) => {
+export const putTaskByIdReducer = (state = null, action:ResponseAction<'PUT_TASK_BY_ID', TaskAction>) => {
     switch (action.type) {
         case PUT_TASK_BY_ID:
             return action.data;
