@@ -2,7 +2,10 @@ import useBrowserHistory from 'hooks/useBrowserHistory';
 import { Location } from 'interfaces/global';
 import checkToMakeSureUserWantsToLeave from './checkToMakeSureUserWantsToLeave';
 
-const useHistoryBlock = (location: Location) => {
+type UnregisterCallback = () => void;
+
+
+const useHistoryBlock = (location: Location): UnregisterCallback => {
   const history = useBrowserHistory();
 
   return () => history.block(checkToMakeSureUserWantsToLeave(location));
