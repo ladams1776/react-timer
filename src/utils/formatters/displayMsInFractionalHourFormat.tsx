@@ -9,6 +9,8 @@
  * @param {Number} milliseconds: Time in milliseconds format
  * @returns {String} in '0.00' format.
  */
-export default function displayMsInFractionalHourFormat(milliseconds) {
+const displayMsInFractionalHourFormat = (milliseconds: number): string => {
   return (milliseconds / 1000 / 60 / 60).toFixed(2);
 }
+
+export default displayMsInFractionalHourFormat;
