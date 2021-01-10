@@ -1,19 +1,18 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import { Field } from 'react-final-form';
 
-const TextAreaAdapter = ({ description, setDescription, id }) => {
-  const toolbar = 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help';
+const toolbar = 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help';
 
-  const onHandler = e => {
-    setDescription(e.target.value);
-  }
+export const Adapter = ({ ...rest }) => {
+  const { onChange } = rest.input;
+  const { value } = rest.input;
 
-  const adapter = <Editor
-    key={id}
-    value={description}
-    id={id}
+  return <Editor
     name="description"
     data-test-id="text-area-adapter"
+    test-dataid="textAreaAdapter"
+    value={value}
     init={{
       height: '60vh',
       menubar: true,
@@ -24,20 +23,47 @@ const TextAreaAdapter = ({ description, setDescription, id }) => {
       ],
       toolbar,
     }}
-    onEditorChange={setDescription}
-  />;
+    onEditorChange={onChange}
+    {...rest}
+  />
+};
 
-  const textarea = <textarea
-    rows="15"
-    cols="125"
+
+const TextAreaAdapter = ({
+  name,
+  subscription,
+  fieldsState = {},
+  children,
+  originalRender,
+  ...rest
+}) => {
+  // const textarea = <textarea
+  //   rows="15"
+  //   cols="125"
+  //   name="description"
+  //   value={description}
+  //   onChange={onHandler}
+  //   id={id}
+  // />;
+
+  // const comp = navigator.onLine ?
+  return <Field
     name="description"
-    value={description}
-    onChange={onHandler}
-    id={id}
-  />;
+    subscription={subscription}>
 
-  const comp = navigator.onLine ? adapter : textarea;
-  return comp;
+    {({ ...rest }) => (
+      <Adapter {...rest} />
+    )}
+
+  </Field>
+
+
+  // : <Field name={name} type="textarea"
+  //   name={name}
+  //   subscription={subscription}
+  //   originalRender={originalRender || children}
+  //   fieldsState={{ ...fieldSubscriptionItems, [name]: fieldsState }} />;
+  // return comp;
 };
 
 export default TextAreaAdapter;
