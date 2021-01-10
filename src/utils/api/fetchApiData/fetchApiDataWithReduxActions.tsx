@@ -9,7 +9,7 @@ type dispatchParam = (data: {}) => void;
 const fetchApiDataWithReduxActions = async (url: string, { method, body, ...settings }: FetchParams, dispatch: dispatchParam) => {
   const headers = { 'Content-Type': 'application/json' };
   const config = {
-    method: method || body ? 'POST' : 'GET',
+    method: method ? method : body ? 'POST' : 'GET',
     ...settings,
     headers: {
       ...headers,
