@@ -16,15 +16,15 @@ interface TaskListViewProp {
 const TaskListView: React.FC<TaskListViewProp> = ({ className, tasks, setTasks, refs }) => {
   const task = useTaskByIdSelector();
   console.log(task);
-  const { _id, description } = task;
+  const { id, description } = task;
 
-  useSmoothScrolling(refs, _id, description);
+  useSmoothScrolling(refs, id, description);
 
   return (
     <div className={cn(className, styles.task, { [styles.listViewAndTask]: id })} data-testid="list-view">
       <ul className={styles.taskList}>
         {tasks.map((task: TaskInterface) => {
-          const desc = task._id === _id ? description : task.description;
+          const desc = task._id === id ? description : task.description;
           const ref = refs[task._id];
           return (
             <li key={task._id} className={cn(styles.task)} ref={ref}>

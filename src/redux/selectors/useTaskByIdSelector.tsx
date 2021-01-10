@@ -4,8 +4,8 @@ const useTaskByIdSelector = (): ReturnedState => {
   return useSelector(
     (state: State): ReturnedState => {
       return {
-        id: state.tasks.taskById._id,
         ...state.tasks.taskById,
+        id: state?.tasks?.taskById?._id,
         project: state?.tasks?.taskById?.contractId,
       };
     },
