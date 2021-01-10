@@ -7,12 +7,10 @@ const DateTimeListView = ({ dateTimes, setEditDateTime }) => {
 
     return <div className={styles.grid}>
         {dateTimes?.map(dT => {
-            if (dT?.id) {
-                return <DateTimeItem
-                    dateTime={dT}
-                    key={dT.id + dT.time}
-                    setEditDateTime={setEditDateTime} />
-            }
+            return <DateTimeItem
+                dateTime={dT}
+                key={dT.id + dT.time}
+                setEditDateTime={setEditDateTime} />
         })}
     </div>
 }
