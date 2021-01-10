@@ -13,7 +13,7 @@ const Timer = () => {
   useEffect(() => setTime(task.time), [task.time, setTime]);
   const setTimeCallback = useCallback(times => setTime(times), [setTime]);
   useUpdateCurrentTime(time, isActive, setTimeCallback);
-  const yeah = displayMsInFractionalHourFormat(time);
+  const millisecondsInFractionalHourFormat = displayMsInFractionalHourFormat(time);
   const msTime = (time && ms(time, { secondsDecimalDigits: 2 })) || 0;
 
   return (
@@ -24,7 +24,7 @@ const Timer = () => {
       setIsActive={setIsActive}
     >
       <div data-test-id="timer__display__content">
-        <div data-test-id="fractionHour">{`Hours: ${yeah}`}</div>
+        <div data-test-id="fractionHour">{`Hours: ${millisecondsInFractionalHourFormat}`}</div>
         <input
           data-test-id="secondDecimalDigitHour"
           value={msTime}
