@@ -15,7 +15,6 @@ interface TaskListViewProp {
 
 const TaskListView: React.FC<TaskListViewProp> = ({ className, tasks, setTasks, refs }) => {
   const task = useTaskByIdSelector();
-  console.log(task);
   const { id, description } = task;
 
   useSmoothScrolling(refs, id, description);
