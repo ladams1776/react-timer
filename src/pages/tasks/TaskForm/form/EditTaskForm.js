@@ -9,7 +9,7 @@ import DateTimeButton from './dateTimePage/DateTimeButton';
 import { useFetchTags } from '../hooks';
 import useFetchTaskByIdDispatch from '../hooks/useFetchTaskById/useFetchTaskByIdDispatch';
 import useTaskByIdSelector from 'redux/selectors/useTaskByIdSelector';
-import TextAreaAdapterNew from '../../../../components/TextAreaAdapterNew';
+import TextAreaAdapter from '../../../../components/TextAreaAdapter';
 
 import styles from './TaskForm.module.css';
 
@@ -52,7 +52,7 @@ const EditTaskForm = ({ taskId, className }) => {
               </div>
             </div>
 
-            <Field name="description" component={TextAreaAdapterNew} />
+            <Field name="description" component={TextAreaAdapter} />
 
             <button type="submit">Submit</button>
 
