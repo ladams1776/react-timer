@@ -1,5 +1,5 @@
 interface FetchParams {
-  body?: {};
+  body?: any;
   headers: {};
 }
 
@@ -16,8 +16,6 @@ const fetchApiData = async (url: string, { body, ...settings }: FetchParams, dis
     },
     body: body ? JSON.stringify(body) : null,
   };
-
-  if (body) config.body = JSON.stringify(body);
 
   const response = await fetch(`/api/${url}`, config);
   const data = await response.json();
