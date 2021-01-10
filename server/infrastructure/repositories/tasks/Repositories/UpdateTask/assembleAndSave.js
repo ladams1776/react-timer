@@ -2,7 +2,6 @@ const EntityToDto = require("../FetchTaskByIdRepository/EntityToDto");
 const sumExistingTime = require("./sumExistingTime");
 
 module.exports = (dto, res) => (err, doc) => {
-    console.log('this is dsa', doc)
     if (err) throw err;
 
     const existingTime = sumExistingTime(doc);
