@@ -1,20 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { displayMsInFractionalHourFormat } from 'utils';
 import useTaskByIdSelector from 'redux/selectors/useTaskByIdSelector';
 import DateTimeListView from '../dateTimeListView/DateTimeListView';
 import EditDateTimeForm from '../EditDateTimeForm/EditDateTimeForm';
 import useFetchTaskByIdDispatch from '../../../hooks/useFetchTaskById/useFetchTaskByIdDispatch';
-
 import styles from './DateTimePage.module.css';
 const DateTimePage = ({ taskId, setIsShowing }) => {
-    const [editDateTime, setEditDateTime] = React.useState({}); 
+    const [editDateTime, setEditDateTime] = React.useState({});
     useFetchTaskByIdDispatch(taskId);
-    const { dateTimes }  = useTaskByIdSelector();
+    const { dateTimes, time } = useTaskByIdSelector();
+    const millisecondsInFractionalHourFormat = displayMsInFractionalHourFormat(time);
+
     return <div className={styles.childrenContent}>
         {
             !editDateTime?.id
-                ? (<DateTimeListView dateTimes={dateTimes} setEditDateTime={setEditDateTime} setIsShowing={setIsShowing} />)
-                : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} setIsShowing={setIsShowing}/>)
+                ? (<>
+                    <DateTimeListView dateTimes={dateTimes} setEditDateTime={setEditDateTime} setIsShowing={setIsShowing} />
+                    <div className={styles.dateTimeTotal}> Total: {millisecondsInFractionalHourFormat} hrs</div>
+                </>)
+                : (<EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} setIsShowing={setIsShowing} />)
         }
     </div>
 };
