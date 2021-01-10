@@ -1,16 +1,16 @@
 import React from 'react';
 import cn from 'classnames';
-import { Task } from 'interfaces/pages/tasks/Task';
+import { TaskInterface } from 'interfaces/pages/tasks/Task';
 import { Button } from 'components';
 import { writeJsonFile } from './writeJsonFile';
 import useTaskAssembler from './useTaskAssembler';
 import styles from './DownloadButton.module.css';
 
 interface DownloadButtonProps {
-  tasks: Task[];
+  tasks: TaskInterface[];
 }
 
-const useHandleDownload = (tasks: Task[]) => {
+const useHandleDownload = (tasks: TaskInterface[]) => {
   const assembleTask = useTaskAssembler(tasks);
   return () => {
     writeJsonFile(assembleTask());
