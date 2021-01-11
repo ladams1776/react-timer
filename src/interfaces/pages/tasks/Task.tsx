@@ -4,3 +4,9 @@ export interface TaskInterface {
   projectId: number;
   time: number;
 }
+
+export interface DateTimeInterface {
+    id: string;
+    time: string;
+    date: string;
+};
