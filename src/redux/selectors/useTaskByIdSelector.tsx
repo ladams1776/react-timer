@@ -1,8 +1,9 @@
+import { DateTimeInterface } from 'interfaces/pages/tasks/Task';
 import { useSelector } from 'react-redux';
 
-const useTaskByIdSelector = (): ReturnedState => {
+const useTaskByIdSelector = (): ReturnedTaskState => {
   return useSelector(
-    (state: State): ReturnedState => {
+    (state: State): ReturnedTaskState => {
       return {
         ...state.tasks.taskById,
         id: state?.tasks?.taskById?._id,
@@ -16,18 +17,16 @@ export default useTaskByIdSelector;
 
 interface State {
   tasks: {
-    taskById: {
-      _id: string;
-      contractId: string;
-      description: string;
-    };
+    taskById: ReturnedTaskState;
   };
 }
 
-interface ReturnedState {
+interface ReturnedTaskState {
   id: string;
   _id: string;
   description: string;
   contractId: string;
   project: string;
+  dateTimes: DateTimeInterface[];
+  time: number;
 }
