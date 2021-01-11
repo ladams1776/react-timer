@@ -5,11 +5,8 @@ import {
     PUT_TASK_BY_ID,
 } from "../types";
 import { ResponseAction, Tag } from 'interfaces/redux/reducers';
-interface DateTime {
-    id: string;
-    time: string;
-    date: string;
-};
+import { DateTimeInterface } from 'interfaces/pages/tasks/Task';
+
 
 interface TaskAction {
     _id: string;
@@ -18,7 +15,7 @@ interface TaskAction {
     date:string;
     tags: Tag[];
     time?: number;
-    dateTimes: DateTime[]
+    dateTimes: DateTimeInterface[]
 }
 
 
