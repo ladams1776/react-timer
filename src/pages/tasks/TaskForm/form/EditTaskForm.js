@@ -9,7 +9,7 @@ import DateTimeButton from './dateTimePage/DateTimeButton';
 import { useFetchTags } from '../hooks';
 import useFetchTaskByIdDispatch from '../hooks/useFetchTaskById/useFetchTaskByIdDispatch';
 import useTaskByIdSelector from 'redux/selectors/useTaskByIdSelector';
-import TextAreaAdapter from '../../../../components/TextAreaAdapter';
+import TextAreaAdapter from 'components/TextAreaAdapter';
 
 import styles from './TaskForm.module.css';
 
