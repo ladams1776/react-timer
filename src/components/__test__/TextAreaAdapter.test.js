@@ -31,4 +31,5 @@ describe('TextAreaAdapter', () => {
     // Assert
     expect(target.container.querySelector(".field")).toBeTruthy();
   });
+
 });
