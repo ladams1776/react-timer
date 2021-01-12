@@ -10,3 +10,9 @@ export interface DateTimeInterface {
     time: string;
     date: string;
 };
+
+export interface EditDateTimeInterface {
+    id: string;
+    date: string;
+    minutes: number;
+  };
