@@ -7,7 +7,7 @@ import DateTimeListView from '../DateTimeListView';
 
 // mock components
 jest.mock('../DateTimeItem', () => {
-    return jest.fn(() => <div data-testid="DateTimeItem"></div>);
+    return () => <div data-testid="DateTimeItem"></div>;
 });
 
 describe('DateTimeListView.test.js', () => {
