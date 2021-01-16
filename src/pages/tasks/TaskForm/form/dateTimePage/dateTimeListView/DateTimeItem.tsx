@@ -15,9 +15,7 @@ interface DateTimeItemInterface {
 const DateTimeItem: React.FC<DateTimeItemInterface> = ({ dateTime, setEditDateTime }) => {
   const myDatetimeString = moment(dateTime.date).tz(myTimezone).format(myDatetimeFormat);
 
-  const onClick = () => {
-    setEditDateTime({ id: dateTime.id, date: dateTime.date, minutes: parseInt(dateTime.time) });
-  };
+  const onClick = () => setEditDateTime({ id: dateTime.id, date: dateTime.date, minutes: parseInt(dateTime.time) });
   const rippleClick = useRippleEffectById(dateTime.id, onClick);
 
   return (
