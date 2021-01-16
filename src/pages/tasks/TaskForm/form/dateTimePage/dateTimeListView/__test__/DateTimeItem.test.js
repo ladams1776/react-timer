@@ -1,7 +1,16 @@
 import React from "react";
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+
+// target
 import DateTimeItem from "../DateTimeItem";
+
+// dependencies
+import { useRippleEffectById } from 'hooks';
+
+// mock dependencies
+jest.mock('hooks/useRippleEffect/useRippleEffectById');
+
 
 describe('DateTimeItem.test.js', () => {
     it('should render', () => {
@@ -28,18 +37,16 @@ describe('DateTimeItem.test.js', () => {
             date: 'dateTimeDate',
             time: 'dateTimeTime',
         };
-        const expected = {
-            "date": dateTime.date,
-            "id": dateTime.id,
-            "minutes": dateTime.time,
-        };
+        const onClick = setEditDateTimeSpy;
+        useRippleEffectById.mockImplementation(onClick);
 
         // Act
-        const { queryByTestId } = render(<DateTimeItem dateTime={dateTime} setEditDateTime={setEditDateTimeSpy} />);
-        fireEvent.click(queryByTestId("DateTimeItem"));
+        const { getByTestId } = render(<DateTimeItem dateTime={dateTime} setEditDateTime={setEditDateTimeSpy} />);
+        fireEvent.click(getByTestId("DateTimeItem"));
 
         // Assert
-        expect(queryByTestId('DateTimeItem')).toBeInTheDocument();
-        expect(setEditDateTimeSpy).toBeCalledWith(expected);
+        expect(useRippleEffectById).toBeCalledWith(dateTime.id, expect.anything());
+        expect(getByTestId('DateTimeItem')).toBeInTheDocument();
+        expect(setEditDateTimeSpy).toBeCalledWith(dateTime.id, expect.anything());
     });
 });
