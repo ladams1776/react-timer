@@ -17,7 +17,7 @@ const deleteTaskByIdAction = require('./application/requestHandlers/tasks/delete
 const deleteAllTaskAction = require('./application/requestHandlers/tasks/deleteAllTaskAction');
 // TASK > IMPORT ACTION imports
 const importAction = require('./application/requestHandlers/tasks/importAction');
-const UpdateDateTimeAction = require('./application/requestHandlers/tasks/UpdateDateTimeAction');
+const updateDateTimeAction = require('./application/requestHandlers/tasks/updateDateTimeAction');
 // TAG ACTION imports
 const deleteTagAction = require('./application/requestHandlers/tags/deleteTagAction');
 const addTagAction = require('./application/requestHandlers/tags/addTagAction');
@@ -104,7 +104,7 @@ app.delete('/api/tasks', deleteAllTaskAction);
 app.post('/api/import', importAction);
 
 // TASKS > DATE TIME
-app.put('/api/task/:taskId/dateTime/:id', UpdateDateTimeAction);
+app.put('/api/task/:taskId/dateTime/:id', updateDateTimeAction);
 
 // TAGS
 app.get('/api/tags', getAllTagsAction);
