@@ -13,7 +13,6 @@ const useSubmit = (
   taskId: String,
   setIsShowingEditDateTimeForm: (isShowing: boolean) => void,
 ): ((editDateTime: EditDateTimeInterface) => void) => {
-    console.log('yes')
   const dispatch = useDispatch();
   return ({ id, date, minutes }: SubmitProp) => {
     const config = {
