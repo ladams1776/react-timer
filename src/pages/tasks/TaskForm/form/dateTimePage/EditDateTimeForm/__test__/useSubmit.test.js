@@ -6,9 +6,6 @@ import useSubmit from '../useSubmit';
 
 // dependencies
 import { putDateTime } from 'redux/actionCreators/actions';
-
-// mock dependencies
-// jest.mock('react-redux/useDispatch');
 jest.mock('redux/actionCreators/actions');
 
 jest.mock('react-redux', () => ({
