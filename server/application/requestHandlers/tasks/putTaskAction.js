@@ -1,4 +1,4 @@
-const FETCH_TASK_BY_ID_RESPONSE = require('../reduxTypes');
+const { FETCH_TASK_BY_ID_RESPONSE } = require('../reduxTypes');
 const TaskService = require('../../../domain/services/tasks/TaskService');
 const apiResponse = require('../apiResponse');
 const RequestToTaskDto = require('./assemblers/RequestToTaskDto');
