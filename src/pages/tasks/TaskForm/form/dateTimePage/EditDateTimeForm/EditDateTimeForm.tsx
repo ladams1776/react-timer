@@ -11,14 +11,13 @@ interface EditDateTime {
   };
 
 interface EditDateTimeFormProp {
-  setEditDateTime: (editDateTime: EditDateTime) => void;
   editDateTime: EditDateTime;
   taskId: string;
-  setIsShowing: (setIsShowing: boolean) => void;
+  setIsShowingEditDateTimeForm: (setIsShowing: boolean) => void;
 }
 
-const EditDateTimeForm: React.FC<EditDateTimeFormProp> = ({ setEditDateTime, editDateTime, taskId, setIsShowing }) => {
-  const onSubmit = useSubmit(editDateTime, setEditDateTime, taskId, setIsShowing);
+const EditDateTimeForm: React.FC<EditDateTimeFormProp> = ({ editDateTime, taskId, setIsShowingEditDateTimeForm }) => {
+  const onSubmit = useSubmit(editDateTime, taskId, setIsShowingEditDateTimeForm);
 
   return (
     <Form
