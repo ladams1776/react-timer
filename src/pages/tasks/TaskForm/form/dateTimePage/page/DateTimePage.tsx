@@ -25,7 +25,7 @@ const DateTimePage: React.FC<DateTimePageProp> = ({ taskId, setIsShowing }) => {
           <div className={styles.dateTimeTotal}> Total: {millisecondsInFractionalHourFormat} hrs</div>
         </>
       ) : (
-        <EditDateTimeForm setEditDateTime={setEditDateTime} taskId={taskId} editDateTime={editDateTime} setIsShowing={setIsShowing} />
+        <EditDateTimeForm taskId={taskId} editDateTime={editDateTime} setIsShowingEditDateTimeForm={setIsShowing} />
       )}
     </div>
   );
