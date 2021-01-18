@@ -5,7 +5,7 @@ import { putDateTime } from 'redux/actionCreators/actions';
 interface SubmitProp {
   id: string;
   date: string;
-  minutes: number;
+  minutes: string;
 }
 
 const useSubmit = (
