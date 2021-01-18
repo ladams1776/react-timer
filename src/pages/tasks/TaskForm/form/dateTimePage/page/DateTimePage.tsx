@@ -12,7 +12,7 @@ interface DateTimePageProp {
 }
 
 const DateTimePage: React.FC<DateTimePageProp> = ({ taskId, setIsShowing }) => {
-  const [editDateTime, setEditDateTime] = React.useState({ id: '', date: '', minutes: 0 });
+  const [editDateTime, setEditDateTime] = React.useState({ id: '', date: '', minutes: "00:00" });
   useFetchTaskByIdDispatch(taskId);
   const { dateTimes, time } = useTaskByIdSelector();
   const millisecondsInFractionalHourFormat = displayMsInFractionalHourFormat(time);
