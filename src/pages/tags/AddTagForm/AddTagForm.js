@@ -5,21 +5,32 @@ import { useSetCurrentLocation } from 'hooks'
 import useFetchTagById from './useFetchTagById';
 import useFormSetup from './useFormSetup';
 import styles from './AddTagForm.module.css';
+import useFetchTagByIdDispatch from './useFetchTagByIdDispatch';
+import { useSelector } from 'react-redux';
+
+
+const useD = () => {
+    return useSelector(state => {
+        return state?.tags?.tagById || {}
+    });
+};
 
 const AddTagePage = ({ tagId, className }) => {
     useSetCurrentLocation(`/tag/${tagId}`);
-
-    const { tag, setTag, onSubmit, setName, setDescription, nameRef, descriptionRef, idRef } = useFormSetup(tagId);
-    useFetchTagById(tagId, setTag);
+    useFetchTagByIdDispatch(tagId);
+    const tag = useD();
+    console.log('tag ', tag)
+    const { onSubmit, setName, setDescription, nameRef, descriptionRef, idRef } = useFormSetup(tagId);
+    // useFetchTagById(tagId, setTag);
 
     return (
         <div className={styles.container}>
             <form
                 data-test-id="form"
-                method={tag._id === -1 ? 'POST' : 'PUT'}
+                method={tag.id === -1 ? 'POST' : 'PUT'}
                 className={styles.form}>
                 <h3>Add a New Tag</h3>
-                <input name="id" type="hidden" value={tag._id} ref={idRef} />
+                <input name="id" type="hidden" value={tag.id} ref={idRef} />
                 <input
                     name="name"
                     onChange={e => setName(e.target.value)}
