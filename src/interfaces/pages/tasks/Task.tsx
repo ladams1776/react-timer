@@ -14,5 +14,5 @@ export interface DateTimeInterface {
 export interface EditDateTimeInterface {
     id: string;
     date: string;
-    minutes: number;
+    minutes: string;
   };
