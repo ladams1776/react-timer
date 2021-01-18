@@ -23,6 +23,15 @@ label {
 flex: 1 1;
 }
 
+.error {
+    display: block;
+    color: #dc3545;
+    padding-bottom: .5em;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+}
+
 .submitContainer {
   display: flex;
   height: 100%;
