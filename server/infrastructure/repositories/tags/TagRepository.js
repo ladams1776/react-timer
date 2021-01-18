@@ -6,8 +6,7 @@ const TagRepository = {
     { _id: id },
     hydrateAndResponse(res)
   ),
-  fetchTagById: (id, res) =>
-    Tag.findById(id, hydrateAndResponse(res)),
+  fetchTagById: (id, res) => Tag.findById(id),
   updateTag: (dto, res) => {
     Tag.findOneAndUpdate(
       { _id: dto.id },
