@@ -22,7 +22,7 @@ const DateTimeItem: React.FC<DateTimeItemInterface> = ({ dateTime, setEditDateTi
     <div id={dateTime.id} className={styles.content} key={dateTime.id + dateTime.time} onClick={rippleClick} data-testid="DateTimeItem">
       <input type="hidden" value={dateTime.id} name="id" />
       <div className={styles.date}>Date: {myDatetimeString}</div>
-      <div className={styles.time}>Minutes: {dateTime.time}</div>
+      <div className={styles.time}>Mins: {dateTime.time}</div>
     </div>
   );
 };
