@@ -8,11 +8,7 @@ interface SubmitProp {
   minutes: string;
 }
 
-const useSubmit = (
-  dateTime: EditDateTimeInterface,
-  taskId: String,
-  setIsShowingEditDateTimeForm: (isShowing: boolean) => void,
-): ((editDateTime: EditDateTimeInterface) => void) => {
+const useSubmit = (taskId: String, setIsShowingEditDateTimeForm: (isShowing: boolean) => void): ((editDateTime: EditDateTimeInterface) => void) => {
   const dispatch = useDispatch();
   return ({ id, date, minutes }: SubmitProp) => {
     const config = {
@@ -22,7 +18,7 @@ const useSubmit = (
         minutes,
       },
       taskId,
-      dateTimeId: dateTime.id,
+      dateTimeId: id,
     };
 
     dispatch(putDateTime(config));

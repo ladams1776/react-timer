@@ -11,33 +11,39 @@ flex-direction: column;
 }
 
 .field {
-  display: flex;
+  display: block;
+  height: 100px;
+  width: 100%;
 }
 
 .field > input {
-  flex: 3 1;
+  display: block;
+}
 
+.input {
+  width: 100%;
 }
 
 label {
-flex: 1 1;
+  display: block;
 }
 
 .error {
     display: block;
     color: #dc3545;
-    padding-bottom: .5em;
+    padding-bottom: 0;
     width: 100%;
+    height: auto;
     margin-top: .25rem;
-    font-size: .875em;
+    font-size: .80em;
 }
 
 .submitContainer {
-  display: flex;
-  height: 100%;
-  flex-direction: row-reverse;
+  display: block;
+  width: 100%;
 }
 
 .submit {
   font-size: .95rem;
+  float: right;
 }
