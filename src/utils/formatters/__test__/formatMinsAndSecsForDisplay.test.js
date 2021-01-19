@@ -1,7 +1,7 @@
-import displayTimeInMinutesAndSecondsFormat from '../displayTimeInMinutesAndSecondsFormat';
+import formatMinsAndSecsForDisplay from '../formatMinsAndSecsForDisplay';
 
-describe('src/utils/__test__/displayTimeInMinutesAndSecondsFormat.test.js', () => {
-  describe('displayTimeInMinutesAndSecondsFormat', () => {
+describe('src/utils/__test__/formatMinsAndSecsForDisplay.test.js', () => {
+  describe('formatMinsAndSecsForDisplay', () => {
     
     describe('with minutes', () => {
       it('should return the time as is.', () => {
@@ -9,7 +9,7 @@ describe('src/utils/__test__/displayTimeInMinutesAndSecondsFormat.test.js', () =
         const expected = '23:23';
 
         // Act
-        const actual = displayTimeInMinutesAndSecondsFormat(expected);
+        const actual = formatMinsAndSecsForDisplay(expected);
 
         // Assert
         expect(actual).toEqual(expected);
@@ -20,7 +20,7 @@ describe('src/utils/__test__/displayTimeInMinutesAndSecondsFormat.test.js', () =
         const expected = '23:00';
 
         // Act
-        const actual = displayTimeInMinutesAndSecondsFormat(expected);
+        const actual = formatMinsAndSecsForDisplay(expected);
 
         // Assert
         expect(actual).toEqual(expected);
@@ -31,7 +31,7 @@ describe('src/utils/__test__/displayTimeInMinutesAndSecondsFormat.test.js', () =
         const expected = '2223:00';
 
         // Act
-        const actual = displayTimeInMinutesAndSecondsFormat(expected);
+        const actual = formatMinsAndSecsForDisplay(expected);
 
         // Assert
         expect(actual).toEqual(expected);
@@ -44,7 +44,7 @@ describe('src/utils/__test__/displayTimeInMinutesAndSecondsFormat.test.js', () =
         const expected = '23:00';
 
         // Act
-        const actual = displayTimeInMinutesAndSecondsFormat('00:23');
+        const actual = formatMinsAndSecsForDisplay('00:23');
 
         // Assert
         expect(actual).toEqual(expected);
@@ -55,18 +55,18 @@ describe('src/utils/__test__/displayTimeInMinutesAndSecondsFormat.test.js', () =
         const expected = '23:00';
 
         // Act
-        const actual = displayTimeInMinutesAndSecondsFormat('23');
+        const actual = formatMinsAndSecsForDisplay('23');
 
         // Assert
         expect(actual).toEqual(expected);
       });
     });
     // it('should format the time correctly - 1 hr & half', () => {
-    //   const tenSeconds = displayTimeInMinutesAndSecondsFormat(5400000);
+    //   const tenSeconds = formatMinsAndSecsForDisplay(5400000);
     //   expect(tenSeconds).toEqual('1.50');
     // });
     // it('should format the time correctly - 1 hr & .95 of another hr', () => {
-    //   const tenSeconds = displayTimeInMinutesAndSecondsFormat(7020000);
+    //   const tenSeconds = formatMinsAndSecsForDisplay(7020000);
     //   expect(tenSeconds).toEqual('1.95');
     // });
   });
