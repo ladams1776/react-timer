@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import PropTypes from "prop-types";
 import cn from 'classnames';
 import { Modal, Button } from 'components';
 import DateTimePage from './page/DateTimePage';
 import styles from './DateTimeButton.module.css';
 
-const DateTimeButton = ({ taskId }) => {
+interface DateTimeButtonProp {
+    taskId:string;
+}
+
+const DateTimeButton:React.FC<DateTimeButtonProp> = ({ taskId }) => {
     const [isShowing, setIsShowing] = useState(false);
 
     return <>
@@ -21,14 +24,5 @@ const DateTimeButton = ({ taskId }) => {
         }
     </>
 };
-
-DateTimeButton.propTypes = {
-    dateTimes: PropTypes.arrayOf(PropTypes.exact({
-        id: PropTypes.string,
-        date: PropTypes.string,
-        time: PropTypes.string
-    })),
-    taskId: PropTypes.string
-}
 
 export default DateTimeButton;
