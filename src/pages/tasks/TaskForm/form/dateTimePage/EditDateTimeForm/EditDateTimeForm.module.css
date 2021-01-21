@@ -1,13 +1,13 @@
 .form {
-width: 300px;
-height: 300px;
-margin: auto;
-justify-self: right;
-background-color: rgb(200, 200, 200);
-padding: 2em;
-border-radius: 10px;
-display: flex;
-flex-direction: column;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  justify-self: right;
+  background-color: rgb(200, 200, 200);
+  padding: 2em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .field {
@@ -20,21 +20,38 @@ flex-direction: column;
   display: block;
 }
 
-.input {
-  width: 100%;
-}
-
 label {
   display: block;
 }
 
-.error {
+.input {
+  flex: 4;
+}
+
+.errorBorder {
+  border-color: #dc3545;
+}
+
+.errorContainer {
+  display: flex;
+  width:100%;
+  height: 20px;
+  margin-top: 4px;
+  color: #dc3545;
+}
+
+span.iconError.glyphicon.glyphicon-info-sign {
+  flex: 1;
+  height: 10px;
+}
+
+.error {  
     display: block;
     color: #dc3545;
-    padding-bottom: 0;
-    width: 100%;
-    height: auto;
-    margin-top: .25rem;
+    padding: 0;
+    margin-left: 4px;
+    flex: 14;
+    height: 10px;
     font-size: .80em;
 }
 
@@ -46,4 +63,5 @@ label {
 .submit {
   font-size: .95rem;
   float: right;
+  width: 100px;
 }
