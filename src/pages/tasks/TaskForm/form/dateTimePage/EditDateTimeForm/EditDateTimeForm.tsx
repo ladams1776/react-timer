@@ -26,12 +26,13 @@ const EditDateTimeForm: React.FC<EditDateTimeFormProp> = ({ editDateTime, taskId
       render={({ handleSubmit, submitting, pristine }) => {
         return (
           <form className={styles.form} data-testid="form" onSubmit={handleSubmit} method="PUT">
+            <h2>Edit Date Time</h2>
             <Field type="hidden" name="id" value={editDateTime.id} component="input" />
             <div className={styles.field}>
               <Field name="date" validate={utcFormatValidator}>
                 {({ input, meta }) => {
                   return (
-                    <div>
+                    <div className={styles.field}>
                       <label htmlFor="date">Date</label>
                       <input {...input} type="text" id="date" className={styles.input} />
                       {meta.error && meta.touched && (

@@ -25,7 +25,7 @@ label {
 }
 
 .input {
-  flex: 4;
+  width: 100%;
 }
 
 .errorBorder {
