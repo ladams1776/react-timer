@@ -1,7 +1,14 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
+
+// target
 import DateTimeButton from '../DateTimeButton';
+
+// dependencies
+jest.mock('components/modal/Modal', () => {
+    return () => <div className="modalContent">modalContent</div>
+});
 
 describe('src/pages/tasks/TaskForm/dateTimeDetail/__test__/DateTimeButton.test.js', () => {
     // Arrange
@@ -28,14 +35,13 @@ describe('src/pages/tasks/TaskForm/dateTimeDetail/__test__/DateTimeButton.test.j
             jest.spyOn(React, 'useState')
                 .mockImplementationOnce(() => realUseState([]));
             const taskId = 'theTaskId';
-            const expected = 'Date: 2020-10-28 11:25:30 pmMinutes: 100Close';
 
             // Act
-            const target = render(<DateTimeButton dateTimes={dateTimes} taskId={taskId} />);
+            const { findByText } = render(<DateTimeButton dateTimes={dateTimes} taskId={taskId} />);
             fireEvent.click(screen.getByRole('button'));
 
             // Assert
-            expect(target.container.querySelector('.modalContent')).toHaveTextContent(expected)
+            expect(await findByText('modalContent')).toBeInTheDocument()
         });
     });
 });
