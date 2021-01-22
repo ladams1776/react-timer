@@ -21,7 +21,7 @@ describe('useSubmit.test.js', () => {
             minutes: 1234
         };
         const taskId = 'taskId';
-        const setIsShowingEditDateTimeFormSpy = jest.fn();
+        const setIsShowingEditDateTimeFormSpy = jest.fn().mockImplementation();
         const expected = {
             body: dateTime,
             taskId,
@@ -29,7 +29,7 @@ describe('useSubmit.test.js', () => {
         }
 
         // Act
-        const { result } = renderHook(() => useSubmit(dateTime, taskId, setIsShowingEditDateTimeFormSpy));
+        const { result } = renderHook(() => useSubmit(taskId, setIsShowingEditDateTimeFormSpy));
         act(() => result.current({ ...dateTime }));
 
         // Assert
