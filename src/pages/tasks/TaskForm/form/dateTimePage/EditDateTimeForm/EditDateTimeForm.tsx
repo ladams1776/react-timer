@@ -53,7 +53,7 @@ const EditDateTimeForm: React.FC<EditDateTimeFormProp> = ({ editDateTime, taskId
                     <input {...input} type="text" id="minutes" className={cn(styles.input, { [styles.errorBorder]: meta.error && meta.touched })} />
                     {meta.error && meta.touched && (
                       <div className={styles.errorContainer}>
-                        <span className={cn('iconError', 'glyphicon glyphicon-info-sign')}/> <span className={styles.error}>{meta.error}</span>
+                        <span className={cn('iconError', 'glyphicon glyphicon-info-sign')} /> <span className={styles.error}>{meta.error}</span>
                       </div>
                     )}
                   </div>

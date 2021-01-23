@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
 // target
 import EditDateTimeForm from '../EditDateTimeForm';
@@ -11,17 +11,34 @@ jest.mock('../useSubmit', () => {
     return () => jest.fn() //@TODO: Left off here.
 });
 
+jest.mock('utils/formatters/formatMinsAndSecsForDisplay', () => {
+    return () => 1111;
+});
+
+jest.mock('react-final-form', () => ({
+    Form: () => <div id="editDateTimeForm">editDateTimeForm</div>
+}));
+
 describe('src/pages/tasks/TaskForm/dateTimeDetail/EditDateTimeForm/__test__/EditDateTimeForm.test.js', () => {
     describe('EditDateTimeForm', () => {
         it('should render', () => {
             // Arrange
-            const expected = "Date: Minutes:";
+            const editDateTime = {
+                minutes: 100,
+                date: 'date',
+                id: 'editDateTimeID'
+            };
+            const taskId = 'taskId';
+            const setIsShowingEditDateTimeFormSpy = jest.fn();
 
             // Act
-            render(<EditDateTimeForm id={'id'} date={'date'} minutes={123} />);
+            const target = render(<EditDateTimeForm
+                editDateTime={editDateTime}
+                taskId={taskId}
+                setIsShowingEditDateTimeForm={setIsShowingEditDateTimeFormSpy} />);
 
             // Assert
-            expect(screen.queryByTestId('editDateTimeForm')).toHaveTextContent(expected);
+            expect(target.getByText('editDateTimeForm')).toHaveTextContent([]);
         })
     });
 });
