@@ -1,3 +1,8 @@
 .tagList {
+    margin: 0;
   padding: 0;
+  max-width: 200px;
+  min-width: 200px;
+  overflow-y: scroll;
+  height: 100%;
 }
