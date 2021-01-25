@@ -5,8 +5,6 @@ import '@testing-library/jest-dom/extend-expect';
 // target
 import TagsListView from '../TagListView';
 
-// dependencies
-
 // mock
 jest.mock('../Tag/Tag', () => {
     return () => <>TagComp</>
