@@ -12,6 +12,7 @@
 .mainInnerContainer {
   display: flex;
   flex-direction: row;
+  height: 900px
 }
 
 .listView {
