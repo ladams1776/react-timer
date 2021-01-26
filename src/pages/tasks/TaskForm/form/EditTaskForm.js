@@ -12,6 +12,7 @@ import useTaskByIdSelector from 'redux/selectors/useTaskByIdSelector';
 import TextAreaAdapter from 'components/TextAreaAdapter';
 
 import styles from './TaskForm.module.css';
+import { Button } from 'components';
 
 const EditTaskForm = ({ taskId, className }) => {
   useFetchTaskByIdDispatch(taskId);
@@ -54,7 +55,7 @@ const EditTaskForm = ({ taskId, className }) => {
 
             <Field name="description" component={TextAreaAdapter} />
 
-            <button type="submit">Submit</button>
+            <Button type="submit" className={styles.submit} value="Submit Form" />
 
           </form>)
       }} />
