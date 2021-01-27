@@ -1,13 +1,7 @@
+import { TagInterface } from 'interfaces/pages/tags/Tag';
 import React from 'react';
 import Tag from './Tag/Tag';
 import styles from './TagListView.module.css';
-
-interface TagInterface {
-  name: string;
-  description: string;
-  _id: string;
-};
-
 
 interface TagListViewProp {
   className:string;
