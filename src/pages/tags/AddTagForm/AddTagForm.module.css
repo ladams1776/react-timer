@@ -29,3 +29,12 @@
   display: flex;
   flex-direction: column;
 }
+
+.submitContainer {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.submit {
+  width: 150px;
+}
