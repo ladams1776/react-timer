@@ -1,24 +1,17 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
 import { Form, Field } from 'react-final-form'
 import { Button } from 'components';
 import { useSetCurrentLocation } from 'hooks'
 import useFormSetup from './useFormSetup';
 import useFetchTagByIdDispatch from './useFetchTagByIdDispatch';
 import styles from './AddTagForm.module.css';
-
-
-const useD = () => {
-    return useSelector(state => {
-        return state?.tags?.tagById || {}
-    });
-};
+import useTagByIdSelector from 'redux/selectors/useTagById';
 
 const AddTagePage = ({ tagId }) => {
     useSetCurrentLocation(`/tag/${tagId}`);
     useFetchTagByIdDispatch(tagId);
-    const tag = useD();
+    const tag = useTagByIdSelector();
     const { onSubmit } = useFormSetup(tagId);
 
     return (
