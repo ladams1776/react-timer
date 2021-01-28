@@ -18,7 +18,7 @@ const DeleteTagButton: React.FC<DeleteTagButtonProp> = ({ tagId, isSelected }) =
     dispatch();
   };
 
-  return <Button onClick={_deleteClick} className={cn(styles.deleteBtn, 'glyphicon glyphicon-trash', { [styles.selected]: isSelected })} data-test-id="delete-tag-button" />;
+  return <Button onClick={_deleteClick} className={cn(styles.deleteBtn, 'glyphicon glyphicon-trash', { [styles.selected]: isSelected })} data-testid="delete-tag-button" />;
 };
 
 export default DeleteTagButton;
