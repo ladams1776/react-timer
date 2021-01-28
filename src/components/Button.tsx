@@ -5,7 +5,7 @@ import styles from './Button.module.css';
 
 interface ButtonProps {
   className?: string;
-  onClick?: () => void;
+  onClick?: (e?:any) => void;
   value?: string | number;
   children?: React.FC;
   testid?: string;
