@@ -1,42 +1,35 @@
-import React from 'react';
-import { createWrapperWithContext, findByTestId } from 'testUtils';
+import React from "react";
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
 import { useBrowserHistory } from 'hooks';
-import Tag from '../Tag';
-import DeleteTagButton from '../DeleteTagButton/DeleteTagButton';
 
+// target
+import Tag from '../Tag';
+import DeleteTagButton from "../DeleteTagButton/DeleteTagButton";
+
+// mock components
 jest.mock('hooks/useBrowserHistory');
+jest.mock('../DeleteTagButton/DeleteTagButton', () => {
+  return () => <div>DeleteTagButton</div>
+});
 
 describe('src/pages/tasks/TaskListView/Tag/__test__/Tag.test.js', () => {
-  // Arrange
-  let wrapper;
-
   describe('Tag', () => {
     it('should display Tag when one is present', () => {
       // Arrange
-      const context = {
-        projects: [{ label: 'label of project' }],
-      };
+      const id = 'id';
+      const name = 'name';
+      const selectedId = 'selectedId';
+      const setTimeSpy = jest.spyOn(Storage.prototype, 'setItem');
+
       const history = { push: jest.fn() };
       useBrowserHistory.mockReturnValue(history);
-      const expected = {
-        children:
-          [<div className="tagItemLeft" onClick={expect.anything()}>
-            <div>yeah</div>
-            <div className="tagItemDescription" dangerouslySetInnerHTML={{ "__html": "what" }} />
-          </div>,
-          <DeleteTagButton tagId={1} />],
-        className: "tagItem",
-        "data-test-id": "tag"
-      };
 
       // Act
-      wrapper = createWrapperWithContext(
-        <Tag _id={1} name={'yeah'} description={'what'} />,
-        context,
-      );
-
+      const target = render(<Tag _id={id} name={name} selectedId={selectedId} />);
+    
       // Assert
-      expect(findByTestId(wrapper, 'tag').props()).toEqual(expected);
+      expect(target.getByTestId("tag")).toBeInTheDocument();
     });
   });
 });
