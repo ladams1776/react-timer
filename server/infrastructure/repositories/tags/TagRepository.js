@@ -1,5 +1,6 @@
 const Tag = require('../../models/Tag');
 const hydrateAndResponse = require('../../hydrators/hydrateAndResponse');
+const hydrate = require('../../hydrators/hydrate');
 
 const TagRepository = {
   deleteTag: (id, res) => Tag.deleteOne(
@@ -7,19 +8,14 @@ const TagRepository = {
     hydrateAndResponse(res)
   ),
   fetchTagById: (id, res) => Tag.findById(id),
-  updateTag: (dto, res) => {
-    Tag.findOneAndUpdate(
-      { _id: dto.id },
-      {
-        $set: {
-          _id: dto.id,
-          name: dto.name,
-          description: dto.description
-        },
-      },
-      { new: true },
-      hydrateAndResponse(res),
-    );
+
+  updateTag: async (dto, res) => {
+    const tag = await Tag.findById(dto._id);
+
+    tag.description = dto.description;
+    tag.name = dto.name;
+
+    tag.save(hydrateAndResponse(res));
   }
 };
 
