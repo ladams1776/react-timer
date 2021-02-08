@@ -26,3 +26,7 @@ export const UPDATE_DATE_TIME_RESPONSE = 'UPDATE_DATE_TIME_RESPONSE';
 // tags
 export const UPDATE_TAG_BY_ID = 'UPDATE_TAG_BY_ID';
 export const UPDATE_TAG_BY_ID_RESPONSE = 'UPDATE_TAG_BY_ID_RESPONSE';
+
+// putTag
+export const PUT_TAG = 'PUT_TAG';
+export const PUT_TAG_RESPONSE = 'PUT_TAG_RESPONSE';
