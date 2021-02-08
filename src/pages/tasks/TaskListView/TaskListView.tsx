@@ -3,8 +3,8 @@ import cn from 'classnames';
 import { TaskInterface } from 'interfaces/pages/tasks/Task';
 import useTaskByIdSelector from 'redux/selectors/useTaskByIdSelector';
 import useSmoothScrolling from './hooks/useSmoothScrolling';
-import styles from './TaskListView.module.css';
 import Task from './Task/Task';
+import styles from './TaskListView.module.css';
 
 interface TaskListViewProp {
   className: string;
