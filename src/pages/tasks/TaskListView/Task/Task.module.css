@@ -10,6 +10,10 @@ li {
   margin-top: -1px; /* Need to make the task top overlap underBorder (of previous task). This allows us to blend it into the selected task. */
 }
 
+.taskContainer:hover {
+    background-color: rgb(245, 245, 245);
+}
+
 .taskItem,
 .taskItem {
   height: 75px;
