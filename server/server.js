@@ -21,7 +21,7 @@ const updateDateTimeAction = require('./application/requestHandlers/tasks/update
 // TAG ACTION imports
 const deleteTagAction = require('./application/requestHandlers/tags/deleteTagAction');
 const addTagAction = require('./application/requestHandlers/tags/addTagAction');
-const editTagAction = require('./application/requestHandlers/tags/editTagAction');
+const putTagAction = require('./application/requestHandlers/tags/putTagAction');
 const getTagByIdAction = require('./application/requestHandlers/tags/getTagByIdAction');
 
 // @TODO: Move the username and password out of here
@@ -110,5 +110,5 @@ app.put('/api/task/:taskId/dateTime/:id', updateDateTimeAction);
 app.get('/api/tags', getAllTagsAction);
 app.get('/api/tag/:id', getTagByIdAction);
 app.post('/api/tag', addTagAction);
-app.put('/api/tag', editTagAction);
+app.put('/api/tag', putTagAction);
 app.delete('/api/tag/:id', deleteTagAction);
