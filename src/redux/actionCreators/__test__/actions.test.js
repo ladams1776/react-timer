@@ -1,5 +1,5 @@
-import { FETCH_TASK_BY_ID, PUT, PUT_TASK_BY_ID, FETCH_ALL_TAGS, FETCH_TAG_BY_ID, UPDATE_DATE_TIME } from "redux/types";
-import { fetchTaskById, putTaskById, fetchAllTags, fetchTagById, putDateTime } from "../actions";
+import { FETCH_TASK_BY_ID, PUT, PUT_TASK_BY_ID, FETCH_ALL_TAGS, FETCH_TAG_BY_ID, UPDATE_DATE_TIME, PUT_TAG } from "redux/types";
+import { fetchTaskById, putTaskById, fetchAllTags, fetchTagById, putDateTime, putTag } from "../actions";
 
 describe('src/redux/actionCreators/__test__/actions.test.js', () => {
     describe('actions.tsx', () => {
@@ -20,6 +20,7 @@ describe('src/redux/actionCreators/__test__/actions.test.js', () => {
                 expect(actual).toEqual(expected);
             });
         });
+
         describe('putTaskById', () => {
             it('should return expected action.', () => {
                 // Arrange
@@ -47,7 +48,7 @@ describe('src/redux/actionCreators/__test__/actions.test.js', () => {
             it('should return expected action.', () => {
                 // Arrange
                 const config = {
-                    body: {id: 'bodyID'},
+                    body: { id: 'bodyID' },
                     dateTimeId: 'dateTimeId',
                     taskId: 'taskId'
                 };
@@ -102,6 +103,29 @@ describe('src/redux/actionCreators/__test__/actions.test.js', () => {
 
                 // Act
                 const actual = fetchTagById(tagId);
+
+                // Assert
+                expect(actual).toEqual(expected);
+            });
+        });
+
+        describe('putTag', () => {
+            it('should return expected action.', () => {
+                // Arrange
+                const body = {
+                    tagId: 'tagId'
+                };
+
+                const expected = {
+                    requestApi: true,
+                    type: PUT_TAG,
+                    url: 'tag',
+                    method: PUT,
+                    body
+                };
+
+                // Act
+                const actual = putTag(body);
 
                 // Assert
                 expect(actual).toEqual(expected);
