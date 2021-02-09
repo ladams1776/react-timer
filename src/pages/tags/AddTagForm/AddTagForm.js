@@ -41,7 +41,6 @@ const AddTagePage = ({ tagId }) => {
                             />
                             <div className={styles.submitContainer}>
                                 <Button type="submit"
-                                    onClick={onSubmit}
                                     className={cn("btn", "btn-primary", styles.submit)}
                                     data-test-id="addTagPageSubmit"
                                     value="Submit Form" />
