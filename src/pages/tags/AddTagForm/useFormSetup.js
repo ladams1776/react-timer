@@ -1,26 +1,13 @@
-import { fetchApiData } from 'utils';
-import { useBrowserHistory } from 'hooks'
-import { flashMessageHandleResponse, useFlashMessageAndIsLoadin } from 'utils';
+import { useDispatch } from 'react-redux';
+import { putTag } from 'redux/actionCreators/actions';
 
 const useFormSetup = () => {
-    const { setSuccessFlashMessage, setErrorFlashMessage, setIsLoadin } = useFlashMessageAndIsLoadin();
-    const { push } = useBrowserHistory();
+    const dispatch = useDispatch();
 
     const onSubmit = ({ _id, description, name }) => {
-        console.log('id', _id);
-        const dispatch = items => {
-            push(`/tags`);
-        }
-
-        const config = {
-            body: { name, description, id: _id },
-            method: _id === undefined ? 'POST' : 'PUT'
-        };
-
-
-        const r = flashMessageHandleResponse(dispatch, setErrorFlashMessage, setSuccessFlashMessage, setIsLoadin, 'Successfully saved tag', 'Failed to save tag');
-        setIsLoadin(true);
-        fetchApiData('tag', config, r);
+        const body = { name, description, _id };
+        console.log('body: ', body);
+        dispatch(putTag(body));
     };
 
     return { onSubmit };
