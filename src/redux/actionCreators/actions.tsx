@@ -1,5 +1,5 @@
-import { PUT, FETCH_ALL_TAGS, FETCH_TASK_BY_ID, PUT_TASK_BY_ID, UPDATE_DATE_TIME, FETCH_TAG_BY_ID } from '../types';
-import { RequestAction, RequestPostPutAction } from 'interfaces/redux/actions';
+import { PUT, FETCH_ALL_TAGS, FETCH_TASK_BY_ID, PUT_TASK_BY_ID, UPDATE_DATE_TIME, FETCH_TAG_BY_ID, PUT_TAG } from '../types';
+import { RequestAction, RequestPostPutAction, RequestPostPutFlashAction } from 'interfaces/redux/actions';
 import { EditDateTimeInterface } from 'interfaces/pages/tasks/Task';
 
 // Tasks
@@ -55,6 +55,18 @@ export const fetchTagById = (tagId: string): RequestAction<'FETCH_TAG_BY_ID'> =>
   return {
     type: FETCH_TAG_BY_ID,
     url: `tag/${tagId}`,
+    requestApi: true,
+  };
+};
+
+export const putTag = (body: Body): RequestPostPutFlashAction<'PUT_TAG'> => { 
+  console.log('the body: ', body);
+  return {
+    type: PUT_TAG,
+    url: 'tag',
+    method: PUT,
+    isFlash: true,
+    body,
     requestApi: true,
   };
 };
