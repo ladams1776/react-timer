@@ -1,5 +1,5 @@
 import { FETCH_ALL_TAGS_RESPONSE, FETCH_ALL_TAGS, FETCH_TAG_BY_ID_RESPONSE } from "redux/types";
-import { fetchTagsReducer, responseFetchTagByIdReducer, responseAllTagsReducer } from "../tagReducers";
+import { fetchTagsReducer, fetchTagByIdResponseReducer, responseAllTagsReducer, putTagResponseReducer } from "../tagReducers";
 
 describe('src/redux/reducers/__test__/tagReducers.test.js', () => {
     describe('tagReducers.tsx', () => {
@@ -39,7 +39,7 @@ describe('src/redux/reducers/__test__/tagReducers.test.js', () => {
             });
         });
 
-        describe('responseAllTagsReducer.tsx', () => {
+        describe('responseAllTagsReducer', () => {
             it('should return expected data', () => {
                 // Arrange
                 const state = {
@@ -74,7 +74,7 @@ describe('src/redux/reducers/__test__/tagReducers.test.js', () => {
             });
         });
 
-        describe('responseFetchTagByIdReducer.tsx', () => {
+        describe('fetchTagByIdResponseReducer', () => {
             it('should return expected expected', () => {
                 // Arrange
                 const state = {
@@ -87,7 +87,7 @@ describe('src/redux/reducers/__test__/tagReducers.test.js', () => {
                 };
 
                 // Act
-                const actual = responseFetchTagByIdReducer(state, action);
+                const actual = fetchTagByIdResponseReducer(state, action);
 
                 // Assert
                 expect(actual).toEqual(expected);
@@ -103,7 +103,43 @@ describe('src/redux/reducers/__test__/tagReducers.test.js', () => {
                 };
 
                 // Act
-                const actual = responseFetchTagByIdReducer(expected, action);
+                const actual = fetchTagByIdResponseReducer(expected, action);
+
+                // Assert
+                expect(actual).toEqual(expected);
+            });
+        });
+
+        describe('putTagResponseReducer', () => {
+            it('should return expected expected', () => {
+                // Arrange
+                const state = {
+                    id: 'id'
+                };
+                const expected = { id: 'expectedID' };
+                const action = {
+                    type: FETCH_TAG_BY_ID_RESPONSE,
+                    data: expected
+                };
+
+                // Act
+                const actual = putTagResponseReducer(state, action);
+
+                // Assert
+                expect(actual).toEqual(expected);
+            });
+
+            it('should return expected state', () => {
+                // Arrange
+                const expected = {
+                    id: 'id'
+                };
+                const action = {
+                    type: 'NOT VALID TYPE',
+                };
+
+                // Act
+                const actual = fetchTagByIdResponseReducer(expected, action);
 
                 // Assert
                 expect(actual).toEqual(expected);
