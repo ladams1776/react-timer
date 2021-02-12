@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import ms from 'pretty-ms';
-import { displayMsInFractionalHourFormat } from 'utils';
 import { useTimeContext } from '../hooks';
 import useUpdateCurrentTime from './hooks/useUpdateCurrentTime';
 import TimerButtons from './timerButtons/TimerButtons';
@@ -13,9 +12,9 @@ const Timer = () => {
   useEffect(() => setTime(task.time), [task.time, setTime]);
   const setTimeCallback = useCallback(times => setTime(times), [setTime]);
   useUpdateCurrentTime(time, isActive, setTimeCallback);
-  const millisecondsInFractionalHourFormat = displayMsInFractionalHourFormat(time);
   const msTime = (time && ms(time, { secondsDecimalDigits: 2 })) || 0;
 
+  const original = ms(task.time, { secondsDecimalDigits: 2 })
   return (
     <TimerButtons
       time={time}
@@ -24,7 +23,8 @@ const Timer = () => {
       setIsActive={setIsActive}
     >
       <div data-test-id="timer__display__content">
-        <div data-test-id="fractionHour">{`Hours: ${millisecondsInFractionalHourFormat}`}</div>
+        {/* <div>{task.time}</div> */}
+        <div data-test-id="fractionHour">{`Hours: ${original}`}</div>
         <input
           data-test-id="secondDecimalDigitHour"
           value={msTime}
