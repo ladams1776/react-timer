@@ -25,8 +25,6 @@ const AddTagePage = ({ tagId }) => {
                             data-test-id="form"
                             className={styles.form}
                             onSubmit={handleSubmit}>
-                            <h3>Add a New Tag</h3>
-
                             <Field
                                 name="name"
                                 component="input"
