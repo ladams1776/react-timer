@@ -17,7 +17,7 @@ const TagPage = ({ match }) => {
     </div>
     <div className={styles.mainInnerContainer}>
       <TagListView className={styles.listView} tagId={tagId} tags={tags} />
-      {tagId !== undefined
+      {(tagId !== undefined && tagId !== "-1")
         ? <AddTagePage tagId={tagId} className={styles.form} />
         : <div className={styles.form}></div>}
     </div>
