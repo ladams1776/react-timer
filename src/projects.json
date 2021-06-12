@@ -34,5 +34,25 @@
   {
     "label": "Farzins lumber effort",
     "value": "8"
+  },
+  {
+    "label": "Politics",
+    "value": "9"
+  },
+  {
+    "label": "Articles and Emails",
+    "value": "10"
+  },
+  {
+    "label": "Udemy Course Work",
+    "value": "11"
+  },
+  {
+    "label": "Crypto Currency Stuff",
+    "value": "12"
+  },
+  {
+    "label": "Udemy Amazon Services Course",
+    "value": "13"
   }
 ]

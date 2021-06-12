@@ -29,7 +29,7 @@ const assembleTask = (task) => {
 
 
 module.exports = (req, res) => {
-    [...req.body.WorkUnit[0].tasks.tasks].map(taskDto => {
+    [...req.body.WorkUnit[0].tasks].map(taskDto => {
         taskDto?.tags.map(tag => {
             if (!doesTagExist(tag)) {
                 TagService.addTag(tag, getTag);
