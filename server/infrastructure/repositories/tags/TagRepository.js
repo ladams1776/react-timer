@@ -1,6 +1,5 @@
 const Tag = require('../../models/Tag');
 const hydrateAndResponse = require('../../hydrators/hydrateAndResponse');
-const hydrate = require('../../hydrators/hydrate');
 
 const TagRepository = {
   deleteTag: (id, res) => Tag.deleteOne(

@@ -5,6 +5,7 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
+    "@testing-library/react-hooks": "^5.0.0",
     "@testing-library/user-event": "^12.1.10",
     "@tinymce/tinymce-react": "^3.8.4",
     "@types/jest": "^26.0.15",
@@ -15,6 +16,7 @@
     "classnames": "^2.2.6",
     "file-saver": "^2.0.5",
     "final-form": "^4.20.1",
+    "hosted-git-info": "^2.8.9",
     "moment-timezone": "^0.5.32",
     "pretty-ms": "^7.0.1",
     "react": "^17.0.1",

@@ -1,4 +1,4 @@
-import { PUT, FETCH_ALL_TAGS, FETCH_TASK_BY_ID, PUT_TASK_BY_ID, UPDATE_DATE_TIME, FETCH_TAG_BY_ID, PUT_TAG } from '../types';
+import { PUT, FETCH_ALL_TAGS, FETCH_TASK_BY_ID, PUT_TASK_BY_ID, UPDATE_DATE_TIME, FETCH_TAG_BY_ID, PUT_TAG, POST_TAG, POST } from '../types';
 import { RequestAction, RequestPostPutAction, RequestPostPutFlashAction } from 'interfaces/redux/actions';
 import { EditDateTimeInterface } from 'interfaces/pages/tasks/Task';
 
@@ -59,12 +59,24 @@ export const fetchTagById = (tagId: string): RequestAction<'FETCH_TAG_BY_ID'> =>
   };
 };
 
-export const putTag = (body: Body): RequestPostPutFlashAction<'PUT_TAG'> => { 
-  console.log('the body: ', body);
+export const putTag = (body: Body): RequestPostPutFlashAction<'PUT_TAG'> => {
+  console.log('put');
   return {
     type: PUT_TAG,
     url: 'tag',
     method: PUT,
+    isFlash: true,
+    body,
+    requestApi: true,
+  };
+};
+
+export const postTag = (body: Body): RequestPostPutFlashAction<'POST_TAG'> => {
+  console.log('post');
+  return {
+    type: POST_TAG,
+    url: 'tag',
+    method: POST,
     isFlash: true,
     body,
     requestApi: true,

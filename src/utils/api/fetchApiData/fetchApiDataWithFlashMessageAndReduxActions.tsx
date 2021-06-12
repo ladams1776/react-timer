@@ -8,6 +8,7 @@ type dispatchParam = (data: {}) => void;
 
 const fetchApiDataWithFlashMessageAndReduxActions = async (url: string, { method, body, ...settings }: FetchParams, dispatch: dispatchParam) => {
   const headers = { 'Content-Type': 'application/json' };
+  console.log('fetchApiDataWithF;lash', body)
   const config = {
     method: method ? method : body ? 'POST' : 'GET',
     ...settings,
@@ -17,10 +18,12 @@ const fetchApiDataWithFlashMessageAndReduxActions = async (url: string, { method
     },
     body: body ? JSON.stringify(body) : null,
   };
-
+  
+  console.log('fetchAPiDataWithF;lash', config);
+  
   const response = await fetch(`/api/${url}`, config);
   const data = await response.json();
-  if (data && response.ok) dispatch({ data: data.items, type: data.type });
+  if (data && response.ok) dispatch({ data: data, type: data.type });
 };
 
 export default fetchApiDataWithFlashMessageAndReduxActions;

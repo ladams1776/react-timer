@@ -29,7 +29,7 @@ const TaskPage = ({ match }) => {
           <div className={styles.mainInnerContainer}>
             <TaskListView tasks={tasks} setTasks={setTasks} refs={refs}
               className={cn(styles.listView, { [styles.listViewAndTask]: taskId })} />
-            {taskId !== undefined
+            {(taskId !== undefined && taskId !== "-1")
               ? <EditTaskForm taskId={taskId} className={styles.form} data-testid="addTaskForm"/>
               : <div className={styles.form}></div>}
           </div>

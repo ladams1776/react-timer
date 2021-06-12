@@ -35,6 +35,11 @@ db.tags.insertOne({
     description: 'Related to a Udemy Course'
 });
 
+db.tags.insertOne({
+    name: 'Udemy',
+    description: 'Blockchain'
+});
+
 // PROJECTS
 db.projects.insertOne({
     id: 0,
@@ -59,4 +64,14 @@ db.projects.insertOne({
 db.projects.insertOne({
     id: 4,
     name: "Conference talks"
+});
+
+db.projects.insertOne({
+    id: 5,
+    name: "AWS Course Work"
+});
+
+db.projects.insertOne({
+    id: 6,
+    name: "Blockchain"
 });
